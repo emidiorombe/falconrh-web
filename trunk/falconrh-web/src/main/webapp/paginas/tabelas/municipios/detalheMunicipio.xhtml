@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelDetalhe" rendered="#{municipioBean.modoDetalhe or municipioBean.modoExclusao}">
+		<p:panel header="#{msg['titulo.municipio.detalhe']}" id="painelDetalheBanco">
+			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
+				<h:outputLabel value="#{msg['label.municipio.uf']}" for="ufDetalhe" id="labelUfDetalhe"/>
+				<h:outputText value="#{municipioBean.entity.uf.nome}" id="ufDetalhe"/>
+				<h:outputLabel value="#{msg['label.municipio.nome']}" for="nomeDetalhe" id="labelNomeDetalhe"/>
+				<h:outputText value="#{municipioBean.entity.nome}" id="nomeDetalhe"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>

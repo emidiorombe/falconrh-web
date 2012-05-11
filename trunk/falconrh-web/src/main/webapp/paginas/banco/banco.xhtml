@@ -1,0 +1,31 @@
+<ui:composition template="/paginas/layout/layout.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="tituloPagina"><h:outputText value="#{msg['titulo.banco']}" id="tituloPaginaConteudo"/></ui:define>
+	<ui:define name="conteudo">
+		<ui:debug hotkey="q"/>
+		<h:form id="form" prependId="true" acceptcharset="utf-8">
+			<p:messages id="mensagens" showDetail="true" showSummary="true"/>
+			<p:outputPanel id="painelGlobal">
+				<ui:include src="incluirBanco.xhtml"/>
+				<ui:include src="detalheBanco.xhtml"/>
+				<ui:include src="pesquisaBanco.xhtml"/>
+				<p:panel style="text-align: center" rendered="#{not empty bancoBean.modoOperacao}">
+					<p:commandButton value="#{msg['label.botao.cadastro.banco']}" actionListener="#{bancoBean.cadastrar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bancoBean.modoInclusao}" title="#{msg['title.botao.cadastro.banco']}" id="botaoCadastroBanco"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.banco']}" actionListener="#{bancoBean.atualizar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bancoBean.modoEdicao}" title="#{msg['title.botao.atualizacao.banco']}" id="botaoAtualizacaoBanco"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.banco']}" actionListener="#{bancoBean.pesquisar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bancoBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.banco']}" id="botaoPesquisaBanco"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.banco']}" actionListener="#{bancoBean.excluir}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bancoBean.modoExclusao}" title="#{msg['title.botao.exclusao.banco']}" id="botaoExclusaoBanco"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{bancoBean.voltarParaResultadoDaPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bancoBean.modoExclusao or bancoBean.modoEdicao or bancoBean.modoDetalhe}" title="#{msg['title.botao.exclusao.banco']}" immediate="true" id="botaoVoltarBanco">
+						<f:setPropertyActionListener target="#{bancoBean.entity}" value="#{bancoBean.entity}"/>
+					</p:commandButton>
+					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{bancoBean.iniciarPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bancoBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente']}" immediate="true" id="botaoPesquisarNovamenteBanco"/>
+					<p:commandButton value="#{msg['label.botao.sair']}" action="#{bancoBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairBanco"/>
+				</p:panel>
+			</p:outputPanel>
+		</h:form>
+	</ui:define>
+</ui:composition>

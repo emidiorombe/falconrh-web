@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+<composite:interface>
+	<composite:attribute name="value" required="true" type="richard.falconrh.entity.localizacao.Endereco"/>
+	<composite:attribute name="modoOperacao" required="true" type="java.lang.String"/>
+</composite:interface>
+<composite:implementation>
+	<p:outputPanel id="painelInclusao" rendered="true">
+	<p:panel header="Endereço">
+			<h:panelGrid columns="2">
+				<h:outputLabel value="#{msg['label.endereco.uf']}" for="uf" id="labelUf" />
+				<p:selectOneMenu value="#{enderecoBean.bairro.municipio.uf}" id="uf" required="true" requiredMessage="#{msg['endereco.uf.obrigatorio']}" title="#{msg['title.endereco.uf']}" valueChangeListener="#{enderecoBean.obterListaMunicipios}" effect="fade" >
+					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true"/>
+					<f:selectItems value="#{utilBean.listaUFs}" />
+					<p:ajax event="change" update="municipio,bairro" immediate="true"/>
+				</p:selectOneMenu>
+				<h:outputLabel value="#{msg['label.endereco.municipio']}" for="municipio" id="labelMunicipio" />
+				<p:selectOneMenu value="#{enderecoBean.bairro.municipio}" id="municipio" required="true" requiredMessage="#{msg['endereco.municipio.obrigatorio']}" title="#{msg['title.endereco.municipio']}" converter="municipioConverter" converterMessage="Erro ao converter Municipio" valueChangeListener="#{enderecoBean.obterListaBairros}" effect="fade">
+					<f:selectItem itemLabel="--Selecione--" itemValue="" noSelectionOption="true"/>
+					<f:selectItems value="#{enderecoBean.listaMunicipios}" var="municipio" itemLabel="#{municipio.nome}" itemValue="#{municipio}" />
+					<p:ajax event="change" update="bairro" immediate="true"/>
+				</p:selectOneMenu>
+				<h:outputLabel value="#{msg['label.endereco.bairro']}" for="bairro" id="labelBairro" />
+				<p:selectOneMenu value="#{cc.attrs.value.logradouro.bairro}" id="bairro" required="true" requiredMessage="#{msg['endereco.bairro.obrigatorio']}" title="#{msg['title.endereco.bairro']}" converter="bairroConverter" converterMessage="Erro ao converter bairro" valueChangeListener="#{enderecoBean.obterListaLogradouros}">
+					<f:selectItem itemLabel="--Selecione--" itemValue="" noSelectionOption="true"/>
+					<f:selectItems value="#{enderecoBean.listaBairros}" var="bairro" itemLabel="#{bairro.nome}" itemValue="#{bairro}" />
+					<p:ajax event="change" update="logradouro" immediate="true"/>
+				</p:selectOneMenu>
+				<h:outputLabel value="#{msg['label.endereco.logradouro']}" for="logradouro" id="labelLogradouro" />
+				<p:selectOneMenu value="#{cc.attrs.value.logradouro}" id="logradouro" required="true" requiredMessage="#{msg['endereco.logradouro.obrigatorio']}" title="#{msg['title.endereco.logradouro']}" converter="logradouroConverter" converterMessage="Erro ao converter logradouro" valueChangeListener="#{enderecoBean.atualizarEnderecoLogradouro}">
+					<f:selectItem itemLabel="--Selecione--" itemValue="" noSelectionOption="true"/>
+					<f:selectItems value="#{enderecoBean.listaLogradouros}" var="logradouro" itemLabel="#{logradouro.nome}" itemValue="#{logradouro}" />
+					<p:ajax event="change" update="@this" immediate="true"/>
+				</p:selectOneMenu>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</composite:implementation>
+</ui:composition>

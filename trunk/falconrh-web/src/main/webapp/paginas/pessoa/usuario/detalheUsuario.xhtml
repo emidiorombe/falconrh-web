@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelDetalhe" rendered="#{usuarioBean.modoDetalhe or usuarioBean.modoExclusao}">
+		<p:panel header="Dados de Autenticação" id="painelDetalheDadosAutenticacaoUsuario">
+			<h:panelGrid columns="2" id="painel2ColunasDetalheU">
+				<h:outputLabel value="#{msg['label.usuario.nome']}" for="usuario" label="labelUsuario" />
+				<h:outputText value="#{usuarioBean.usuario.nome}" id="usuario" required="true" requiredMessage="#{msg['usuario.nome.obrigatorio']}" title="#{msg['title.usuario.nome']}"/>
+				<h:outputLabel value="#{msg['label.usuario.login']}" id="labelLoginDetalhe" for="loginDetalhe"/>
+				<h:outputText value="#{usuarioBean.usuario.login}" id="loginDetalhe" title="#{msg['title.usuario.login']}"/>
+			</h:panelGrid>
+		</p:panel>
+		<p:panel header="Dados do Usuario" id="painelDetalheUsuario">
+			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
+				<h:outputLabel value="#{msg['label.usuario.nome']}" for="nomeDetalhe" id="labelNomeDetalhe"/>
+				<h:outputText value="#{usuarioBean.usuario.nome}" id="nomeDetalhe"/>
+				<h:outputLabel value="#{msg['label.usuario.dataNascimento']}" for="dataNascimentoDetalhe" id="labelDataNascimentoDetalhe" />
+				<h:outputText value="#{usuarioBean.usuario.dataNascimento}" id="dataNascimentoDetalhe">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" locale="pt_BR"/>
+				</h:outputText>
+				<h:outputLabel value="#{msg['label.usuario.sexo']}" id="labelSexoDetalhe" for="sexoDetalhe" />
+				<h:outputText value="#{usuarioBean.usuario.etnia.descricao}" id="sexoDetalhe"/>
+				<h:outputLabel value="#{msg['label.usuario.estadoCivil']}" id="labelEstadoCivilDetalhe" for="estadoCivilDetalhe" />
+				<h:outputText value="#{usuarioBean.usuario.estadoCivil.descricao}" id="estadoCivilDetalhe" />
+				<h:outputLabel value="#{msg['label.usuario.etnia']}" id="labelEtniaDetalhe" for="etniaDetalhe" />
+				<h:outputText value="#{usuarioBean.usuario.etnia.descricao}" id="etniaDetalhe" />
+				<h:outputLabel value="#{msg['label.usuario.nacionalidade']}" id="labelNacionalidadeDetalhe" for="nacionalidadeDetalhe" />
+				<h:outputText value="#{usuarioBean.usuario.nacionalidade.descricao}" id="nacionalidadeDetalhe" />
+				<h:outputLabel value="#{msg['label.usuario.email']}" id="labelEmailDetalhe" for="emailDetalhe"/>
+				<h:outputText value="#{usuarioBean.usuario.email}" id="emailDetalhe"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>

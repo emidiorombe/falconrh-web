@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+
+	<div class="ui-widget ui-widget-header" style="padding: 20px">
+		<div style="float:left">
+			<h:graphicImage library="imagens" name="logo_falconrh.png" width="100" height="70"/>
+		</div>
+		<h1><h:outputText id="nomeAplicacao" value="#{msg['nome.aplicacao']}"/></h1>
+		<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" style="width: 250px"/>
+		<p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false">
+			<h:graphicImage library="imagens" name="ajaxloadingbar.gif"/>
+		</p:dialog>
+	</div>
+</ui:composition>

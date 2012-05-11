@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelPesquisa" rendered="#{tabelaFeriadoBean.modoPesquisa}">
+		<p:panel header="Pesquisa de Tabela de Feriados" id="painelPesquisaTabelaFeriado">
+			<p:focus for="descricaoPesquisa" id="focusPaginaPesquisa"/>
+			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
+				<h:outputLabel for="descricaoPesquisa" id="labelDescricaoPesquisa" value="#{msg['label.tabelaFeriado.descricao']}"/>
+				<p:inputText value="#{tabelaFeriadoBean.tabelaFeriado.descricao}" id="descricaoPesquisa" size="60" maxlength="255" required="true" requiredMessage="#{msg['tabelaFeriado.descricao.obrigatorio']}" title="#{msg['title.tabelaFeriado.descricao']}"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+	<p:outputPanel id="painelDetalhePesquisa" rendered="#{tabelaFeriadoBean.modoDetalhePesquisa}" >
+	</p:outputPanel>
+</ui:composition>

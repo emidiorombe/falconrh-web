@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view contentType="text/html">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>#{msg['nome.aplicacao']}</title>
+		<link href="#{facesContext.externalContext.requestContextPath}/resources/estilos/falconrh.css" rel="stylesheet" type="text/css" />
+		<link href="#{facesContext.externalContext.requestContextPath}/resources/estilos/redmond/skin.css" rel="stylesheet" type="text/css" />
+		<link rel="shortcut icon" type="image/x-icon" href="#{facesContext.externalContext.requestContextPath}/resources/imagens/favicon.ico" />
+	</h:head>
+	<h:body contentType="text/html">
+		<ui:debug hotkey="d"/>
+	    <ui:insert name="topo" >
+	    	<ui:include src="topo.xhtml" />
+	    </ui:insert>
+	    <ui:insert name="menu" >
+	    	<ui:include src="menu.xhtml" />
+	    </ui:insert>
+		<div id="conteudo">
+			<h1 class="title ui-widget-header ui-corner-all"><ui:insert name="tituloPagina"></ui:insert></h1>
+			<ui:insert name="conteudo"/>
+		</div>
+		<ui:insert name="rodape" >
+	    	<ui:include src="rodape.xhtml" />
+	    </ui:insert>
+	</h:body>
+</f:view>
+</html>

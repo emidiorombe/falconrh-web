@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<script type="text/javascript">
+	PrimeFaces.locales['pt_BR'] = {
+            closeText: 'Fechar',
+            prevText: 'Anterior',
+            nextText: 'Próximo',
+            currentText: 'Começo',
+            monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+            monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
+            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+            dayNamesMin: ['D','S','T','Q','Q','S','S'],
+            weekHeader: 'Semana',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Só Horas',
+            timeText: 'Tempo',
+            hourText: 'Hora',
+            minuteText: 'Minuto',
+            secondText: 'Segundo',
+            currentText: 'Data Atual',
+            ampm: false,
+            month: 'Mês',
+            week: 'Semana',
+            day: 'Dia',
+            allDayText : 'Todo Dia'
+        };
+	</script>
+	<p:outputPanel id="painelInclusao" rendered="#{tabelaINSSBean.modoInclusao or tabelaINSSBean.modoEdicao}">
+		<p:panel header="Cadastro de Tabela de INSS">
+			<p:focus for="descricaoInclusao" id="focusPaginaInclusao"/>
+			<h:panelGrid columns="2" id="painel2ColunasInclusao">
+				<h:outputLabel value="#{msg['label.tabelaINSS.descricao']}" for="descricaoInclusao" id="labelDescricaoInclusao"/>
+				<p:inputText value="#{tabelaINSSBean.tabelaINSS.descricao}" id="descricaoInclusao" required="true" requiredMessage="#{msg['tabelaINSS.descricao.obrigatorio']}" title="#{msg['title.tabelaINSS.descricao']}" size="100" maxlength="255"/>
+				<h:outputLabel value="#{msg['label.tabelaINSS.dataInicioVigencia']}" for="dataInicioVigenciaInclusao" id="labelDataInicioVigenciaInclusao"/>
+				<p:calendar value="#{tabelaINSSBean.tabelaINSS.dataInicioVigencia}" id="dataInicioVigenciaInclusao" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" lang="pt" locale="pt_BR" navigator="true" required="true" requiredMessage="#{msg['tabelaINSS.dataInicioVigencia.obrigatorio']}" showButtonPanel="true"/>
+				<h:outputLabel value="#{msg['label.tabelaINSS.dataTerminoVigencia']}" for="dataTerminoVigenciaInclusao" id="labelDataTerminoVigenciaInclusao"/>
+				<p:calendar value="#{tabelaINSSBean.tabelaINSS.dataTerminoVigencia}" id="dataTerminoVigenciaInclusao" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" lang="pt" locale="pt_BR" navigator="true" showButtonPanel="true"/>
+			</h:panelGrid>
+		</p:panel>
+		<p:panel header="Incluir Alíquotas de INSS" id="painelInclusaoAliquotaINSS">
+			<h:panelGrid columns="10">
+				<h:outputLabel value="#{msg['label.aliquotaINSS.descricao']}" for="descricao" id="labelDescricao"/>
+				<p:inputText value="#{tabelaINSSBean.aliquotaINSS.descricao}" id="descricao"/>
+				<h:outputLabel value="#{msg['label.aliquotaINSS.aliquota']}" for="aliquota" id="labelAliquota"/>
+				<p:inputText value="#{tabelaINSSBean.aliquotaINSS.aliquota}" id="aliquota" size="6" maxlength="6"/>
+				<h:outputLabel value="#{msg['label.aliquotaINSS.valorInicial']}" for="valorInicial" id="labelValorInicial" />
+				<p:inputText value="#{tabelaINSSBean.aliquotaINSS.valorInicial}" size="10" maxlength="10" id="valorInicial"/>
+				<h:outputLabel value="#{msg['label.aliquotaINSS.valorFinal']}" for="valorFinal" id="labelValorFinal" />
+				<p:inputText value="#{tabelaINSSBean.aliquotaINSS.valorFinal}" size="10" maxlength="10" id="valorFinal"/>
+
+				<p:commandButton value="Limpar" type="reset" />
+				<p:commandButton value="Adicionar" update="aliquotasINSS" action="#{tabelaINSSBean.reinitAliquotasINSS}" process="painelInclusaoAliquotaINSS">
+					<p:collector value="#{tabelaINSSBean.aliquotaINSS}" addTo="#{tabelaINSSBean.tabelaINSS.listaAliquotasINSS}" />
+				</p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+		<p:outputPanel id="aliquotasINSS">
+			<p:dataTable value="#{tabelaINSSBean.tabelaINSS.listaAliquotasINSS}" var="aliquotaINSS" emptyMessage="#{msg['info.aliquotaINSS.nao.informados']}">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.aliquotaINSS.descricao']}" />
+					</f:facet>
+					<h:outputText value="#{aliquotaINSS.descricao}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.aliquotaINSS.aliquota']}" />
+					</f:facet>
+					<h:outputText value="#{aliquotaINSS.aliquota}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.aliquotaINSS.valorInicial']}" />
+					</f:facet>
+					<h:outputText value="#{aliquotaINSS.valorInicial}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.aliquotaINSS.valorFinal']}" />
+					</f:facet>
+					<h:outputText value="#{aliquotaINSS.valorFinal}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Operação" />
+					</f:facet>
+					<p:commandLink value="Remover" update="form:aliquotasINSS" immediate="true">
+						<p:collector value="#{aliquotaINSS}" removeFrom="#{tabelaINSSBean.tabelaINSS.listaAliquotasINSS}" />
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+	<MUNICIPIOS ID="2" NOME="Nome do Município alterado" UF="SANTA_CATARINA"/>
+	<MUNICIPIOS ID="3" NOME="Joinville" UF="SANTA_CATARINA"/>
+</dataset>

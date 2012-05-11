@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelPesquisa" rendered="#{agenciaBean.modoPesquisa}">
+		<p:panel header="#{msg['titulo.agencia.pesquisa']}" id="painelPesquisaAgencia">
+			<p:focus for="nomePesquisa" id="focusPaginaPesquisa" rendered="#{agenciaBean.modoPesquisa}"/>
+			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
+				<h:outputLabel for="nomePesquisa" id="labelNomePesquisa" value="#{msg['label.agencia.nome']}"/>
+				<p:inputText value="#{agenciaBean.entity.nome}" id="nomePesquisa" size="50" maxlength="255" required="true" requiredMessage="#{msg['agencia.nome.obrigatorio']}" title="#{msg['title.agencia.nome']}"/>
+			</h:panelGrid>
+			<h:outputLabel value="#{msg['label.agencia.banco']}" for="bancoPesquisa" id="labelBancoPesquisa"/>
+			<p:selectOneMenu value="#{agenciaBean.entity.banco}" id="bancoPesquisa" required="true" requiredMessage="#{msg['agencia.banco.obrigatorio']}" effect="fade" label="#{msg['title.agencia.banco']}" converter="bancoConverter" converterMessage="Erro ao converter banco para objeto">
+				<f:selectItem itemLabel="Informe o Banco" noSelectionOption="true"/>
+				<f:selectItems value="#{utilBean.listaBancos}" var="banco" itemLabel="#{banco.descricao}" itemValue="#{banco}"/>
+			</p:selectOneMenu>
+		</p:panel>
+	</p:outputPanel>
+	<p:outputPanel id="painelDetalhePesquisa" rendered="#{agenciaBean.modoDetalhePesquisa}" >
+		<p:dataTable value="#{agenciaBean.listaEntities}" var="agencia" id="dataTableDetalhePesquisa" >
+			<p:column id="colunaNomeAgencia">
+				<f:facet name="header"><h:outputText value="#{msg['label.agencia.nome']}" id="labelColunaNome"/></f:facet>
+				<h:outputText value="#{agencia.nome}" id="nomeDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaNumeroAgencia">
+				<f:facet name="header"><h:outputText value="#{msg['label.agencia.numero']}" id="labelColunaAgencia" /></f:facet>
+				<h:outputText value="#{agencia.numero}" id="numeroDetalhe"/><f:verbatim> - </f:verbatim> <h:outputText value="#{agencia.digitoVerificador}" id="digitoVerificadorDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaBanco">
+				<f:facet name="header"><h:outputText value="#{msg['label.banco.nome']}" id="labelColunaBanco" /></f:facet>
+				<h:outputText value="#{agencia.banco.nome}" id="bancoDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaBotaoEditar">
+				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{agenciaBean.editar}" id="botaoEditarAgencia">
+					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarAgencia"/>
+                	<f:setPropertyActionListener value="#{agencia}" target="#{agenciaBean.entity}"/>  
+            	</p:commandLink>
+			</p:column>            	  
+			<p:column style="text-align:center" id="colunaVisualizar">
+				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{agenciaBean.visualizar}" id="botaoVisualizarAgencia">
+					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarAgencia"/>
+                	<f:setPropertyActionListener value="#{agencia}" target="#{agenciaBean.entity}" />
+				</p:commandLink>
+			</p:column>
+			<p:column style="text-align:center" id="colunaExcluir">
+				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{agenciaBean.iniciarExclusao}" id="botaoExcluirAgencia">
+					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirAgencia"/>
+                	<f:setPropertyActionListener value="#{agencia}" target="#{agenciaBean.entity}" />
+            	</p:commandLink>                        
+			</p:column>
+		</p:dataTable>
+	</p:outputPanel>
+</ui:composition>

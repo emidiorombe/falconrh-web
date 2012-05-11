@@ -1,0 +1,30 @@
+<ui:composition template="/paginas/layout/layout.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="tituloPagina"><h:outputText value="#{msg['titulo.tabelaFeriado']}" id="tituloPaginaConteudo"/></ui:define>
+	<ui:define name="conteudo">
+		<ui:debug hotkey="q"/>
+		<h:form id="form" prependId="true" acceptcharset="utf-8">
+			<p:messages id="mensagens" showDetail="true" showSummary="false"/>
+			<p:outputPanel id="painelGlobal">
+				<ui:include src="incluirTabelaFeriado.xhtml"/>
+				<ui:include src="detalheTabelaFeriado.xhtml"/>
+				<ui:include src="pesquisaTabelaFeriado.xhtml"/>
+				<p:panel style="text-align: center" rendered="#{not empty tabelaFeriadoBean.modoOperacao}">
+					<p:commandButton value="#{msg['label.botao.cadastro.tabelaFeriado']}" actionListener="#{tabelaFeriadoBean.cadastrarTabelaFeriado}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaFeriadoBean.modoInclusao}" title="#{msg['title.botao.cadastro.tabelaFeriado']}" id="botaoCadastroTabelaFeriado"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.tabelaFeriado']}" actionListener="#{tabelaFeriadoBean.atualizarTabelaFeriado}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaFeriadoBean.modoEdicao}" title="#{msg['title.botao.atualizacao.tabelaFeriado']}" id="botaoAtualizacaoTabelaFeriado"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.tabelaFeriado']}" actionListener="#{tabelaFeriadoBean.pesquisarTabelaFeriado}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaFeriadoBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.tabelaFeriado']}" id="botaoPesquisaTabelaFeriado"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.tabelaFeriado']}" actionListener="#{tabelaFeriadoBean.excluirTabelaFeriado}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaFeriadoBean.modoExclusao}" title="#{msg['title.botao.exclusao.tabelaFeriado']}" id="botaoExclusaoTabelaFeriado"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{tabelaFeriadoBean.voltarParaResultadoPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaFeriadoBean.modoExclusao or tabelaFeriadoBean.modoEdicao or tabelaFeriadoBean.modoDetalhe}" title="#{msg['title.botao.exclusao.tabelaFeriado']}" immediate="true" id="botaoVoltarTabelaFeriado">
+						<f:setPropertyActionListener target="#{tabelaFeriadoBean.tabelaFeriado}" value="#{tabelaFeriadoBean.tabelaFeriado}"/>
+					</p:commandButton>
+					<p:commandButton value="#{msg['label.botao.sair']}" action="#{tabelaFeriadoBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairTabelaFeriado"/>
+				</p:panel>
+			</p:outputPanel>
+		</h:form>
+	</ui:define>
+</ui:composition>

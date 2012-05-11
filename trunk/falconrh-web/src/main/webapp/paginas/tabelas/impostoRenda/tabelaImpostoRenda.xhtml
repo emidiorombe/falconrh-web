@@ -1,0 +1,30 @@
+<ui:composition template="/paginas/layout/layout.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="tituloPagina"><h:outputText value="#{msg['titulo.tabelaImpostoRenda']}" id="tituloPaginaConteudo"/></ui:define>
+	<ui:define name="conteudo">
+		<ui:debug hotkey="q"/>
+		<h:form id="form" prependId="true" acceptcharset="utf-8">
+			<p:messages id="mensagens" showDetail="true" showSummary="false"/>
+			<p:outputPanel id="painelGlobal">
+				<ui:include src="incluirTabelaImpostoRenda.xhtml"/>
+				<ui:include src="detalheTabelaImpostoRenda.xhtml"/>
+				<ui:include src="pesquisaTabelaImpostoRenda.xhtml"/>
+				<p:panel style="text-align: center" rendered="#{not empty tabelaImpostoRendaBean.modoOperacao}">
+					<p:commandButton value="#{msg['label.botao.cadastro.tabelaImpostoRenda']}" actionListener="#{tabelaImpostoRendaBean.cadastrar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaImpostoRendaBean.modoInclusao}" title="#{msg['title.botao.cadastro.tabelaImpostoRenda']}" id="botaoCadastroTabelaImpostoRenda"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.tabelaImpostoRenda']}" actionListener="#{tabelaImpostoRendaBean.atualizar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaImpostoRendaBean.modoEdicao}" title="#{msg['title.botao.atualizacao.tabelaImpostoRenda']}" id="botaoAtualizacaoTabelaImpostoRenda"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.tabelaImpostoRenda']}" actionListener="#{tabelaImpostoRendaBean.pesquisar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaImpostoRendaBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.tabelaImpostoRenda']}" id="botaoPesquisaTabelaImpostoRenda"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.tabelaImpostoRenda']}" actionListener="#{tabelaImpostoRendaBean.excluir}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaImpostoRendaBean.modoExclusao}" title="#{msg['title.botao.exclusao.tabelaImpostoRenda']}" id="botaoExclusaoTabelaImpostoRenda"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{tabelaImpostoRendaBean.voltarParaResultadoPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaImpostoRendaBean.modoExclusao or tabelaImpostoRendaBean.modoEdicao or tabelaImpostoRendaBean.modoDetalhe}" title="#{msg['title.botao.exclusao.tabelaImpostoRenda']}" immediate="true" id="botaoVoltarTabelaImpostoRenda">
+						<f:setPropertyActionListener target="#{tabelaImpostoRendaBean.tabelaImpostoRenda}" value="#{tabelaImpostoRendaBean.tabelaImpostoRenda}"/>
+					</p:commandButton>
+					<p:commandButton value="#{msg['label.botao.sair']}" action="#{tabelaImpostoRendaBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairTabelaImpostoRenda"/>
+				</p:panel>
+			</p:outputPanel>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    			xmlns:ui="http://java.sun.com/jsf/facelets"
+    			xmlns:h="http://java.sun.com/jsf/html"
+    			xmlns:p="http://primefaces.org/ui">
+	<h:form id="formMenu">
+		<p:menubar id="barraMenu">  
+			<p:submenu label="Cadastros" id="menuCadastros">
+				<p:submenu label="Pessoa" id="submenuCadastrosPessoa">
+					<p:menuitem value="Novo" url="/faces/paginas/pessoa/pessoa.xhtml?modoOperacao=modoInclusao" id="menuitemCadastrosPessoaNovo"/>
+	        		<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/pessoa/pessoa.xhtml?modoOperacao=modoPesquisa" id="menuitemCadastrosPessoaPesquisarAlterarExcluir"/>
+				</p:submenu>
+			</p:submenu>
+	        <p:submenu label="Gestão" id="menuGestao">
+	        	<p:submenu label="Tabelas do Sistema" id="submenuGestaoTabelasSistema">
+	        		<p:submenu label="Bancos" id="submenuTabelasSistemaBancos">
+	        			<p:menuitem value="Novo" url="/faces/paginas/banco/banco.xhtml?modoOperacao=modoInclusao" id="menuitemBancosNovo"/>
+	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/banco/banco.xhtml?modoOperacao=modoPesquisa" id="menuitemBancosPesquisarAlterarExcluir"/>
+	        			<p:submenu label="Agências" id="submenuTabelasSistemaAgencias">
+	        				<p:menuitem value="Nova" url="/faces/paginas/banco/agencia/agencia.xhtml?modoOperacao=modoInclusao" id="menuitemAgenciasNova"/>
+	        				<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/banco/agencia/agencia.xhtml?modoOperacao=modoPesquisa" id="menuitemAgenciasPesquisarAlterarExcluir"/>
+	        			</p:submenu>
+	        			<p:submenu label="Contas Correntes" id="submenuTabelasSistemaContasCorrentes">
+	        				<p:menuitem value="Nova" url="/faces/paginas/banco/contaCorrente/contaCorrente.xhtml?modoOperacao=modoInclusao" id="submenuContaCorrenteNova"/>
+	        				<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/banco/contaCorrente/contaCorrente.xhtml?modoOperacao=modoPesquisa" id="submenuContaCorrentePesquisarAlterarExcluir"/>
+	        			</p:submenu>
+	        		</p:submenu>
+	        		<p:submenu label="Tabela de IR" id="submenuTabelasSistemaTabelaImpostoRenda">
+	        			<p:menuitem value="Novo" url="/faces/paginas/tabelas/impostoRenda/tabelaImpostoRenda.xhtml?modoOperacao=modoInclusao" id="menuitemTabelaImpostoRendaNovo"/>
+	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/tabelas/impostoRenda/tabelaImpostoRenda.xhtml?modoOperacao=modoPesquisa" id="menuitemTabelaImpostoRendaPesquisarAlterarExcluir"/>
+	        		</p:submenu>
+	        		<p:submenu label="Tabela de INSS" id="submenuTabelasSistemaTabelaINSS">
+	        			<p:menuitem value="Novo" url="/faces/paginas/tabelas/inss/tabelaINSS.xhtml?modoOperacao=modoInclusao" id="menuitemTabelaINSSNovo"/>
+	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/tabelas/inss/tabelaINSS.xhtml?modoOperacao=modoPesquisa" id="menuitemTabelaINSSPesquisarAlterarExcluir"/>
+	        		</p:submenu>
+	        		<p:submenu label="Feriados" id="submenuTabelasSistemaFeriados">
+	        			<p:menuitem value="Novo" url="/faces/paginas/tabelas/feriado/tabelaFeriado.xhtml?modoOperacao=modoInclusao" id="menuitemTabelaFeriadoNovo"/>
+	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/tabelas/feriado/tabelaFeriado.xhtml?modoOperacao=modoPesquisa" id="menuitemTabelaFeriadoPesquisarAlterarExcluir"/>
+	        		</p:submenu>
+	        		<p:submenu label="Municipios" id="submenuTabelasSistemaMunicipios">
+	        			<p:menuitem value="Novo" url="/faces/paginas/tabelas/municipios/municipio.xhtml?modoOperacao=modoInclusao" id="menuitemMunicipiosNovo"/>
+	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/tabelas/municipios/municipio.xhtml?modoOperacao=modoPesquisa" id="menuitemMunicipiosPesquisarAlterarExcluir"/>
+	        		</p:submenu>
+	        		<p:submenu label="Bairros" id="submenuTabelasSistemaBairros">
+	        			<p:menuitem value="Novo" url="/faces/paginas/tabelas/bairros/bairro.xhtml?modoOperacao=modoInclusao" id="menuitemBairrosNovo"/>
+	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/tabelas/bairros/bairro.xhtml?modoOperacao=modoPesquisa" id="menuitemBairrosPesquisarAlterarExcluir"/>
+	        		</p:submenu>
+	        		<p:submenu label="Logradouros" id="submenuTabelasSistemaLogradouros">
+	        			<p:menuitem value="Novo" url="/faces/paginas/tabelas/logradouros/logradouro.xhtml?modoOperacao=modoInclusao" id="menuitemLogradourosNovo"/>
+	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/tabelas/logradouros/logradouro.xhtml?modoOperacao=modoPesquisa" id="menuitemLogradourosPesquisarAlterarExcluir"/>
+	        		</p:submenu>
+	        	</p:submenu>
+	        </p:submenu>
+			<p:submenu label="Ajuda" id="submenuAjuda">
+	       		<p:menuitem value="Ajuda do Falcon RH" url="#" id="menuitemAjudaDoFalconRH"/>
+	       		<p:separator id="separadorAjuda"/>
+	       		<p:menuitem value="Sobre o Falcon RH..." url="#" id="menuitemAjudaSobreFalconRH"/>
+	       	</p:submenu>
+		</p:menubar>  
+	</h:form>
+</ui:composition>

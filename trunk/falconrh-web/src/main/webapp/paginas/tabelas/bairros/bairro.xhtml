@@ -1,0 +1,31 @@
+<ui:composition template="/paginas/layout/layout.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="tituloPagina"><h:outputText value="#{msg['titulo.bairro']}" id="tituloPaginaConteudo"/></ui:define>
+	<ui:define name="conteudo">
+		<ui:debug hotkey="q"/>
+		<h:form id="form" prependId="true" acceptcharset="utf-8">
+			<p:messages id="mensagens" showDetail="true" showSummary="true"/>
+			<p:outputPanel id="painelGlobal">
+				<ui:include src="incluirBairro.xhtml"/>
+				<ui:include src="detalheBairro.xhtml"/>
+				<ui:include src="pesquisaBairro.xhtml"/>
+				<p:panel style="text-align: center" rendered="#{not empty bairroBean.modoOperacao}">
+					<p:commandButton value="#{msg['label.botao.cadastro.bairro']}" actionListener="#{bairroBean.cadastrar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bairroBean.modoInclusao}" title="#{msg['title.botao.cadastro.bairro']}" id="botaoCadastroBairro"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.bairro']}" actionListener="#{bairroBean.atualizar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bairroBean.modoEdicao}" title="#{msg['title.botao.atualizacao.bairro']}" id="botaoAtualizacaoBairro"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.bairro']}" actionListener="#{bairroBean.pesquisar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bairroBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.bairro']}" id="botaoPesquisaBairro"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.bairro']}" actionListener="#{bairroBean.excluir}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bairroBean.modoExclusao}" title="#{msg['title.botao.exclusao.bairro']}" id="botaoExclusaoBairro"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{bairroBean.voltarParaResultadoDaPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bairroBean.modoExclusao or bairroBean.modoEdicao or bairroBean.modoDetalhe}" title="#{msg['title.botao.exclusao.bairro']}" immediate="true" id="botaoVoltarBairro">
+						<f:setPropertyActionListener target="#{bairroBean.entity}" value="#{bairroBean.entity}"/>
+					</p:commandButton>
+					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{bairroBean.iniciarPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bairroBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente']}" immediate="true" id="botaoPesquisarNovamenteBairro"/>
+					<p:commandButton value="#{msg['label.botao.sair']}" action="#{bairroBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairBairro"/>
+				</p:panel>
+			</p:outputPanel>
+		</h:form>
+	</ui:define>
+</ui:composition>

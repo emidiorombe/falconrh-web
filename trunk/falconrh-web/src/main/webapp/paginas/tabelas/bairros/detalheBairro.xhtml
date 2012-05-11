@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelDetalhe" rendered="#{bairroBean.modoDetalhe or bairroBean.modoExclusao}">
+		<p:panel header="#{msg['titulo.bairro.detalhe']}" id="painelDetalheBairro">
+			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
+				<h:outputLabel value="#{msg['label.bairro.uf']}" for="ufDetalhe" id="labelUfDetalhe"/>
+				<h:outputText value="#{bairroBean.entity.municipio.uf.nome}" id="ufDetalhe"/>
+				<h:outputLabel value="#{msg['label.bairro.municipio']}" for="municipioDetalhe" id="labelMunicipioDetalhe"/>
+				<h:outputText value="#{bairroBean.entity.municipio.nome}" id="municipioDetalhe"/>
+				<h:outputLabel value="#{msg['label.bairro.nome']}" for="nomeDetalhe" id="labelNomeDetalhe"/>
+				<h:outputText value="#{bairroBean.entity.nome}" id="nomeDetalhe"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>

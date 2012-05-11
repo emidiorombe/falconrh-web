@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelDetalhe" rendered="#{tabelaFeriadoBean.modoDetalhe or tabelaFeriadoBean.modoExclusao}">
+		<p:panel header="Dados da Tabela de Feriado" id="painelDetalheFeriado">
+			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
+				<h:outputLabel value="#{msg['label.tabelaFeriado.descricao']}" for="descricaoDetalhe" id="labelDescricaoDetalhe"/>
+				<h:outputText value="#{tabelaFeriadoBean.tabelaFeriado.descricao}" id="descricaoDetalhe"/>
+				<h:outputLabel value="#{msg['label.tabelaFeriado.ano']}" for="anoDetalhe" id="labelAnoDetalhe"/>
+				<h:outputText value="#{tabelaFeriadoBean.tabelaFeriado.ano}" id="anoDetalhe"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>

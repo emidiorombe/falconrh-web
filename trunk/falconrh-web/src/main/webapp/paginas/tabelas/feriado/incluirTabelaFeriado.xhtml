@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelInclusao" rendered="#{tabelaFeriadoBean.modoInclusao or tabelaFeriadoBean.modoEdicao}">
+		<p:panel header="Cadastro de Tabela de Feriados">
+			<p:focus for="anoInclusao" id="focusPaginaInclusao"/>
+			<h:panelGrid columns="2" id="painel2ColunasInclusao">
+				<h:outputLabel value="#{msg['label.tabelaFeriado.ano']}" for="anoInclusao" id="labelAnoInclusao"/>
+				<p:inputText value="#{tabelaFeriadoBean.tabelaFeriado.ano}" id="anoInclusao" required="true" requiredMessage="#{msg['tabelaFeriado.ano.obrigatorio']}" showButtonPanel="true"/>
+				<h:outputLabel value="#{msg['label.tabelaFeriado.descricao']}" for="descricaoInclusao" id="labelDescricaoInclusao"/>
+				<p:inputText value="#{tabelaFeriadoBean.tabelaFeriado.descricao}" id="descricaoInclusao" required="true" requiredMessage="#{msg['tabelaFeriado.descricao.obrigatorio']}" title="#{msg['title.tabelaFeriado.descricao']}" size="100" maxlength="255"/>
+			</h:panelGrid>
+		</p:panel>
+		<p:panel header="Incluir Feriado" id="painelInclusaoFeriado">
+			<h:panelGrid columns="10">
+				<h:outputLabel value="#{msg['label.feriado.descricao']}" for="descricao" id="labelDescricao"/>
+				<p:inputText value="#{tabelaFeriadoBean.feriado.descricao}" id="descricao"/>
+				<h:outputLabel value="#{msg['label.feriado.tipoFeriado']}" for="tipoFeriado" id="labelTipoFeriado"/>
+				<p:selectOneMenu value="#{tabelaFeriadoBean.feriado.tipoFeriado}" id="tipoFeriado" required="true" requiredMessage="#{msg['feriado.tipoFeriado.obrigatorio']}" title="#{msg['title.feriado.tipoFeriado']}">
+					<f:selectItems value="#{utilBean.listaTiposFeriados}"/>
+				</p:selectOneMenu>
+				
+				<h:outputLabel value="#{msg['label.feriado.data']}" for="dataInclusao" id="labelData" />
+				<p:calendar value="#{tabelaFeriadoBean.feriado.data}" id="dataInclusao" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" lang="pt" locale="pt_BR" navigator="true" required="true" requiredMessage="#{msg['feriado.data.obrigatorio']}" showButtonPanel="true"/>
+
+				<p:commandButton value="Limpar" type="reset" />
+				<p:commandButton value="Adicionar" update="feriados" action="#{tabelaFeriadoBean.reinitFeriado}" process="painelInclusaoFeriado">
+					<p:collector value="#{tabelaFeriadoBean.feriado}" addTo="#{tabelaFeriadoBean.tabelaFeriado.listaFeriados}" />
+				</p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+		<p:outputPanel id="feriados">
+			<p:dataTable value="#{tabelaFeriadoBean.tabelaFeriado.listaFeriados}" var="feriado" emptyMessage="#{msg['info.feriado.nao.informados']}">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.feriado.descricao']}" />
+					</f:facet>
+					<h:outputText value="#{feriado.descricao}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.feriado.tipoFeriado']}" />
+					</f:facet>
+					<h:outputText value="#{feriado.tipoFeriado}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.feriado.data']}" />
+					</f:facet>
+					<h:outputText value="#{feriado.data}">
+						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="America/Sao_Paulo"/>
+					</h:outputText>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Operação" />
+					</f:facet>
+					<p:commandLink value="Remover" update="form:feriados" immediate="true">
+						<p:collector value="#{feriado}" removeFrom="#{tabelaFeriadoBean.tabelaFeriado.listaFeriados}" />
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		</p:outputPanel>
+	</p:outputPanel>
+</ui:composition>

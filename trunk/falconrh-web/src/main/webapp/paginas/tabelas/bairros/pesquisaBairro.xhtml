@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelPesquisa" rendered="#{bairroBean.modoPesquisa}">
+		<p:panel header="#{msg['titulo.bairro.pesquisa']}" id="painelPesquisaBairro">
+			<p:focus for="ufPesquisa" id="focusPaginaPesquisa"/>
+			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
+				<h:outputLabel value="#{msg['label.bairro.uf']}" for="ufPesquisa" id="labelUfPesquisa" />
+				<p:selectOneMenu value="#{bairroBean.entity.municipio.uf}" id="ufPesquisa" title="#{msg['title.bairro.uf']}" valueChangeListener="#{bairroBean.obterListaMunicipios}" effect="fade" immediate="true">
+					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true"/>
+					<f:selectItems value="#{utilBean.listaUFs}" />
+					<p:ajax event="change" update="municipioPesquisa" immediate="true"/>
+				</p:selectOneMenu>
+				<h:outputLabel value="#{msg['label.bairro.municipio']}" for="municipioPesquisa" id="labelMunicipioPesquisa" />
+				<p:selectOneMenu value="#{bairroBean.entity.municipio}" id="municipioPesquisa" title="#{msg['title.bairro.municipio']}" converter="municipioConverter" converterMessage="Erro ao converter Municipio" effect="fade">
+					<f:selectItem itemLabel="--Selecione--" itemValue="" noSelectionOption="true"/>
+					<f:selectItems value="#{bairroBean.listaMunicipios}" var="municipio" itemLabel="#{municipio.nome}" itemValue="#{municipio}" />
+				</p:selectOneMenu>
+				<h:outputLabel value="#{msg['label.bairro.nome']}" for="nomePesquisa" id="labelNomePesquisa" />
+				<p:inputText value="#{bairroBean.entity.nome}" id="nomePesquisa" size="60" maxlength="255" title="#{msg['title.bairro.nome']}"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+	<p:outputPanel id="painelDetalhePesquisa" rendered="#{bairroBean.modoDetalhePesquisa}" >
+		<p:dataTable value="#{bairroBean.listaEntities}" var="bairro" id="dataTableDetalhePesquisa">
+			<p:column id="colunaNomeBairro" sortBy="#{bairro.nome}">
+				<f:facet name="header"><h:outputText value="#{msg['label.bairro.nome']}" id="labelColunaNome"/></f:facet>
+				<h:outputText value="#{bairro.nome}" id="nomeDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaUF" sortBy="#{bairro.uf}">
+				<f:facet name="header"><h:outputText value="#{msg['label.bairro.uf']}" id="labelColunaUF" /></f:facet>
+				<h:outputText value="#{bairro.uf}" id="ufDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaBotaoEditar">
+				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{bairroBean.editar}" id="botaoEditarBairro" ajax="true" immediate="true">
+					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarBairro"/>
+                	<f:setPropertyActionListener value="#{bairro}" target="#{bairroBean.entity}"/>  
+            	</p:commandLink>
+			</p:column>            	  
+			<p:column style="text-align:center" id="colunaVisualizar">
+				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{bairroBean.visualizar}" id="botaoVisualizarBairro" ajax="true" immediate="true">
+					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarBairro"/>
+                	<f:setPropertyActionListener value="#{bairro}" target="#{bairroBean.entity}" />
+				</p:commandLink>
+			</p:column>
+			<p:column style="text-align:center" id="colunaExcluir">
+				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{bairroBean.iniciarExclusao}" id="botaoExcluirBairro" ajax="true" immediate="true">
+					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirBairro"/>
+                	<f:setPropertyActionListener value="#{bairro}" target="#{bairroBean.entity}" />
+            	</p:commandLink>                        
+			</p:column>
+		</p:dataTable>
+	</p:outputPanel>
+</ui:composition>
