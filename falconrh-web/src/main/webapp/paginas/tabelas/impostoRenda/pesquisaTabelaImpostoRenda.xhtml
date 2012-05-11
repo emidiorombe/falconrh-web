@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelPesquisa" rendered="#{tabelaImpostoRendaBean.modoPesquisa}">
+		<p:panel header="Pesquisa de Tabela de Imposto de Renda" id="painelPesquisaTabelaImpostoRenda">
+			<p:focus for="anoBasePesquisa" id="focusPaginaPesquisa"/>
+			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
+				<h:outputLabel for="anoBasePesquisa" id="labelAnoBasePesquisa" value="#{msg['label.tabelaImpostoRenda.anoBase']}"/>
+				<p:inputText value="#{tabelaImpostoRendaBean.entity.anoBase}" id="anoBasePesquisa" size="6" maxlength="4" required="true" requiredMessage="#{msg['tabelaImpostoRenda.anoBase.obrigatorio']}" title="#{msg['title.tabelaImpostoRenda.anoBase']}"/>
+				<h:outputLabel for="descricaoPesquisa" id="labelDescricaoPesquisa" value="#{msg['label.tabelaImpostoRenda.descricao']}"/>
+				<p:inputText value="#{tabelaImpostoRendaBean.entity.descricao}" id="descricaoPesquisa" size="60" maxlength="255" required="true" requiredMessage="#{msg['tabelaImpostoRenda.descricao.obrigatorio']}" title="#{msg['title.tabelaImpostoRenda.descricao']}"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+	<p:outputPanel id="painelDetalhePesquisa" rendered="#{tabelaImpostoRendaBean.modoDetalhePesquisa}" >
+		<p:dataTable value="#{tabelaImpostoRendaBean.listaEntities}" var="tabelaImpostoRenda" id="dataTableDetalhePesquisa" >
+			<p:column id="colunaDescricaoTabelaImpostoRenda" style="min-width:450px">
+				<f:facet name="header"><h:outputText value="#{msg['label.tabelaImpostoRenda.descricao']}" id="labelColunaDescricao"/></f:facet>
+				<h:outputText value="#{tabelaImpostoRenda.descricao}" id="descricaoDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaAnoBase">
+				<f:facet name="header"><h:outputText value="#{msg['label.tabelaImpostoRenda.anoBase']}" id="labelColunaAnoBase"/></f:facet>
+				<h:outputText value="#{tabelaImpostoRenda.anoBase}" id="anoBaseDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaBotaoEditar">
+				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{tabelaImpostoRendaBean.editar}" id="botaoEditarTabelaImpostoRenda">
+					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarTabelaImpostoRenda"/>
+                	<f:setPropertyActionListener value="#{tabelaImpostoRenda}" target="#{tabelaImpostoRendaBean.entity}"/>  
+            	</p:commandLink>
+			</p:column>            	  
+			<p:column style="text-align:center" id="colunaVisualizar">
+				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{tabelaImpostoRendaBean.visualizar}" id="botaoVisualizarTabelaImpostoRenda">
+					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarTabelaImpostoRenda"/>
+                	<f:setPropertyActionListener value="#{tabelaImpostoRenda}" target="#{tabelaImpostoRendaBean.entity}" />
+				</p:commandLink>
+			</p:column>
+			<p:column style="text-align:center" id="colunaExcluir">
+				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{tabelaImpostoRendaBean.iniciarExclusao}" id="botaoExcluirTabelaImpostoRenda">
+					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirTabelaImpostoRenda"/>
+                	<f:setPropertyActionListener value="#{tabelaImpostoRenda}" target="#{tabelaImpostoRendaBean.entity}" />
+            	</p:commandLink>                        
+			</p:column>
+		</p:dataTable>
+	</p:outputPanel>
+</ui:composition>

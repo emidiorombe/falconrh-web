@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelDetalhe" rendered="#{tabelaINSSBean.modoDetalhe or tabelaINSSBean.modoExclusao}">
+		<p:panel header="Dados da Tabela de INSS" id="painelDetalheINSS">
+			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
+				<h:outputLabel value="#{msg['label.tabelaINSS.descricao']}" for="descricaoDetalhe" id="labelDescricaoDetalhe"/>
+				<h:outputText value="#{tabelaINSSBean.tabelaINSS.descricao}" id="descricaoDetalhe"/>
+				<h:outputLabel value="#{msg['label.tabelaINSS.dataInicioVigencia']}" for="dataInicioVigenciaDetalhe" id="labelDataInicioVigenciaDetalhe"/>
+				<h:outputText value="#{tabelaINSSBean.tabelaINSS.dataInicioVigencia}" id="dataInicioVigenciaDetalhe">
+					<f:convertDateTime locale="pt" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" />
+				</h:outputText>
+				<h:outputLabel value="#{msg['label.tabelaINSS.dataTerminoVigencia']}" for="dataTerminoVigenciaDetalhe" id="labelDataTerminoVigenciaDetalhe"/>
+				<h:outputText value="#{tabelaINSSBean.tabelaINSS.dataTerminoVigencia}" id="dataTerminoVigenciaDetalhe">
+					<f:convertDateTime locale="pt" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy"/>
+				</h:outputText>
+			</h:panelGrid>
+		</p:panel>
+		<p:dataTable value="#{tabelaINSSBean.tabelaINSS.listaAliquotasINSS}" var="aliquotaINSS" emptyMessage="#{msg['info.tabelaAliquotasINSS.nao.encontradas']}" sortBy="#{aliquotaINSS.aliquota}">
+			<f:facet name="header">Lista de Aliquotas da Tabela de INSS</f:facet>
+			<p:column>
+				<f:facet name="header"><h:outputText value="#{msg['label.aliquotaINSS.descricao']}" /></f:facet>
+				<h:outputText value="#{aliquotaINSS.descricao}" />
+			</p:column>
+			<p:column >
+				<f:facet name="header"><h:outputText value="#{msg['label.aliquotaINSS.aliquota']}" /></f:facet>
+				<h:outputText value="#{aliquotaINSS.aliquota}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header"><h:outputText value="#{msg['label.aliquotaINSS.valorInicial']}" /></f:facet>
+				<h:outputText value="#{aliquotaINSS.valorInicial}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header"><h:outputText value="#{msg['label.aliquotaINSS.valorFinal']}" /></f:facet>
+				<h:outputText value="#{aliquotaINSS.valorFinal}" />
+			</p:column>
+		</p:dataTable>
+	</p:outputPanel>
+</ui:composition>

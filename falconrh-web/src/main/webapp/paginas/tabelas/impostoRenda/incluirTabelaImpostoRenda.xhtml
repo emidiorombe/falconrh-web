@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<script type="text/javascript">
+	PrimeFaces.locales['pt_BR'] = {
+            closeText: 'Fechar',
+            prevText: 'Anterior',
+            nextText: 'Próximo',
+            currentText: 'Começo',
+            monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+            monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
+            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+            dayNamesMin: ['D','S','T','Q','Q','S','S'],
+            weekHeader: 'Semana',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Só Horas',
+            timeText: 'Tempo',
+            hourText: 'Hora',
+            minuteText: 'Minuto',
+            secondText: 'Segundo',
+            currentText: 'Data Atual',
+            ampm: false,
+            month: 'Mês',
+            week: 'Semana',
+            day: 'Dia',
+            allDayText : 'Todo Dia'
+        };
+	</script>
+	<p:outputPanel id="painelInclusao" rendered="#{tabelaImpostoRendaBean.modoInclusao or tabelaImpostoRendaBean.modoEdicao}">
+		<p:panel header="Cadastro de Tabela de Imposto de Renda">
+			<p:focus for="descricaoInclusao" id="focusPaginaInclusao"/>
+			<h:panelGrid columns="2" id="painel2ColunasInclusao">
+				<h:outputLabel value="#{msg['label.tabelaImpostoRenda.descricao']}" for="descricaoInclusao" id="labelDescricaoInclusao"/>
+				<p:inputText value="#{tabelaImpostoRendaBean.entity.descricao}" id="descricaoInclusao" required="true" requiredMessage="#{msg['tabelaImpostoRenda.descricao.obrigatorio']}" title="#{msg['title.tabelaImpostoRenda.descricao']}" size="100" maxlength="255"/>
+				<h:outputLabel value="#{msg['label.tabelaImpostoRenda.anoBase']}" for="anoBaseInclusao" id="labelAnoBaseInclusao"/>
+				<p:inputText value="#{tabelaImpostoRendaBean.entity.anoBase}" id="anoBaseInclusao" required="true" requiredMessage="#{msg['tabelaImpostoRenda.anoBase.obrigatorio']}" title="#{msg['title.tabelaImpostoRenda.anoBase']}" size="6" maxlength="4"/>
+				<h:outputLabel value="#{msg['label.tabelaImpostoRenda.dataInicioVigencia']}" for="dataInicioVigenciaInclusao" id="labelDataInicioVigenciaInclusao"/>
+				<p:calendar value="#{tabelaImpostoRendaBean.entity.dataInicioVigencia}" id="dataInicioVigenciaInclusao" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" lang="pt" locale="pt_BR" navigator="true" required="true" requiredMessage="#{msg['tabelaImpostoRenda.dataInicioVigencia.obrigatorio']}" showButtonPanel="true"/>
+				<h:outputLabel value="#{msg['label.tabelaImpostoRenda.dataTerminoVigencia']}" for="dataTerminoVigenciaInclusao" id="labelDataTerminoVigenciaInclusao"/>
+				<p:calendar value="#{tabelaImpostoRendaBean.entity.dataTerminoVigencia}" id="dataTerminoVigenciaInclusao" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" lang="pt" locale="pt_BR" navigator="true" showButtonPanel="true"/>
+			</h:panelGrid>
+		</p:panel>
+		<p:panel header="Incluir Alíquotas para Tabela de Imposto de Renda" id="painelInclusaoAliquotas">
+			<h:panelGrid columns="12">
+				<h:outputLabel value="#{msg['label.aliquotaImpostoRenda.descricao']}" for="descricao" id="labelDescricao"/>
+				<p:inputText value="#{tabelaImpostoRendaBean.aliquotaImpostoRenda.descricao}" id="descricao"/>
+				<h:outputLabel value="#{msg['label.aliquotaImpostoRenda.aliquota']}" for="aliquota" id="labelAliquota"/>
+				<p:inputText value="#{tabelaImpostoRendaBean.aliquotaImpostoRenda.aliquota}" id="aliquota" size="6" maxlength="6">
+					<f:convertNumber locale="pt_BR" pattern="#00,00" />
+				</p:inputText>
+				<h:outputLabel value="#{msg['label.aliquotaImpostoRenda.valorInicial']}" for="valorInicial" id="labelValorInicial" />
+				<p:inputText value="#{tabelaImpostoRendaBean.aliquotaImpostoRenda.valorInicial}" size="10" maxlength="10" id="valorInicial">
+					<f:convertNumber locale="pt_BR" pattern="#00,00" />
+				</p:inputText>
+				<h:outputLabel value="#{msg['label.aliquotaImpostoRenda.valorFinal']}" for="valorFinal" id="labelValorFinal" />
+				<p:inputText value="#{tabelaImpostoRendaBean.aliquotaImpostoRenda.valorFinal}" size="10" maxlength="10" id="valorFinal">
+					<f:convertNumber locale="pt_BR" pattern="#00,00" />
+				</p:inputText>
+				<h:outputLabel value="#{msg['label.aliquotaImpostoRenda.valorParcelaADeduzir']}" for="valorInicial" id="labelValorParcelaADeduzir" />
+				<p:inputText value="#{tabelaImpostoRendaBean.aliquotaImpostoRenda.valorParcelaADeduzir}" size="10" maxlength="10" id="valorParcelaADeduzir">
+					<f:convertNumber locale="pt_BR" pattern="#00,00" />
+				</p:inputText>
+				<p:commandButton value="Limpar" type="reset" />
+				<p:commandButton value="Adicionar" update="aliquotas" action="#{tabelaImpostoRendaBean.reinitAliqutoasImpostoRenda}" process="painelInclusaoAliquotas">
+					<p:collector value="#{tabelaImpostoRendaBean.aliquotaImpostoRenda}" addTo="#{tabelaImpostoRendaBean.entity.listaAliquotasImpostoRenda}"/>
+				</p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+		<p:outputPanel id="aliquotas">
+			<p:dataTable value="#{tabelaImpostoRendaBean.entity.listaAliquotasImpostoRenda}" var="aliquotaImpostoRenda" emptyMessage="#{msg['info.aliquotaImpostoRenda.nao.informados']}">
+				<f:facet name="header">
+					<h:outputText value="Alíquotas da Tabela de Imposto de Renda"/>
+				</f:facet>
+				<p:column  style="max-width: 450px; min-width: 450px; overflow: hidden">
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.aliquotaImpostoRenda.descricao']}"/>
+					</f:facet>
+					<h:outputText value="#{aliquotaImpostoRenda.descricao}" />
+				</p:column>
+				<p:column style="text-align: right">
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.aliquotaImpostoRenda.aliquota']}"/>
+					</f:facet>
+					<h:outputText value="#{aliquotaImpostoRenda.aliquota}">
+						<f:convertNumber minFractionDigits="2" locale="pt_BR"/>
+					</h:outputText>
+				</p:column>
+				
+				<p:column style="text-align: right">
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.aliquotaImpostoRenda.valorInicial']}"/>
+					</f:facet>
+					<h:outputText value="#{aliquotaImpostoRenda.valorInicial}" >
+						<f:convertNumber type="currency" minFractionDigits="2" locale="pt_BR"/>
+					</h:outputText>
+					
+				</p:column>
+				<p:column style="text-align: right">
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.aliquotaImpostoRenda.valorFinal']}"/>
+					</f:facet>
+					<h:outputText value="#{aliquotaImpostoRenda.valorFinal}" >
+						<f:convertNumber type="currency" minFractionDigits="2" locale="pt_BR"/>
+					</h:outputText>
+				</p:column>
+				<p:column style="text-align: right">
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.aliquotaImpostoRenda.valorParcelaADeduzir']}"/>
+					</f:facet>
+					<h:outputText value="#{aliquotaImpostoRenda.valorParcelaADeduzir}" >
+						<f:convertNumber type="currency" minFractionDigits="2" locale="pt_BR"/>
+					</h:outputText>
+				</p:column>				
+				<p:column style="text-align: center">
+					<f:facet name="header">
+						<h:outputText value="Operação" />
+					</f:facet>
+					<p:commandLink value="Remover" update="form:aliquotas" immediate="true">
+						<p:collector value="#{aliquotaImpostoRenda}" removeFrom="#{tabelaImpostoRendaBean.entity.listaAliquotasImpostoRenda}" />
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		</p:outputPanel>		
+	</p:outputPanel>
+</ui:composition>

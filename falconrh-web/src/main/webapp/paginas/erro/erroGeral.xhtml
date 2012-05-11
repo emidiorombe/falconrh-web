@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:p="http://primefaces.org/ui">
+	<h:head>
+  	<title><h:outputText value="#{msg['nome.aplicacao']}"/></title>
+	</h:head>
+	<h:body>
+		<h:form prependId="false" id="formErroGeral">
+			<p:messages id="mensagens" showDetail="true" showSummary="true" />
+			<h1 class="title ui-widget-header ui-corner-all"><h:outputText value="#{msg['nome.aplicacao']}"/></h1>
+			<p:panel>
+				<p>Ocorreu um erro no sistema.</p>
+				<p>Tente novamente e, se o problema persistir, por favor, entre em contato com o <a href="mailto:richard.madureira@gmail.com">administrador do sistema pelo email.</a></p>
+			</p:panel>
+  		</h:form>
+	</h:body>
+</html>

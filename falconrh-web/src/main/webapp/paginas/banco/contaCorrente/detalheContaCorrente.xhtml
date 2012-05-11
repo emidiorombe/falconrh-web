@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelDetalhe" rendered="#{contaCorrenteBean.modoDetalhe or contaCorrenteBean.modoExclusao}">
+		<p:panel header="#{msg['titulo.agencia.detalhe']}" id="painelDetalheContaCorrente">
+			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
+				<h:outputLabel value="#{msg['label.contaCorrente.banco']}" for="bancoDetalhe" id="labelBancoDetalhe"/>
+				<h:outputText value="#{contaCorrenteBean.entity.agencia.banco}" id="bancoDetalhe"/>
+				<h:outputLabel value="#{msg['label.contaCorrente.agencia']}" for="agenciaDetalhe" id="labelAgenciaDetalhe"/>
+				<h:outputText value="#{contaCorrenteBean.entity.agencia.nome}" id="agenciaDetalhe"/>
+				<h:outputLabel value="#{msg['label.contaCorrente.numero']}" for="numeroDetalhe" id="labelNumeroDetalhe"/>
+				<h:outputText value="#{contaCorrenteBean.entity.numero}" id="numeroDetalhe"/>
+				<h:outputLabel value="#{msg['label.contaCorrente.digitoVerificador']}" for="digitoVerificadorContaCorrenteDetalhe" id="labelDigitoVerificadorContaCorrenteDetalhe"/>
+				<h:outputText value="#{contaCorrenteBean.entity.digitoVerificador}" id="digitoVerificadorContaCorrenteDetalhe"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>

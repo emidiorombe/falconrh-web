@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelPesquisa" rendered="#{bancoBean.modoPesquisa}">
+		<p:panel header="#{msg['titulo.banco.pesquisa']}" id="painelPesquisaBanco">
+			<p:focus for="nomePesquisa" id="focusPaginaPesquisa"/>
+			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
+				<h:outputLabel for="nomePesquisa" id="labelNomePesquisa" value="#{msg['label.banco.nome']}"/>
+				<p:inputText value="#{bancoBean.entity.nome}" id="nomePesquisa" size="60" maxlength="255" required="true" requiredMessage="#{msg['banco.nome.obrigatorio']}" title="#{msg['title.banco.nome']}"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+	<p:outputPanel id="painelDetalhePesquisa" rendered="#{bancoBean.modoDetalhePesquisa}" >
+		<p:dataTable value="#{bancoBean.listaEntities}" var="banco" id="dataTableDetalhePesquisa">
+			<p:column id="colunaNomeBanco" sortBy="#{banco.nome}">
+				<f:facet name="header"><h:outputText value="#{msg['label.banco.nome']}" id="labelColunaNome"/></f:facet>
+				<h:outputText value="#{banco.nome}" id="nomeDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaCodigoFebraban" sortBy="#{banco.codigoFebraban}">
+				<f:facet name="header"><h:outputText value="#{msg['label.banco.codigoFebraban']}" id="labelColunaCodigoFebraban" /></f:facet>
+				<h:outputText value="#{banco.codigoFebraban}" id="codigoFebrabanDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaBotaoEditar">
+				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{bancoBean.editar}" id="botaoEditarBanco" ajax="true">
+					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarBanco"/>
+                	<f:setPropertyActionListener value="#{banco}" target="#{bancoBean.entity}"/>  
+            	</p:commandLink>
+			</p:column>            	  
+			<p:column style="text-align:center" id="colunaVisualizar">
+				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{bancoBean.visualizar}" id="botaoVisualizarBanco" ajax="true">
+					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarBanco"/>
+                	<f:setPropertyActionListener value="#{banco}" target="#{bancoBean.entity}" />
+				</p:commandLink>
+			</p:column>
+			<p:column style="text-align:center" id="colunaExcluir">
+				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{bancoBean.iniciarExclusao}" id="botaoExcluirBanco" ajax="true">
+					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirBanco"/>
+                	<f:setPropertyActionListener value="#{banco}" target="#{bancoBean.entity}" />
+            	</p:commandLink>                        
+			</p:column>
+		</p:dataTable>
+	</p:outputPanel>
+</ui:composition>

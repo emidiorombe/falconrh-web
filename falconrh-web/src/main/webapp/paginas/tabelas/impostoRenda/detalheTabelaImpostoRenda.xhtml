@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelDetalhe" rendered="#{tabelaImpostoRendaBean.modoDetalhe or tabelaImpostoRendaBean.modoExclusao}">
+		<p:panel header="Dados da Tabela de Imposto de Renda" id="painelDetalheImpostoRenda">
+			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
+				<h:outputLabel value="#{msg['label.tabelaImpostoRenda.descricao']}" for="descricaoDetalhe" id="labelDescricaoDetalhe"/>
+				<h:outputText value="#{tabelaImpostoRendaBean.entity.descricao}" id="descricaoDetalhe"/>
+				<h:outputLabel value="#{msg['label.tabelaImpostoRenda.anoBase']}" for="anoBaseDetalhe" id="labelAnoBaseDetalhe"/>
+				<h:outputText value="#{tabelaImpostoRendaBean.entity.anoBase}" id="anoBaseDetalhe"/>
+				<h:outputLabel value="#{msg['label.tabelaImpostoRenda.dataInicioVigencia']}" for="dataInicioVigenciaDetalhe" id="labelDataInicioVigenciaDetalhe"/>
+				<h:outputText value="#{tabelaImpostoRendaBean.entity.dataInicioVigencia}" id="dataInicioVigenciaDetalhe">
+					<f:convertDateTime locale="pt" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy"/>
+				</h:outputText>
+				<h:outputLabel value="#{msg['label.tabelaImpostoRenda.dataTerminoVigencia']}" for="dataTerminoVigenciaDetalhe" id="labelDataTerminoVigenciaDetalhe"/>
+				<h:outputText value="#{tabelaImpostoRendaBean.entity.dataTerminoVigencia}" id="dataTerminoVigenciaDetalhe">
+					<f:convertDateTime locale="pt" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy"/>
+				</h:outputText>
+			</h:panelGrid>
+		</p:panel>
+		<p:panel header="Alíquotas da Tabela de Imposto de Renda" id="painelDetalheAliqutoas" rendered="#{not empty tabelaImpostoRendaBean.entity.listaAliquotasImpostoRenda}">
+			<p:dataTable value="#{tabelaImpostoRendaBean.entity.listaAliquotasImpostoRenda}" var="aliquotaImpostoRenda" emptyMessage="#{msg['info.tabelaAliquotasImpostoRenda.nao.encontradas']}" sortBy="#{aliquotaImpostoRenda.aliquota}">
+				<f:facet name="header">Lista de Aliquotas da Tabela de Imposto de Renda</f:facet>
+				<p:column>
+					<f:facet name="header"><h:outputText value="#{msg['label.aliquotaImpostoRenda.descricao']}" /></f:facet>
+					<h:outputText value="#{aliquotaImpostoRenda.descricao}" />
+				</p:column>
+				<p:column >
+					<f:facet name="header"><h:outputText value="#{msg['label.aliquotaImpostoRenda.aliquota']}" /></f:facet>
+					<h:outputText value="#{aliquotaImpostoRenda.aliquota}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header"><h:outputText value="#{msg['label.aliquotaImpostoRenda.valorInicial']}" /></f:facet>
+					<h:outputText value="#{aliquotaImpostoRenda.valorInicial}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header"><h:outputText value="#{msg['label.aliquotaImpostoRenda.valorFinal']}" /></f:facet>
+					<h:outputText value="#{aliquotaImpostoRenda.valorFinal}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header"><h:outputText value="#{msg['label.aliquotaImpostoRenda.valorParcelaADeduzir']}" /></f:facet>
+					<h:outputText value="#{aliquotaImpostoRenda.valorParcelaADeduzir}" />
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>

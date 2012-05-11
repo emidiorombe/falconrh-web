@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelPesquisa" rendered="#{municipioBean.modoPesquisa}">
+		<p:panel header="#{msg['titulo.municipio.pesquisa']}" id="painelPesquisaMunicipio">
+			<p:focus for="ufPesquisa" id="focusPaginaPesquisa"/>
+			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
+				<h:outputLabel value="#{msg['label.municipio.uf']}" for="ufPesquisa" />
+				<p:selectOneMenu value="#{municipioBean.entity.uf}" id="ufPesquisa" title="#{msg['title.municipio.uf']}" effect="fade" >
+					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true"/>
+					<f:selectItems value="#{utilBean.listaUFs}" />
+				</p:selectOneMenu>
+				<h:outputLabel for="nomePesquisa" id="labelNomePesquisa" value="#{msg['label.municipio.nome']}"/>
+				<p:inputText value="#{municipioBean.entity.nome}" id="nomePesquisa" size="60" maxlength="255" title="#{msg['title.municipio.nome']}"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+	<p:outputPanel id="painelDetalhePesquisa" rendered="#{municipioBean.modoDetalhePesquisa}" >
+		<p:dataTable value="#{municipioBean.listaEntities}" var="municipio" id="dataTableDetalhePesquisa">
+			<p:column id="colunaNomeMunicipio" sortBy="#{municipio.nome}">
+				<f:facet name="header"><h:outputText value="#{msg['label.municipio.nome']}" id="labelColunaNome"/></f:facet>
+				<h:outputText value="#{municipio.nome}" id="nomeDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaUF" sortBy="#{municipio.uf}">
+				<f:facet name="header"><h:outputText value="#{msg['label.municipio.uf']}" id="labelColunaUF" /></f:facet>
+				<h:outputText value="#{municipio.uf}" id="ufDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaBotaoEditar">
+				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{municipioBean.editar}" id="botaoEditarMunicipio" ajax="true" immediate="true">
+					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarMunicipio"/>
+                	<f:setPropertyActionListener value="#{municipio}" target="#{municipioBean.entity}"/>  
+            	</p:commandLink>
+			</p:column>            	  
+			<p:column style="text-align:center" id="colunaVisualizar">
+				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{municipioBean.visualizar}" id="botaoVisualizarMunicipio" ajax="true" immediate="true">
+					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarMunicipio"/>
+                	<f:setPropertyActionListener value="#{municipio}" target="#{municipioBean.entity}" />
+				</p:commandLink>
+			</p:column>
+			<p:column style="text-align:center" id="colunaExcluir">
+				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{municipioBean.iniciarExclusao}" id="botaoExcluirMunicipio" ajax="true" immediate="true">
+					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirMunicipio"/>
+                	<f:setPropertyActionListener value="#{municipio}" target="#{municipioBean.entity}" />
+            	</p:commandLink>                        
+			</p:column>
+		</p:dataTable>
+	</p:outputPanel>
+</ui:composition>

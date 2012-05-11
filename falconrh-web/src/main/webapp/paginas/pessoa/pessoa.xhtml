@@ -1,0 +1,30 @@
+<ui:composition template="/paginas/layout/layout.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="tituloPagina"><h:outputText value="#{msg['titulo.pessoa']}" id="tituloPaginaConteudo"/></ui:define>
+	<ui:define name="conteudo">
+		<ui:debug hotkey="q"/>
+		<h:form id="form" prependId="true" acceptcharset="utf-8">
+			<p:messages id="mensagens" showDetail="true" showSummary="false"/>
+			<p:outputPanel id="painelGlobal">
+				<ui:include src="incluirPessoa.xhtml"/>
+				<ui:include src="detalhePessoa.xhtml"/>
+				<ui:include src="pesquisaPessoa.xhtml"/>
+				<p:panel style="text-align: center" rendered="#{not empty pessoaBean.modoOperacao}">
+					<p:commandButton value="#{msg['label.botao.cadastro.pessoa']}" actionListener="#{pessoaBean.cadastrarPessoa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{pessoaBean.modoInclusao}" title="#{msg['title.botao.cadastro.pessoa']}" id="botaoCadastroPessoa"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.pessoa']}" actionListener="#{pessoaBean.atualizarPessoa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{pessoaBean.modoEdicao}" title="#{msg['title.botao.atualizacao.pessoa']}" id="botaoAtualizacaoPessoa"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.pessoa']}" actionListener="#{pessoaBean.pesquisarPessoa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{pessoaBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.pessoa']}" id="botaoPesquisaPessoa"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.pessoa']}" actionListener="#{pessoaBean.excluirPessoa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{pessoaBean.modoExclusao}" title="#{msg['title.botao.exclusao.pessoa']}" id="botaoExclusaoPessoa"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{pessoaBean.voltarParaResultadoPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{pessoaBean.modoExclusao or pessoaBean.modoEdicao or pessoaBean.modoDetalhe}" title="#{msg['title.botao.exclusao.pessoa']}" immediate="true" id="botaoVoltarPessoa">
+						<f:setPropertyActionListener target="#{pessoaBean.pessoa}" value="#{pessoaBean.pessoa}"/>
+					</p:commandButton>
+					<p:commandButton value="#{msg['label.botao.sair']}" action="#{pessoaBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairPessoa"/>
+				</p:panel>
+			</p:outputPanel>
+		</h:form>
+	</ui:define>
+</ui:composition>

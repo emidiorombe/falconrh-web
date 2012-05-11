@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelDetalhe" rendered="#{logradouroBean.modoDetalhe or logradouroBean.modoExclusao}">
+		<p:panel header="#{msg['titulo.logradouro.detalhe']}" id="painelDetalheBanco">
+			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
+				<h:outputLabel value="#{msg['label.logradouro.uf']}" for="ufDetalhe" id="labelUfDetalhe"/>
+				<h:outputText value="#{logradouroBean.entity.bairro.municipio.uf.nome}" id="ufDetalhe"/>
+				<h:outputLabel value="#{msg['label.logradouro.municipio']}" got="municipioDetalhe" id="labelMunicipioDetalhe"/>
+				<h:outputText value="#{logradouroBean.entity.bairro.municipio.nome}" id="nomeDetalhe"/>
+				<h:outputLabel value="#{msg['label.logradouro.bairro']}" for="bairroDetalhe" id="labelBairroDetalhe"/>
+				<h:outputText value="#{logradouroBean.entity.bairro.nome}" id="bairroDetalhe"/>
+				<h:outputLabel value="#{msg['label.logradouro.nome']}" for="nomeDetalheLogradouro" id="labelNomeDetalhe"/>
+				<h:outputText value="#{logradouroBean.entity.nome}" id="nomeDetalheLogradouro"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>

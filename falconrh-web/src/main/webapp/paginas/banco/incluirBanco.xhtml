@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelInclusao" rendered="#{bancoBean.modoInclusao or bancoBean.modoEdicao}">
+		<p:panel header="#{msg['label.titulo.inclusao.banco']}">
+			<p:focus for="codigoFebraban" id="focusPaginaInclusao"/>
+			<h:panelGrid columns="2" id="painel2ColunasInclusao">
+				<h:outputLabel value="#{msg['label.banco.codigoFebraban']}" id="labelCodigoFebraban" for="codigoFebraban" />
+				<p:inputText value="#{bancoBean.entity.codigoFebraban}" id="codigoFebraban" required="true" requiredMessage="#{msg['banco.codigoFebraban.obrigatorio']}" maxlength="3" size="5"/>
+				<h:outputLabel value="#{msg['label.banco.nome']}" for="nome" id="labelNome" />
+				<p:inputText value="#{bancoBean.entity.nome}" id="nome" size="60" maxlength="255" required="true" requiredMessage="#{msg['banco.nome.obrigatorio']}" title="#{msg['title.banco.nome']}"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>

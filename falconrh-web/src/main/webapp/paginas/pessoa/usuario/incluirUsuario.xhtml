@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://java.sun.com/jsf/composite/rich">
+	<p:outputPanel id="painelInclusao" rendered="#{usuarioBean.modoInclusao or usuarioBean.modoEdicao}">
+		<p:panel header="Dados do Usuário do Sistema">
+			<p:focus for="pessoa"/>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="#{msg['label.usuario.nome']}" for="pessoa" label="labelPessoa" />
+				<p:selectOneMenu value="#{usuarioBean.pessoaTemp}" id="pessoa" required="true" requiredMessage="#{msg['usuario.nome.obrigatorio']}" title="#{msg['title.usuario.nome']}">
+					<f:selectItems value="#{utilBean.listaPessoas}"/>
+					<f:converter converterId="pessoaConverter"/>
+				</p:selectOneMenu>
+				<h:outputLabel value="#{msg['label.usuario.login']}" id="labelLogin" for="login"/>
+				<p:inputText value="#{usuarioBean.usuario.login}" id="login" title="#{msg['title.usuario.login']}" size="60" maxlength="100" required="true" requiredMessage="#{msg['usuario.login.obrigatorio']}"/>
+				<h:outputLabel value="#{msg['label.usuario.senha']}" id="labelSenha" for="senha"/>
+				<p:password value="#{usuarioBean.usuario.senha}" id="senha" title="#{msg['title.usuario.senha']}" size="20" maxlength="40" goodLabel="Senha confiável" feedback="true" inline="true" minLength="6" promptLabel="Informe a senha aqui" strongLabel="Senha forte" weakLabel="Senha Fraca" lang="pt" required="true" requiredMessage="#{msg['usuario.senha.obrigatorio']}" />
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>

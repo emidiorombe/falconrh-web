@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+
+body{
+	margin: 0;
+	padding: 0;
+}
+
+.carregando{
+	background-color: darkRed;
+	color: white;
+	border: 1px solid black;
+	float: right;
+	position: absolute;
+	top:0;
+	right: 0;
+	padding-right: 5px	
+}
+
+#conteudo, #rodape{
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.ui-widget-header{
+	padding-left : 10px;
+	padding-right: 10px;
+}
