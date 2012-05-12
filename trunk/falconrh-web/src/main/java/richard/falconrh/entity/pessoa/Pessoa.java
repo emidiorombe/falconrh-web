@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -35,7 +36,7 @@ import richard.falconrh.modelo.enums.Sexo;
 @Table(name="PESSOAS")
 @GenericGenerator(name = "SEQ_GEN", strategy = "sequence", parameters = { @Parameter(name = "sequence", value = "SEQ_PESSOAS") })
 @Inheritance(strategy =InheritanceType.JOINED)
-public class Pessoa extends Parent implements Cloneable{
+public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	private static final long serialVersionUID = 7713203491119053888L;
 
 	private String nome;
@@ -306,6 +307,17 @@ public class Pessoa extends Parent implements Cloneable{
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public int compareTo(Pessoa pessoa) {
+		if(this.getId()!=null & pessoa.getId()!=null){
+			return this.getId().compareTo(pessoa.getId());
+		}
+		if(StringUtils.isNotBlank(this.getNome()) && StringUtils.isNotBlank(pessoa.getNome())){
+			return this.getNome().compareTo(pessoa.getNome());
+		}
+		return 0;
 	}
 	
 	
