@@ -10,7 +10,6 @@ import richard.falconrh.service.PessoaServices;
 /**
  * ManagedBean JSF utilizado em arquivos xhtml
  * @author Richard Mendes Madureira
- *
  * @version $Revision: 1.0 $
  */
 @ManagedBean(name="pessoaBean")
@@ -32,7 +31,6 @@ public class PessoaBean extends BaseBean<Pessoa, PessoaServices>{
 
 	/**
 	 * Method getServices.
-	
 	 * @return PessoaServices */
 	@Override
 	public PessoaServices getServices() {
@@ -41,7 +39,14 @@ public class PessoaBean extends BaseBean<Pessoa, PessoaServices>{
 
 	@Override
 	public void setMensagensInformativas() {
-		// TODO Auto-generated method stub
-		
+		SUCESSO_CADASTRO = "sucesso.cadastro.pessoa";
+		SUCESSO_ATUALIZACAO = "sucesso.atualizacao.pessoa";
+		SUCESSO_EXCLUSAO = "sucesso.exclusao.pessoa";
+		SUCESSO_PESQUISA = "sucesso.pesquisa.pessoa";
+		ERRO_CADASTRO = "erro.cadastro.pessoa";
+		ERRO_ATUALIZACAO = "erro.atualizacao.pessoa";
+		ERRO_EXCLUSAO = "erro.exclusao.pessoa";
+		ERRO_PESQUISA = "erro.pesquisa.pessoa";
+		PESQUISA_NAO_ENCONTRADA = "pesquisa.pessoa.nao.encontrada";
 	}
 }
