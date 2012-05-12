@@ -9,15 +9,14 @@
 			<p:focus for="nomePesquisa" id="focusPaginaPesquisa"/>
 			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
 				<h:outputLabel for="nomePesquisa" id="labelNomePesquisa" value="#{msg['label.pessoa.nome']}"/>
-				<p:inputText value="#{pessoaBean.pessoa.nome}" id="nomePesquisa" size="60" maxlength="255" required="true" requiredMessage="#{msg['pessoa.nome.obrigatorio']}" title="#{msg['title.pessoa.nome']}"/>
-				
+				<p:inputText value="#{pessoaBean.entity.nome}" id="nomePesquisa" size="60" maxlength="255" title="#{msg['title.pessoa.nome']}"/>
 				<h:outputLabel for="dataNascimentoPesquisa" id="labelDataNascimentoPesquisa" value="#{msg['label.pessoa.dataNascimento']}"/>
-				<p:calendar value="#{pessoaBean.pessoa.dataNascimento}" id="dataNascimentoPesquisa" title="#{msg['title.pessoa.dataNascimento']}" locale="pt_BR" timeZone="America/Sao_Paulo" lang="pt" pattern="dd/MM/yyyy"/>
+				<p:calendar value="#{pessoaBean.entity.dataNascimento}" id="dataNascimentoPesquisa" title="#{msg['title.pessoa.dataNascimento']}" locale="pt_BR" timeZone="America/Sao_Paulo" lang="pt" pattern="dd/MM/yyyy"/>
 			</h:panelGrid>
 		</p:panel>
 	</p:outputPanel>
 	<p:outputPanel id="painelDetalhePesquisa" rendered="#{pessoaBean.modoDetalhePesquisa}" >
-		<p:dataTable value="#{pessoaBean.listaPessoas}" var="pessoa" id="dataTableDetalhePesquisa" >
+		<p:dataTable value="#{pessoaBean.listaEntities}" var="pessoa" id="dataTableDetalhePesquisa" >
 			<p:column id="colunaNomePessoa">
 				<f:facet name="header"><h:outputText value="#{msg['label.pessoa.nome']}" id="labelColunaNome"/></f:facet>
 				<h:outputText value="#{pessoa.nome}" id="nomeDetalhe"/>
@@ -28,25 +27,31 @@
 					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="America/Sao_Paulo"/>
 				</h:outputText>
 			</p:column>
+			<p:column style="text-align:center" id="colunaSexo">
+				<f:facet name="header"><h:outputText value="#{msg['label.pessoa.sexo']}" id="labelSexo"/></f:facet>
+				<h:outputText value="#{pessoa.sexo.nome}" id="sexoDetalhe">
+					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="America/Sao_Paulo"/>
+				</h:outputText>
+			</p:column>
 			<p:column style="text-align:center" id="colunaBotaoEditar">
 				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{pessoaBean.editarPessoa}" id="botaoEditarPessoa">
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{pessoaBean.editar}" id="botaoEditarPessoa">
 					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarPessoa"/>
-                	<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"/>  
+                	<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.entity}"/>  
             	</p:commandLink>
 			</p:column>            	  
 			<p:column style="text-align:center" id="colunaVisualizar">
 				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{pessoaBean.visualizarPessoa}" id="botaoVisualizarPessoa">
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{pessoaBean.visualizar}" id="botaoVisualizarPessoa">
 					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarPessoa"/>
-                	<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}" />
+                	<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.entity}" />
 				</p:commandLink>
 			</p:column>
 			<p:column style="text-align:center" id="colunaExcluir">
 				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{pessoaBean.iniciarExclusaoPessoa}" id="botaoExcluirPessoa">
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{pessoaBean.iniciarExclusao}" id="botaoExcluirPessoa">
 					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirPessoa"/>
-                	<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}" />
+                	<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.entity}" />
             	</p:commandLink>                        
 			</p:column>
 		</p:dataTable>
