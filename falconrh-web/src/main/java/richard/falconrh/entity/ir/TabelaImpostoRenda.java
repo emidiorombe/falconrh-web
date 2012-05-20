@@ -47,8 +47,8 @@ public class TabelaImpostoRenda extends Parent {
 
 	/**
 	 * Method getDescricao.
-	
-	 * @return String */
+	 * @return String
+	 */
 	@Column(length=100, nullable=false)
 	public String getDescricao(){
 		return descricao;
@@ -56,8 +56,8 @@ public class TabelaImpostoRenda extends Parent {
 	
 	/**
 	 * Method getAnoBase.
-	
-	 * @return Integer */
+	 * @return Integer
+	 */
 	@Column(nullable=false)
 	public Integer getAnoBase(){
 		return anoBase;
@@ -65,8 +65,8 @@ public class TabelaImpostoRenda extends Parent {
 	
 	/**
 	 * Method getDataInicioVigencia.
-	
-	 * @return Date */
+	 * @return Date
+	 */
 	@Temporal(value = TemporalType.DATE)
 	@Column(nullable = false)
 	public Date getDataInicioVigencia() {
@@ -75,8 +75,8 @@ public class TabelaImpostoRenda extends Parent {
 
 	/**
 	 * Method getDataTerminoVigencia.
-	
-	 * @return Date */
+	 * @return Date
+	 */
 	@Temporal(value = TemporalType.DATE)
 	public Date getDataTerminoVigencia() {
 		return dataTerminoVigencia;
@@ -84,8 +84,8 @@ public class TabelaImpostoRenda extends Parent {
 
 	/**
 	 * Method getListaAliquotasImpostoRenda.
-	
-	 * @return List<AliquotaImpostoRenda> */
+	 * @return List<AliquotaImpostoRenda>
+	 */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tabelaImpostoRenda", cascade=CascadeType.ALL)
 	public List<AliquotaImpostoRenda> getListaAliquotasImpostoRenda() {
 		return listaAliquotasImpostoRenda;
@@ -134,8 +134,8 @@ public class TabelaImpostoRenda extends Parent {
 	/**
 	 * Method isVigente.
 	 * @param dataReferencia Date
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	@Transient
 	public boolean isVigente(Date dataReferencia){
 		if(getDataInicioVigencia().before(dataReferencia) || getDataInicioVigencia()==dataReferencia){
@@ -145,4 +145,58 @@ public class TabelaImpostoRenda extends Parent {
 		}
 		return false;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((anoBase == null) ? 0 : anoBase.hashCode());
+		result = prime
+				* result
+				+ ((dataInicioVigencia == null) ? 0 : dataInicioVigencia
+						.hashCode());
+		result = prime
+				* result
+				+ ((dataTerminoVigencia == null) ? 0 : dataTerminoVigencia
+						.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (!(obj instanceof TabelaImpostoRenda)) {
+			return false;
+		}
+		TabelaImpostoRenda other = (TabelaImpostoRenda) obj;
+		if (anoBase == null) {
+			if (other.anoBase != null) {
+				return false;
+			}
+		} else if (!anoBase.equals(other.anoBase)) {
+			return false;
+		}
+		if (dataInicioVigencia == null) {
+			if (other.dataInicioVigencia != null) {
+				return false;
+			}
+		} else if (!dataInicioVigencia.equals(other.dataInicioVigencia)) {
+			return false;
+		}
+		if (dataTerminoVigencia == null) {
+			if (other.dataTerminoVigencia != null) {
+				return false;
+			}
+		} else if (!dataTerminoVigencia.equals(other.dataTerminoVigencia)) {
+			return false;
+		}
+		return true;
+	}
+	
+	
 }
