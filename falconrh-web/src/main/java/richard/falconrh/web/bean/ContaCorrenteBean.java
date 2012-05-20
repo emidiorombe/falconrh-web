@@ -53,8 +53,8 @@ public class ContaCorrenteBean extends BaseBean<ContaCorrente, ContaCorrenteServ
 	
 	/**
 	 * Method getServices.
-	
-	 * @return ContaCorrenteServices */
+	 * @return ContaCorrenteServices
+	 */
 	@Override
 	public ContaCorrenteServices getServices() {
 		return contaCorrenteServices;
@@ -83,7 +83,6 @@ public class ContaCorrenteBean extends BaseBean<ContaCorrente, ContaCorrenteServ
 			try {
 				Set<Agencia> listaAgencias = agenciaServices.obterListaPeloIdBanco(banco.getId());
 				setListaAgencias(new ArrayList<Agencia>(listaAgencias));
-				adicionarMensagemInformacao("sucesso.pesquisa.agencia");
 			} catch (ServicesException e) {
 				logger.error("erro.pesquisa.agencia", e);
 				adicionarMensagemErro("erro.pesquisa.agencia");
@@ -93,8 +92,8 @@ public class ContaCorrenteBean extends BaseBean<ContaCorrente, ContaCorrenteServ
 
 	/**
 	 * Method getListaAgencias.
-	
-	 * @return List<Agencia> */
+	 * @return List<Agencia>
+	 */
 	public List<Agencia> getListaAgencias() {
 		return listaAgencias;
 	}
@@ -106,6 +105,4 @@ public class ContaCorrenteBean extends BaseBean<ContaCorrente, ContaCorrenteServ
 	public void setListaAgencias(List<Agencia> listaAgencias) {
 		this.listaAgencias = listaAgencias;
 	}
-
-
 }

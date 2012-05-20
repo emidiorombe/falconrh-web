@@ -13,7 +13,6 @@ import richard.falconrh.service.ImpostoRendaServices;
 /**
  * ManagedBean JSF utilizado em arquivos xhtml
  * @author Richard Mendes Madureira
- *
  * @version $Revision: 1.0 $
  */
 @ManagedBean(name="tabelaImpostoRendaBean")
@@ -50,8 +49,8 @@ public class TabelaImpostoRendaBean extends BaseBean<TabelaImpostoRenda, Imposto
 	
 	/**
 	 * Method reinitAliqutoasImpostoRenda.
-	
-	 * @return String */
+	 * @return String
+	 */
 	public String reinitAliqutoasImpostoRenda(){
 		setAliquotaImpostoRenda(new AliquotaImpostoRenda());
 		return null;
@@ -65,8 +64,8 @@ public class TabelaImpostoRendaBean extends BaseBean<TabelaImpostoRenda, Imposto
 	
 	/**
 	 * Method getAliquotaImpostoRenda.
-	
-	 * @return AliquotaImpostoRenda */
+	 * @return AliquotaImpostoRenda
+	 */
 	public AliquotaImpostoRenda getAliquotaImpostoRenda() {
 		return aliquotaImpostoRenda;
 	}
@@ -81,7 +80,6 @@ public class TabelaImpostoRendaBean extends BaseBean<TabelaImpostoRenda, Imposto
 	
 	/**
 	 * Method getServices.
-	
 	 * @return ImpostoRendaServices */
 	@Override
 	public ImpostoRendaServices getServices() {

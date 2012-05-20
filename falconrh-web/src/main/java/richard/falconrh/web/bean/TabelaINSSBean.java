@@ -13,7 +13,6 @@ import richard.falconrh.service.TabelaINSSServices;
 /**
  * ManagedBean JSF utilizado em arquivos xhtml
  * @author Richard Mendes Madureira
- *
  * @version $Revision: 1.0 $
  */
 @ManagedBean(name="tabelaINSSBean")
@@ -38,8 +37,8 @@ public class TabelaINSSBean extends BaseBean<TabelaINSS, TabelaINSSServices>{
 	
 	/**
 	 * Method reinitAliquotasINSS.
-	
-	 * @return String */
+	 * @return String
+	 */
 	public String reinitAliquotasINSS(){
 		setAliquotaINSS(new AliquotaINSS());
 		return null;
