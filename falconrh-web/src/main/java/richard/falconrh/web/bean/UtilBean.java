@@ -260,7 +260,7 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 	public SelectItem[] getListaSimOuNao(){
 		SelectItem[] items = new SelectItem[2];
 		items[0] = new SelectItem(Boolean.TRUE, "Sim");
-		items[0] = new SelectItem(Boolean.FALSE, "Nao");
+		items[1] = new SelectItem(Boolean.FALSE, "Nao");
 		return items;
 	}
 	
