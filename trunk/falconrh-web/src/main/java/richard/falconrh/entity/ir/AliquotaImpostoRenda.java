@@ -42,8 +42,8 @@ public class AliquotaImpostoRenda extends Parent {
 
 	/**
 	 * Method getTabelaImpostoRenda.
-	
-	 * @return TabelaImpostoRenda */
+	 * @return TabelaImpostoRenda
+	 */
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_TABELA_IR")
 	public TabelaImpostoRenda getTabelaImpostoRenda() {
@@ -52,8 +52,8 @@ public class AliquotaImpostoRenda extends Parent {
 
 	/**
 	 * Method getDescricao.
-	
-	 * @return String */
+	 * @return String
+	 */
 	@Column(length=100, nullable=false)
 	public String getDescricao() {
 		return descricao;
@@ -61,8 +61,8 @@ public class AliquotaImpostoRenda extends Parent {
 
 	/**
 	 * Method getAliquota.
-	
-	 * @return Double */
+	 * @return Double
+	 */
 	@Column(nullable=false)
 	public Double getAliquota() {
 		return aliquota;
@@ -70,8 +70,8 @@ public class AliquotaImpostoRenda extends Parent {
 
 	/**
 	 * Method getValorInicial.
-	
-	 * @return Double */
+	 * @return Double
+	 */
 	@Column(nullable=false)
 	public Double getValorInicial() {
 		return valorInicial;
@@ -79,8 +79,8 @@ public class AliquotaImpostoRenda extends Parent {
 
 	/**
 	 * Method getValorFinal.
-	
-	 * @return Double */
+	 * @return Double
+	 */
 	@Column(nullable=true)
 	public Double getValorFinal() {
 		return valorFinal;
@@ -88,8 +88,8 @@ public class AliquotaImpostoRenda extends Parent {
 
 	/**
 	 * Method getValorParcelaADeduzir.
-	
-	 * @return Double */
+	 * @return Double
+	 */
 	@Column(nullable=false)
 	public Double getValorParcelaADeduzir() {
 		return valorParcelaADeduzir;
@@ -143,18 +143,16 @@ public class AliquotaImpostoRenda extends Parent {
 		this.valorParcelaADeduzir = valorParcelaADeduzir;
 	}
 
-	/**
-	 * Method hashCode.
-	
-	 * @return int */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
 				+ ((aliquota == null) ? 0 : aliquota.hashCode());
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime
+				* result
+				+ ((tabelaImpostoRenda == null) ? 0 : tabelaImpostoRenda
+						.hashCode());
 		result = prime * result
 				+ ((valorFinal == null) ? 0 : valorFinal.hashCode());
 		result = prime * result
@@ -166,47 +164,55 @@ public class AliquotaImpostoRenda extends Parent {
 		return result;
 	}
 
-	/**
-	 * Method equals.
-	 * @param obj Object
-	
-	 * @return boolean */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (!super.equals(obj))
+		}
+		if (!super.equals(obj)) {
 			return false;
-		if (!(obj instanceof AliquotaImpostoRenda))
+		}
+		if (!(obj instanceof AliquotaImpostoRenda)) {
 			return false;
+		}
 		AliquotaImpostoRenda other = (AliquotaImpostoRenda) obj;
 		if (aliquota == null) {
-			if (other.aliquota != null)
+			if (other.aliquota != null) {
 				return false;
-		} else if (!aliquota.equals(other.aliquota))
+			}
+		} else if (!aliquota.equals(other.aliquota)) {
 			return false;
-		if (descricao == null) {
-			if (other.descricao != null)
+		}
+		if (tabelaImpostoRenda == null) {
+			if (other.tabelaImpostoRenda != null) {
 				return false;
-		} else if (!descricao.equals(other.descricao))
+			}
+		} else if (!tabelaImpostoRenda.equals(other.tabelaImpostoRenda)) {
 			return false;
+		}
 		if (valorFinal == null) {
-			if (other.valorFinal != null)
+			if (other.valorFinal != null) {
 				return false;
-		} else if (!valorFinal.equals(other.valorFinal))
+			}
+		} else if (!valorFinal.equals(other.valorFinal)) {
 			return false;
+		}
 		if (valorInicial == null) {
-			if (other.valorInicial != null)
+			if (other.valorInicial != null) {
 				return false;
-		} else if (!valorInicial.equals(other.valorInicial))
+			}
+		} else if (!valorInicial.equals(other.valorInicial)) {
 			return false;
+		}
 		if (valorParcelaADeduzir == null) {
-			if (other.valorParcelaADeduzir != null)
+			if (other.valorParcelaADeduzir != null) {
 				return false;
-		} else if (!valorParcelaADeduzir.equals(other.valorParcelaADeduzir))
+			}
+		} else if (!valorParcelaADeduzir.equals(other.valorParcelaADeduzir)) {
 			return false;
+		}
 		return true;
 	}
-
+	
 	
 }
