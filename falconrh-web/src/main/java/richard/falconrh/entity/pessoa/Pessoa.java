@@ -1,18 +1,21 @@
 package richard.falconrh.entity.pessoa;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,6 +25,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import richard.falconrh.entity.Parent;
+import richard.falconrh.entity.documento.Documento;
 import richard.falconrh.entity.localizacao.Telefone;
 import richard.falconrh.modelo.enums.EstadoCivil;
 import richard.falconrh.modelo.enums.Etnia;
@@ -47,7 +51,8 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	private Nacionalidade nacionalidade;
 	private String email;
 //	private Endereco endereco;
-	private Set<Telefone> listaTelefones;
+	private List<Telefone> listaTelefones;
+	private List<Documento> listaDocumentos;
 	private Boolean deficienteFisico;
 	
 	public Pessoa(){
@@ -139,10 +144,15 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	 * Method getListaTelefones.
 	
 	 * @return Set<Telefone> */
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name="PESSOAS_TELEFONES", joinColumns = @JoinColumn(name="ID_PESSOA", referencedColumnName="ID"), inverseJoinColumns= @JoinColumn(name="ID_TELEFONE", referencedColumnName="ID"))
-	public Set<Telefone> getListaTelefones(){
+	public List<Telefone> getListaTelefones(){
 		return listaTelefones;
+	}
+	
+	@OneToMany(fetch=FetchType.EAGER,  cascade=CascadeType.ALL, mappedBy="pessoa", targetEntity=Documento.class)
+	public List<Documento> getListaDocumentos(){
+		return listaDocumentos;
 	}
 	
 	/**
@@ -220,8 +230,12 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	 * Method setListaTelefones.
 	 * @param listaTelefones Set<Telefone>
 	 */
-	public void setListaTelefones(Set<Telefone> listaTelefones){
+	public void setListaTelefones(List<Telefone> listaTelefones){
 		this.listaTelefones = listaTelefones;
+	}
+	
+	public void setListaDocumentos(List<Documento> listaDocumentos){
+		this.listaDocumentos = listaDocumentos;
 	}
 	
 	/**
@@ -238,9 +252,23 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	 */
 	public void adicionarTelefone(Telefone telefone) {
 		if(getListaTelefones()==null){
-			setListaTelefones(new HashSet<Telefone>());
+			setListaTelefones(new ArrayList<Telefone>());
+		}
+		if(telefone!=null && telefone.getListaPessoas()==null){
+			telefone.setListaPessoas(new ArrayList<Pessoa>());
+		}
+		if(telefone !=null && !telefone.getListaPessoas().contains(this)){
+			telefone.getListaPessoas().add(this);
 		}
 		getListaTelefones().add(telefone);
+	}
+	
+	public void adicionarDocumento(Documento documento) {
+		if(getListaDocumentos()==null){
+			setListaDocumentos(new ArrayList<Documento>());
+		}
+		documento.setPessoa(this);
+		getListaDocumentos().add(documento);
 	}
 	
 	/**
@@ -250,9 +278,19 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	 * @return boolean */
 	public boolean removerTelefone(Telefone telefone){
 		if(getListaTelefones()==null){
-			setListaTelefones(new HashSet<Telefone>());
+			setListaTelefones(new ArrayList<Telefone>());
 		}else if(!getListaTelefones().isEmpty()){
 			return getListaTelefones().remove(telefone);
+		}
+		return false;
+	}
+	
+	public boolean removerDocumento(Documento documento){
+		if(getListaDocumentos()==null){
+			setListaDocumentos(new ArrayList<Documento>());
+		}
+		if(!getListaDocumentos().contains(documento)){
+			return getListaDocumentos().remove(documento);
 		}
 		return false;
 	}

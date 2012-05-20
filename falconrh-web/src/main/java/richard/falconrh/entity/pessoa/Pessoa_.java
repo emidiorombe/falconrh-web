@@ -2,11 +2,12 @@ package richard.falconrh.entity.pessoa;
 
 import java.util.Date;
 
-import javax.persistence.metamodel.SetAttribute;
+import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
 import richard.falconrh.entity.Parent_;
+import richard.falconrh.entity.documento.Documento;
 import richard.falconrh.entity.localizacao.Endereco;
 import richard.falconrh.entity.localizacao.Telefone;
 import richard.falconrh.modelo.enums.EstadoCivil;
@@ -31,6 +32,7 @@ public class Pessoa_ extends Parent_{
 	public static volatile SingularAttribute<Pessoa, Etnia> etnia;
 	public static volatile SingularAttribute<Pessoa, Nacionalidade> nacionalidade;
 	public static volatile SingularAttribute<Pessoa, Endereco> endereco;
-	public static volatile SetAttribute<Pessoa, Telefone> listaTelefones;
+	public static volatile ListAttribute<Pessoa, Telefone> listaTelefones;
+	public static volatile ListAttribute<Pessoa, Documento> listaDocumentos;
 	public static volatile SingularAttribute<Pessoa, Sexo> sexo;
 }
