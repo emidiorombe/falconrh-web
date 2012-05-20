@@ -18,7 +18,7 @@ import richard.falconrh.entity.pessoa.Pessoa;
 import richard.falconrh.modelo.enums.TipoTelefone;
 
 /**
- * @author richard
+ * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
 @Entity
@@ -49,7 +49,6 @@ public class Telefone extends Parent{
 
 	/**
 	 * Method getTipoTelefone.
-	
 	 * @return TipoTelefone */
 	@Enumerated(value = EnumType.STRING)
 	@Column(length = 30, nullable = false)
@@ -59,7 +58,6 @@ public class Telefone extends Parent{
 
 	/**
 	 * Method getDdd.
-	
 	 * @return Integer */
 	@Column(length = 3, nullable = false)
 	public Integer getDdd() {
@@ -68,7 +66,6 @@ public class Telefone extends Parent{
 
 	/**
 	 * Method getNumero.
-	
 	 * @return Long */
 	@Column(length = 8, nullable = false)
 	public Long getNumero() {
@@ -77,7 +74,6 @@ public class Telefone extends Parent{
 	
 	/**
 	 * Method getListaPessoas.
-	
 	 * @return List<Pessoa> */
 	@ManyToMany(targetEntity=Pessoa.class, mappedBy="listaTelefones", cascade=CascadeType.ALL)
 	public List<Pessoa> getListaPessoas() {

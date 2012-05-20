@@ -50,7 +50,6 @@ public class Documento extends Parent {
 	
 	/**
 	 * Method getDataEmissao.
-	
 	 * @return Date */
 	@Temporal(value=TemporalType.DATE)
 	public Date getDataEmissao() {
@@ -59,7 +58,6 @@ public class Documento extends Parent {
 	
 	/**
 	 * Method getNumero.
-	
 	 * @return String */
 	@Column(length=15, nullable=false)
 	public String getNumero() {
@@ -68,7 +66,6 @@ public class Documento extends Parent {
 
 	/**
 	 * Method getTipoDocumento.
-	
 	 * @return TipoDocumento */
 	@Enumerated(value=EnumType.STRING)
 	@Column(length=30, nullable=false)
@@ -78,9 +75,8 @@ public class Documento extends Parent {
 
 	/**
 	 * Method getPessoa.
-	
 	 * @return Pessoa */
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="ID_PESSOA", nullable=false)
 	public Pessoa getPessoa() {
 		return pessoa;

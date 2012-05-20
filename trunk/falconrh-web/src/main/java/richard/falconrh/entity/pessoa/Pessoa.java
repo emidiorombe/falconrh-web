@@ -142,28 +142,25 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	
 	/**
 	 * Method getListaTelefones.
-	
 	 * @return Set<Telefone> */
-	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="PESSOAS_TELEFONES", joinColumns = @JoinColumn(name="ID_PESSOA", referencedColumnName="ID"), inverseJoinColumns= @JoinColumn(name="ID_TELEFONE", referencedColumnName="ID"))
 	public List<Telefone> getListaTelefones(){
 		return listaTelefones;
 	}
 	
-	@OneToMany(fetch=FetchType.EAGER,  cascade=CascadeType.ALL, mappedBy="pessoa", targetEntity=Documento.class)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="pessoa", targetEntity=Documento.class)
 	public List<Documento> getListaDocumentos(){
 		return listaDocumentos;
 	}
 	
 	/**
 	 * Method getDeficienteFisico.
-	
 	 * @return Boolean */
 	@Column(nullable=false)
 	public Boolean getDeficienteFisico(){
 		return deficienteFisico;
 	}
-	
 	
 	/**
 	 * Method setNome.

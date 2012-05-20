@@ -18,8 +18,8 @@ import richard.falconrh.exception.ServicesException;
 import richard.falconrh.service.AbstractServices;
 
 /**
- * Classe abstrata com metodos comuns para os services.
- * @author richard
+ * Classe abstrata com métodos comuns para os services.
+ * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
 public abstract class AbstractServicesImpl<T extends Parent> implements AbstractServices<T> {
@@ -30,9 +30,9 @@ public abstract class AbstractServicesImpl<T extends Parent> implements Abstract
 
 	/**
 	 * Method getEntityManager.
-	
-	 * @return EntityManager */
-	protected EntityManager getEntityManager() {
+	 * @return EntityManager
+	 */
+	public EntityManager getEntityManager() {
 		return this.entityManager;
 	}
 
@@ -47,9 +47,8 @@ public abstract class AbstractServicesImpl<T extends Parent> implements Abstract
 	/**
 	 * Method cadastrar.
 	 * @param entity T
-	
-	
-	 * @throws ServicesException * @see richard.falconrh.service.AbstractServices#cadastrar(T) */
+	 * @throws ServicesException * @see richard.falconrh.service.AbstractServices#cadastrar(T)
+	 */
 	@Override
 	public void cadastrar(T entity) throws ServicesException {
 		LOGGER.debug("Inicio do cadastro da entitdade " + entity.getClass().getSimpleName());
@@ -66,9 +65,8 @@ public abstract class AbstractServicesImpl<T extends Parent> implements Abstract
 	/**
 	 * Method alterar.
 	 * @param entity T
-	
-	
-	 * @throws ServicesException * @see richard.falconrh.service.AbstractServices#alterar(T) */
+	 * @throws ServicesException * @see richard.falconrh.service.AbstractServices#alterar(T)
+	 */
 	@Override
 	public void alterar(T entity) throws ServicesException {
 		LOGGER.debug("Inicio da alteracao da entitdade " + entity.getClass().getSimpleName());
@@ -86,9 +84,8 @@ public abstract class AbstractServicesImpl<T extends Parent> implements Abstract
 	 * Method excluirPeloId.
 	 * @param clazz Class<T>
 	 * @param id Long
-	
-	
-	 * @throws ServicesException * @see richard.falconrh.service.AbstractServices#excluirPeloId(Class<T>, Long) */
+	 * @throws ServicesException * @see richard.falconrh.service.AbstractServices#excluirPeloId(Class<T>, Long)
+	 */
 	@Override
 	public void excluirPeloId(Class<T> clazz, Long id) throws ServicesException {
 		LOGGER.debug("Inicio da exclusao da entitdade " + clazz.getSimpleName());
@@ -107,10 +104,8 @@ public abstract class AbstractServicesImpl<T extends Parent> implements Abstract
 	 * Method obterPeloId.
 	 * @param clazz Class<T>
 	 * @param id Long
-	
-	
-	
-	 * @return T * @throws ServicesException * @see richard.falconrh.service.AbstractServices#obterPeloId(Class<T>, Long) */
+	 * @return T * @throws ServicesException * @see richard.falconrh.service.AbstractServices#obterPeloId(Class<T>, Long)
+	 */
 	@Override
 	public T obterPeloId(Class<T> clazz, Long id) throws ServicesException {
 		LOGGER.debug("Pesquisando entitdade " + clazz.getSimpleName());
@@ -127,10 +122,8 @@ public abstract class AbstractServicesImpl<T extends Parent> implements Abstract
 	/**
 	 * Method obterListaPeloExemplo.
 	 * @param entity T
-	
-	
-	
-	 * @return Set<T> * @throws ServicesException * @see richard.falconrh.service.AbstractServices#obterListaPeloExemplo(T) */
+	 * @return Set<T> * @throws ServicesException * @see richard.falconrh.service.AbstractServices#obterListaPeloExemplo(T)
+	 */
 	@SuppressWarnings("unchecked")
 	public Set<T> obterListaPeloExemplo(T entity) throws ServicesException{
 		LOGGER.debug("Pesquisando entidade pelo exemplo");
