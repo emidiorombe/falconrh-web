@@ -29,7 +29,7 @@
 			</p:column>
 			<p:column style="text-align:center" id="colunaSexo">
 				<f:facet name="header"><h:outputText value="#{msg['label.pessoa.sexo']}" id="labelSexo"/></f:facet>
-				<h:outputText value="#{pessoa.sexo.nome}" id="sexoDetalhe">
+				<h:outputText value="#{pessoa.sexo.descricao}" id="sexoDetalhe">
 					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="America/Sao_Paulo"/>
 				</h:outputText>
 			</p:column>
