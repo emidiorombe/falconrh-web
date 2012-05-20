@@ -9,12 +9,12 @@
 			<p:focus for="descricaoPesquisa" id="focusPaginaPesquisa"/>
 			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
 				<h:outputLabel for="descricaoPesquisa" id="labelDescricaoPesquisa" value="#{msg['label.tabelaINSS.descricao']}"/>
-				<p:inputText value="#{tabelaINSSBean.tabelaINSS.descricao}" id="descricaoPesquisa" size="60" maxlength="255" required="true" requiredMessage="#{msg['tabelaINSS.descricao.obrigatorio']}" title="#{msg['title.tabelaINSS.descricao']}"/>
+				<p:inputText value="#{tabelaINSSBean.entity.descricao}" id="descricaoPesquisa" size="60" maxlength="255" required="true" requiredMessage="#{msg['tabelaINSS.descricao.obrigatorio']}" title="#{msg['title.tabelaINSS.descricao']}"/>
 			</h:panelGrid>
 		</p:panel>
 	</p:outputPanel>
 	<p:outputPanel id="painelDetalhePesquisa" rendered="#{tabelaINSSBean.modoDetalhePesquisa}" >
-		<p:dataTable value="#{tabelaINSSBean.listaTabelasINSS}" var="tabelaINSS" id="dataTableDetalhePesquisa" >
+		<p:dataTable value="#{tabelaINSSBean.listaEntities}" var="tabelaINSS" id="dataTableDetalhePesquisa" >
 			<p:column id="colunaDescricaoTabelaINSS">
 				<f:facet name="header"><h:outputText value="#{msg['label.aliquotaINSS.descricao']}" id="labelColunaDescricao"/></f:facet>
 				<h:outputText value="#{tabelaINSS.descricao}" id="descricaoDetalhe"/>
@@ -33,23 +33,23 @@
 			</p:column>
 			<p:column style="text-align:center" id="colunaBotaoEditar">
 				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{tabelaINSSBean.editarTabelaINSS}" id="botaoEditarTabelaINSS">
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{tabelaINSSBean.editar}" id="botaoEditarTabelaINSS">
 					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarTabelaINSS"/>
-                	<f:setPropertyActionListener value="#{tabelaINSS}" target="#{tabelaINSSBean.tabelaINSS}"/>  
+                	<f:setPropertyActionListener value="#{tabelaINSS}" target="#{tabelaINSSBean.entity}"/>  
             	</p:commandLink>
 			</p:column>            	  
 			<p:column style="text-align:center" id="colunaVisualizar">
 				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{tabelaINSSBean.visualizarTabelaINSS}" id="botaoVisualizarTabelaINSS">
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{tabelaINSSBean.visualizar}" id="botaoVisualizarTabelaINSS">
 					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarTabelaINSS"/>
-                	<f:setPropertyActionListener value="#{tabelaINSS}" target="#{tabelaINSSBean.tabelaINSS}" />
+                	<f:setPropertyActionListener value="#{tabelaINSS}" target="#{tabelaINSSBean.entity}" />
 				</p:commandLink>
 			</p:column>
 			<p:column style="text-align:center" id="colunaExcluir">
 				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{tabelaINSSBean.iniciarExclusaoTabelaINSS}" id="botaoExcluirTabelaINSS">
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{tabelaINSSBean.iniciarExclusao}" id="botaoExcluirTabelaINSS">
 					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirTabelaINSS"/>
-                	<f:setPropertyActionListener value="#{tabelaINSS}" target="#{tabelaINSSBean.tabelaINSS}" />
+                	<f:setPropertyActionListener value="#{tabelaINSS}" target="#{tabelaINSSBean.entity}" />
             	</p:commandLink>                        
 			</p:column>
 		</p:dataTable>

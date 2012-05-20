@@ -15,13 +15,11 @@
 				<ui:include src="detalheTabelaINSS.xhtml"/>
 				<ui:include src="pesquisaTabelaINSS.xhtml"/>
 				<p:panel style="text-align: center" rendered="#{not empty tabelaINSSBean.modoOperacao}">
-					<p:commandButton value="#{msg['label.botao.cadastro.tabelaINSS']}" actionListener="#{tabelaINSSBean.cadastrarTabelaINSS}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaINSSBean.modoInclusao}" title="#{msg['title.botao.cadastro.tabelaINSS']}" id="botaoCadastroTabelaINSS"/>
-					<p:commandButton value="#{msg['label.botao.atualizacao.tabelaINSS']}" actionListener="#{tabelaINSSBean.atualizarTabelaINSS}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaINSSBean.modoEdicao}" title="#{msg['title.botao.atualizacao.tabelaINSS']}" id="botaoAtualizacaoTabelaINSS"/>
-					<p:commandButton value="#{msg['label.botao.pesquisa.tabelaINSS']}" actionListener="#{tabelaINSSBean.pesquisarTabelaINSS}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaINSSBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.tabelaINSS']}" id="botaoPesquisaTabelaINSS"/>
-					<p:commandButton value="#{msg['label.botao.exclusao.tabelaINSS']}" actionListener="#{tabelaINSSBean.excluirTabelaINSS}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaINSSBean.modoExclusao}" title="#{msg['title.botao.exclusao.tabelaINSS']}" id="botaoExclusaoTabelaINSS"/>
-					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{tabelaINSSBean.voltarParaResultadoPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaINSSBean.modoExclusao or tabelaINSSBean.modoEdicao or tabelaINSSBean.modoDetalhe}" title="#{msg['title.botao.exclusao.tabelaINSS']}" immediate="true" id="botaoVoltarTabelaINSS">
-						<f:setPropertyActionListener target="#{tabelaINSSBean.tabelaINSS}" value="#{tabelaINSSBean.tabelaINSS}"/>
-					</p:commandButton>
+					<p:commandButton value="#{msg['label.botao.cadastro.tabelaINSS']}" actionListener="#{tabelaINSSBean.cadastrar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaINSSBean.modoInclusao}" title="#{msg['title.botao.cadastro.tabelaINSS']}" id="botaoCadastroTabelaINSS"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.tabelaINSS']}" actionListener="#{tabelaINSSBean.atualizar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaINSSBean.modoEdicao}" title="#{msg['title.botao.atualizacao.tabelaINSS']}" id="botaoAtualizacaoTabelaINSS"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.tabelaINSS']}" actionListener="#{tabelaINSSBean.pesquisar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaINSSBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.tabelaINSS']}" id="botaoPesquisaTabelaINSS"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.tabelaINSS']}" actionListener="#{tabelaINSSBean.excluir}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaINSSBean.modoExclusao}" title="#{msg['title.botao.exclusao.tabelaINSS']}" id="botaoExclusaoTabelaINSS"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{tabelaINSSBean.voltarParaResultadoDaPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaINSSBean.modoExclusao or tabelaINSSBean.modoEdicao or tabelaINSSBean.modoDetalhe}" title="#{msg['title.botao.exclusao.tabelaINSS']}" immediate="true" id="botaoVoltarTabelaINSS"/>
 					<p:commandButton value="#{msg['label.botao.sair']}" action="#{tabelaINSSBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairTabelaINSS"/>
 				</p:panel>
 			</p:outputPanel>

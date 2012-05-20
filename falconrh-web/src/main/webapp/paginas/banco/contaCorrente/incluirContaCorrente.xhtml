@@ -10,15 +10,15 @@
 			<h:panelGrid columns="2" id="painel2ColunasInclusao">
 				<h:outputLabel value="#{msg['label.contaCorrente.banco']}" for="banco" id="labelBanco"/>
 				<p:selectOneMenu value="#{contaCorrenteBean.entity.agencia.banco}" id="banco" required="true" requiredMessage="#{msg['contaCorrente.banco.obrigatorio']}" effect="fade" label="#{msg['title.contaCorrente.banco']}" converter="bancoConverter" converterMessage="Erro ao converter banco para objeto" valueChangeListener="#{contaCorrenteBean.obterListaAgencias}">
-					<f:selectItem itemLabel="Informe o Banco" noSelectionOption="true"/>
+					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
 					<f:selectItems value="#{utilBean.listaBancos}"/>
 					<p:ajax event="change" update="form:mensagens, form:agencia" immediate="true"/>
 				</p:selectOneMenu>
 				<h:outputLabel value="#{msg['label.contaCorrente.agencia']}" for="agencia" id="labelAgencia"/>
 				<p:selectOneMenu value="#{contaCorrenteBean.entity.agencia}" id="agencia" required="true" requiredMessage="#{msg['contaCorrente.agencia.obrigatorio']}" effect="fade" label="#{msg['title.contaCorrente.agencia']}" converter="agenciaConverter" converterMessage="Erro ao converter agencia para objeto">
+					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
 					<f:selectItems value="#{contaCorrenteBean.listaAgencias}" var="agencia" itemLabel="#{agencia.descricao}" itemValue="#{agencia}"/>
 				</p:selectOneMenu>
-				
 				<h:outputLabel value="#{msg['label.contaCorrente.numero']}" for="numero" id="labelNumero"/>
 				<p:inputText value="#{contaCorrenteBean.entity.numero}" id="numero" required="true" requiredMessage="#{msg['contaCorrente.numero.obrigatorio']}" title="#{msg['title.contaCorrente.numero']}" size="10" maxlength="10"/>
 				<h:outputLabel value="#{msg['label.contaCorrente.digitoVerificador']}" for="digitoVerificador" id="labelDigitoVerificador"/>

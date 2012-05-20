@@ -7,7 +7,6 @@
       
 <ui:define name="tituloPagina"><h:outputText value="#{msg['titulo.contaCorrente']}" id="tituloPaginaConteudo"/></ui:define>
 	<ui:define name="conteudo">
-
 		<ui:debug hotkey="q"/>
 		<h:form id="form" prependId="true" acceptcharset="utf-8">
 			<p:messages id="mensagens" showDetail="true" showSummary="true"/>
@@ -20,9 +19,7 @@
 					<p:commandButton value="#{msg['label.botao.atualizacao.contaCorrente']}" actionListener="#{contaCorrenteBean.atualizar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{contaCorrenteBean.modoEdicao}" title="#{msg['title.botao.atualizacao.contaCorrente']}" id="botaoAtualizacaoContaCorrente"/>
 					<p:commandButton value="#{msg['label.botao.pesquisa.contaCorrente']}" actionListener="#{contaCorrenteBean.pesquisar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{contaCorrenteBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.contaCorrente']}" id="botaoPesquisaContaCorrente"/>
 					<p:commandButton value="#{msg['label.botao.exclusao.contaCorrente']}" actionListener="#{contaCorrenteBean.excluir}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{contaCorrenteBean.modoExclusao}" title="#{msg['title.botao.exclusao.contaCorrente']}" id="botaoExclusaoContaCorrente"/>
-					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{contaCorrenteBean.voltarParaResultadoDaPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{contaCorrenteBean.modoExclusao or contaCorrenteBean.modoEdicao or contaCorrenteBean.modoDetalhePesquisa}" title="#{msg['title.botao.exclusao.contaCorrente']}" immediate="true" id="botaoVoltarContaCorrente">
-						<f:setPropertyActionListener target="#{contaCorrenteBean.contaCorrente}" value="#{contaCorrenteBean.contaCorrente}"/>
-					</p:commandButton>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{contaCorrenteBean.voltarParaResultadoDaPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{contaCorrenteBean.modoExclusao or contaCorrenteBean.modoEdicao or contaCorrenteBean.modoDetalhePesquisa}" title="#{msg['title.botao.exclusao.contaCorrente']}" immediate="true" id="botaoVoltarContaCorrente"/>
 					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{contaCorrenteBean.iniciarPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{contaCorrenteBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente']}" immediate="true" id="botaoPesquisarNovamenteContaCorrente"/>
 					<p:commandButton value="#{msg['label.botao.sair']}" action="#{contaCorrenteBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairContaCorrente"/>
 				</p:panel>

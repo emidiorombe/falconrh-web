@@ -9,23 +9,23 @@
 			<p:focus for="anoBasePesquisa" id="focusPaginaPesquisa"/>
 			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
 				<h:outputLabel for="anoBasePesquisa" id="labelAnoBasePesquisa" value="#{msg['label.tabelaImpostoRenda.anoBase']}"/>
-				<p:inputText value="#{tabelaImpostoRendaBean.entity.anoBase}" id="anoBasePesquisa" size="6" maxlength="4" required="true" requiredMessage="#{msg['tabelaImpostoRenda.anoBase.obrigatorio']}" title="#{msg['title.tabelaImpostoRenda.anoBase']}"/>
+				<p:inputText value="#{tabelaImpostoRendaBean.entity.anoBase}" id="anoBasePesquisa" size="6" maxlength="4" required="false" requiredMessage="#{msg['tabelaImpostoRenda.anoBase.obrigatorio']}" title="#{msg['title.tabelaImpostoRenda.anoBase']}" />
 				<h:outputLabel for="descricaoPesquisa" id="labelDescricaoPesquisa" value="#{msg['label.tabelaImpostoRenda.descricao']}"/>
-				<p:inputText value="#{tabelaImpostoRendaBean.entity.descricao}" id="descricaoPesquisa" size="60" maxlength="255" required="true" requiredMessage="#{msg['tabelaImpostoRenda.descricao.obrigatorio']}" title="#{msg['title.tabelaImpostoRenda.descricao']}"/>
+				<p:inputText value="#{tabelaImpostoRendaBean.entity.descricao}" id="descricaoPesquisa" size="60" maxlength="255" required="false" requiredMessage="#{msg['tabelaImpostoRenda.descricao.obrigatorio']}" title="#{msg['title.tabelaImpostoRenda.descricao']}"/>
 			</h:panelGrid>
 		</p:panel>
 	</p:outputPanel>
 	<p:outputPanel id="painelDetalhePesquisa" rendered="#{tabelaImpostoRendaBean.modoDetalhePesquisa}" >
-		<p:dataTable value="#{tabelaImpostoRendaBean.listaEntities}" var="tabelaImpostoRenda" id="dataTableDetalhePesquisa" >
-			<p:column id="colunaDescricaoTabelaImpostoRenda" style="min-width:450px">
+		<p:dataTable value="#{tabelaImpostoRendaBean.listaEntities}" var="tabelaImpostoRenda" id="dataTableDetalhePesquisa" rows="20" paginator="true" >
+			<p:column id="colunaDescricaoTabelaImpostoRenda" style="min-width:450px" sortBy="#{tabelaImpostoRenhdaBean.descricao}">
 				<f:facet name="header"><h:outputText value="#{msg['label.tabelaImpostoRenda.descricao']}" id="labelColunaDescricao"/></f:facet>
 				<h:outputText value="#{tabelaImpostoRenda.descricao}" id="descricaoDetalhe"/>
 			</p:column>
-			<p:column style="text-align:center" id="colunaAnoBase">
+			<p:column style="text-align:center" id="colunaAnoBase" sortBy="#{tabelaImpostoRendaBean.anoBase}">
 				<f:facet name="header"><h:outputText value="#{msg['label.tabelaImpostoRenda.anoBase']}" id="labelColunaAnoBase"/></f:facet>
 				<h:outputText value="#{tabelaImpostoRenda.anoBase}" id="anoBaseDetalhe"/>
 			</p:column>
-			<p:column style="text-align:center" id="colunaBotaoEditar">
+			<p:column style="text-align:center" id="colunaBotaoEditar" >
 				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
 				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{tabelaImpostoRendaBean.editar}" id="botaoEditarTabelaImpostoRenda">
 					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarTabelaImpostoRenda"/>

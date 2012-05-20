@@ -10,7 +10,7 @@
 			<h:panelGrid columns="2" id="painel2ColunasInclusao">
 				<h:outputLabel value="#{msg['label.agencia.banco']}" for="banco" id="labelBanco"/>
 				<p:selectOneMenu value="#{agenciaBean.entity.banco}" id="banco" required="true" requiredMessage="#{msg['agencia.banco.obrigatorio']}" effect="fade" label="#{msg['title.agencia.banco']}" converter="bancoConverter" converterMessage="Erro ao converter banco para objeto">
-					<f:selectItem itemLabel="Informe o Banco" noSelectionOption="true"/>
+					<f:selectItem itemLabel="Informe o Banco" itemValue=""/>
 					<f:selectItems value="#{utilBean.listaBancos}" var="banco" itemLabel="#{banco.descricao}" itemValue="#{banco}"/>
 				</p:selectOneMenu>
 				<h:outputLabel value="#{msg['label.agencia.nome']}" for="nome" id="labelNome"/>
