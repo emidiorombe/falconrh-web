@@ -244,7 +244,6 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 		try{
 			ultimoSamplePesquisa = getEntity();
 			lista = getServices().obterListaPeloExemplo(getEntity());
-			adicionarMensagemInformacao(SUCESSO_PESQUISA);
 			logger.debug("SUcesso a pesquisar entidade");
 		}catch(Exception e){
 			e.printStackTrace();
