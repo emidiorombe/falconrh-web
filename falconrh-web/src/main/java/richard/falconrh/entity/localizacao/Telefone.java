@@ -9,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -110,6 +111,12 @@ public class Telefone extends Parent{
 	 */
 	public void setListaPessoas(List<Pessoa> listaPessoas) {
 		this.listaPessoas = listaPessoas;
+	}
+	
+	@Transient
+	public String getNumeroFormatado(){
+		String n = String.valueOf(getNumero());
+		return "(" + getDdd() + ") " + n.substring(0,4)+"-"+n.substring(5,8);
 	}
 
 	@Override
