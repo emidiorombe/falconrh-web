@@ -50,18 +50,18 @@ public class AgenciaConverter implements Converter {
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Agencia agencia = null;
-		if(StringUtils.isBlank(value)){
-			return null;
+		if(StringUtils.isNotBlank(value) && !"--Selecione--".equals(value)){
+			try {
+				Long idAgencia = Long.valueOf(value);
+				agencia = agenciaServices.obterPeloId(Agencia.class, idAgencia);
+			} catch (ServicesException e) {
+				logger.error("Erro ao converter a string para um objeto do tipo agencia", e);
+				FacesMessage facesMessage = new FacesMessage("Erro ao converter a String para um objeto do tipo Agencia");
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			}
+			return agencia;
 		}
-		try {
-			Long idAgencia = Long.valueOf(value);
-			agencia = agenciaServices.obterPeloId(Agencia.class, idAgencia);
-		} catch (ServicesException e) {
-			logger.error("Erro ao converter a string para um objeto do tipo agencia", e);
-			FacesMessage facesMessage = new FacesMessage("Erro ao converter a String para um objeto do tipo Agencia");
-			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-		}
-		return agencia;
+		return null;
 	}
 
 	/**
