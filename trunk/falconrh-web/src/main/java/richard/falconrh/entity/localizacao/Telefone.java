@@ -2,6 +2,7 @@ package richard.falconrh.entity.localizacao;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -78,7 +79,7 @@ public class Telefone extends Parent{
 	 * Method getListaPessoas.
 	
 	 * @return List<Pessoa> */
-	@ManyToMany(targetEntity=Pessoa.class, mappedBy="listaTelefones")
+	@ManyToMany(targetEntity=Pessoa.class, mappedBy="listaTelefones", cascade=CascadeType.ALL)
 	public List<Pessoa> getListaPessoas() {
 		return listaPessoas;
 	}
@@ -115,4 +116,43 @@ public class Telefone extends Parent{
 		this.listaPessoas = listaPessoas;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((ddd == null) ? 0 : ddd.hashCode());
+		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (!(obj instanceof Telefone)) {
+			return false;
+		}
+		Telefone other = (Telefone) obj;
+		if (ddd == null) {
+			if (other.ddd != null) {
+				return false;
+			}
+		} else if (!ddd.equals(other.ddd)) {
+			return false;
+		}
+		if (numero == null) {
+			if (other.numero != null) {
+				return false;
+			}
+		} else if (!numero.equals(other.numero)) {
+			return false;
+		}
+		return true;
+	}
+
+	
 }
