@@ -14,7 +14,7 @@
 					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" locale="pt_BR"/>
 				</h:outputText>
 				<h:outputLabel value="#{msg['label.pessoa.sexo']}" id="labelSexoDetalhe" for="sexoDetalhe" />
-				<h:outputText value="#{pessoaBean.entity.etnia.descricao}" id="sexoDetalhe"/>
+				<h:outputText value="#{pessoaBean.entity.sexo.descricao}" id="sexoDetalhe"/>
 				<h:outputLabel value="#{msg['label.pessoa.estadoCivil']}" id="labelEstadoCivilDetalhe" for="estadoCivilDetalhe" />
 				<h:outputText value="#{pessoaBean.entity.estadoCivil.descricao}" id="estadoCivilDetalhe" />
 				<h:outputLabel value="#{msg['label.pessoa.etnia']}" id="labelEtniaDetalhe" for="etniaDetalhe" />
@@ -23,6 +23,8 @@
 				<h:outputText value="#{pessoaBean.entity.nacionalidade.descricao}" id="nacionalidadeDetalhe" />
 				<h:outputLabel value="#{msg['label.pessoa.email']}" id="labelEmailDetalhe" for="emailDetalhe"/>
 				<h:outputText value="#{pessoaBean.entity.email}" id="emailDetalhe"/>
+				<h:outputLabel value="#{msg['label.pessoa.deficienteFisico']}" id="labelDeficienteFisicoDetalhe" for="deficienteFisicoDetalhe"/>
+				<h:outputText value="#{pessoaBean.entity.deficienteFisico}" id="deficienteFisicoDetalhe" converter="simNaoConverter"/>
 			</h:panelGrid>
 		</p:panel>
 	</p:outputPanel>
