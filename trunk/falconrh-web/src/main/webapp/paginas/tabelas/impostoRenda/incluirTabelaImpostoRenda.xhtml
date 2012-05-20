@@ -32,6 +32,14 @@
             day: 'Dia',
             allDayText : 'Todo Dia'
         };
+
+    	function limparCamposAliquota(){
+        	document.getElementById("form:descricao").value = "";
+        	document.getElementById("form:aliquota").value = "";
+        	document.getElementById("form:valorInicial").value = "";
+        	document.getElementById("form:valorFinal").value = "";
+        	document.getElementById("form:valorParcelaADeduzir").value = "";
+        }
 	</script>
 	<p:outputPanel id="painelInclusao" rendered="#{tabelaImpostoRendaBean.modoInclusao or tabelaImpostoRendaBean.modoEdicao}">
 		<p:panel header="Cadastro de Tabela de Imposto de Renda">
@@ -67,62 +75,46 @@
 				<p:inputText value="#{tabelaImpostoRendaBean.aliquotaImpostoRenda.valorParcelaADeduzir}" size="10" maxlength="10" id="valorParcelaADeduzir">
 					<f:convertNumber locale="pt_BR" pattern="#00,00" />
 				</p:inputText>
-				<p:commandButton value="Limpar" type="reset" />
-				<p:commandButton value="Adicionar" update="aliquotas" action="#{tabelaImpostoRendaBean.reinitAliqutoasImpostoRenda}" process="painelInclusaoAliquotas">
+				<p:commandButton value="Limpar" type="button" onclick="javascript:limparCamposAliquota()" />
+				<p:commandButton value="Adicionar" update="aliquotas @parent" action="#{tabelaImpostoRendaBean.reinitAliqutoasImpostoRenda}" process="painelInclusaoAliquotas" id="botaoAdicionarAliquota">
 					<p:collector value="#{tabelaImpostoRendaBean.aliquotaImpostoRenda}" addTo="#{tabelaImpostoRendaBean.entity.listaAliquotasImpostoRenda}"/>
 				</p:commandButton>
 			</h:panelGrid>
 		</p:panel>
 		<p:outputPanel id="aliquotas">
-			<p:dataTable value="#{tabelaImpostoRendaBean.entity.listaAliquotasImpostoRenda}" var="aliquotaImpostoRenda" emptyMessage="#{msg['info.aliquotaImpostoRenda.nao.informados']}">
-				<f:facet name="header">
-					<h:outputText value="Alíquotas da Tabela de Imposto de Renda"/>
-				</f:facet>
+			<p:dataTable value="#{tabelaImpostoRendaBean.entity.listaAliquotasImpostoRenda}" var="aliquotaImpostoRenda" emptyMessage="#{msg['info.aliquotaImpostoRenda.nao.informados']}" id="dataTableAliquotas">
+				<f:facet name="header"><h:outputText value="Alíquotas da Tabela de Imposto de Renda"/></f:facet>
 				<p:column  style="max-width: 450px; min-width: 450px; overflow: hidden">
-					<f:facet name="header">
-						<h:outputText value="#{msg['label.aliquotaImpostoRenda.descricao']}"/>
-					</f:facet>
+					<f:facet name="header"><h:outputText value="#{msg['label.aliquotaImpostoRenda.descricao']}"/></f:facet>
 					<h:outputText value="#{aliquotaImpostoRenda.descricao}" />
 				</p:column>
 				<p:column style="text-align: right">
-					<f:facet name="header">
-						<h:outputText value="#{msg['label.aliquotaImpostoRenda.aliquota']}"/>
-					</f:facet>
+					<f:facet name="header"><h:outputText value="#{msg['label.aliquotaImpostoRenda.aliquota']}"/></f:facet>
 					<h:outputText value="#{aliquotaImpostoRenda.aliquota}">
 						<f:convertNumber minFractionDigits="2" locale="pt_BR"/>
 					</h:outputText>
 				</p:column>
-				
 				<p:column style="text-align: right">
-					<f:facet name="header">
-						<h:outputText value="#{msg['label.aliquotaImpostoRenda.valorInicial']}"/>
-					</f:facet>
+					<f:facet name="header"><h:outputText value="#{msg['label.aliquotaImpostoRenda.valorInicial']}"/></f:facet>
 					<h:outputText value="#{aliquotaImpostoRenda.valorInicial}" >
 						<f:convertNumber type="currency" minFractionDigits="2" locale="pt_BR"/>
 					</h:outputText>
-					
 				</p:column>
 				<p:column style="text-align: right">
-					<f:facet name="header">
-						<h:outputText value="#{msg['label.aliquotaImpostoRenda.valorFinal']}"/>
-					</f:facet>
+					<f:facet name="header"><h:outputText value="#{msg['label.aliquotaImpostoRenda.valorFinal']}"/></f:facet>
 					<h:outputText value="#{aliquotaImpostoRenda.valorFinal}" >
 						<f:convertNumber type="currency" minFractionDigits="2" locale="pt_BR"/>
 					</h:outputText>
 				</p:column>
 				<p:column style="text-align: right">
-					<f:facet name="header">
-						<h:outputText value="#{msg['label.aliquotaImpostoRenda.valorParcelaADeduzir']}"/>
-					</f:facet>
+					<f:facet name="header"><h:outputText value="#{msg['label.aliquotaImpostoRenda.valorParcelaADeduzir']}"/></f:facet>
 					<h:outputText value="#{aliquotaImpostoRenda.valorParcelaADeduzir}" >
 						<f:convertNumber type="currency" minFractionDigits="2" locale="pt_BR"/>
 					</h:outputText>
 				</p:column>				
 				<p:column style="text-align: center">
-					<f:facet name="header">
-						<h:outputText value="Operação" />
-					</f:facet>
-					<p:commandLink value="Remover" update="form:aliquotas" immediate="true">
+					<f:facet name="header"><h:outputText value="Operação"/></f:facet>
+					<p:commandLink value="Remover" update="dataTableAliquotas" immediate="true">
 						<p:collector value="#{aliquotaImpostoRenda}" removeFrom="#{tabelaImpostoRendaBean.entity.listaAliquotasImpostoRenda}" />
 					</p:commandLink>
 				</p:column>

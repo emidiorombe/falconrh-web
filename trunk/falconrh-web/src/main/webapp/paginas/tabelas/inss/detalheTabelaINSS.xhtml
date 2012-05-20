@@ -8,18 +8,18 @@
 		<p:panel header="Dados da Tabela de INSS" id="painelDetalheINSS">
 			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
 				<h:outputLabel value="#{msg['label.tabelaINSS.descricao']}" for="descricaoDetalhe" id="labelDescricaoDetalhe"/>
-				<h:outputText value="#{tabelaINSSBean.tabelaINSS.descricao}" id="descricaoDetalhe"/>
+				<h:outputText value="#{tabelaINSSBean.entity.descricao}" id="descricaoDetalhe"/>
 				<h:outputLabel value="#{msg['label.tabelaINSS.dataInicioVigencia']}" for="dataInicioVigenciaDetalhe" id="labelDataInicioVigenciaDetalhe"/>
-				<h:outputText value="#{tabelaINSSBean.tabelaINSS.dataInicioVigencia}" id="dataInicioVigenciaDetalhe">
+				<h:outputText value="#{tabelaINSSBean.entity.dataInicioVigencia}" id="dataInicioVigenciaDetalhe">
 					<f:convertDateTime locale="pt" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" />
 				</h:outputText>
 				<h:outputLabel value="#{msg['label.tabelaINSS.dataTerminoVigencia']}" for="dataTerminoVigenciaDetalhe" id="labelDataTerminoVigenciaDetalhe"/>
-				<h:outputText value="#{tabelaINSSBean.tabelaINSS.dataTerminoVigencia}" id="dataTerminoVigenciaDetalhe">
-					<f:convertDateTime locale="pt" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy"/>
+				<h:outputText value="#{tabelaINSSBean.entity.dataTerminoVigencia}" id="dataTerminoVigenciaDetalhe">
+					<f:convertDateTime locale="pt_BR" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy"/>
 				</h:outputText>
 			</h:panelGrid>
 		</p:panel>
-		<p:dataTable value="#{tabelaINSSBean.tabelaINSS.listaAliquotasINSS}" var="aliquotaINSS" emptyMessage="#{msg['info.tabelaAliquotasINSS.nao.encontradas']}" sortBy="#{aliquotaINSS.aliquota}">
+		<p:dataTable value="#{tabelaINSSBean.entity.listaAliquotasINSS}" var="aliquotaINSS" emptyMessage="#{msg['info.tabelaAliquotasINSS.nao.encontradas']}" sortBy="#{aliquotaINSS.aliquota}">
 			<f:facet name="header">Lista de Aliquotas da Tabela de INSS</f:facet>
 			<p:column>
 				<f:facet name="header"><h:outputText value="#{msg['label.aliquotaINSS.descricao']}" /></f:facet>

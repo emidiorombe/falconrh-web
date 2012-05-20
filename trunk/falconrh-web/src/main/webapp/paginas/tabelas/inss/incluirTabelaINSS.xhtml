@@ -32,69 +32,75 @@
             day: 'Dia',
             allDayText : 'Todo Dia'
         };
+    	function limparCamposAliquota(){
+        	document.getElementById("descricaoAliquota").value = "";
+        	document.getElementById("aliquotaAliquota").value = "";
+        	document.getElementById("valorInicialAliquota").value = "";
+        	document.getElementById("valorFinalAliquota").value = "";
+    	}
 	</script>
 	<p:outputPanel id="painelInclusao" rendered="#{tabelaINSSBean.modoInclusao or tabelaINSSBean.modoEdicao}">
 		<p:panel header="Cadastro de Tabela de INSS">
 			<p:focus for="descricaoInclusao" id="focusPaginaInclusao"/>
 			<h:panelGrid columns="2" id="painel2ColunasInclusao">
 				<h:outputLabel value="#{msg['label.tabelaINSS.descricao']}" for="descricaoInclusao" id="labelDescricaoInclusao"/>
-				<p:inputText value="#{tabelaINSSBean.tabelaINSS.descricao}" id="descricaoInclusao" required="true" requiredMessage="#{msg['tabelaINSS.descricao.obrigatorio']}" title="#{msg['title.tabelaINSS.descricao']}" size="100" maxlength="255"/>
+				<p:inputText value="#{tabelaINSSBean.entity.descricao}" id="descricaoInclusao" required="true" requiredMessage="#{msg['tabelaINSS.descricao.obrigatorio']}" title="#{msg['title.tabelaINSS.descricao']}" size="100" maxlength="255"/>
 				<h:outputLabel value="#{msg['label.tabelaINSS.dataInicioVigencia']}" for="dataInicioVigenciaInclusao" id="labelDataInicioVigenciaInclusao"/>
-				<p:calendar value="#{tabelaINSSBean.tabelaINSS.dataInicioVigencia}" id="dataInicioVigenciaInclusao" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" lang="pt" locale="pt_BR" navigator="true" required="true" requiredMessage="#{msg['tabelaINSS.dataInicioVigencia.obrigatorio']}" showButtonPanel="true"/>
+				<p:calendar value="#{tabelaINSSBean.entity.dataInicioVigencia}" id="dataInicioVigenciaInclusao" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" lang="pt" locale="pt_BR" navigator="true" required="true" requiredMessage="#{msg['tabelaINSS.dataInicioVigencia.obrigatorio']}" showButtonPanel="true"/>
 				<h:outputLabel value="#{msg['label.tabelaINSS.dataTerminoVigencia']}" for="dataTerminoVigenciaInclusao" id="labelDataTerminoVigenciaInclusao"/>
-				<p:calendar value="#{tabelaINSSBean.tabelaINSS.dataTerminoVigencia}" id="dataTerminoVigenciaInclusao" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" lang="pt" locale="pt_BR" navigator="true" showButtonPanel="true"/>
+				<p:calendar value="#{tabelaINSSBean.entity.dataTerminoVigencia}" id="dataTerminoVigenciaInclusao" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" lang="pt" locale="pt_BR" navigator="true" showButtonPanel="true"/>
 			</h:panelGrid>
 		</p:panel>
 		<p:panel header="Incluir Alíquotas de INSS" id="painelInclusaoAliquotaINSS">
 			<h:panelGrid columns="10">
-				<h:outputLabel value="#{msg['label.aliquotaINSS.descricao']}" for="descricao" id="labelDescricao"/>
-				<p:inputText value="#{tabelaINSSBean.aliquotaINSS.descricao}" id="descricao"/>
-				<h:outputLabel value="#{msg['label.aliquotaINSS.aliquota']}" for="aliquota" id="labelAliquota"/>
-				<p:inputText value="#{tabelaINSSBean.aliquotaINSS.aliquota}" id="aliquota" size="6" maxlength="6"/>
-				<h:outputLabel value="#{msg['label.aliquotaINSS.valorInicial']}" for="valorInicial" id="labelValorInicial" />
-				<p:inputText value="#{tabelaINSSBean.aliquotaINSS.valorInicial}" size="10" maxlength="10" id="valorInicial"/>
-				<h:outputLabel value="#{msg['label.aliquotaINSS.valorFinal']}" for="valorFinal" id="labelValorFinal" />
-				<p:inputText value="#{tabelaINSSBean.aliquotaINSS.valorFinal}" size="10" maxlength="10" id="valorFinal"/>
-
-				<p:commandButton value="Limpar" type="reset" />
-				<p:commandButton value="Adicionar" update="aliquotasINSS" action="#{tabelaINSSBean.reinitAliquotasINSS}" process="painelInclusaoAliquotaINSS">
-					<p:collector value="#{tabelaINSSBean.aliquotaINSS}" addTo="#{tabelaINSSBean.tabelaINSS.listaAliquotasINSS}" />
+				<h:outputLabel value="#{msg['label.aliquotaINSS.descricao']}" for="descricaoAliquota" id="labelDescricaoAliquota"/>
+				<p:inputText value="#{tabelaINSSBean.aliquotaINSS.descricao}" id="descricaoAliquota"/>
+				<h:outputLabel value="#{msg['label.aliquotaINSS.aliquota']}" for="aliquotaAliquota" id="labelAliquotaAliquota"/>
+				<p:inputText value="#{tabelaINSSBean.aliquotaINSS.aliquota}" id="aliquotaAliquota" size="6" maxlength="6">
+					<f:convertNumber locale="pt_BR" pattern="#00,00" />
+				</p:inputText>
+				<h:outputLabel value="#{msg['label.aliquotaINSS.valorInicial']}" for="valorInicialAliquota" id="labelValorInicialAliquota" />
+				<p:inputText value="#{tabelaINSSBean.aliquotaINSS.valorInicial}" size="10" maxlength="10" id="valorInicialAliquota">
+					<f:convertNumber locale="pt_BR" pattern="#00,00" />
+				</p:inputText>
+				<h:outputLabel value="#{msg['label.aliquotaINSS.valorFinal']}" for="valorFinalAliquota" id="labelValorFinalAliquota" />
+				<p:inputText value="#{tabelaINSSBean.aliquotaINSS.valorFinal}" size="10" maxlength="10" id="valorFinalAliquota">
+					<f:convertNumber locale="pt_BR" pattern="#00,00" />
+				</p:inputText>
+				<p:commandButton value="Limpar" type="button" onclick="javascript:limparCamposAliquota()" />
+				<p:commandButton value="Adicionar" update="form:mensagens aliquotasINSS @parent" action="#{tabelaINSSBean.reinitAliquotasINSS}" process="painelInclusaoAliquotaINSS" id="botaoAdicionarAliquotaINSS">
+					<p:collector value="#{tabelaINSSBean.aliquotaINSS}" addTo="#{tabelaINSSBean.entity.listaAliquotasINSS}" />
 				</p:commandButton>
 			</h:panelGrid>
 		</p:panel>
 		<p:outputPanel id="aliquotasINSS">
-			<p:dataTable value="#{tabelaINSSBean.tabelaINSS.listaAliquotasINSS}" var="aliquotaINSS" emptyMessage="#{msg['info.aliquotaINSS.nao.informados']}">
+			<p:dataTable value="#{tabelaINSSBean.entity.listaAliquotasINSS}" var="aliquotaINSS" emptyMessage="#{msg['info.aliquotaINSS.nao.informados']}" rows="20" paginator="true" id="dataTableAliquotas">
 				<p:column>
-					<f:facet name="header">
-						<h:outputText value="#{msg['label.aliquotaINSS.descricao']}" />
-					</f:facet>
+					<f:facet name="header"><h:outputText value="#{msg['label.aliquotaINSS.descricao']}"/></f:facet>
 					<h:outputText value="#{aliquotaINSS.descricao}" />
 				</p:column>
 				<p:column>
-					<f:facet name="header">
-						<h:outputText value="#{msg['label.aliquotaINSS.aliquota']}" />
-					</f:facet>
-					<h:outputText value="#{aliquotaINSS.aliquota}" />
+					<f:facet name="header"><h:outputText value="#{msg['label.aliquotaINSS.aliquota']}"/></f:facet>
+					<h:outputText value="#{aliquotaINSS.aliquota}">
+						<f:convertNumber minFractionDigits="2" locale="pt_BR"/>
+					</h:outputText>
 				</p:column>
 				<p:column>
-					<f:facet name="header">
-						<h:outputText value="#{msg['label.aliquotaINSS.valorInicial']}" />
-					</f:facet>
-					<h:outputText value="#{aliquotaINSS.valorInicial}" />
+					<f:facet name="header"><h:outputText value="#{msg['label.aliquotaINSS.valorInicial']}"/></f:facet>
+					<h:outputText value="#{aliquotaINSS.valorInicial}">
+						<f:convertNumber type="currency" minFractionDigits="2" locale="pt_BR"/>
+					</h:outputText>
 				</p:column>
 				<p:column>
-					<f:facet name="header">
-						<h:outputText value="#{msg['label.aliquotaINSS.valorFinal']}" />
-					</f:facet>
-					<h:outputText value="#{aliquotaINSS.valorFinal}" />
+					<f:facet name="header"><h:outputText value="#{msg['label.aliquotaINSS.valorFinal']}"/></f:facet>
+					<h:outputText value="#{aliquotaINSS.valorFinal}">
+						<f:convertNumber type="currency" minFractionDigits="2" locale="pt_BR"/>
+					</h:outputText>
 				</p:column>
-
 				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Operação" />
-					</f:facet>
-					<p:commandLink value="Remover" update="form:aliquotasINSS" immediate="true">
-						<p:collector value="#{aliquotaINSS}" removeFrom="#{tabelaINSSBean.tabelaINSS.listaAliquotasINSS}" />
+					<f:facet name="header"><h:outputText value="Operação"/></f:facet>
+					<p:commandLink value="Remover" update="dataTableAliquotas" immediate="true">
+						<p:collector value="#{aliquotaINSS}" removeFrom="#{tabelaINSSBean.entity.listaAliquotasINSS}" />
 					</p:commandLink>
 				</p:column>
 			</p:dataTable>

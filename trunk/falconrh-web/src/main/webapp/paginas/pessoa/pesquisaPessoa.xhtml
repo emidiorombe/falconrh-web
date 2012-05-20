@@ -15,19 +15,19 @@
 			</h:panelGrid>
 		</p:panel>
 	</p:outputPanel>
-	<p:outputPanel id="painelDetalhePesquisa" rendered="#{pessoaBean.modoDetalhePesquisa}" >
-		<p:dataTable value="#{pessoaBean.listaEntities}" var="pessoa" id="dataTableDetalhePesquisa" >
-			<p:column id="colunaNomePessoa">
+	<p:outputPanel id="painelDetalhePesquisa" rendered="#{pessoaBean.modoDetalhePesquisa}">
+		<p:dataTable value="#{pessoaBean.listaEntities}" var="pessoa" id="dataTableDetalhePesquisa" rows="3" paginator="true" >
+			<p:column id="colunaNomePessoa" sortBy="#{pessoa.nome}">
 				<f:facet name="header"><h:outputText value="#{msg['label.pessoa.nome']}" id="labelColunaNome"/></f:facet>
 				<h:outputText value="#{pessoa.nome}" id="nomeDetalhe"/>
 			</p:column>
-			<p:column style="text-align:center" id="colunaDataNascimento">
+			<p:column style="text-align:center" id="colunaDataNascimento" sortBy="#{pessoa.dataNascimento}}">
 				<f:facet name="header"><h:outputText value="#{msg['label.pessoa.dataNascimento']}" id="labelColunaDataNascimento"/></f:facet>
 				<h:outputText value="#{pessoa.dataNascimento}" id="dataNascimentoDetalhe">
 					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="America/Sao_Paulo"/>
 				</h:outputText>
 			</p:column>
-			<p:column style="text-align:center" id="colunaSexo">
+			<p:column style="text-align:center" id="colunaSexo" sortBy="#{pessoa.sexo}">
 				<f:facet name="header"><h:outputText value="#{msg['label.pessoa.sexo']}" id="labelSexo"/></f:facet>
 				<h:outputText value="#{pessoa.sexo.descricao}" id="sexoDetalhe">
 					<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="America/Sao_Paulo"/>

@@ -14,10 +14,18 @@
 		</p:panel>
 	</p:outputPanel>
 	<p:outputPanel id="painelDetalhePesquisa" rendered="#{contaCorrenteBean.modoDetalhePesquisa}" >
-		<p:dataTable value="#{contaCorrenteBean.listaEntities}" var="contaCorrente" id="dataTableDetalhePesquisa" >
-			<p:column id="colunaNumeroContaCorrente">
+		<p:dataTable value="#{contaCorrenteBean.listaEntities}" var="contaCorrente" id="dataTableDetalhePesquisa" paginator="true" rows="20">
+			<p:column id="colunaNumeroContaCorrente" sortBy="#{contaCorrente.numero}">
 				<f:facet name="header"><h:outputText value="#{msg['label.contaCorrente.numero']}" id="labelColunaNumero"/></f:facet>
 				<h:outputText value="#{contaCorrente.numero}" id="numeroDetalhe"/>
+			</p:column>
+			<p:column id="colunaAgenciaContaCorrente" sortBy="#{contaCorrente.agencia.descricao}">
+				<f:facet name="header"><h:outputText value="#{msg['label.contaCorrente.numero']}" id="labelColunaAgencia"/></f:facet>
+				<h:outputText value="#{contaCorrente.agencia.descricao}" id="agenciaContaCorrenteoDetalhe"/>
+			</p:column>
+			<p:column id="colunaBancoContaCorrente" sortBy="#{contaCorrente.agencia.banco.nome}">
+				<f:facet name="header"><h:outputText value="#{msg['label.contaCorrente.numero']}" id="labelColunaBanco"/></f:facet>
+				<h:outputText value="#{contaCorrente.agencia.banco.nome}" id="bancoContaCorrenteDetalhe"/>
 			</p:column>
 			<p:column style="text-align:center" id="colunaBotaoEditar">
 				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>

@@ -15,13 +15,13 @@
 	</p:outputPanel>
 	<p:outputPanel id="painelDetalhePesquisa" rendered="#{bancoBean.modoDetalhePesquisa}" >
 		<p:dataTable value="#{bancoBean.listaEntities}" var="banco" id="dataTableDetalhePesquisa">
-			<p:column id="colunaNomeBanco" sortBy="#{banco.nome}">
-				<f:facet name="header"><h:outputText value="#{msg['label.banco.nome']}" id="labelColunaNome"/></f:facet>
-				<h:outputText value="#{banco.nome}" id="nomeDetalhe"/>
-			</p:column>
 			<p:column style="text-align:center" id="colunaCodigoFebraban" sortBy="#{banco.codigoFebraban}">
 				<f:facet name="header"><h:outputText value="#{msg['label.banco.codigoFebraban']}" id="labelColunaCodigoFebraban" /></f:facet>
 				<h:outputText value="#{banco.codigoFebraban}" id="codigoFebrabanDetalhe"/>
+			</p:column>
+			<p:column id="colunaNomeBanco" sortBy="#{banco.nome}">
+				<f:facet name="header"><h:outputText value="#{msg['label.banco.nome']}" id="labelColunaNome"/></f:facet>
+				<h:outputText value="#{banco.nome}" id="nomeDetalhe"/>
 			</p:column>
 			<p:column style="text-align:center" id="colunaBotaoEditar">
 				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>

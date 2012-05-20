@@ -54,38 +54,30 @@
 				<h:outputLabel value="#{msg['label.telefone.numero']}" for="numeroTelefone" id="labelNumero" />
 				<p:inputText value="#{pessoaBean.telefone.numero}" size="10" maxlength="8" id="numeroTelefone"/>
 				<p:commandButton value="Limpar" type="button" onclick="javascript:limparCamposTelefone()" />
-				<p:commandButton value="Adicionar" update="telefones @parent" action="#{pessoaBean.reinitTelefones}" process="painelInclusaoTelefones">
+				<p:commandButton value="Adicionar" update="telefones @parent" action="#{pessoaBean.reinitTelefones}" process="painelInclusaoTelefones" id="botaoAdicionarTelefone">
 					<p:collector value="#{pessoaBean.telefone}" addTo="#{pessoaBean.entity.listaTelefones}"/>
 				</p:commandButton>
 			</h:panelGrid>
 		</p:panel>
 		<p:outputPanel id="telefones"  autoUpdate="true">
 			<p:dataTable value="#{pessoaBean.entity.listaTelefones}" var="telefone" emptyMessage="#{msg['info.telefone.nao.informados']}" id="dataTableListaTelefones">
-				<f:facet name="header">
-					<h:outputText value="Telefones da Pessoa"/>
-				</f:facet>
+				<f:facet name="header"><h:outputText value="Telefones da Pessoa"/></f:facet>
 				<p:column  style="max-width: 450px; min-width: 450px; overflow: hidden">
-					<f:facet name="header">
-						<h:outputText value="#{msg['label.telefone.tipoTelefone']}"/>
-					</f:facet>
+					<f:facet name="header"><h:outputText value="#{msg['label.telefone.tipoTelefone']}"/></f:facet>
 					<h:outputText value="#{telefone.tipoTelefone.descricao}" />
 				</p:column>
 				<p:column style="text-align: right">
-					<f:facet name="header">
-						<h:outputText value="#{msg['label.telefone.ddd']}"/>
-					</f:facet>
-					<h:outputText value="#{telefone.ddd}"/>
+					<f:facet name="header"><h:outputText value="#{msg['label.telefone.numero']}"/></f:facet>
+					<h:outputText value="#{telefone.numeroFormatado}" />
 				</p:column>
-				<p:column style="text-align: right">
-					<f:facet name="header">
-						<h:outputText value="#{msg['label.telefone.numero']}"/>
-					</f:facet>
-					<h:outputText value="#{telefone.numero}" />
+				<p:column style="text-align: center">
+					<f:facet name="header"><h:outputText value="Operação" /></f:facet>
+					<p:commandLink value="Remover" update="dataTableListaTelefones" immediate="true">
+						<p:collector value="#{pessoas}" removeFrom="#{pessoaBean.entity.listaTelefones}" />
+					</p:commandLink>
 				</p:column>
 			</p:dataTable>
 		</p:outputPanel>
-		
-		
 		<p:panel header="Incluir documentos da pessoa" id="painelInclusaoDocumentos">
 			<h:panelGrid columns="8" id="panelGridInclusaoDocumentos">
 				<h:outputLabel value="#{msg['label.documento.tipoDocumento']}" for="tipoDocumento" id="labelTipoDocumento"/>
@@ -103,30 +95,28 @@
 				</p:commandButton>
 			</h:panelGrid>
 		</p:panel>
-		<p:outputPanel id="documentos">
-			<p:dataTable value="#{pessoaBean.entity.listaDocumentos}" var="documento" emptyMessage="#{msg['info.documento.nao.informados']}" id="dataTableListaDocumentos">
-				<f:facet name="header" >
-					<h:outputText value="Documentos da Pessoa" id="labelDocumentosPessoa"/>
-				</f:facet>
+		<p:outputPanel id="documentos" autoUpdate="true">
+			<p:dataTable value="#{pessoaBean.entity.listaDocumentos}" var="documento" emptyMessage="#{msg['info.documentos.nao.informados']}" id="dataTableListaDocumentos">
+				<f:facet name="header" ><h:outputText value="Documentos da Pessoa" id="labelDocumentosPessoa"/></f:facet>
 				<p:column  style="max-width: 450px; min-width: 450px; overflow: hidden" id="columnTipoDocumento">
-					<f:facet name="header">
-						<h:outputText value="#{msg['label.documento.tipoDocumento']}" id="labelTipoDocumentoDataTable"/>
-					</f:facet>
+					<f:facet name="header"><h:outputText value="#{msg['label.documento.tipoDocumento']}" id="labelTipoDocumentoDataTable"/></f:facet>
 					<h:outputText value="#{documento.tipoDocumento.descricao}" id="tipoDocumentoDataTable" />
 				</p:column>
 				<p:column style="text-align: right" id="columnNumeroDocumento">
-					<f:facet name="header">
-						<h:outputText value="#{msg['label.documento.numero']}" id="labelNumeroDocumentoDataTable"/>
-					</f:facet>
+					<f:facet name="header"><h:outputText value="#{msg['label.documento.numero']}" id="labelNumeroDocumentoDataTable"/></f:facet>
 					<h:outputText value="#{documento.numero}" id="numeroDocumentoDataTable"/>
 				</p:column>
 				<p:column style="text-align: right" id="columnDataEmissaoDocumento">
-					<f:facet name="header">
-						<h:outputText value="#{msg['label.documento.dataEmissao']}" id="labelDataEmissaoDocumentoDataTable"/>
-					</f:facet>
+					<f:facet name="header"><h:outputText value="#{msg['label.documento.dataEmissao']}" id="labelDataEmissaoDocumentoDataTable"/></f:facet>
 					<h:outputText value="#{documento.dataEmissao}" id="dataEmissaoDocumentoDataTable">
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" locale="pt_BR"/>
 					</h:outputText>
+				</p:column>
+				<p:column style="text-align: center">
+					<f:facet name="header"><h:outputText value="Operação" /></f:facet>
+					<p:commandLink value="Remover" update="dataTableListaDocumentos" immediate="true">
+						<p:collector value="#{documento}" removeFrom="#{pessoaBean.entity.listaDocumentos}" />
+					</p:commandLink>
 				</p:column>
 			</p:dataTable>
 		</p:outputPanel>

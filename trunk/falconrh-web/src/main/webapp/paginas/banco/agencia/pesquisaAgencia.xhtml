@@ -9,26 +9,26 @@
 			<p:focus for="nomePesquisa" id="focusPaginaPesquisa" rendered="#{agenciaBean.modoPesquisa}"/>
 			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
 				<h:outputLabel for="nomePesquisa" id="labelNomePesquisa" value="#{msg['label.agencia.nome']}"/>
-				<p:inputText value="#{agenciaBean.entity.nome}" id="nomePesquisa" size="50" maxlength="255" required="true" requiredMessage="#{msg['agencia.nome.obrigatorio']}" title="#{msg['title.agencia.nome']}"/>
+				<p:inputText value="#{agenciaBean.entity.nome}" id="nomePesquisa" size="50" maxlength="255" required="false" requiredMessage="#{msg['agencia.nome.obrigatorio']}" title="#{msg['title.agencia.nome']}"/>
 			</h:panelGrid>
 			<h:outputLabel value="#{msg['label.agencia.banco']}" for="bancoPesquisa" id="labelBancoPesquisa"/>
-			<p:selectOneMenu value="#{agenciaBean.entity.banco}" id="bancoPesquisa" required="true" requiredMessage="#{msg['agencia.banco.obrigatorio']}" effect="fade" label="#{msg['title.agencia.banco']}" converter="bancoConverter" converterMessage="Erro ao converter banco para objeto">
+			<p:selectOneMenu value="#{agenciaBean.entity.banco}" id="bancoPesquisa" required="false" requiredMessage="#{msg['agencia.banco.obrigatorio']}" effect="fade" label="#{msg['title.agencia.banco']}" converter="bancoConverter" converterMessage="Erro ao converter banco para objeto">
 				<f:selectItem itemLabel="Informe o Banco" noSelectionOption="true"/>
 				<f:selectItems value="#{utilBean.listaBancos}" var="banco" itemLabel="#{banco.descricao}" itemValue="#{banco}"/>
 			</p:selectOneMenu>
 		</p:panel>
 	</p:outputPanel>
 	<p:outputPanel id="painelDetalhePesquisa" rendered="#{agenciaBean.modoDetalhePesquisa}" >
-		<p:dataTable value="#{agenciaBean.listaEntities}" var="agencia" id="dataTableDetalhePesquisa" >
-			<p:column id="colunaNomeAgencia">
+		<p:dataTable value="#{agenciaBean.listaEntities}" var="agencia" id="dataTableDetalhePesquisa" rows="20" paginator="true">
+			<p:column id="colunaNomeAgencia" sortBy="#{agencia.nome}">
 				<f:facet name="header"><h:outputText value="#{msg['label.agencia.nome']}" id="labelColunaNome"/></f:facet>
 				<h:outputText value="#{agencia.nome}" id="nomeDetalhe"/>
 			</p:column>
-			<p:column style="text-align:center" id="colunaNumeroAgencia">
+			<p:column style="text-align:center" id="colunaNumeroAgencia" sortBy="#{agencia.numero}">
 				<f:facet name="header"><h:outputText value="#{msg['label.agencia.numero']}" id="labelColunaAgencia" /></f:facet>
 				<h:outputText value="#{agencia.numero}" id="numeroDetalhe"/><f:verbatim> - </f:verbatim> <h:outputText value="#{agencia.digitoVerificador}" id="digitoVerificadorDetalhe"/>
 			</p:column>
-			<p:column style="text-align:center" id="colunaBanco">
+			<p:column style="text-align:center" id="colunaBanco" sortBy="#{agencia.banco.nome}">
 				<f:facet name="header"><h:outputText value="#{msg['label.banco.nome']}" id="labelColunaBanco" /></f:facet>
 				<h:outputText value="#{agencia.banco.nome}" id="bancoDetalhe"/>
 			</p:column>
