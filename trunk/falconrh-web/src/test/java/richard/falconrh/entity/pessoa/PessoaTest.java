@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -44,7 +44,7 @@ public class PessoaTest {
 		EstadoCivil estadoCivil = EstadoCivil.SOLTEIRO;
 		Etnia etnia = Etnia.NEGRA;
 		Telefone telefone = new Telefone(TipoTelefone.CELULAR, 38, 98765432L);
-		Set<Telefone> listaTelefones = new HashSet<Telefone>();
+		List<Telefone> listaTelefones = new ArrayList<Telefone>();
 		listaTelefones.add(telefone);
 		Long id = 656565L;
 		Nacionalidade nacionalidade = Nacionalidade.BRASILEIRO;
@@ -93,7 +93,7 @@ public class PessoaTest {
 	@Test
 	public void testaRemoverTelefone(){
 		Telefone telefone = new Telefone(TipoTelefone.CELULAR, 48, 96149698L);
-		pessoa.setListaTelefones(new HashSet<Telefone>());
+		pessoa.setListaTelefones(new ArrayList<Telefone>());
 		pessoa.getListaTelefones().add(telefone);
 		assertTrue(pessoa.getListaTelefones().contains(telefone));
 		pessoa.removerTelefone(telefone);
