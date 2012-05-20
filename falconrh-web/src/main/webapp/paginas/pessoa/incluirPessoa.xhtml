@@ -7,14 +7,14 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:rich="http://java.sun.com/jsf/composite/rich">
 	<p:outputPanel id="painelInclusao" rendered="#{pessoaBean.modoInclusao or pessoaBean.modoEdicao}">
-		<p:panel header="Dados Pessoais">
-			<p:focus for="nome"/>
-			<h:panelGrid columns="2">
-				<h:outputLabel value="#{msg['label.pessoa.nome']}" for="nome" label="labelNome" />
+		<p:panel header="Dados Pessoais" id="painelDadosPessoais">
+			<p:focus for="nome" id="focusId"/>
+			<h:panelGrid columns="2" id="painelGridDadosPessoais">
+				<h:outputLabel value="#{msg['label.pessoa.nome']}" for="nome" id="labelNome"/>
 				<p:inputText value="#{pessoaBean.entity.nome}" id="nome" size="60" maxlength="255" required="true" requiredMessage="#{msg['pessoa.nome.obrigatorio']}" title="#{msg['title.pessoa.nome']}"/>
-				<h:outputLabel value="#{msg['label.pessoa.dataNascimento']}" for="dataNascimento" label="labelDataNascimento" />
+				<h:outputLabel value="#{msg['label.pessoa.dataNascimento']}" for="dataNascimento" id="labelDataNascimento" />
 				<p:calendar value="#{pessoaBean.entity.dataNascimento}" id="dataNascimento" size="12" maxlength="10" required="true" requiredMessage="#{msg['pessoa.dataNascimento.obrigatorio']}" title="#{msg['title.pessoa.dataNascimento']}" showOn="button" navigator="true" locale="pt_BR" lang="pt" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy"/>
-				<h:outputLabel value="#{msg['label.pessoa.sexo']}" id="labelSexo" for="sexo" />
+				<h:outputLabel value="#{msg['label.pessoa.sexo']}" id="labelSexo" for="sexo"/>
 				<p:selectOneMenu value="#{pessoaBean.entity.sexo}" id="sexo" required="true" requiredMessage="#{msg['pessoa.sexo.obrigatorio']}" effect="fade">
 					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true"/>
 					<f:selectItems value="#{utilBean.listaSexos}" />
@@ -29,6 +29,10 @@
 					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true"/>
 					<f:selectItems value="#{utilBean.listaEtnias}" />
 				</p:selectOneMenu>
+				<h:outputLabel value="#{msg['label.pessoa.deficienteFisico']}" id="labelDeficienteFisico" for="deficienteFisico" />
+				<p:selectOneRadio value="#{pessoaBean.entity.deficienteFisico}" id="deficienteFisico" required="true" requiredMessage="#{msg['pessoa.deficienteFisico.obrigatorio']}" effect="fade">
+					<f:selectItems value="#{utilBean.listaSimOuNao}" />
+				</p:selectOneRadio>
 				<h:outputLabel value="#{msg['label.pessoa.nacionalidade']}" id="labelNacionalidade" for="nacionalidade" />
 				<p:selectOneMenu value="#{pessoaBean.entity.nacionalidade}" id="nacionalidade" required="true" requiredMessage="#{msg['pessoa.nacionalidade.obrigatorio']}" effect="fade">
 					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true"/>
@@ -38,5 +42,103 @@
 				<p:inputText value="#{pessoaBean.entity.email}" id="email" title="#{msg['title.pessoa.email']}" size="60" maxlength="100"/>
 			</h:panelGrid>
 		</p:panel>
+		<p:panel header="Incluir telefones da pessoa" id="painelInclusaoTelefones">
+			<h:panelGrid columns="8" id="panelGridInclusaoTelefones">
+				<h:outputLabel value="#{msg['label.telefone.tipoTelefone']}" for="tipoTelefone" id="labelTipoTelefone"/>
+				<p:selectOneMenu value="#{pessoaBean.telefone.tipoTelefone}" id="tipoTelefone">
+					<f:selectItem itemLabel="--Selectione" itemValue="" id="selecioneTipoTelefoneId"/>
+					<f:selectItems value="#{utilBean.listaTiposTelefones}"/>
+				</p:selectOneMenu>
+				<h:outputLabel value="#{msg['label.telefone.ddd']}" for="dddTelefone" id="labelDdd"/>
+				<p:inputText value="#{pessoaBean.telefone.ddd}" id="dddTelefone" size="4" maxlength="2"/>
+				<h:outputLabel value="#{msg['label.telefone.numero']}" for="numeroTelefone" id="labelNumero" />
+				<p:inputText value="#{pessoaBean.telefone.numero}" size="10" maxlength="8" id="numeroTelefone"/>
+				<p:commandButton value="Limpar" type="button" onclick="javascript:limparCamposTelefone()" />
+				<p:commandButton value="Adicionar" update="telefones @parent" action="#{pessoaBean.reinitTelefones}" process="painelInclusaoTelefones">
+					<p:collector value="#{pessoaBean.telefone}" addTo="#{pessoaBean.entity.listaTelefones}"/>
+				</p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+		<p:outputPanel id="telefones"  autoUpdate="true">
+			<p:dataTable value="#{pessoaBean.entity.listaTelefones}" var="telefone" emptyMessage="#{msg['info.telefone.nao.informados']}" id="dataTableListaTelefones">
+				<f:facet name="header">
+					<h:outputText value="Telefones da Pessoa"/>
+				</f:facet>
+				<p:column  style="max-width: 450px; min-width: 450px; overflow: hidden">
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.telefone.tipoTelefone']}"/>
+					</f:facet>
+					<h:outputText value="#{telefone.tipoTelefone.descricao}" />
+				</p:column>
+				<p:column style="text-align: right">
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.telefone.ddd']}"/>
+					</f:facet>
+					<h:outputText value="#{telefone.ddd}"/>
+				</p:column>
+				<p:column style="text-align: right">
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.telefone.numero']}"/>
+					</f:facet>
+					<h:outputText value="#{telefone.numero}" />
+				</p:column>
+			</p:dataTable>
+		</p:outputPanel>
+		
+		
+		<p:panel header="Incluir documentos da pessoa" id="painelInclusaoDocumentos">
+			<h:panelGrid columns="8" id="panelGridInclusaoDocumentos">
+				<h:outputLabel value="#{msg['label.documento.tipoDocumento']}" for="tipoDocumento" id="labelTipoDocumento"/>
+				<p:selectOneMenu value="#{pessoaBean.documento.tipoDocumento}" id="tipoDocumento">
+					<f:selectItem itemLabel="--Selecione" itemValue="" id="selectItemSelecioneTipoDocumento"/>
+					<f:selectItems value="#{utilBean.listaTiposDocumentos}" id="selectItemsTiposDocumentos"/>
+				</p:selectOneMenu>
+				<h:outputLabel value="#{msg['label.documento.dataEmissao']}" for="dataEmissaoDocumento" id="labelDataEmissaoDocumento"/>
+				<p:calendar value="#{pessoaBean.documento.dataEmissao}" id="dataEmissaoDocumento" size="12" maxlength="10" title="#{msg['title.documento.dataEmissao']}" showOn="button" navigator="true" locale="pt_BR" lang="pt" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy"/>
+				<h:outputLabel value="#{msg['label.documento.numero']}" for="numeroDocumento" id="labelNumeroDocumento" />
+				<p:inputText value="#{pessoaBean.documento.numero}" size="10" maxlength="8" id="numeroDocumento"/>
+				<p:commandButton value="Limpar" type="button" onclick="javascript:limparCamposDocumento()" id="botaoLimparDocumentos"/>
+				<p:commandButton value="Adicionar" update="documentos @parent" action="#{pessoaBean.reinitDocumentos}" process="painelInclusaoDocumentos" id="botaoAdicionarDocumento">
+					<p:collector value="#{pessoaBean.documento}" addTo="#{pessoaBean.entity.listaDocumentos}"/>
+				</p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+		<p:outputPanel id="documentos">
+			<p:dataTable value="#{pessoaBean.entity.listaDocumentos}" var="documento" emptyMessage="#{msg['info.documento.nao.informados']}" id="dataTableListaDocumentos">
+				<f:facet name="header" >
+					<h:outputText value="Documentos da Pessoa" id="labelDocumentosPessoa"/>
+				</f:facet>
+				<p:column  style="max-width: 450px; min-width: 450px; overflow: hidden" id="columnTipoDocumento">
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.documento.tipoDocumento']}" id="labelTipoDocumentoDataTable"/>
+					</f:facet>
+					<h:outputText value="#{documento.tipoDocumento.descricao}" id="tipoDocumentoDataTable" />
+				</p:column>
+				<p:column style="text-align: right" id="columnNumeroDocumento">
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.documento.numero']}" id="labelNumeroDocumentoDataTable"/>
+					</f:facet>
+					<h:outputText value="#{documento.numero}" id="numeroDocumentoDataTable"/>
+				</p:column>
+				<p:column style="text-align: right" id="columnDataEmissaoDocumento">
+					<f:facet name="header">
+						<h:outputText value="#{msg['label.documento.dataEmissao']}" id="labelDataEmissaoDocumentoDataTable"/>
+					</f:facet>
+					<h:outputText value="#{documento.dataEmissao}" id="dataEmissaoDocumentoDataTable">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
+		</p:outputPanel>
 	</p:outputPanel>
+	<script>
+		function limparCamposTelefone(){
+			document.getElementById("dddTelefone").value = "";
+			document.getElementById("numeroTelefone").value = "";
+		}
+		function limparCamposDocumento(){
+			document.getElementById("numeroDocumento").value = "";
+			document.getElementById("dataEmissaoDocumento").value = "";
+		}
+	</script>
 </ui:composition>
