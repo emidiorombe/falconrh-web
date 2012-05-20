@@ -9,6 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import richard.falconrh.entity.banco.Banco;
@@ -35,16 +36,19 @@ public class BancoConverter implements Converter {
 	 * @return Object * @see javax.faces.convert.Converter#getAsObject(FacesContext, UIComponent, String) */
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Long idBanco = Long.valueOf(value);
-		Banco banco = null;
-		try {
-			banco = getBancoServices().obterPeloId(Banco.class, idBanco);
-		} catch (ServicesException e) {
-			logger.error("Erro ao converter a String para um objeto do tipo Banco", e);
-			FacesMessage facesMessage = new FacesMessage("Erro ao converter a String para um objeto do tipo Banco");
-			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		if(StringUtils.isNotBlank(value) && !"--Selecione--".equals(value)){
+			Long idBanco = Long.valueOf(value);
+			Banco banco = null;
+			try {
+				banco = getBancoServices().obterPeloId(Banco.class, idBanco);
+			} catch (ServicesException e) {
+				logger.error("Erro ao converter a String para um objeto do tipo Banco", e);
+				FacesMessage facesMessage = new FacesMessage("Erro ao converter a String para um objeto do tipo Banco");
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			}
+			return banco;
 		}
-		return banco;
+		return null;
 	}
 
 	/**
