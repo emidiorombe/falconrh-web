@@ -8,9 +8,9 @@
 		<p:panel header="Dados da Tabela de Feriado" id="painelDetalheFeriado">
 			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
 				<h:outputLabel value="#{msg['label.tabelaFeriado.descricao']}" for="descricaoDetalhe" id="labelDescricaoDetalhe"/>
-				<h:outputText value="#{tabelaFeriadoBean.tabelaFeriado.descricao}" id="descricaoDetalhe"/>
+				<h:outputText value="#{tabelaFeriadoBean.entity.descricao}" id="descricaoDetalhe"/>
 				<h:outputLabel value="#{msg['label.tabelaFeriado.ano']}" for="anoDetalhe" id="labelAnoDetalhe"/>
-				<h:outputText value="#{tabelaFeriadoBean.tabelaFeriado.ano}" id="anoDetalhe"/>
+				<h:outputText value="#{tabelaFeriadoBean.entity.ano}" id="anoDetalhe"/>
 			</h:panelGrid>
 		</p:panel>
 	</p:outputPanel>
