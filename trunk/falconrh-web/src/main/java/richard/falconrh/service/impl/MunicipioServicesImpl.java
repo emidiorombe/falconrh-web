@@ -28,10 +28,8 @@ public class MunicipioServicesImpl extends AbstractServicesImpl<Municipio> imple
 	/**
 	 * Method obterListaMunicipiosPelaUF.
 	 * @param uf UF
-	
-	
-	
-	 * @return Set<Municipio> * @throws ServicesException * @see richard.falconrh.service.MunicipioServices#obterListaMunicipiosPelaUF(UF) */
+	 * @return Set<Municipio> * @throws ServicesException * @see richard.falconrh.service.MunicipioServices#obterListaMunicipiosPelaUF(UF)
+	 */
 	@Override
 	public Set<Municipio> obterListaMunicipiosPelaUF(UF uf) throws ServicesException {
 		CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
@@ -48,9 +46,8 @@ public class MunicipioServicesImpl extends AbstractServicesImpl<Municipio> imple
 	/**
 	 * Method obterListaPeloExemplo.
 	 * @param municipio Municipio
-	
-	
-	 * @return Set<Municipio> * @throws ServicesException */
+	 * @return Set<Municipio> * @throws ServicesException
+	 */
 	@Override
 	public Set<Municipio> obterListaPeloExemplo(Municipio municipio) throws ServicesException {
 		CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
