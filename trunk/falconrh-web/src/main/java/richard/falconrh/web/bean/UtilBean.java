@@ -24,6 +24,7 @@ import richard.falconrh.entity.localizacao.Endereco;
 import richard.falconrh.entity.localizacao.Logradouro;
 import richard.falconrh.entity.localizacao.Municipio;
 import richard.falconrh.entity.pessoa.Pessoa;
+import richard.falconrh.entity.seguranca.Acao;
 import richard.falconrh.exception.ServicesException;
 import richard.falconrh.modelo.enums.EstadoCivil;
 import richard.falconrh.modelo.enums.Etnia;
@@ -35,6 +36,7 @@ import richard.falconrh.modelo.enums.TipoLogradouro;
 import richard.falconrh.modelo.enums.TipoTelefone;
 import richard.falconrh.modelo.enums.UF;
 import richard.falconrh.service.AbstractServices;
+import richard.falconrh.service.AcaoServices;
 import richard.falconrh.service.BancoServices;
 import richard.falconrh.service.PessoaServices;
 
@@ -65,6 +67,8 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 	@EJB(name="ejb/PessoaServices")
 	private PessoaServices pessoaServices;
 	
+	@EJB(name="ejb/AcaoServices")
+	private AcaoServices acaoServices;
 	
 	/**
 	 * Method getListaNacionalidades.
@@ -253,10 +257,29 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 		return null;
 	}
 	
+	public SelectItem[] getListaTodasAcoes(){
+		Set<Acao> listaAcoes = new TreeSet<Acao>();
+		try{
+			listaAcoes = acaoServices.obterListaTodasAcoes();
+		}catch(ServicesException e){
+			LOGGER.error("erro.obter.lista.acoes", e);
+			adicionarMensagemErro("erro.obter.lista.acoes");
+			return null;
+		}
+		SelectItem[] lista = new SelectItem[listaAcoes.size()];
+		int cont = 0;
+		SelectItem item = null;
+		for(Acao acao : listaAcoes){
+			item = new SelectItem(acao, acao.getNome());
+			lista[cont++] = item;
+		}
+		return lista;
+	}
+	
 	/**
 	 * Method getListaSimOuNao.
-	
-	 * @return SelectItem[] */
+	 * @return SelectItem[]
+	 */
 	public SelectItem[] getListaSimOuNao(){
 		SelectItem[] items = new SelectItem[2];
 		items[0] = new SelectItem(Boolean.TRUE, "Sim");
