@@ -21,6 +21,7 @@
 		<class>richard.falconrh.entity.banco.ContaCorrente</class>
 		<class>richard.falconrh.entity.banco.Banco</class>
 		<class>richard.falconrh.entity.banco.Agencia</class>
+		<class>richard.falconrh.entity.seguranca.Acao</class>
 		<class>richard.falconrh.entity.Parent</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
@@ -28,6 +29,7 @@
             <property name="hibernate.show_sql" value ="true"/>
 			<property name="hibernate.generate_statistics" value="true"/>
 			<property name="org.hibernate.SQL.level" value="FINEST"/>
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 		</properties>
 	</persistence-unit>
 </persistence>
