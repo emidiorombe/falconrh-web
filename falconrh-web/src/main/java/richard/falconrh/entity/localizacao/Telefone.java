@@ -116,7 +116,7 @@ public class Telefone extends Parent{
 	@Transient
 	public String getNumeroFormatado(){
 		String n = String.valueOf(getNumero());
-		return "(" + getDdd() + ") " + n.substring(0,4)+"-"+n.substring(5,8);
+		return "(" + getDdd() + ") " + n.substring(0,4)+"-"+n.substring(4,8);
 	}
 
 	@Override
