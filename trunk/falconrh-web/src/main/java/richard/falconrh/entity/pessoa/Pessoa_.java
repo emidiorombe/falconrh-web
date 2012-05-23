@@ -23,7 +23,6 @@ import richard.falconrh.modelo.enums.Sexo;
  */
 @StaticMetamodel(Pessoa.class)
 public class Pessoa_ extends Parent_{
-	public static volatile SingularAttribute<Pessoa, Long> id;
 	public static volatile SingularAttribute<Pessoa, String> nome;
 	public static volatile SingularAttribute<Pessoa, String> email;
 	public static volatile SingularAttribute<Pessoa, Date> dataNascimento;
