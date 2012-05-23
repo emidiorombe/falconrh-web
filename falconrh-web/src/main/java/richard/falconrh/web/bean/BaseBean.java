@@ -300,7 +300,9 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	 */
 	public void visualizar(ActionEvent event){
 		logger.debug("Iniciando visualizacao");
+		beforeVisualizar();
 		setModoOperacao(MODO_DETALHE);
+		afterVisualizar();
 	}
 	
 	/**
@@ -339,6 +341,9 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	public void afterExcluir(){}
 	public void beforePesquisar(){}
 	public void afterPesquisar(){}
+	public void beforeVisualizar(){}
+	public void afterVisualizar(){}
+	
 	
 	
 	/**
