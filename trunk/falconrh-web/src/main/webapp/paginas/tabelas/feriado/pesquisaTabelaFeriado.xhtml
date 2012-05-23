@@ -9,10 +9,41 @@
 			<p:focus for="descricaoPesquisa" id="focusPaginaPesquisa"/>
 			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
 				<h:outputLabel for="descricaoPesquisa" id="labelDescricaoPesquisa" value="#{msg['label.tabelaFeriado.descricao']}"/>
-				<p:inputText value="#{tabelaFeriadoBean.tabelaFeriado.descricao}" id="descricaoPesquisa" size="60" maxlength="255" required="true" requiredMessage="#{msg['tabelaFeriado.descricao.obrigatorio']}" title="#{msg['title.tabelaFeriado.descricao']}"/>
+				<p:inputText value="#{tabelaFeriadoBean.entity.descricao}" id="descricaoPesquisa" size="60" maxlength="255" required="true" requiredMessage="#{msg['tabelaFeriado.descricao.obrigatorio']}" title="#{msg['title.tabelaFeriado.descricao']}"/>
 			</h:panelGrid>
 		</p:panel>
 	</p:outputPanel>
 	<p:outputPanel id="painelDetalhePesquisa" rendered="#{tabelaFeriadoBean.modoDetalhePesquisa}" >
+		<p:dataTable value="#{tabelaFeriadoBean.listaEntities}" var="tabelaFeriado" id="dataTableDetalhePesquisa" >
+			<p:column id="colunaDescricaoTabelaFeriado">
+				<f:facet name="header"><h:outputText value="#{msg['label.tabelaFeriado.descricao']}" id="labelColunaDescricao"/></f:facet>
+				<h:outputText value="#{tabelaFeriado.descricao}" id="descricaoDetalhe"/>
+			</p:column>
+			<p:column id="colunaAnoTabelaFeriado">
+				<f:facet name="header"><h:outputText value="#{msg['label.tabelaFeriado.ano']}" id="labelColunaAno"/></f:facet>
+				<h:outputText value="#{tabelaFeriado.ano}" id="anoDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaBotaoEditar">
+				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{tabelaFeriadoBean.editar}" id="botaoEditarTabelaFeriado">
+					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarTabelaFeriado"/>
+                	<f:setPropertyActionListener value="#{tabelaFeriado}" target="#{tabelaFeriadoBean.entity}"/>  
+            	</p:commandLink>
+			</p:column>            	  
+			<p:column style="text-align:center" id="colunaVisualizar">
+				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{tabelaFeriadoBean.visualizar}" id="botaoVisualizarTabelaFeriado">
+					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarTabelaFeriado"/>
+                	<f:setPropertyActionListener value="#{tabelaFeriado}" target="#{tabelaFeriadoBean.entity}" />
+				</p:commandLink>
+			</p:column>
+			<p:column style="text-align:center" id="colunaExcluir">
+				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{tabelaFeriadoBean.iniciarExclusao}" id="botaoExcluirTabelaFeriado">
+					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirTabelaFeriado"/>
+                	<f:setPropertyActionListener value="#{tabelaFeriado}" target="#{tabelaFeriadoBean.entity}" />
+            	</p:commandLink>                        
+			</p:column>
+		</p:dataTable>
 	</p:outputPanel>
 </ui:composition>

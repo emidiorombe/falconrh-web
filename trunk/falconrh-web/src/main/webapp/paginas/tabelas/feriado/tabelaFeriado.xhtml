@@ -14,14 +14,12 @@
 				<ui:include src="incluirTabelaFeriado.xhtml"/>
 				<ui:include src="detalheTabelaFeriado.xhtml"/>
 				<ui:include src="pesquisaTabelaFeriado.xhtml"/>
-				<p:panel style="text-align: center" rendered="#{not empty tabelaFeriadoBean.modoOperacao}">
-					<p:commandButton value="#{msg['label.botao.cadastro.tabelaFeriado']}" actionListener="#{tabelaFeriadoBean.cadastrarTabelaFeriado}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaFeriadoBean.modoInclusao}" title="#{msg['title.botao.cadastro.tabelaFeriado']}" id="botaoCadastroTabelaFeriado"/>
-					<p:commandButton value="#{msg['label.botao.atualizacao.tabelaFeriado']}" actionListener="#{tabelaFeriadoBean.atualizarTabelaFeriado}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaFeriadoBean.modoEdicao}" title="#{msg['title.botao.atualizacao.tabelaFeriado']}" id="botaoAtualizacaoTabelaFeriado"/>
-					<p:commandButton value="#{msg['label.botao.pesquisa.tabelaFeriado']}" actionListener="#{tabelaFeriadoBean.pesquisarTabelaFeriado}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaFeriadoBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.tabelaFeriado']}" id="botaoPesquisaTabelaFeriado"/>
-					<p:commandButton value="#{msg['label.botao.exclusao.tabelaFeriado']}" actionListener="#{tabelaFeriadoBean.excluirTabelaFeriado}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaFeriadoBean.modoExclusao}" title="#{msg['title.botao.exclusao.tabelaFeriado']}" id="botaoExclusaoTabelaFeriado"/>
-					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{tabelaFeriadoBean.voltarParaResultadoPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaFeriadoBean.modoExclusao or tabelaFeriadoBean.modoEdicao or tabelaFeriadoBean.modoDetalhe}" title="#{msg['title.botao.exclusao.tabelaFeriado']}" immediate="true" id="botaoVoltarTabelaFeriado">
-						<f:setPropertyActionListener target="#{tabelaFeriadoBean.tabelaFeriado}" value="#{tabelaFeriadoBean.tabelaFeriado}"/>
-					</p:commandButton>
+				<p:panel style="text-align: center" rendered="#{not empty tabelaFeriadoBean.modoOperacao}" id="painelBotoes">
+					<p:commandButton value="#{msg['label.botao.cadastro.tabelaFeriado']}" actionListener="#{tabelaFeriadoBean.cadastrar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaFeriadoBean.modoInclusao}" title="#{msg['title.botao.cadastro.tabelaFeriado']}" id="botaoCadastroTabelaFeriado"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.tabelaFeriado']}" actionListener="#{tabelaFeriadoBean.atualizar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaFeriadoBean.modoEdicao}" title="#{msg['title.botao.atualizacao.tabelaFeriado']}" id="botaoAtualizacaoTabelaFeriado"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.tabelaFeriado']}" actionListener="#{tabelaFeriadoBean.pesquisar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaFeriadoBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.tabelaFeriado']}" id="botaoPesquisaTabelaFeriado"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.tabelaFeriado']}" actionListener="#{tabelaFeriadoBean.excluir}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaFeriadoBean.modoExclusao}" title="#{msg['title.botao.exclusao.tabelaFeriado']}" id="botaoExclusaoTabelaFeriado"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{tabelaFeriadoBean.voltarParaResultadoDaPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaFeriadoBean.modoExclusao or tabelaFeriadoBean.modoEdicao or tabelaFeriadoBean.modoDetalhe}" title="#{msg['title.botao.exclusao.tabelaFeriado']}" immediate="true" id="botaoVoltarTabelaFeriado"/>
 					<p:commandButton value="#{msg['label.botao.sair']}" action="#{tabelaFeriadoBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairTabelaFeriado"/>
 				</p:panel>
 			</p:outputPanel>
