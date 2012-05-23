@@ -21,6 +21,7 @@
 		<class>richard.falconrh.entity.banco.Agencia</class>
 		<class>richard.falconrh.entity.Parent</class>
 		<class>richard.falconrh.entity.documento.Documento</class>
+		<class>richard.falconrh.entity.seguranca.Acao</class>
 		<!-- configurações para o postregresql
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
