@@ -29,8 +29,11 @@ public class PessoaServicesImpl extends AbstractServicesImpl<Pessoa> implements 
 	 * @return Set<Pessoa> * @throws ServicesException * @see richard.falconrh.service.PessoaServices#obterListaTodasPessoas() */
 	@Override
 	public Set<Pessoa> obterListaTodasPessoas() throws ServicesException {
-		// TODO Auto-generated method stub
-		return null;
+		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<Pessoa> cq = cb.createQuery(Pessoa.class);
+		cq.from(Pessoa.class);
+		TypedQuery<Pessoa> query = getEntityManager().createQuery(cq);
+		return new TreeSet<Pessoa>(query.getResultList());
 	}
 	
 	@Override
@@ -79,5 +82,13 @@ public class PessoaServicesImpl extends AbstractServicesImpl<Pessoa> implements 
 		cq.where(listaRestricoes);
 		TypedQuery<Pessoa> query = getEntityManager().createQuery(cq);
 		return new TreeSet<Pessoa>(query.getResultList());
+	}
+	
+	@Override
+	public Pessoa obterPeloId(Class<Pessoa> clazz, Long id)throws ServicesException {
+		String jpql = "select p from Pessoa p left join p.listaTelefones left join p.listaDocumentos where p.id = :idPessoa";
+		TypedQuery<Pessoa> q = getEntityManager().createQuery(jpql, Pessoa.class);
+		q.setParameter("idPessoa", id);
+		return q.getSingleResult();
 	}
 }
