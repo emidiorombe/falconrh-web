@@ -13,7 +13,6 @@ import richard.falconrh.service.TabelaFeriadoServices;
 /**
  * ManagedBean JSF utilizado em arquivos xhtml
  * @author Richard Mendes Madureira
- *
  * @version $Revision: 1.0 $
  */
 @ManagedBean(name="tabelaFeriadoBean")
@@ -38,8 +37,8 @@ public class TabelaFeriadoBean extends BaseBean<TabelaFeriado, TabelaFeriadoServ
 	
 	/**
 	 * Method reinitFeriado.
-	
-	 * @return String */
+	 * @return String
+	 */
 	public String reinitFeriado(){
 		setFeriado(new Feriado());
 		return null;
@@ -63,8 +62,8 @@ public class TabelaFeriadoBean extends BaseBean<TabelaFeriado, TabelaFeriadoServ
 
 	/**
 	 * Method getFeriado.
-	
-	 * @return Feriado */
+	 * @return Feriado
+	 */
 	public Feriado getFeriado() {
 		return feriado;
 	}
@@ -76,7 +75,6 @@ public class TabelaFeriadoBean extends BaseBean<TabelaFeriado, TabelaFeriadoServ
 	public void setFeriado(Feriado feriado) {
 		this.feriado = feriado;
 	}
-
 
 	@Override
 	public void setMensagensInformativas() {
