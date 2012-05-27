@@ -19,7 +19,7 @@ import richard.falconrh.service.AcaoServices;
 public class AcaoBean extends BaseBean<Acao, AcaoServices>{
 	private static final long serialVersionUID = -7205911761531138512L;
 	
-	@EJB(name="ejb/acaoServices")
+	@EJB(name="ejb/AcaoServices")
 	private AcaoServices acaoServices;
 	
 	public AcaoBean(){
@@ -34,7 +34,8 @@ public class AcaoBean extends BaseBean<Acao, AcaoServices>{
 	
 	/**
 	 * Method getServices.
-	 * @return acaoServices */
+	 * @return acaoServices 
+	 */
 	@Override
 	public AcaoServices getServices() {
 		return acaoServices;
@@ -50,7 +51,7 @@ public class AcaoBean extends BaseBean<Acao, AcaoServices>{
 		ERRO_ATUALIZACAO = "erro.atualizacao.acao";
 		ERRO_EXCLUSAO = "erro.exclusao.acao";
 		ERRO_PESQUISA = "erro.pesquisa.acao";
-		PESQUISA_NAO_ENCONTRADA = "pesquisa.acao.nao.encontrado";
+		PESQUISA_NAO_ENCONTRADA = "pesquisa.acao.nao.encontrada";
 	}
 	
 }
