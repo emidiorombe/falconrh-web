@@ -18,7 +18,7 @@
 					<p:commandButton value="#{msg['label.botao.cadastro.banco']}" actionListener="#{bancoBean.cadastrar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bancoBean.modoInclusao}" title="#{msg['title.botao.cadastro.banco']}" id="botaoCadastroBanco"/>
 					<p:commandButton value="#{msg['label.botao.atualizacao.banco']}" actionListener="#{bancoBean.atualizar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bancoBean.modoEdicao}" title="#{msg['title.botao.atualizacao.banco']}" id="botaoAtualizacaoBanco"/>
 					<p:commandButton value="#{msg['label.botao.pesquisa.banco']}" actionListener="#{bancoBean.pesquisar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bancoBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.banco']}" id="botaoPesquisaBanco"/>
-					<p:commandButton value="#{msg['label.botao.exclusao.banco']}" actionListener="#{bancoBean.excluir}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bancoBean.modoExclusao}" title="#{msg['title.botao.exclusao.banco']}" id="botaoExclusaoBanco"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.banco']}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bancoBean.modoExclusao}" title="#{msg['title.botao.exclusao.banco']}" id="botaoExclusaoBanco" onclick="confirmation.show()" type="button"/>
 					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{bancoBean.voltarParaResultadoDaPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{bancoBean.modoExclusao or bancoBean.modoEdicao or bancoBean.modoDetalhe}" title="#{msg['title.botao.exclusao.banco']}" immediate="true" id="botaoVoltarBanco">
 						<f:setPropertyActionListener target="#{bancoBean.entity}" value="#{bancoBean.entity}"/>
 					</p:commandButton>
@@ -26,6 +26,10 @@
 					<p:commandButton value="#{msg['label.botao.sair']}" action="#{bancoBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairBanco"/>
 				</p:panel>
 			</p:outputPanel>
+			<p:confirmDialog id="confirmDialog" message="Você tem certeza de que deseja excluir o registro?" header="Confirmação de Exclusão" severity="alert" widgetVar="confirmation">
+				<p:commandButton id="confirmId" value="Sim" update="form:mensagens" oncomplete="confirmation.hide()" actionListener="#{bancoBean.excluir}" />
+				<p:commandButton id="declineId" value="Não" onclick="confirmation.hide()" type="button" /> 
+			</p:confirmDialog>
 		</h:form>
 	</ui:define>
 </ui:composition>
