@@ -19,7 +19,7 @@ import richard.falconrh.exception.ServicesException;
 import richard.falconrh.service.AgenciaServices;
 
 /**
- * @author richard
+ * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
 @Stateless(name="ejb/AgenciaServices", mappedName="AgenciaServices")
@@ -28,10 +28,8 @@ public class AgenciaServicesImpl extends AbstractServicesImpl<Agencia> implement
 	/**
 	 * Method obterListaPeloIdBanco.
 	 * @param idBanco Long
-	
-	
-	
-	 * @return Set<Agencia> * @throws ServicesException * @see richard.falconrh.service.AgenciaServices#obterListaPeloIdBanco(Long) */
+	 * @return Set<Agencia> * @throws ServicesException * @see richard.falconrh.service.AgenciaServices#obterListaPeloIdBanco(Long)
+	 */
 	@Override
 	public Set<Agencia> obterListaPeloIdBanco(Long idBanco) throws ServicesException {
 		CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
@@ -48,9 +46,8 @@ public class AgenciaServicesImpl extends AbstractServicesImpl<Agencia> implement
 	/**
 	 * Method obterListaPeloExemplo.
 	 * @param entity Agencia
-	
-	
-	 * @return Set<Agencia> * @throws ServicesException */
+	 * @return Set<Agencia> * @throws ServicesException
+	 */
 	@Override
 	public Set<Agencia> obterListaPeloExemplo(Agencia entity) throws ServicesException {
 		CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
