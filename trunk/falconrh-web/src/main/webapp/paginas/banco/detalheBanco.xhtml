@@ -6,9 +6,9 @@
 	<p:outputPanel id="painelDetalhe" rendered="#{bancoBean.modoDetalhe or bancoBean.modoExclusao}">
 		<p:panel header="#{msg['titulo.banco.detalhe']}" id="painelDetalheBanco">
 			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
-				<h:outputLabel value="#{msg['label.banco.codigoFebraban']}" for="codigoFebrabanDetalhe" id="labelCodigoFebrabanDetalhe"/>
+				<h:outputLabel value="#{msg['label.banco.codigoFebraban']}" for="codigoFebrabanDetalhe" id="labelCodigoFebrabanDetalhe" styleClass="labelNegrito"/>
 				<h:outputText value="#{bancoBean.entity.codigoFebraban}" id="codigoFebrabanDetalhe"/>
-				<h:outputLabel value="#{msg['label.banco.nome']}" for="nomeDetalhe" id="labelNomeDetalhe"/>
+				<h:outputLabel value="#{msg['label.banco.nome']}" for="nomeDetalhe" id="labelNomeDetalhe" styleClass="labelNegrito"/>
 				<h:outputText value="#{bancoBean.entity.nome}" id="nomeDetalhe"/>
 			</h:panelGrid>
 		</p:panel>
