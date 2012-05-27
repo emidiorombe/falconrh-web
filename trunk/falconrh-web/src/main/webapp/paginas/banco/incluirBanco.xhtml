@@ -8,7 +8,7 @@
 			<p:focus for="codigoFebraban" id="focusPaginaInclusao"/>
 			<h:panelGrid columns="2" id="painel2ColunasInclusao">
 				<h:outputLabel value="#{msg['label.banco.codigoFebraban']}" id="labelCodigoFebraban" for="codigoFebraban" />
-				<p:inputText value="#{bancoBean.entity.codigoFebraban}" id="codigoFebraban" required="true" requiredMessage="#{msg['banco.codigoFebraban.obrigatorio']}" maxlength="3" size="5"/>
+				<p:inputText value="#{bancoBean.entity.codigoFebraban}" id="codigoFebraban" required="true" requiredMessage="#{msg['banco.codigoFebraban.obrigatorio']}" maxlength="6" size="8"/>
 				<h:outputLabel value="#{msg['label.banco.nome']}" for="nome" id="labelNome" />
 				<p:inputText value="#{bancoBean.entity.nome}" id="nome" size="60" maxlength="255" required="true" requiredMessage="#{msg['banco.nome.obrigatorio']}" title="#{msg['title.banco.nome']}"/>
 			</h:panelGrid>
