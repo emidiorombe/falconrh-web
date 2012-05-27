@@ -15,14 +15,20 @@
 				<ui:include src="detalheTabelaImpostoRenda.xhtml"/>
 				<ui:include src="pesquisaTabelaImpostoRenda.xhtml"/>
 				<p:panel style="text-align: center" rendered="#{not empty tabelaImpostoRendaBean.modoOperacao}">
-					<p:commandButton value="#{msg['label.botao.cadastro.tabelaImpostoRenda']}" actionListener="#{tabelaImpostoRendaBean.cadastrar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaImpostoRendaBean.modoInclusao}" title="#{msg['title.botao.cadastro.tabelaImpostoRenda']}" id="botaoCadastroTabelaImpostoRenda"/>
-					<p:commandButton value="#{msg['label.botao.atualizacao.tabelaImpostoRenda']}" actionListener="#{tabelaImpostoRendaBean.atualizar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaImpostoRendaBean.modoEdicao}" title="#{msg['title.botao.atualizacao.tabelaImpostoRenda']}" id="botaoAtualizacaoTabelaImpostoRenda"/>
-					<p:commandButton value="#{msg['label.botao.pesquisa.tabelaImpostoRenda']}" actionListener="#{tabelaImpostoRendaBean.pesquisar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaImpostoRendaBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.tabelaImpostoRenda']}" id="botaoPesquisaTabelaImpostoRenda"/>
-					<p:commandButton value="#{msg['label.botao.exclusao.tabelaImpostoRenda']}" actionListener="#{tabelaImpostoRendaBean.excluir}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaImpostoRendaBean.modoExclusao}" title="#{msg['title.botao.exclusao.tabelaImpostoRenda']}" id="botaoExclusaoTabelaImpostoRenda"/>
-					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{tabelaImpostoRendaBean.voltarParaResultadoDaPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{tabelaImpostoRendaBean.modoExclusao or tabelaImpostoRendaBean.modoEdicao or tabelaImpostoRendaBean.modoDetalhe}" title="#{msg['title.botao.exclusao.tabelaImpostoRenda']}" immediate="true" id="botaoVoltarTabelaImpostoRenda"/>
+					<p:commandButton value="#{msg['label.botao.cadastro.tabelaImpostoRenda']}" actionListener="#{tabelaImpostoRendaBean.cadastrar}" update="form:painelGlobal, form:mensagens" rendered="#{tabelaImpostoRendaBean.modoInclusao}" title="#{msg['title.botao.cadastro.tabelaImpostoRenda']}" id="botaoCadastroTabelaImpostoRenda"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.tabelaImpostoRenda']}" actionListener="#{tabelaImpostoRendaBean.atualizar}" update="form:painelGlobal, form:mensagens" rendered="#{tabelaImpostoRendaBean.modoEdicao}" title="#{msg['title.botao.atualizacao.tabelaImpostoRenda']}" id="botaoAtualizacaoTabelaImpostoRenda"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.tabelaImpostoRenda']}" actionListener="#{tabelaImpostoRendaBean.pesquisar}" update="form:painelGlobal, form:mensagens" rendered="#{tabelaImpostoRendaBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.tabelaImpostoRenda']}" id="botaoPesquisaTabelaImpostoRenda"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.tabelaImpostoRenda']}" actionListener="#{tabelaImpostoRendaBean.excluir}" update="form:painelGlobal, form:mensagens" rendered="#{tabelaImpostoRendaBean.modoExclusao}" title="#{msg['title.botao.exclusao.tabelaImpostoRenda']}" id="botaoExclusaoTabelaImpostoRenda" onclick="confirmation.show()" type="button"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{tabelaImpostoRendaBean.voltarParaResultadoDaPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{tabelaImpostoRendaBean.modoExclusao or tabelaImpostoRendaBean.modoEdicao or tabelaImpostoRendaBean.modoDetalhe}" title="#{msg['title.botao.exclusao.tabelaImpostoRenda']}" immediate="true" id="botaoVoltarTabelaImpostoRenda">
+						<f:setPropertyActionListener target="#{tabelaImpostoRendaBean.entity}" value="#{tabelaImpostoRendaBean.entity}" />
+					</p:commandButton>
 					<p:commandButton value="#{msg['label.botao.sair']}" action="#{tabelaImpostoRendaBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairTabelaImpostoRenda"/>
 				</p:panel>
 			</p:outputPanel>
+			<p:confirmDialog id="confirmDialog" message="Você tem certeza de que deseja excluir o registro?" header="Confirmação de Exclusão" severity="alert" widgetVar="confirmation">
+				<p:commandButton id="confirmId" value="Sim" update="form:painelGlobal, form:mensagens" oncomplete="confirmation.hide()" actionListener="#{tabelaImpostoRendaBean.excluir}"/>
+				<p:commandButton id="declineId" value="Não" onclick="confirmation.hide()" type="button" /> 
+			</p:confirmDialog>
 		</h:form>
 	</ui:define>
 </ui:composition>
