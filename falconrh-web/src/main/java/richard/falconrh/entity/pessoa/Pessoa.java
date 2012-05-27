@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -142,7 +143,7 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	/**
 	 * Method getListaTelefones.
 	 * @return Set<Telefone> */
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="PESSOAS_TELEFONES", joinColumns = @JoinColumn(name="ID_PESSOA", referencedColumnName="ID"), inverseJoinColumns= @JoinColumn(name="ID_TELEFONE", referencedColumnName="ID"))
 	public List<Telefone> getListaTelefones(){
 		return listaTelefones;
