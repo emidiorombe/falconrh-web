@@ -72,8 +72,8 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 	
 	/**
 	 * Method getListaNacionalidades.
-	
-	 * @return SelectItem[] */
+	 * @return SelectItem[]
+	 */
 	public SelectItem[] getListaNacionalidades(){
 		SelectItem[] lista = new SelectItem[Nacionalidade.values().length];
 		int cont = 0;
@@ -87,8 +87,8 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 	
 	/**
 	 * Method getListaSexos.
-	
-	 * @return SelectItem[] */
+	 * @return SelectItem[]
+	 */
 	public SelectItem[] getListaSexos(){
 		SelectItem[] lista = new SelectItem[Sexo.values().length];
 		int cont = 0;
@@ -102,8 +102,8 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 
 	/**
 	 * Method getListaEstadosCivis.
-	
-	 * @return SelectItem[] */
+	 * @return SelectItem[]
+	 */
 	public SelectItem[] getListaEstadosCivis(){
 		SelectItem[] lista = new SelectItem[EstadoCivil.values().length];
 		int cont = 0;
@@ -117,8 +117,8 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 
 	/**
 	 * Method getListaTiposDocumentos.
-	
-	 * @return SelectItem[] */
+	 * @return SelectItem[]
+	 */
 	public SelectItem[] getListaTiposDocumentos(){
 		SelectItem[] lista = new SelectItem[TipoDocumento.values().length];
 		int cont = 0;
@@ -132,8 +132,8 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 	
 	/**
 	 * Method getListaTiposTelefones.
-	
-	 * @return SelectItem[] */
+	 * @return SelectItem[]
+	 */
 	public SelectItem[] getListaTiposTelefones(){
 		SelectItem[] lista = new SelectItem[TipoTelefone.values().length];
 		int cont = 0;
@@ -148,8 +148,8 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 	
 	/**
 	 * Method getListaEtnias.
-	
-	 * @return SelectItem[] */
+	 * @return SelectItem[]
+	 */
 	public SelectItem[] getListaEtnias(){
 		SelectItem[] lista = new SelectItem[Etnia.values().length];
 		int cont = 0;
@@ -163,8 +163,8 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 	
 	/**
 	 * Method getListaTiposLogradouros.
-	
-	 * @return SelectItem[] */
+	 * @return SelectItem[]
+	 */
 	public SelectItem[] getListaTiposLogradouros(){
 		SelectItem[] lista = new SelectItem[TipoLogradouro.values().length];
 		int cont = 0;
@@ -178,8 +178,8 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 	
 	/**
 	 * Method getListaUFs.
-	
-	 * @return SelectItem[] */
+	 * @return SelectItem[]
+	 */
 	public SelectItem[] getListaUFs(){
 		SelectItem[] lista = new SelectItem[UF.values().length];
 		int cont = 0;
@@ -193,8 +193,8 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 	
 	/**
 	 * Method getListaTiposFeriados.
-	
-	 * @return SelectItem[] */
+	 * @return SelectItem[]
+	 */
 	public SelectItem[] getListaTiposFeriados(){
 		SelectItem[] lista = new SelectItem[TipoFeriado.values().length];
 		int cont = 0;
@@ -208,8 +208,8 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 	
 	/**
 	 * Method getListaBancos.
-	
-	 * @return SelectItem[] */
+	 * @return SelectItem[]
+	 */
 	public SelectItem[] getListaBancos(){
 		SortedSet<Banco> listaBancos = new TreeSet<Banco>();
 		try{
@@ -231,8 +231,8 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 	
 	/**
 	 * Method getListaAgencias.
-	
-	 * @return SelectItem[] */
+	 * @return SelectItem[]
+	 */
 	public SelectItem[] getListaAgencias(){
 		String sIdBanco = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idBanco");
 		if(StringUtils.isNotBlank(sIdBanco)){
@@ -249,7 +249,7 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 			int cont = 0;
 			SelectItem item = null;
 			for(Agencia agencia : listaAgencias){
-				item = new SelectItem(agencia, agencia.getDescricao());
+				item = new SelectItem(agencia, agencia.getNumeroFormatado());
 				lista[cont++] = item;
 			}
 			return lista;
@@ -289,8 +289,8 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 	
 	/**
 	 * Method getListaPessoas.
-	
-	 * @return SelectItem[] */
+	 * @return SelectItem[]
+	 */
 	public SelectItem[] getListaPessoas(){
 		LOGGER.info("Iniciando pesquisa de todoas as pessoas");
 		Set<Pessoa> listaPessoas;
@@ -314,8 +314,8 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 	
 	/**
 	 * Method getEndereco.
-	
-	 * @return Endereco */
+	 * @return Endereco
+	 */
 	public Endereco getEndereco() {
 		return endereco;
 	}
