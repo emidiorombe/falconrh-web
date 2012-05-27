@@ -44,25 +44,10 @@ public class TabelaINSSBean extends BaseBean<TabelaINSS, TabelaINSSServices>{
 		return null;
 	}
 
-	@Override
-	public void beforeCadastrar() {
-		atualizarObjetoAntes();
-	}
-	
-	@Override
-	public void beforeAtualizar() {
-		atualizarObjetoAntes();
-	}
-	private void atualizarObjetoAntes() {
-		for(AliquotaINSS a :  getEntity().getListaAliquotasINSS()){
-			a.setTabelaINSS(getEntity());
-		}
-	}
-
 	/**
 	 * Method getAliquotaINSS.
-	
-	 * @return AliquotaINSS */
+	 * @return AliquotaINSS
+	 */
 	public AliquotaINSS getAliquotaINSS() {
 		return aliquotaINSS;
 	}
@@ -77,8 +62,8 @@ public class TabelaINSSBean extends BaseBean<TabelaINSS, TabelaINSSServices>{
 
 	/**
 	 * Method getServices.
-	
-	 * @return TabelaINSSServices */
+	 * @return TabelaINSSServices
+	 */
 	@Override
 	public TabelaINSSServices getServices() {
 		return tabelaINSSServices;
