@@ -20,7 +20,7 @@ import richard.falconrh.entity.Parent;
 import richard.falconrh.util.FalconRHUtils;
 
 /**
- * @author richard
+ * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
 @Entity
@@ -49,8 +49,8 @@ public class Agencia extends Parent implements Comparable<Agencia>{
 	
 	/**
 	 * Method getNome.
-	
-	 * @return String */
+	 * @return String
+	 */
 	@Column(length = 100, nullable = true)
 	public String getNome() {
 		return nome;
@@ -58,8 +58,8 @@ public class Agencia extends Parent implements Comparable<Agencia>{
 
 	/**
 	 * Method getNumero.
-	
-	 * @return String */
+	 * @return String
+	 */
 	@Column(length = 5, nullable = false)
 	public String getNumero() {
 		return numero;
@@ -67,8 +67,8 @@ public class Agencia extends Parent implements Comparable<Agencia>{
 
 	/**
 	 * Method getDigitoVerificador.
-	
-	 * @return String */
+	 * @return String
+	 */
 	@Column(length = 1, nullable = false)
 	public String getDigitoVerificador() {
 		return digitoVerificador;
@@ -76,8 +76,8 @@ public class Agencia extends Parent implements Comparable<Agencia>{
 	
 	/**
 	 * Method getBanco.
-	
-	 * @return Banco */
+	 * @return Banco
+	 */
 	@ManyToOne
 	@JoinColumn(name="ID_BANCO", nullable=false)
 	public Banco getBanco(){
@@ -86,8 +86,8 @@ public class Agencia extends Parent implements Comparable<Agencia>{
 	
 	/**
 	 * Method getListaContasCorrentes.
-	
-	 * @return List<ContaCorrente> */
+	 * @return List<ContaCorrente>
+	 */
 	@OneToMany(targetEntity=ContaCorrente.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	public List<ContaCorrente> getListaContasCorrentes(){
 		return listaContasCorrentes;
@@ -135,10 +135,10 @@ public class Agencia extends Parent implements Comparable<Agencia>{
 	
 	/**
 	 * Method getDescricao.
-	
-	 * @return String */
+	 * @return String
+	 */
 	@Transient
-	public String getDescricao(){
+	public String getNumeroFormatado(){
 		if(StringUtils.isNotBlank(getDigitoVerificador())){
 			return getNumero()+"-"+getDigitoVerificador() + "/" + getNome();
 		}
@@ -147,8 +147,8 @@ public class Agencia extends Parent implements Comparable<Agencia>{
 	
 	/**
 	 * Method isValida.
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	@Transient
 	public boolean isValida(){
 		String dv = FalconRHUtils.getDigitoVerificador(getNumero());
@@ -158,8 +158,8 @@ public class Agencia extends Parent implements Comparable<Agencia>{
 	/**
 	 * Method compareTo.
 	 * @param agencia2 Agencia
-	
-	 * @return int */
+	 * @return int
+	 */
 	@Override
 	public int compareTo(Agencia agencia2) {
 		return this.getNumero().compareTo(agencia2.getNumero());
