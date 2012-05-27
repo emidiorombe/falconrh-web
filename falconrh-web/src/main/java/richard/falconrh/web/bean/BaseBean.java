@@ -1,14 +1,23 @@
 package richard.falconrh.web.bean;
 
+import static richard.falconrh.util.FalconRHConstants.ATENCAO;
+import static richard.falconrh.util.FalconRHConstants.ERRO;
+import static richard.falconrh.util.FalconRHConstants.ERRO_FATAL;
+import static richard.falconrh.util.FalconRHConstants.INFORMACAO;
+import static richard.falconrh.util.FalconRHConstants.MSG;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.EditableValueHolder;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -16,7 +25,6 @@ import org.apache.log4j.Logger;
 
 import richard.falconrh.entity.Parent;
 import richard.falconrh.service.AbstractServices;
-import static richard.falconrh.util.FalconRHConstants.*;
 
 /**
  * @author richard
@@ -197,7 +205,6 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	 */
 	public void cadastrar(ActionEvent event){
 		logger.debug("Inicializando o cadastro de entidade");
-		beforeCadastrar();
 		try{
 			getServices().cadastrar(getEntity());
 			adicionarMensagemInformacao(SUCESSO_CADASTRO);
@@ -209,7 +216,6 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 		}finally{
 			logger.debug("Fim do cadastro de entidade");
 		}
-		afterCadastrar();
 	}
 
 	/**
@@ -218,7 +224,6 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	 */
 	public void atualizar(ActionEvent event){
 		logger.debug("Inicializando a atualizacao da entidade");
-		beforeAtualizar();
 		try{
 			getServices().alterar(getEntity());
 			adicionarMensagemInformacao(SUCESSO_ATUALIZACAO);
@@ -230,7 +235,6 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 		}finally{
 			logger.debug("Fim da atualizacao de entidade");
 		}
-		afterAtualizar();
 	}
 	
 	/**
@@ -240,7 +244,6 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	public void pesquisar(ActionEvent event){
 		logger.debug("Iniciando a pesquisa de de entidade...");
 		Set<T> lista = new HashSet<T>();
-		beforePesquisar();
 		try{
 			ultimoSamplePesquisa = getEntity();
 			lista = getServices().obterListaPeloExemplo(getEntity());
@@ -257,7 +260,6 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 			return;
 		}
 		setListaEntities(new ArrayList<T>(lista));
-		afterPesquisar();
 		setModoOperacao(MODO_DETALHE_PESQUISA);
 		logger.debug("Fim da pesquisa de entidade");
 	}
@@ -269,11 +271,11 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	@SuppressWarnings("unchecked")
 	public void excluir(ActionEvent event){
 		logger.debug("Inicializando a exclusao de entidade");
-		beforeExcluir();
 		try{
 			getServices().excluirPeloId((Class<T>) getEntity().getClass(), getEntity().getId());
 			adicionarMensagemInformacao(SUCESSO_EXCLUSAO);
-			setModoOperacao("");
+			setModoOperacao(MODO_PESQUISA);
+			inicializaEntity();
 			logger.debug("Entidade excluida com sucesso");
 		}catch(Exception e){
 			adicionarMensagemErro(ERRO_EXCLUSAO);
@@ -281,7 +283,6 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 		}finally{
 			logger.debug("Fim da exclusao de entidade");
 		}
-		afterExcluir();
 	}
 	
 	
@@ -300,9 +301,7 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	 */
 	public void visualizar(ActionEvent event){
 		logger.debug("Iniciando visualizacao");
-		beforeVisualizar();
 		setModoOperacao(MODO_DETALHE);
-		afterVisualizar();
 	}
 	
 	/**
@@ -332,24 +331,11 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 		setEntity(ultimoSamplePesquisa);
 		pesquisar(event);
 	}
-
-	public void beforeCadastrar(){}
-	public void afterCadastrar(){}
-	public void beforeAtualizar(){}
-	public void afterAtualizar(){}
-	public void beforeExcluir(){}
-	public void afterExcluir(){}
-	public void beforePesquisar(){}
-	public void afterPesquisar(){}
-	public void beforeVisualizar(){}
-	public void afterVisualizar(){}
-	
-	
 	
 	/**
 	 * Method getModoOperacao.
-	
-	 * @return String */
+	 * @return String
+	 */
 	public String getModoOperacao() {
 		return modoOperacao;
 	}
@@ -364,8 +350,8 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 
 	/**
 	 * Method getEntity.
-	
-	 * @return T */
+	 * @return T
+	 */
 	public T getEntity() {
 		return entity;
 	}
@@ -380,7 +366,6 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 
 	/**
 	 * Method getListaEntities.
-	
 	 * @return List<T> */
 	public List<T> getListaEntities() {
 		return listaEntities;
@@ -393,5 +378,4 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	public void setListaEntities(List<T> listaEntities) {
 		this.listaEntities = listaEntities;
 	}
-	
 }
