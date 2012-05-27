@@ -2,6 +2,7 @@ package richard.falconrh.entity.documento;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -75,7 +76,7 @@ public class Documento extends Parent {
 	/**
 	 * Method getPessoa.
 	 * @return Pessoa */
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="ID_PESSOA", nullable=false)
 	public Pessoa getPessoa() {
 		return pessoa;
