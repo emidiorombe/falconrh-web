@@ -41,22 +41,11 @@ public class PessoaBean extends BaseBean<Pessoa, PessoaServices>{
 		setTelefone(new Telefone());
 		setDocumento(new Documento());
 	}
-	
-	@Override
-	public void beforeCadastrar() {
-		atualizarObjetoPessoaDoTelefone();
-		atualizarObjetoPessoaDoDocumento();
-	}
 
-	@Override
-	public void beforeAtualizar() {
-		atualizarObjetoPessoaDoTelefone();
-		atualizarObjetoPessoaDoDocumento();
-	}
-	
 	/**
-	 * Method reinitAliqutoasImpostoRenda.
-	 * @return String */
+	 * Method reinitTelefones.
+	 * @return String
+	 */
 	public String reinitTelefones(){
 		setTelefone(new Telefone());
 		return null;
@@ -67,29 +56,10 @@ public class PessoaBean extends BaseBean<Pessoa, PessoaServices>{
 		return null;
 	}
 		
-	private void atualizarObjetoPessoaDoTelefone(){
-		for(Telefone telefone : getEntity().getListaTelefones()){
-			if(telefone.getListaPessoas()!=null && !telefone.getListaPessoas().contains(telefone)){
-				telefone.getListaPessoas().add(getEntity());
-			}else if(telefone.getListaPessoas()==null){
-				telefone.setListaPessoas(new ArrayList<Pessoa>());
-				telefone.getListaPessoas().add(getEntity());
-			}
-		}
-	}
-	
-	private void atualizarObjetoPessoaDoDocumento(){
-		for(Documento documento : getEntity().getListaDocumentos()){
-			if(documento.getPessoa()==null){
-				documento.setPessoa(getEntity());
-			}
-		}
-	}
-	
 	/**
 	 * Method getTelefone.
-	
-	 * @return Telefone */
+	 * @return Telefone
+	 */
 	public Telefone getTelefone() {
 		return telefone;
 	}
@@ -112,7 +82,8 @@ public class PessoaBean extends BaseBean<Pessoa, PessoaServices>{
 	
 	/**
 	 * Method getServices.
-	 * @return PessoaServices */
+	 * @return PessoaServices
+	 */
 	@Override
 	public PessoaServices getServices() {
 		return pessoaServices;
