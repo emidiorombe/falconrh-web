@@ -80,7 +80,7 @@ public class AgenciaTest {
 		agencia.setNome("Praça XI de Novembro");
 		agencia.setNumero("0016");
 		agencia.setDigitoVerificador("7");
-		assertEquals(descricaoEsperada, agencia.getDescricao());
+		assertEquals(descricaoEsperada, agencia.getNumeroFormatado());
 	}
 	
 	@Test
@@ -89,7 +89,7 @@ public class AgenciaTest {
 		agencia = new Agencia();
 		agencia.setNome("Praça XI de Novembro");
 		agencia.setNumero("0016");
-		assertEquals(descricaoEsperada, agencia.getDescricao());
+		assertEquals(descricaoEsperada, agencia.getNumeroFormatado());
 	}
 	
 	@Test
