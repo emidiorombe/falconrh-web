@@ -16,7 +16,8 @@ import org.hibernate.annotations.Parameter;
 import richard.falconrh.entity.Parent;
 
 /**
- * @author richard
+ * Entidade que representa um Banco no Sistema.
+ * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
 @Entity
@@ -29,21 +30,34 @@ public class Banco extends Parent implements Comparable<Banco>{
 	private String nome;
 	private Set<Agencia> listaAgencias;
 
+	/**
+	 * Construtor Padrão
+	 */
 	public Banco(){
 	}
 	
 	/**
-	 * Constructor for Banco.
-	 * @param id Long
+	 * Construtor para Banco.
+	 * @param id Long - O id do banco
 	 */
 	public Banco(Long id){
 		this.id = id;
 	}
 	
 	/**
-	 * Method getCodigoFebraban.
+	 * Construtor para BAnco
+	 * @param codigoFebraban - o código do banco, segundo a Febraban
+	 * @param nome - o nome do banco
+	 */
+	public Banco(String codigoFebraban, String nome){
+		this.codigoFebraban = codigoFebraban;
+		this.nome = nome;
+	}
 	
-	 * @return String */
+	/**
+	 * Método que retorna o código go banco
+	 * @return String o codigo do banco, segundo a Febraban
+	 */
 	@Column(length=3, nullable=false)
 	public String getCodigoFebraban() {
 		return codigoFebraban;
@@ -51,8 +65,8 @@ public class Banco extends Parent implements Comparable<Banco>{
 	
 	/**
 	 * Method getNome.
-	
-	 * @return String */
+	 * @return String - o nome do banco
+	 */
 	@Column(length=100, nullable=false)
 	public String getNome() {
 		return nome;
@@ -60,8 +74,8 @@ public class Banco extends Parent implements Comparable<Banco>{
 	
 	/**
 	 * Method getListaAgencias.
-	
-	 * @return Set<Agencia> */
+	 * @return Set<Agencia>
+	 */
 	@OneToMany(mappedBy="banco", cascade=CascadeType.ALL, orphanRemoval=true)
 	public Set<Agencia> getListaAgencias() {
 		return listaAgencias;
@@ -93,8 +107,8 @@ public class Banco extends Parent implements Comparable<Banco>{
 
 	/**
 	 * Method getDescricao.
-	
-	 * @return String */
+	 * @return String
+	 */
 	@Transient
 	public String getDescricao(){
 		return getCodigoFebraban() + " - " + getNome();
@@ -103,8 +117,8 @@ public class Banco extends Parent implements Comparable<Banco>{
 	/**
 	 * Method compareTo.
 	 * @param b2 Banco
-	
-	 * @return int */
+	 * @return int
+	 */
 	@Override
 	public int compareTo(Banco b2) {
 		if(StringUtils.isNotBlank(this.getCodigoFebraban())){
@@ -121,6 +135,5 @@ public class Banco extends Parent implements Comparable<Banco>{
 			}
 		}
 		return 0;
-		
 	}
 }
