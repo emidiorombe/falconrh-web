@@ -15,17 +15,21 @@
 				<ui:include src="detalheAcao.xhtml"/>
 				<ui:include src="pesquisaAcao.xhtml"/>
 				<p:panel style="text-align: center" rendered="#{not empty acaoBean.modoOperacao}">
-					<p:commandButton value="#{msg['label.botao.cadastro.acao']}" actionListener="#{acaoBean.cadastrar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{acaoBean.modoInclusao}" title="#{msg['title.botao.cadastro.acao']}" id="botaoCadastroAcao"/>
-					<p:commandButton value="#{msg['label.botao.atualizacao.acao']}" actionListener="#{acaoBean.atualizar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{acaoBean.modoEdicao}" title="#{msg['title.botao.atualizacao.acao']}" id="botaoAtualizacaoAcao"/>
-					<p:commandButton value="#{msg['label.botao.pesquisa.acao']}" actionListener="#{acaoBean.pesquisar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{acaoBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.acao']}" id="botaoPesquisaAcao"/>
-					<p:commandButton value="#{msg['label.botao.exclusao.acao']}" actionListener="#{acaoBean.excluir}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{acaoBean.modoExclusao}" title="#{msg['title.botao.exclusao.acao']}" id="botaoExclusaoAcao"/>
-					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{acaoBean.voltarParaResultadoDaPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{acaoBean.modoExclusao or acaoBean.modoEdicao or acaoBean.modoDetalhe}" title="#{msg['title.botao.exclusao.acao']}" immediate="true" id="botaoVoltarAcao">
+					<p:commandButton value="#{msg['label.botao.cadastro.acao']}" actionListener="#{acaoBean.cadastrar}" update="form:painelGlobal, form:mensagens" rendered="#{acaoBean.modoInclusao}" title="#{msg['title.botao.cadastro.acao']}" id="botaoCadastroAcao"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.acao']}" actionListener="#{acaoBean.atualizar}" update="form:painelGlobal, form:mensagens" rendered="#{acaoBean.modoEdicao}" title="#{msg['title.botao.atualizacao.acao']}" id="botaoAtualizacaoAcao"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.acao']}" actionListener="#{acaoBean.pesquisar}" update="form:painelGlobal, form:mensagens" rendered="#{acaoBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.acao']}" id="botaoPesquisaAcao"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.acao']}" update="form:painelGlobal, form:mensagens" rendered="#{acaoBean.modoExclusao}" title="#{msg['title.botao.exclusao.acao']}" id="botaoExclusaoAcao" onclick="confirmation.show()" type="button"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{acaoBean.voltarParaResultadoDaPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{acaoBean.modoExclusao or acaoBean.modoEdicao or acaoBean.modoDetalhe}" title="#{msg['title.botao.exclusao.acao']}" immediate="true" id="botaoVoltarAcao">
 						<f:setPropertyActionListener target="#{acaoBean.entity}" value="#{acaoBean.entity}"/>
 					</p:commandButton>
-					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{acaoBean.iniciarPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{acaoBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente']}" immediate="true" id="botaoPesquisarNovamenteAcao"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{acaoBean.iniciarPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{acaoBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente']}" immediate="true" id="botaoPesquisarNovamenteAcao"/>
 					<p:commandButton value="#{msg['label.botao.sair']}" action="#{acaoBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairAcao"/>
 				</p:panel>
 			</p:outputPanel>
+			<p:confirmDialog id="confirmDialog" message="Você tem certeza de que deseja excluir o registro?" header="Confirmação de Exclusão" severity="alert" widgetVar="confirmation">
+				<p:commandButton id="confirmId" value="Sim" update="form:painelGlobal, form:mensagens" oncomplete="confirmation.hide()" actionListener="#{acaoBean.excluir}"/>
+				<p:commandButton id="declineId" value="Não" onclick="confirmation.hide()" type="button" /> 
+			</p:confirmDialog>
 		</h:form>
 	</ui:define>
 </ui:composition>
