@@ -13,7 +13,6 @@ import richard.falconrh.service.AgenciaServices;
 /**
  * ManagedBean JSF utilizado em arquivos xhtml
  * @author Richard Mendes Madureira
- *
  * @version $Revision: 1.0 $
  */
 @ManagedBean(name="agenciaBean")
@@ -36,8 +35,8 @@ public class AgenciaBean extends BaseBean<Agencia, AgenciaServices>{
 	
 	/**
 	 * Method getServices.
-	
-	 * @return AgenciaServices */
+	 * @return AgenciaServices
+	 */
 	@Override
 	public AgenciaServices getServices() {
 		return agenciaServices;
