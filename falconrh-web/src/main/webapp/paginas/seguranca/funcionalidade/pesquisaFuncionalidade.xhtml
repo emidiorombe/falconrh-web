@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelPesquisa" rendered="#{funcionalidadeBean.modoPesquisa}">
+		<p:panel header="#{msg['titulo.funcionalidade.pesquisa']}" id="painelPesquisaFuncionalidade">
+			<p:focus for="nomePesquisa" id="focusPaginaPesquisa"/>
+			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
+				<h:outputLabel for="nomePesquisa" id="labelNomePesquisa" value="#{msg['label.funcionalidade.nome']}" styleClass="labelNegrito"/>
+				<p:inputText value="#{funcionalidadeBean.entity.nome}" id="nomePesquisa" size="60" maxlength="255" required="true" requiredMessage="#{msg['funcionalidade.nome.obrigatorio']}" title="#{msg['title.funcionalidade.nome']}"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+	<p:outputPanel id="painelDetalhePesquisa" rendered="#{funcionalidadeBean.modoDetalhePesquisa}" >
+		<p:dataTable value="#{funcionalidadeBean.listaEntities}" var="funcionalidade" id="dataTableDetalhePesquisa">
+			<p:column id="colunaNomeFuncionalidade" sortBy="#{funcionalidade.nome}">
+				<f:facet name="header"><h:outputText value="#{msg['label.funcionalidade.nome']}" id="labelColunaNome"/></f:facet>
+				<h:outputText value="#{funcionalidade.nome}" id="nomeDetalhe"/>
+			</p:column>
+			<p:column id="colunaLinkFuncionalidade" sortBy="#{funcionalidade.link}">
+				<f:facet name="header"><h:outputText value="#{msg['label.funcionalidade.link']}" id="labelColunaLink"/></f:facet>
+				<h:outputText value="#{funcionalidade.link}" id="linkDetalhe"/>
+			</p:column>
+			<p:column id="colunaAtivaFuncionalidade" sortBy="#{funcionalidade.ativa}" style="text-align:center">
+				<f:facet name="header"><h:outputText value="#{msg['label.funcionalidade.ativa']}" id="labelColunaAtiva"/></f:facet>
+				<h:outputText value="#{funcionalidade.ativa}" id="ativaDetalhe" converter="simNaoConverter"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaBotaoEditar">
+				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{funcionalidadeBean.editar}" id="botaoEditarFuncionalidade">
+					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarFuncionalidade"/>
+                	<f:setPropertyActionListener value="#{funcionalidade}" target="#{funcionalidadeBean.entity}"/>  
+            	</p:commandLink>
+			</p:column>            	  
+			<p:column style="text-align:center" id="colunaVisualizar">
+				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{funcionalidadeBean.visualizar}" id="botaoVisualizarFuncionalidade">
+					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarFuncionalidade"/>
+                	<f:setPropertyActionListener value="#{funcionalidade}" target="#{funcionalidadeBean.entity}" />
+				</p:commandLink>
+			</p:column>
+			<p:column style="text-align:center" id="colunaExcluir">
+				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{funcionalidadeBean.iniciarExclusao}" id="botaoExcluirFuncionalidade">
+					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirFuncionalidade"/>
+                	<f:setPropertyActionListener value="#{funcionalidade}" target="#{funcionalidadeBean.entity}" />
+            	</p:commandLink>                        
+			</p:column>
+		</p:dataTable>
+	</p:outputPanel>
+</ui:composition>

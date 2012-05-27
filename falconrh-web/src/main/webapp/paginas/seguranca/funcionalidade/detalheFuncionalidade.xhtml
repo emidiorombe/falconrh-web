@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<p:outputPanel id="painelDetalhe" rendered="#{funcionalidadeBean.modoDetalhe or funcionalidadeBean.modoExclusao}">
+		<p:panel header="#{msg['titulo.funcionalidade.detalhe']}" id="painelDetalheAcao">
+			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
+				<h:outputLabel value="#{msg['label.funcionalidade.nome']}" for="nomeDetalhe" id="labelNomeDetalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{funcionalidadeBean.entity.nome}" id="nomeDetalhe"/>
+				<h:outputLabel value="#{msg['label.funcionalidade.link']}" for="linkDetalhe" id="labelLinkDetalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{funcionalidadeBean.entity.link}" id="linkDetalhe"/>
+				<h:outputLabel value="#{msg['label.funcionalidade.ativa']}" for="ativaDetalhe" id="labelAtivaDetalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{funcionalidadeBean.entity.ativa}" id="ativaDetalhe" converter="simNaoConverter"/>
+				<p:dataTable value="#{funcionalidadeBean.entity.listaAcoes}" id="dataTableListaAcoesDetalhe" paginator="true" rows="20" var="acao">
+					<f:facet name="header"><h:outputText value="#{msg['label.funcionalidade.listaAcoes']}"/></f:facet>
+						<p:column id="colunaNomeAcaoDetalhe" sortBy="#{acao.nome}">
+							<f:facet name="header"><h:outputText value="#{msg['label.acao.nome']}"/></f:facet>
+							<h:outputText value="#{acao.nome}" id="acaoNomeDetalhe"/>
+						</p:column>
+				</p:dataTable>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>
