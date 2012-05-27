@@ -22,6 +22,7 @@
 		<class>richard.falconrh.entity.banco.Banco</class>
 		<class>richard.falconrh.entity.banco.Agencia</class>
 		<class>richard.falconrh.entity.seguranca.Acao</class>
+		<class>richard.falconrh.entity.seguranca.Funcionalidade</class>
 		<class>richard.falconrh.entity.Parent</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
