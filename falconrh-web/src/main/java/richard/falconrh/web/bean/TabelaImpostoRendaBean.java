@@ -37,16 +37,6 @@ public class TabelaImpostoRendaBean extends BaseBean<TabelaImpostoRenda, Imposto
 		setAliquotaImpostoRenda(new AliquotaImpostoRenda());
 	}
 	
-	@Override
-	public void beforeCadastrar() {
-		atualizarAliquotaComATabelaIR();
-	}
-
-	@Override
-	public void beforeAtualizar() {
-		atualizarAliquotaComATabelaIR();
-	}
-	
 	/**
 	 * Method reinitAliqutoasImpostoRenda.
 	 * @return String
@@ -54,12 +44,6 @@ public class TabelaImpostoRendaBean extends BaseBean<TabelaImpostoRenda, Imposto
 	public String reinitAliqutoasImpostoRenda(){
 		setAliquotaImpostoRenda(new AliquotaImpostoRenda());
 		return null;
-	}
-	
-	private void atualizarAliquotaComATabelaIR(){
-		for(AliquotaImpostoRenda aliquotaIR : getEntity().getListaAliquotasImpostoRenda()){
-			aliquotaIR.setTabelaImpostoRenda(getEntity());
-		}
 	}
 	
 	/**
@@ -80,7 +64,8 @@ public class TabelaImpostoRendaBean extends BaseBean<TabelaImpostoRenda, Imposto
 	
 	/**
 	 * Method getServices.
-	 * @return ImpostoRendaServices */
+	 * @return ImpostoRendaServices
+	 */
 	@Override
 	public ImpostoRendaServices getServices() {
 		return impostoRendaServices;

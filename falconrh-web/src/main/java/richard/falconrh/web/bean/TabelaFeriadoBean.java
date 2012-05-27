@@ -44,22 +44,6 @@ public class TabelaFeriadoBean extends BaseBean<TabelaFeriado, TabelaFeriadoServ
 		return null;
 	}
 	
-	@Override
-	public void beforeAtualizar() {
-		atualizarObjetoAntes();
-	}
-	
-	@Override
-	public void beforeCadastrar() {
-		atualizarObjetoAntes();
-	}
-	
-	private void atualizarObjetoAntes() {
-		for(Feriado f :  getEntity().getListaFeriados()){
-			f.setTabelaFeriado(getEntity());
-		}
-	}
-
 	/**
 	 * Method getFeriado.
 	 * @return Feriado
