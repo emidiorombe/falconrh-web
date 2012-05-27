@@ -8,16 +8,16 @@
 		<p:panel header="#{msg['titulo.agencia.inclusao']}">
 			<p:focus for="banco" id="focusPaginaInclusao" rendered="#{bancoBean.modoInclusao}"/>
 			<h:panelGrid columns="2" id="painel2ColunasInclusao">
-				<h:outputLabel value="#{msg['label.agencia.banco']}" for="banco" id="labelBanco"/>
+				<h:outputLabel value="#{msg['label.agencia.banco']}" for="banco" id="labelBanco" styleClass="labelNegrito"/>
 				<p:selectOneMenu value="#{agenciaBean.entity.banco}" id="banco" required="true" requiredMessage="#{msg['agencia.banco.obrigatorio']}" effect="fade" label="#{msg['title.agencia.banco']}" converter="bancoConverter" converterMessage="Erro ao converter banco para objeto">
 					<f:selectItem itemLabel="Informe o Banco" itemValue=""/>
 					<f:selectItems value="#{utilBean.listaBancos}" var="banco" itemLabel="#{banco.descricao}" itemValue="#{banco}"/>
 				</p:selectOneMenu>
-				<h:outputLabel value="#{msg['label.agencia.nome']}" for="nome" id="labelNome"/>
+				<h:outputLabel value="#{msg['label.agencia.nome']}" for="nome" id="labelNome" styleClass="labelNegrito"/>
 				<h:inputText value="#{agenciaBean.entity.nome}" id="nome" required="true" requiredMessage="#{msg['agencia.nome.obrigatorio']}" title="#{msg['title.agencia.nome']}" size="100" maxlength="255"/>
-				<h:outputLabel value="#{msg['label.agencia.numero']}" for="numeroAgencia" id="labelNumeroAgencia"/>
+				<h:outputLabel value="#{msg['label.agencia.numero']}" for="numeroAgencia" id="labelNumeroAgencia" styleClass="labelNegrito"/>
 				<h:inputText value="#{agenciaBean.entity.numero}" id="numeroAgencia" required="true" requiredMessage="#{msg['agencia.numero.obrigatorio']}" title="#{msg['title.agencia.numero']}"/>
-				<h:outputLabel value="#{msg['label.agencia.digitoVerificador']}" for="digitoVerificadorAgencia" id="labelDigitoVerificadorAgencia"/>
+				<h:outputLabel value="#{msg['label.agencia.digitoVerificador']}" for="digitoVerificadorAgencia" id="labelDigitoVerificadorAgencia" styleClass="labelNegrito"/>
 				<h:inputText value="#{agenciaBean.entity.digitoVerificador}" id="digitoVerificadorAgencia" required="true" requiredMessage="#{msg['agencia.digitoVerificador.obrigatorio']}" title="#{msg['title.agencia.digitoVerificador']}"/>
 			</h:panelGrid>
 		</p:panel>

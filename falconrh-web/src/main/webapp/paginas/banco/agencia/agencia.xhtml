@@ -16,17 +16,21 @@
 				<ui:include src="detalheAgencia.xhtml"/>
 				<ui:include src="pesquisaAgencia.xhtml"/>
 				<p:panel style="text-align: center" rendered="#{not empty agenciaBean.modoOperacao}">
-					<p:commandButton value="#{msg['label.botao.cadastro.agencia']}" actionListener="#{agenciaBean.cadastrar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{agenciaBean.modoInclusao}" title="#{msg['title.botao.cadastro.agencia']}" id="botaoCadastroAgencia"/>
-					<p:commandButton value="#{msg['label.botao.atualizacao.agencia']}" actionListener="#{agenciaBean.atualizar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{agenciaBean.modoEdicao}" title="#{msg['title.botao.atualizacao.agencia']}" id="botaoAtualizacaoAgencia"/>
-					<p:commandButton value="#{msg['label.botao.pesquisa.agencia']}" actionListener="#{agenciaBean.pesquisar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{agenciaBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.agencia']}" id="botaoPesquisaAgencia"/>
-					<p:commandButton value="#{msg['label.botao.exclusao.agencia']}" actionListener="#{agenciaBean.excluir}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{agenciaBean.modoExclusao}" title="#{msg['title.botao.exclusao.agencia']}" id="botaoExclusaoAgencia"/>
-					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{agenciaBean.voltarParaResultadoDaPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{agenciaBean.modoExclusao or agenciaBean.modoEdicao or agenciaBean.modoDetalhe}" title="#{msg['title.botao.exclusao.agencia']}" immediate="true" id="botaoVoltarAgencia">
+					<p:commandButton value="#{msg['label.botao.cadastro.agencia']}" actionListener="#{agenciaBean.cadastrar}" update="form:painelGlobal, form:mensagens" rendered="#{agenciaBean.modoInclusao}" title="#{msg['title.botao.cadastro.agencia']}" id="botaoCadastroAgencia"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.agencia']}" actionListener="#{agenciaBean.atualizar}" update="form:painelGlobal, form:mensagens" rendered="#{agenciaBean.modoEdicao}" title="#{msg['title.botao.atualizacao.agencia']}" id="botaoAtualizacaoAgencia"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.agencia']}" actionListener="#{agenciaBean.pesquisar}" update="form:painelGlobal, form:mensagens" rendered="#{agenciaBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.agencia']}" id="botaoPesquisaAgencia"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.agencia']}" update="form:painelGlobal, form:mensagens" rendered="#{agenciaBean.modoExclusao}" title="#{msg['title.botao.exclusao.agencia']}" id="botaoExclusaoAgencia" onclick="confirmation.show()" type="button"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{agenciaBean.voltarParaResultadoDaPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{agenciaBean.modoExclusao or agenciaBean.modoEdicao or agenciaBean.modoDetalhe}" title="#{msg['title.botao.exclusao.agencia']}" immediate="true" id="botaoVoltarAgencia">
 						<f:setPropertyActionListener target="#{agenciaBean.entity}" value="#{agenciaBean.entity}"/>
 					</p:commandButton>
-					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{agenciaBean.iniciarPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{agenciaBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente.agencia']}" immediate="true" id="botaoPesquisarNovamenteAgencia"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{agenciaBean.iniciarPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{agenciaBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente.agencia']}" immediate="true" id="botaoPesquisarNovamenteAgencia"/>
 					<p:commandButton value="#{msg['label.botao.sair']}" action="#{agenciaBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairAgencia"/>
 				</p:panel>
 			</p:outputPanel>
+			<p:confirmDialog id="confirmDialog" message="Você tem certeza de que deseja excluir o registro?" header="Confirmação de Exclusão" severity="alert" widgetVar="confirmation">
+				<p:commandButton id="confirmId" value="Sim" update="form:mensagens" oncomplete="confirmation.hide()" actionListener="#{agenciaBean.excluir}" />
+				<p:commandButton id="declineId" value="Não" onclick="confirmation.hide()" type="button" /> 
+			</p:confirmDialog>
 		</h:form>
 	</ui:define>
 </ui:composition>
