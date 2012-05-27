@@ -26,18 +26,26 @@
 				<h:outputLabel value="#{msg['label.pessoa.deficienteFisico']}" id="labelDeficienteFisicoDetalhe" for="deficienteFisicoDetalhe"/>
 				<h:outputText value="#{pessoaBean.entity.deficienteFisico}" id="deficienteFisicoDetalhe" converter="simNaoConverter"/>
 			</h:panelGrid>
-			<p:panel header="Lista de Telefones">
-				<p:dataTable value="#{pessoaBean.entity.listaTelefones}" var="telefone" id="dataTableListaTelefonesDetalhe">
-					<p:column id="colunaTipoTelefoneDetalhe">
-						<f:facet name="header"><h:outputText value="#{msg['label.telefone.tipoTelefone']}"/></f:facet>
-						<h:outputText value="#{telefone.tipoTelefone.descricao}" id="tipoTelefoneDetalhe"/>
-					</p:column>
-					<p:column id="colunaNumeroFormatadoDetalhe">
-						<f:facet name="header"><h:outputText value="#{msg['label.telefone.numero']}"/></f:facet>
-						<h:outputText value="#{telefone.numeroFormatado}" id="numeroFormatadoDetalhe"/>
-					</p:column>
-				</p:dataTable>
-			</p:panel>
+			<p:dataTable value="#{pessoaBean.entity.listaTelefones}" var="telefone" id="dataTableListaTelefonesDetalhe">
+				<p:column id="colunaTipoTelefoneDetalhe">
+					<f:facet name="header"><h:outputText value="#{msg['label.telefone.tipoTelefone']}"/></f:facet>
+					<h:outputText value="#{telefone.tipoTelefone.descricao}" id="tipoTelefoneDetalhe"/>
+				</p:column>
+				<p:column id="colunaNumeroFormatadoDetalhe">
+					<f:facet name="header"><h:outputText value="#{msg['label.telefone.numero']}"/></f:facet>
+					<h:outputText value="#{telefone.numeroFormatado}" id="numeroFormatadoDetalhe"/>
+				</p:column>
+			</p:dataTable>
+			<p:dataTable value="#{pessoaBean.entity.listaDocumentos}" var="documento" id="dataTableListaDocumentosDetalhe">
+				<p:column id="colunaTipoDocumentoDetalhe">
+					<f:facet name="header"><h:outputText value="#{msg['label.documento.tipoDocumento']}"/></f:facet>
+					<h:outputText value="#{documento.tipoDocumento.descricao}" id="tipoTelefoneDetalhe"/>
+				</p:column>
+				<p:column id="colunaNumeroDetalhe">
+					<f:facet name="header"><h:outputText value="#{msg['label.documento.numero']}"/></f:facet>
+					<h:outputText value="#{documento.numero}" id="numeroDetalhe"/>
+				</p:column>
+			</p:dataTable>
 		</p:panel>
 	</p:outputPanel>
 </ui:composition>
