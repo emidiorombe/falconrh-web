@@ -79,4 +79,13 @@ public class FuncionalidadeServicesImpl extends AbstractServicesImpl<Funcionalid
 		f.getListaAcoes().size();
 		return f;
 	}
+
+	@Override
+	public Set<Funcionalidade> obterListaTodasFuncionalidades() {
+		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<Funcionalidade> cq = cb.createQuery(Funcionalidade.class);
+		cq.from(Funcionalidade.class);
+		TypedQuery<Funcionalidade> tq = getEntityManager().createQuery(cq);
+		return new HashSet<Funcionalidade>(tq.getResultList());
+	}
 }
