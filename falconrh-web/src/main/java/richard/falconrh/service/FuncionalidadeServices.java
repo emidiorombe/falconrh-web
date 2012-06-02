@@ -1,5 +1,7 @@
 package richard.falconrh.service;
 
+import java.util.Set;
+
 import javax.ejb.Remote;
 
 import richard.falconrh.entity.seguranca.Funcionalidade;
@@ -10,4 +12,5 @@ import richard.falconrh.entity.seguranca.Funcionalidade;
  */
 @Remote
 public interface FuncionalidadeServices extends AbstractServices<Funcionalidade>{
+	public Set<Funcionalidade> obterListaTodasFuncionalidades();
 }
