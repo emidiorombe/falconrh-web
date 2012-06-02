@@ -8,6 +8,11 @@
 		<p:panel header="#{msg['label.titulo.inclusao.funcionalidade']}">
 			<p:focus for="nome" id="focusPaginaInclusao"/>
 			<h:panelGrid columns="2" id="painel2ColunasInclusao">
+				<h:outputLabel value="#{msg['label.funcionalidade.funcionalidadePai']}" for="funcionalidadePai" id="labelFuncionalidadePai" styleClass="labelNegrito"/>
+				<p:selectOneMenu id="funcionalidadePai" value="#{funcionalidadeBean.entity.funcionalidadePai}" converter="funcionalidadeConverter" required="false" requiredMessage="#{msg['label.funcionalidadePai.obrigatorio']}">
+					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
+					<f:selectItems  value="#{funcionalidadeBean.listaTodasFuncionalidades}" var="funcPai" itemLabel="#{funcPai.nome}" itemValue="#{funcPai}"/>
+				</p:selectOneMenu>
 				<h:outputLabel value="#{msg['label.funcionalidade.nome']}" for="nome" id="labelNome" styleClass="labelNegrito"/>
 				<p:inputText value="#{funcionalidadeBean.entity.nome}" id="nome" size="60" maxlength="255" required="true" requiredMessage="#{msg['funcionalidade.nome.obrigatorio']}" title="#{msg['title.funcionalidade.nome']}"/>
 				<h:outputLabel value="#{msg['label.funcionalidade.link']}" for="link" id="labelLink" styleClass="labelNegrito"/>
@@ -18,10 +23,9 @@
 				</p:selectOneRadio>
 			</h:panelGrid>
 		</p:panel>
-		<p:pickList id="acoesPickList" value="#{funcionalidadeBean.acoes}" var="acao" effect="fade" itemValue="#{acao}" converter="acaoConverter" showSourceControls="true" showTargetControls="true">  
-        	<f:facet name="sourceCaption">Disponíveis</f:facet>  
-        	<f:facet name="targetCaption">Escolhidos</f:facet>  
-         	<p:column style="width:75%"><h:outputText value="#{acao.nome}"/></p:column>  
+		<p:pickList id="acoesPickList" value="#{funcionalidadeBean.acoes}" var="acao" effect="fade" itemLabel="#{acao.nome}" itemValue="#{acao}" converter="acaoConverter" showSourceControls="true" showTargetControls="true" iconOnly="true">  
+        	<f:facet name="sourceCaption"><h:outputText value="#{msg['label.pickList.acoes.disponiveis']}"/></f:facet>  
+        	<f:facet name="targetCaption"><h:outputText value="#{msg['label.pickList.acoes.escolhidas']}"/></f:facet>  
     	</p:pickList>  
 	</p:outputPanel>
 </ui:composition>

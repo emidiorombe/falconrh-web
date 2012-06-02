@@ -7,6 +7,8 @@
 	<p:outputPanel id="painelDetalhe" rendered="#{funcionalidadeBean.modoDetalhe or funcionalidadeBean.modoExclusao}">
 		<p:panel header="#{msg['titulo.funcionalidade.detalhe']}" id="painelDetalheAcao">
 			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
+				<h:outputLabel value="#{msg['label.funcionalidade.funcionalidadePai']}" for="funcionalidadePaiDetalhe" id="labelFuncionalidadePaiDetalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{funcionalidadeBean.entity.funcionalidadePai.nome}" id="funcionalidadePaiDetalhe"/>
 				<h:outputLabel value="#{msg['label.funcionalidade.nome']}" for="nomeDetalhe" id="labelNomeDetalhe" styleClass="labelNegrito"/>
 				<h:outputText value="#{funcionalidadeBean.entity.nome}" id="nomeDetalhe"/>
 				<h:outputLabel value="#{msg['label.funcionalidade.link']}" for="linkDetalhe" id="labelLinkDetalhe" styleClass="labelNegrito"/>
