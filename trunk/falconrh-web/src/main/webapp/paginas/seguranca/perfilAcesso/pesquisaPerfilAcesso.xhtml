@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelPesquisa" rendered="#{perfilAcessoBean.modoPesquisa}">
+		<p:panel header="#{msg['titulo.perfilAcesso.pesquisa']}" id="painelPesquisaPerfilAcesso">
+			<p:focus for="nomePesquisa" id="focusPaginaPesquisa"/>
+			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
+				<h:outputLabel for="nomePesquisa" id="labelNomePesquisa" value="#{msg['label.perfilAcesso.nome']}" styleClass="labelNegrito"/>
+				<p:inputText value="#{perfilAcessoBean.entity.nome}" id="nomePesquisa" size="60" maxlength="255" required="true" requiredMessage="#{msg['perfilAcesso.nome.obrigatorio']}" title="#{msg['title.perfilAcesso.nome']}"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+	<p:outputPanel id="painelDetalhePesquisa" rendered="#{perfilAcessoBean.modoDetalhePesquisa}" >
+		<p:dataTable value="#{perfilAcessoBean.listaEntities}" var="perfilAcesso" id="dataTableDetalhePesquisa">
+			<p:column id="colunaNomePerfilAcesso" sortBy="#{perfilAcesso.nome}">
+				<f:facet name="header"><h:outputText value="#{msg['label.perfilAcesso.nome']}" id="labelColunaNome"/></f:facet>
+				<h:outputText value="#{perfilAcesso.nome}" id="nomeDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaBotaoEditar">
+				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{perfilAcessoBean.editar}" id="botaoEditarPerfilAcesso">
+					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarPerfilAcesso"/>
+                	<f:setPropertyActionListener value="#{perfilAcesso}" target="#{perfilAcessoBean.entity}"/>  
+            	</p:commandLink>
+			</p:column>            	  
+			<p:column style="text-align:center" id="colunaVisualizar">
+				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{perfilAcessoBean.visualizar}" id="botaoVisualizarPerfilAcesso">
+					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarPerfilAcesso"/>
+                	<f:setPropertyActionListener value="#{perfilAcesso}" target="#{perfilAcessoBean.entity}" />
+				</p:commandLink>
+			</p:column>
+			<p:column style="text-align:center" id="colunaExcluir">
+				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{perfilAcessoBean.iniciarExclusao}" id="botaoExcluirPerfilAcesso">
+					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirPerfilAcesso"/>
+                	<f:setPropertyActionListener value="#{perfilAcesso}" target="#{perfilAcessoBean.entity}" />
+            	</p:commandLink>                        
+			</p:column>
+		</p:dataTable>
+	</p:outputPanel>
+</ui:composition>

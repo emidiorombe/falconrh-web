@@ -59,6 +59,10 @@
 	        			<p:menuitem value="Nova" url="/faces/paginas/seguranca/funcionalidade/funcionalidade.xhtml?modoOperacao=modoInclusao" id="menuitemGestaoSegurancaFuncionalidadesNovo"/>
 	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/funcionalidade/funcionalidade.xhtml?modoOperacao=modoPesquisa" id="menuitemGestaoSegurancaFuncionalidadesPesquisarAlterarExcluir"/>
 	        		</p:submenu>
+	        		<p:submenu label="Perfil de Acesso" id="submenuGestaoSegurancaPerfilAcesso">
+						<p:menuitem value="Novo" url="/faces/paginas/seguranca/perfilAcesso/perfilAcesso.xhtml?modoOperacao=modoInclusao"/>
+	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/perfilAcesso/perfilAcesso.xhtml?modoOperacao=modoPesquisa"/>
+					</p:submenu>
 	        	</p:submenu>
 	        </p:submenu>
 			<p:submenu label="Ajuda" id="submenuAjuda">
@@ -66,6 +70,22 @@
 	       		<p:separator id="separadorAjuda"/>
 	       		<p:menuitem value="Sobre o Falcon RH..." url="#" id="menuitemAjudaSobreFalconRH"/>
 	       	</p:submenu>
-		</p:menubar>  
+		</p:menubar>
+		<p:toolbar>
+			<p:toolbarGroup align="left">
+				<p:menuButton value="Ações">
+					<p:menuitem value="Nova" url="/faces/paginas/seguranca/acao/acao.xhtml?modoOperacao=modoInclusao"/>
+	        		<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/acao/acao.xhtml?modoOperacao=modoPesquisa"/>	
+				</p:menuButton>
+				<p:menuButton value="Funcionalidade">
+					<p:menuitem value="Nova" url="/faces/paginas/seguranca/funcionalidade/funcionalidade.xhtml?modoOperacao=modoInclusao"/>
+	        		<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/funcionalidade/funcionalidade.xhtml?modoOperacao=modoPesquisa"/>
+				</p:menuButton>
+				<p:menuButton value="Perfil de Acesso">
+					<p:menuitem value="Novo" url="/faces/paginas/seguranca/perfilAcesso/perfilAcesso.xhtml?modoOperacao=modoInclusao"/>
+	        		<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/perfilAcesso/perfilAcesso.xhtml?modoOperacao=modoPesquisa"/>
+				</p:menuButton>
+			</p:toolbarGroup>
+		</p:toolbar>  
 	</h:form>
 </ui:composition>

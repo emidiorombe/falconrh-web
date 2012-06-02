@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -78,6 +79,7 @@ public class Documento extends Parent {
 	 * @return Pessoa */
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="ID_PESSOA", nullable=false)
+	@ForeignKey(name="fk_pessoa")
 	public Pessoa getPessoa() {
 		return pessoa;
 	}

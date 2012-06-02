@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -56,6 +57,7 @@ public class Bairro extends Parent implements Comparable<Bairro>{
 	 * @return Municipio */
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_MUNICIPIO", nullable=false)
+	@ForeignKey(name="fk_municipio")
 	public Municipio getMunicipio() {
 		return municipio;
 	}

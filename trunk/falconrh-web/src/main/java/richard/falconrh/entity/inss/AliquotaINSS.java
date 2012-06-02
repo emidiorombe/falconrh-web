@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -45,6 +46,7 @@ public class AliquotaINSS extends Parent {
 	 * @return TabelaINSS */
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_TABELA_INSS", nullable=false)
+	@ForeignKey(name="fk_aliquota")
 	public TabelaINSS getTabelaINSS() {
 		return tabelaINSS;
 	}

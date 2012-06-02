@@ -129,8 +129,8 @@ public class FuncionalidadeBean extends BaseBean<Funcionalidade, FuncionalidadeS
 			return null;
 		}
 		List<Acao> source = new ArrayList<Acao>(listaAcoes);
-		source.removeAll(getEntity().getListaAcoes());
 		List<Acao> target = new ArrayList<Acao>(getEntity().getListaAcoes());
+		source.removeAll(target);
 		return  new DualListModel<Acao>(source, target);
 	}
 	
@@ -149,6 +149,7 @@ public class FuncionalidadeBean extends BaseBean<Funcionalidade, FuncionalidadeS
 	
 	@Override
 	public void editar(ActionEvent event) {
+		setAcoes(getListaAcaoInicial());
 		super.editar(event);
 	}
 }

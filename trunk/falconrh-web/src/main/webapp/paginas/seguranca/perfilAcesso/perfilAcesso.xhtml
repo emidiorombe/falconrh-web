@@ -1,0 +1,35 @@
+<ui:composition template="/paginas/layout/layout.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="tituloPagina"><h:outputText value="#{msg['titulo.perfilAcesso']}" id="tituloPaginaConteudo"/></ui:define>
+	<ui:define name="conteudo">
+		<ui:debug hotkey="q"/>
+		<h:form id="form" prependId="true" acceptcharset="utf-8">
+			<p:messages id="mensagens" showDetail="true" showSummary="true"/>
+			<p:outputPanel id="painelGlobal">
+				<ui:include src="incluirPerfilAcesso.xhtml"/>
+				<ui:include src="detalhePerfilAcesso.xhtml"/>
+				<ui:include src="pesquisaPerfilAcesso.xhtml"/>
+				<p:panel style="text-align: center" rendered="#{not empty perfilAcessoBean.modoOperacao}">
+					<p:commandButton value="#{msg['label.botao.cadastro.perfilAcesso']}" actionListener="#{perfilAcessoBean.cadastrar}" update="form:painelGlobal, form:mensagens" rendered="#{perfilAcessoBean.modoInclusao}" title="#{msg['title.botao.cadastro.perfilAcesso']}" id="botaoCadastroPerfilAcesso"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.perfilAcesso']}" actionListener="#{perfilAcessoBean.atualizar}" update="form:painelGlobal, form:mensagens" rendered="#{perfilAcessoBean.modoEdicao}" title="#{msg['title.botao.atualizacao.perfilAcesso']}" id="botaoAtualizacaoPerfilAcesso"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.perfilAcesso']}" actionListener="#{perfilAcessoBean.pesquisar}" update="form:painelGlobal, form:mensagens" rendered="#{perfilAcessoBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.perfilAcesso']}" id="botaoPesquisaPerfilAcesso"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.perfilAcesso']}" update="form:painelGlobal, form:mensagens" rendered="#{perfilAcessoBean.modoExclusao}" title="#{msg['title.botao.exclusao.perfilAcesso']}" id="botaoExclusaoPerfilAcesso" onclick="confirmation.show()" type="button"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{perfilAcessoBean.voltarParaResultadoDaPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{perfilAcessoBean.modoExclusao or perfilAcessoBean.modoEdicao or perfilAcessoBean.modoDetalhe}" title="#{msg['title.botao.exclusao.perfilAcesso']}" immediate="true" id="botaoVoltarPerfilAcesso">
+						<f:setPropertyActionListener target="#{perfilAcessoBean.entity}" value="#{perfilAcessoBean.entity}"/>
+					</p:commandButton>
+					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{perfilAcessoBean.iniciarPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{perfilAcessoBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente']}" immediate="true" id="botaoPesquisarNovamentePerfilAcesso"/>
+					<p:commandButton value="#{msg['label.botao.sair']}" action="#{perfilAcessoBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairPerfilAcesso"/>
+				</p:panel>
+			</p:outputPanel>
+			<p:confirmDialog id="confirmDialog" message="Você tem certeza de que deseja excluir o registro?" header="Confirmação de Exclusão" severity="alert" widgetVar="confirmation">
+				<p:commandButton id="confirmId" value="Sim" update="form:painelGlobal, form:mensagens" oncomplete="confirmation.hide()" actionListener="#{perfilAcessoBean.excluir}"/>
+				<p:commandButton id="declineId" value="Não" onclick="confirmation.hide()" type="button" /> 
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
