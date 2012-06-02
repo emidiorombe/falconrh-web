@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -80,6 +81,7 @@ public class Agencia extends Parent implements Comparable<Agencia>{
 	 */
 	@ManyToOne
 	@JoinColumn(name="ID_BANCO", nullable=false)
+	@ForeignKey(name="fk_banco")
 	public Banco getBanco(){
 		return banco;
 	}

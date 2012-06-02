@@ -23,7 +23,8 @@
 		<class>richard.falconrh.entity.documento.Documento</class>
 		<class>richard.falconrh.entity.seguranca.Acao</class>
 		<class>richard.falconrh.entity.seguranca.Funcionalidade</class>
-		<!-- configurações para o postregresql
+		<class>richard.falconrh.entity.seguranca.PerfilAcesso</class>
+		<!-- configurações para o postregresql -->
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/falconrhdb" />
@@ -34,8 +35,8 @@
             <property name="hibernate.show_sql" value ="true"/>
 			<property name="hibernate.generate_statistics" value="true"/>
 		</properties>
-		 -->
-		<!-- configuração para o h2 -->
+		 
+		<!-- configuração para o h2
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
             <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:unit-testing-jpa" />
@@ -46,6 +47,7 @@
             <property name="hibernate.show_sql" value ="false"/>
 			<property name="hibernate.generate_statistics" value="false"/>
 		</properties>
+		 -->
 	</persistence-unit>
 
 </persistence>

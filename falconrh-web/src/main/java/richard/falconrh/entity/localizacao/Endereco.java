@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -61,6 +62,7 @@ public class Endereco extends Parent{
 	 * @return Logradouro */
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_LOGRADOURO", nullable=false)
+	@ForeignKey(name="fk_logradouro")
 	public Logradouro getLogradouro() {
 		return logradouro;
 	}

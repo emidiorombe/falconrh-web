@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -70,6 +71,7 @@ public class Feriado extends Parent {
 	 * @return TabelaFeriado */
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_TAB_FERIADO", nullable=false)
+	@ForeignKey(name="fk_tabelaFeriado")
 	public TabelaFeriado getTabelaFeriado() {
 		return tabelaFeriado;
 	}

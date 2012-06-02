@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ForeignKey;
+
 import richard.falconrh.modelo.enums.SituacaoFuncional;
 
 /**
@@ -13,7 +15,8 @@ import richard.falconrh.modelo.enums.SituacaoFuncional;
  */
 @Entity
 @Table(name="EMPREGADOS")
-@PrimaryKeyJoinColumn(name="ID_PESSOA", referencedColumnName="id")  
+@PrimaryKeyJoinColumn(name="ID_PESSOA", referencedColumnName="id")
+@ForeignKey(name="fk_pessoa")
 public class Empregado extends Pessoa{
 	private static final long serialVersionUID = -5809485961666989193L;
 	

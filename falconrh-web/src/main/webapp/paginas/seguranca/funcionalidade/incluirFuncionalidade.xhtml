@@ -18,7 +18,7 @@
 				<h:outputLabel value="#{msg['label.funcionalidade.link']}" for="link" id="labelLink" styleClass="labelNegrito"/>
 				<p:inputText value="#{funcionalidadeBean.entity.link}" id="link" size="60" maxlength="255" required="true" requiredMessage="#{msg['funcionalidade.link.obrigatorio']}" title="#{msg['title.funcionalidade.link']}"/>
 				<h:outputLabel value="#{msg['label.funcionalidade.ativa']}" for="ativa" id="labelAtiva" styleClass="labelNegrito"/>
-				<p:selectOneRadio value="#{funcionalidadeBean.entity.ativa}" id="ativa" required="true" requiredMessage="#{msg['funcionalidade.ativa.obrigatorio']}" title="#{msg['title.funcionalidade.ativa']}">
+				<p:selectOneRadio converter="simNaoConverter" value="#{funcionalidadeBean.entity.ativa}" id="ativa" required="true" requiredMessage="#{msg['funcionalidade.ativa.obrigatorio']}" title="#{msg['title.funcionalidade.ativa']}">
 					<f:selectItems value="#{utilBean.listaSimOuNao}" id="selectItemsSimOUNao"/>
 				</p:selectOneRadio>
 			</h:panelGrid>

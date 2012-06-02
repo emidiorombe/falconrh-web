@@ -23,9 +23,11 @@ import richard.falconrh.entity.ir.AliquotaImpostoRenda;
 import richard.falconrh.entity.ir.TabelaImpostoRenda;
 import richard.falconrh.entity.pessoa.Pessoa;
 import richard.falconrh.entity.pessoa.Usuario;
+import richard.falconrh.entity.seguranca.PerfilAcesso;
 import richard.falconrh.modelo.enums.EstadoCivil;
 import richard.falconrh.modelo.enums.Etnia;
 import richard.falconrh.modelo.enums.Nacionalidade;
+import richard.falconrh.modelo.enums.NivelAcesso;
 import richard.falconrh.modelo.enums.Sexo;
 
 /**
@@ -55,8 +57,10 @@ public class TesteMain {
 		logger.debug("Iniciando");
 //		gravarTabelaIR(entityManager);
 //		gravarTabelaINSS(entityManager);
-		gravarPessoa(entityManager);
-		gravarUsuario(entityManager);
+//		gravarPessoa(entityManager);
+//		gravarUsuario(entityManager);
+		gravarPerfilAcesso(entityManager);
+		
 		
 		logger.debug("Iniciando");
 		System.out.println("Fim");
@@ -64,6 +68,18 @@ public class TesteMain {
 		System.exit(0);
 	}
 	
+	private void gravarPerfilAcesso(EntityManager entityManager) {
+		PerfilAcesso perfilAcesso = new PerfilAcesso();
+//		perfilAcesso.setNome("Administrador Master");
+//		perfilAcesso.setAtivo(Boolean.TRUE);
+//		perfilAcesso.setNivelAcesso(NivelAcesso.NACIONAL);
+
+		entityManager.getTransaction().begin();
+		entityManager.persist(perfilAcesso);
+		entityManager.getTransaction().commit();
+		
+	}
+
 	/**
 	 * Method gravarBancoAgenciaEContaCorrente.
 	 * @param entityManager EntityManager
@@ -258,6 +274,7 @@ public class TesteMain {
 		usuario.setSexo(Sexo.MASCULINO);
 		usuario.setLogin("richard.madureira");
 		usuario.setSenha("123456789");
+		usuario.setAtivo(true);
 		
 		return usuario;
 		

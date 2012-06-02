@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -46,6 +47,7 @@ public class ContaCorrente extends Parent {
 	 * @return Agencia */
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_AGENCIA", nullable=false)
+	@ForeignKey(name="fk_agencia")
 	public Agencia getAgencia() {
 		return agencia;
 	}

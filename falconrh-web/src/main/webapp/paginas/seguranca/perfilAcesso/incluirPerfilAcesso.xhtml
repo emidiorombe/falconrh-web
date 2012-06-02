@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelInclusao" rendered="#{perfilAcessoBean.modoInclusao or perfilAcessoBean.modoEdicao}">
+		<p:panel header="#{msg['label.titulo.inclusao.perfilAcesso']}">
+			<p:focus for="nome" id="focusPaginaInclusao"/>
+			<h:panelGrid columns="2" id="painel2ColunasInclusao">
+				<h:outputLabel value="#{msg['label.perfilAcesso.nome']}" for="nome" id="labelNome" styleClass="labelNegrito"/>
+				<p:inputText value="#{perfilAcessoBean.entity.nome}" id="nome" size="40" maxlength="100" required="true" requiredMessage="#{msg['perfilAcesso.nome.obrigatorio']}" title="#{msg['title.perfilAcesso.nome']}"/>
+				<h:outputLabel value="#{msg['label.perfilAcesso.nivelAcesso']}" for="nivelAcesso" id="labelNivelAcesso" styleClass="labelNegrito"/>
+				<p:selectOneMenu value="#{perfilAcessoBean.entity.nivelAcesso}" id="nivelAcesso" required="true" requiredMessage="#{msg['perfilAcesso.nivelAcesso.obrigatorio']}" title="#{msg['title.perfilAcesso.nivelAcesso']}">
+					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
+					<f:selectItems value="#{utilBean.listaNiveisAcessos}" var="nivelAcesso" itemLabel="#{nivelAcesso.nome}" itemValue="{nivelAcesso}"/>
+				</p:selectOneMenu>
+				<h:outputLabel value="#{msg['label.perfilAcesso.ativo']}" for="ativo" id="labelAtivo" styleClass="labelNegrito"/>
+				<p:selectOneRadio converter="simNaoConverter" value="#{perfilAcessoBean.entity.ativo}" id="ativo" required="true" requiredMessage="#{msg['perfilAcesso.ativo.obrigatorio']}" title="#{msg['title.perfilAcesso.ativo']}">
+					<f:selectItems value="#{utilBean.listaSimOuNao}" id="selectItemsSimOUNao"/>
+				</p:selectOneRadio>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>

@@ -29,6 +29,7 @@ import richard.falconrh.exception.ServicesException;
 import richard.falconrh.modelo.enums.EstadoCivil;
 import richard.falconrh.modelo.enums.Etnia;
 import richard.falconrh.modelo.enums.Nacionalidade;
+import richard.falconrh.modelo.enums.NivelAcesso;
 import richard.falconrh.modelo.enums.Sexo;
 import richard.falconrh.modelo.enums.TipoDocumento;
 import richard.falconrh.modelo.enums.TipoFeriado;
@@ -145,6 +146,20 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 		return lista;
 	}
 	
+	/**
+	 * Method getListaNiveisAcessos.
+	 * @return SelectItem[]
+	 */
+	public SelectItem[] getListaNiveisAcessos(){
+		SelectItem[] lista = new SelectItem[NivelAcesso.values().length];
+		int cont = 0;
+		SelectItem item = null;
+		for(NivelAcesso nivelAcesso: NivelAcesso.values()){
+			item = new SelectItem(nivelAcesso, nivelAcesso.getNome());
+			lista[cont++] = item;
+		}
+		return lista;
+	}
 	
 	/**
 	 * Method getListaEtnias.
