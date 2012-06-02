@@ -9,6 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import richard.falconrh.entity.seguranca.Funcionalidade;
@@ -32,8 +33,11 @@ public class FuncionalidadeConverter implements Converter {
 	 * @return Object * @see javax.faces.convert.Converter#getAsObject(FacesContext, UIComponent, String) */
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Long idFuncionalidade = Long.valueOf(value);
 		Funcionalidade funcionalidade = null;
+		if(StringUtils.isBlank(value)){
+			return null;
+		}
+		Long idFuncionalidade = Long.valueOf(value);
 		try {
 			funcionalidade = getFuncionalidadeServices().obterPeloId(Funcionalidade.class, idFuncionalidade);
 		} catch (ServicesException e) {
