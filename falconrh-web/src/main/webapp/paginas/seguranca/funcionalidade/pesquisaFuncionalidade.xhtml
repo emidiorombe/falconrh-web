@@ -29,7 +29,7 @@
 			</p:column>
 			<p:column style="text-align:center" id="colunaBotaoEditar">
 				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{funcionalidadeBean.editar}" id="botaoEditarFuncionalidade">
+				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{funcionalidadeBean.editar}" id="botaoEditarFuncionalidade" immediate="true">
 					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarFuncionalidade"/>
                 	<f:setPropertyActionListener value="#{funcionalidade}" target="#{funcionalidadeBean.entity}"/>  
             	</p:commandLink>
