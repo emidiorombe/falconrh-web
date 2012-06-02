@@ -8,6 +8,7 @@ import java.util.TreeSet;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -33,6 +34,7 @@ public class FuncionalidadeBean extends BaseBean<Funcionalidade, FuncionalidadeS
 	private static final Logger LOGGER = Logger.getLogger(FuncionalidadeBean.class);
 	
 	private Acao acao;
+	private List<Funcionalidade> listaTodasFuncionalidades;
 	
 	private DualListModel<Acao> acoes;
 	
@@ -130,5 +132,23 @@ public class FuncionalidadeBean extends BaseBean<Funcionalidade, FuncionalidadeS
 		source.removeAll(getEntity().getListaAcoes());
 		List<Acao> target = new ArrayList<Acao>(getEntity().getListaAcoes());
 		return  new DualListModel<Acao>(source, target);
+	}
+	
+	public List<Funcionalidade> getListaTodasFuncionalidades(){
+		if(listaTodasFuncionalidades==null){
+			return new ArrayList<Funcionalidade>(getServices().obterListaTodasFuncionalidades());
+		}
+		return listaTodasFuncionalidades;
+	}
+	
+	@Override
+	public void cadastrar(ActionEvent event) {
+		getEntity().setListaAcoes(getAcoes().getTarget());
+		super.cadastrar(event);
+	}
+	
+	@Override
+	public void editar(ActionEvent event) {
+		super.editar(event);
 	}
 }
