@@ -5,10 +5,10 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -30,6 +30,7 @@ public class Funcionalidade extends Parent{
 	private String link;
 	private Boolean ativa;
 	private List<Acao> listaAcoes;
+	private Funcionalidade funcionalidadePai;
 	
 	public Funcionalidade(){}
 
@@ -47,10 +48,16 @@ public class Funcionalidade extends Parent{
 		return ativa;
 	}
 
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="FUNCIONALIDADE_ACOES", joinColumns = @JoinColumn(name="ID_FUNCIONALIDADE", referencedColumnName="ID"), inverseJoinColumns= @JoinColumn(name="ID_ACAO", referencedColumnName="ID"))
 	public List<Acao> getListaAcoes() {
 		return listaAcoes;
+	}
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="ID_FUNCIONALIDADE_PAI")
+	public Funcionalidade getFuncionalidadePai(){
+		return funcionalidadePai;
 	}
 
 	public void setNome(String nome) {
@@ -67,6 +74,48 @@ public class Funcionalidade extends Parent{
 
 	public void setListaAcoes(List<Acao> listaAcoes) {
 		this.listaAcoes = listaAcoes;
+	}
+	
+	public void setFuncionalidadePai(Funcionalidade funcionalidadePai){
+		this.funcionalidadePai = funcionalidadePai;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((link == null) ? 0 : link.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (!(obj instanceof Funcionalidade)) {
+			return false;
+		}
+		Funcionalidade other = (Funcionalidade) obj;
+		if (link == null) {
+			if (other.link != null) {
+				return false;
+			}
+		} else if (!link.equals(other.link)) {
+			return false;
+		}
+		if (nome == null) {
+			if (other.nome != null) {
+				return false;
+			}
+		} else if (!nome.equals(other.nome)) {
+			return false;
+		}
+		return true;
 	}
 	
 	

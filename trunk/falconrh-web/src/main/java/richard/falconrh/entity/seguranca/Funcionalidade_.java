@@ -12,4 +12,5 @@ public class Funcionalidade_ extends Parent_{
 	public static volatile SingularAttribute<Funcionalidade, String> link;
 	public static volatile SingularAttribute<Funcionalidade, Boolean> ativa;
 	public static volatile SetAttribute<Funcionalidade, Acao> listaAcoes;
+	public static volatile SingularAttribute<Funcionalidade, Funcionalidade> funcionalidadePai;
 }
