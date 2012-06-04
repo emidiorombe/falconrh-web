@@ -33,7 +33,7 @@ public class PerfilAcesso extends Parent {
 		return nivelAcesso;
 	}
 
-	@Column(nullable = true)
+	@Column(nullable = false)
 	public Boolean getAtivo() {
 		return ativo;
 	}
