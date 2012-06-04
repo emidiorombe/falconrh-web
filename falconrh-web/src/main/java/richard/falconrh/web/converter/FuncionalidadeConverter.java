@@ -34,7 +34,7 @@ public class FuncionalidadeConverter implements Converter {
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Funcionalidade funcionalidade = null;
-		if(StringUtils.isBlank(value)){
+		if(StringUtils.isBlank(value) || value.equals("--Selecione--")){
 			return null;
 		}
 		Long idFuncionalidade = Long.valueOf(value);
