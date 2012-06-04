@@ -21,21 +21,21 @@
 			</p:column>
 			<p:column style="text-align:center" id="colunaBotaoEditar">
 				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{acaoBean.editar}" id="botaoEditarAcao">
+				<p:commandLink update="@form" actionListener="#{acaoBean.editar}" id="botaoEditarAcao">
 					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarAcao"/>
                 	<f:setPropertyActionListener value="#{acao}" target="#{acaoBean.entity}"/>  
             	</p:commandLink>
 			</p:column>            	  
 			<p:column style="text-align:center" id="colunaVisualizar">
 				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{acaoBean.visualizar}" id="botaoVisualizarAcao">
+				<p:commandLink update="@form" actionListener="#{acaoBean.visualizar}" id="botaoVisualizarAcao">
 					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarAcao"/>
                 	<f:setPropertyActionListener value="#{acao}" target="#{acaoBean.entity}" />
 				</p:commandLink>
 			</p:column>
 			<p:column style="text-align:center" id="colunaExcluir">
 				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{acaoBean.iniciarExclusao}" id="botaoExcluirAcao">
+				<p:commandLink update="@form" actionListener="#{acaoBean.iniciarExclusao}" id="botaoExcluirAcao">
 					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirAcao"/>
                 	<f:setPropertyActionListener value="#{acao}" target="#{acaoBean.entity}" />
             	</p:commandLink>                        
