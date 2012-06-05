@@ -30,3 +30,7 @@ body{
 .labelNegrito{
 	font-weight: bold !important;
 }
+
+.ui-dialog-buttonpane{
+	text-align:center;
+}
