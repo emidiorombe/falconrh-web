@@ -8,7 +8,7 @@
 		<p:panel header="#{msg['titulo.banco.pesquisa']}" id="painelPesquisaBanco">
 			<p:focus for="nomePesquisa" id="focusPaginaPesquisa"/>
 			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
-				<h:outputLabel for="nomePesquisa" id="labelNomePesquisa" value="#{msg['label.banco.nome']}" styleClass="labelNegrito"/>
+				<p:outputLabel for="nomePesquisa" id="labelNomePesquisa" value="#{msg['label.banco.nome']}" styleClass="labelNegrito"/>
 				<p:inputText value="#{bancoBean.entity.nome}" id="nomePesquisa" size="60" maxlength="255" required="true" requiredMessage="#{msg['banco.nome.obrigatorio']}" title="#{msg['title.banco.nome']}"/>
 			</h:panelGrid>
 		</p:panel>
@@ -25,21 +25,21 @@
 			</p:column>
 			<p:column style="text-align:center" id="colunaBotaoEditar">
 				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{bancoBean.editar}" id="botaoEditarBanco" ajax="true">
+				<p:commandLink update="@form" actionListener="#{bancoBean.editar}" id="botaoEditarBanco" ajax="true">
 					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarBanco"/>
                 	<f:setPropertyActionListener value="#{banco}" target="#{bancoBean.entity}"/>  
             	</p:commandLink>
 			</p:column>            	  
 			<p:column style="text-align:center" id="colunaVisualizar">
 				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{bancoBean.visualizar}" id="botaoVisualizarBanco" ajax="true">
+				<p:commandLink update="@form" actionListener="#{bancoBean.visualizar}" id="botaoVisualizarBanco" ajax="true">
 					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarBanco"/>
                 	<f:setPropertyActionListener value="#{banco}" target="#{bancoBean.entity}" />
 				</p:commandLink>
 			</p:column>
 			<p:column style="text-align:center" id="colunaExcluir">
 				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{bancoBean.iniciarExclusao}" id="botaoExcluirBanco" ajax="true">
+				<p:commandLink update="@form" actionListener="#{bancoBean.iniciarExclusao}" id="botaoExcluirBanco" ajax="true">
 					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirBanco"/>
                 	<f:setPropertyActionListener value="#{banco}" target="#{bancoBean.entity}" />
             	</p:commandLink>                        

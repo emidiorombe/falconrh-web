@@ -8,7 +8,7 @@
 		<p:panel header="#{msg['titulo.agencia.pesquisa']}" id="painelPesquisaBanco">
 			<p:focus for="numeroPesquisa" id="focusPaginaPesquisa"/>
 			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
-				<h:outputLabel for="numeroPesquisa" id="labelNumeroPesquisa" value="#{msg['label.contaCorrente.numero']}"/>
+				<p:outputLabel for="numeroPesquisa" id="labelNumeroPesquisa" value="#{msg['label.contaCorrente.numero']}"/>
 				<p:inputText value="#{contaCorrenteBean.entity.numero}" id="numeroPesquisa" size="10" maxlength="10" title="#{msg['title.contaCorrente.numero']}"/>
 			</h:panelGrid>
 		</p:panel>
@@ -29,21 +29,21 @@
 			</p:column>
 			<p:column style="text-align:center" id="colunaBotaoEditar">
 				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{contaCorrenteBean.editar}" id="botaoEditarContaCorrente">
+				<p:commandLink update="@form" actionListener="#{contaCorrenteBean.editar}" id="botaoEditarContaCorrente">
 					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarContaCorrente"/>
                 	<f:setPropertyActionListener value="#{contaCorrente}" target="#{contaCorrenteBean.entity}"/>  
             	</p:commandLink>
 			</p:column>            	  
 			<p:column style="text-align:center" id="colunaVisualizar">
 				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{contaCorrenteBean.visualizar}" id="botaoVisualizarContaCorrente">
+				<p:commandLink update="@form" actionListener="#{contaCorrenteBean.visualizar}" id="botaoVisualizarContaCorrente">
 					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarContaCorrente"/>
                 	<f:setPropertyActionListener value="#{contaCorrente}" target="#{contaCorrenteBean.entity}" />
 				</p:commandLink>
 			</p:column>
 			<p:column style="text-align:center" id="colunaExcluir">
 				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{contaCorrenteBean.iniciarExclusao}" id="botaoExcluirContaCorrente">
+				<p:commandLink update="@form" actionListener="#{contaCorrenteBean.iniciarExclusao}" id="botaoExcluirContaCorrente">
 					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluir"/>
                 	<f:setPropertyActionListener value="#{contaCorrente}" target="#{contaCorrenteBean.entity}" />
             	</p:commandLink>                        
