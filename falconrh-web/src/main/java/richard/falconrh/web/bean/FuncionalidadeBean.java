@@ -46,10 +46,12 @@ public class FuncionalidadeBean extends BaseBean<Funcionalidade, FuncionalidadeS
 	
 	public FuncionalidadeBean(){
 		super();
+		System.out.println("FuncionalidadeBean()");
 	}
 	
 	@Override
 	public void inicializaEntity() {
+		System.out.println("inicializaEntity()");
 		setEntity(new Funcionalidade());
 		getEntity().setListaAcoes(new ArrayList<Acao>());
 		setListaEntities(new ArrayList<Funcionalidade>());
@@ -97,10 +99,16 @@ public class FuncionalidadeBean extends BaseBean<Funcionalidade, FuncionalidadeS
 	}
 
 	public DualListModel<Acao> getAcoes() {
+		System.out.println("getAcoes()");
+		if(!getEntity().getListaAcoes().isEmpty()){
+			acoes.setTarget(getEntity().getListaAcoes());
+			acoes.getSource().removeAll(getEntity().getListaAcoes());
+		}
 		return acoes;
 	}
 
 	public void setAcoes(DualListModel<Acao> acoes) {
+		System.out.println("setAcoes()");
 		this.acoes = acoes;
 	}
 	
@@ -148,8 +156,10 @@ public class FuncionalidadeBean extends BaseBean<Funcionalidade, FuncionalidadeS
 	}
 	
 	@Override
-	public void editar(ActionEvent event) {
-		setAcoes(getListaAcaoInicial());
-		super.editar(event);
+	public void atualizar(ActionEvent event) {
+		getEntity().setListaAcoes(getAcoes().getTarget());
+		super.atualizar(event);
 	}
+	
+	
 }
