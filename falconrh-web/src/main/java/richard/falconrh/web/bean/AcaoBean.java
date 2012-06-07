@@ -1,12 +1,17 @@
 package richard.falconrh.web.bean;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import richard.falconrh.entity.seguranca.Acao;
+import richard.falconrh.exception.ServicesException;
 import richard.falconrh.service.AcaoServices;
 
 /**
@@ -52,6 +57,24 @@ public class AcaoBean extends BaseBean<Acao, AcaoServices>{
 		ERRO_EXCLUSAO = "erro.exclusao.acao";
 		ERRO_PESQUISA = "erro.pesquisa.acao";
 		PESQUISA_NAO_ENCONTRADA = "pesquisa.acao.nao.encontrada";
+	}
+	
+	@Override
+	public void cadastrar(ActionEvent event) {
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		System.out.println(externalContext.getAuthType());
+		System.out.println(externalContext.getRemoteUser());
+		System.out.println(externalContext.getUserPrincipal().getName());
+		try {
+			Set<Acao> acaoTemp = getServices().obterListaPeloExemplo(getEntity());
+			if(!acaoTemp.isEmpty()){
+				adicionarMensagemErro("erro.registro.jah.existente");
+				return;
+			}
+		} catch (ServicesException e) {
+			adicionarMensagemErroFatal(ERRO_PESQUISA);
+		}
+		super.cadastrar(event);
 	}
 	
 }
