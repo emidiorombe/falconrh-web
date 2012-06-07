@@ -1,5 +1,6 @@
 package richard.falconrh.entity.seguranca;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.GenericGenerator;
@@ -24,7 +26,7 @@ import richard.falconrh.entity.Parent;
 @Entity
 @Table(name = "FUNCIONALIDADES")
 @GenericGenerator(name = "SEQ_GEN", strategy = "sequence", parameters = { @Parameter(name = "sequence", value = "SEQ_FUNCIONALIDADES") })
-public class Funcionalidade extends Parent{
+public class Funcionalidade extends Parent implements Principal{
 	private static final long serialVersionUID = 5242868664531412945L;
 	
 	private String nome;
@@ -119,6 +121,10 @@ public class Funcionalidade extends Parent{
 		}
 		return true;
 	}
-	
-	
+
+	@Override
+	@Transient
+	public String getName() {
+		return getNome();
+	}
 }
