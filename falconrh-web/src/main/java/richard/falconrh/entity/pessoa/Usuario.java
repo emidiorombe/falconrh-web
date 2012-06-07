@@ -35,7 +35,7 @@ public class Usuario extends Pessoa implements Principal{
 	 * Method getLogin.
 	 * @return String
 	 */
-	@Column(nullable=false, length=50)
+	@Column(nullable=false, length=50, unique=true)
 	public String getLogin() {
 		return login;
 	}
