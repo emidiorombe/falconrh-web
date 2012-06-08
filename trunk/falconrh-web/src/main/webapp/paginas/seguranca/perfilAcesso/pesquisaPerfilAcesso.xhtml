@@ -21,21 +21,21 @@
 			</p:column>
 			<p:column style="text-align:center" id="colunaBotaoEditar">
 				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{perfilAcessoBean.editar}" id="botaoEditarPerfilAcesso">
+				<p:commandLink update="@form" actionListener="#{perfilAcessoBean.editar}" id="botaoEditarPerfilAcesso">
 					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarPerfilAcesso"/>
                 	<f:setPropertyActionListener value="#{perfilAcesso}" target="#{perfilAcessoBean.entity}"/>  
             	</p:commandLink>
 			</p:column>            	  
 			<p:column style="text-align:center" id="colunaVisualizar">
 				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{perfilAcessoBean.visualizar}" id="botaoVisualizarPerfilAcesso">
+				<p:commandLink update="@form" actionListener="#{perfilAcessoBean.visualizar}" id="botaoVisualizarPerfilAcesso">
 					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarPerfilAcesso"/>
                 	<f:setPropertyActionListener value="#{perfilAcesso}" target="#{perfilAcessoBean.entity}" />
 				</p:commandLink>
 			</p:column>
 			<p:column style="text-align:center" id="colunaExcluir">
 				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{perfilAcessoBean.iniciarExclusao}" id="botaoExcluirPerfilAcesso">
+				<p:commandLink update="@form" actionListener="#{perfilAcessoBean.iniciarExclusao}" id="botaoExcluirPerfilAcesso">
 					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirPerfilAcesso"/>
                 	<f:setPropertyActionListener value="#{perfilAcesso}" target="#{perfilAcessoBean.entity}" />
             	</p:commandLink>                        
