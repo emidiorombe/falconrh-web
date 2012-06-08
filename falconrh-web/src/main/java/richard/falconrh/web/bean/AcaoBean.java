@@ -61,10 +61,6 @@ public class AcaoBean extends BaseBean<Acao, AcaoServices>{
 	
 	@Override
 	public void cadastrar(ActionEvent event) {
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		System.out.println(externalContext.getAuthType());
-		System.out.println(externalContext.getRemoteUser());
-		System.out.println(externalContext.getUserPrincipal().getName());
 		try {
 			Set<Acao> acaoTemp = getServices().obterListaPeloExemplo(getEntity());
 			if(!acaoTemp.isEmpty()){
