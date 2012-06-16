@@ -17,7 +17,6 @@ import richard.falconrh.service.BairroServices;
 /**
  * Classe para conversão de instancias de objetos Bairro em Strings para utilização em arquivos xhtml
  * @author Richard Mendes Madureira
- *
  * @version $Revision: 1.0 $
  */
 @FacesConverter(forClass=Bairro.class, value="bairroConverter")
@@ -29,9 +28,9 @@ public class BairroConverter implements Converter {
 	 * @param ctx FacesContext
 	 * @param component UIComponent
 	 * @param value String
-	
-	
-	 * @return Object * @see javax.faces.convert.Converter#getAsObject(FacesContext, UIComponent, String) */
+	 * @return Object
+	 * @see javax.faces.convert.Converter#getAsObject(FacesContext, UIComponent, String)
+	 */
 	@Override
 	public Object getAsObject(FacesContext ctx, UIComponent component, String value) {
 		LOGGER.debug("Convertendo A String bairro em um objeto...");
@@ -52,9 +51,9 @@ public class BairroConverter implements Converter {
 	 * @param ctx FacesContext
 	 * @param component UIComponent
 	 * @param object Object
-	
-	
-	 * @return String * @see javax.faces.convert.Converter#getAsString(FacesContext, UIComponent, Object) */
+	 * @return String
+	 * @see javax.faces.convert.Converter#getAsString(FacesContext, UIComponent, Object)
+	 */
 	@Override
 	public String getAsString(FacesContext ctx, UIComponent component, Object object) {
 		LOGGER.debug("Convertendo o objeto bairro em String...");
@@ -66,8 +65,8 @@ public class BairroConverter implements Converter {
 	
 	/**
 	 * Method getBairroServices.
-	
-	 * @return BairroServices */
+	 * @return BairroServices
+	 */
 	public BairroServices getBairroServices(){
 		try {
 			Context context = new InitialContext();
@@ -79,6 +78,4 @@ public class BairroConverter implements Converter {
 		}
 		return null;
 	}
-
-
 }
