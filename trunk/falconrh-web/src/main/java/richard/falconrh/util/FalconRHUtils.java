@@ -21,14 +21,12 @@ public class FalconRHUtils {
 	public static final String BLANK = "";
 	public static final String PONTO = ".";
 	public static final String SHA_256 = "SHA-256";
+	public static final String SHA_512 = "SHA-512";
 	public static final String UTF_8 = "UTF-8";
 	
 	/**
 	 * Transforma a senha em um hash de 44 caracteres
 	 * @param senhaPlana - A senha que será transformada em hash
-	
-	
-	
 	 * @throws Exception * @return o hash que representa a senha, contendo 44 caracteres * @throws ImpossivelObterHashSenhaException * @throws ImpossivelObterHashSenhaException
 	 */
 	public static final String getHashSenha(String senhaPlana) throws ImpossivelObterHashSenhaException{
@@ -53,8 +51,8 @@ public class FalconRHUtils {
 	 * Concatena duas string, separando-as com um ponto (".")
 	 * @param string1 - a String que será a parte inicial
 	 * @param string2 - a String que será a parte final
-	
-	 * @return uma String que contem as duas strings informadas, separada por um ponto. */
+	 * @return uma String que contem as duas strings informadas, separada por um ponto.
+	 */
 	public static String concat(String string1, String string2){
 		return string1 +"." + string2;
 	}
@@ -62,8 +60,8 @@ public class FalconRHUtils {
 	/**
 	 * Method getDigitoVerificador.
 	 * @param numero String
-	
-	 * @return String */
+	 * @return String
+	 */
 	public static String getDigitoVerificador(String numero){
 		int totalDigitos = numero.length();
 		int total = 0;
@@ -85,8 +83,8 @@ public class FalconRHUtils {
 	/**
 	 * Method isCPFValido.
 	 * @param strCpf String
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	public static boolean isCPFValido(String strCpf){
 		String[] blackList = new String[]{
 				"00000000000",	"11111111111",	"22222222222",	"33333333333",	"44444444444",
@@ -133,8 +131,8 @@ public class FalconRHUtils {
 	/**
 	 * Method isCNPJValido.
 	 * @param strCNPJ String
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	public static boolean isCNPJValido(String strCNPJ) {
 	    int iSoma = 0, iDigito;
 	    char[] chCaracteresCNPJ;
@@ -186,8 +184,8 @@ public class FalconRHUtils {
 	/**
 	 * Method isPISValido.
 	 * @param numPIS String
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	public static boolean isPISValido(String numPIS) {
 		final String ftap = "3298765432";
 		int total=0;
@@ -217,8 +215,8 @@ public class FalconRHUtils {
 	/**
 	 * Method isCEPValido.
 	 * @param value String
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	public static boolean isCEPValido(String value){
 		return false;
 	}
@@ -226,8 +224,8 @@ public class FalconRHUtils {
 	/**
 	 * Method isDataValida.
 	 * @param value String
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	public static boolean isDataValida(String value){
 		return false;
 	}
@@ -235,8 +233,8 @@ public class FalconRHUtils {
 	/**
 	 * Method isMoedaValida.
 	 * @param value String
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	public static boolean isMoedaValida(String value){
 		return false;
 	}
@@ -244,8 +242,8 @@ public class FalconRHUtils {
 	/**
 	 * Method isCEPValido.
 	 * @param value Long
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	public static boolean isCEPValido(Long value){
 		return false;
 	}
@@ -253,8 +251,8 @@ public class FalconRHUtils {
 	/**
 	 * Method isCPFValido.
 	 * @param value Long
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	public static boolean isCPFValido(Long value){
 		return false;
 	}
@@ -262,8 +260,8 @@ public class FalconRHUtils {
 	/**
 	 * Method getSomenteNumeros.
 	 * @param value String
-	
-	 * @return String */
+	 * @return String
+	 */
 	public static String getSomenteNumeros(String value) {
 		LOGGER.debug("Retirando caracteres não numéricos");
 		final String regex = "[^0123456789]";
@@ -276,8 +274,8 @@ public class FalconRHUtils {
 	/**
 	 * Method getCPFCormatado.
 	 * @param cpf Long
-	
-	 * @return String */
+	 * @return String
+	 */
 	public static String getCPFCormatado(Long cpf) {
 		String cpfRetorno = StringUtils.leftPad(String.valueOf(cpf), 11, '0');
 		return cpfRetorno.substring(0,3) + "." + cpfRetorno.substring(3,6) + "." + cpfRetorno.substring(6,9) + "-" + cpfRetorno.substring(9);
@@ -286,8 +284,8 @@ public class FalconRHUtils {
 	/**
 	 * Method getCEPFormatado.
 	 * @param cep Long
-	
-	 * @return String */
+	 * @return String
+	 */
 	public static String getCEPFormatado(Long cep){
 		String cepRetorno = StringUtils.rightPad(String.valueOf(cep), 8, '0');
 		return cepRetorno.substring(0,2) + "." + cepRetorno.substring(2,5) + "-" + cepRetorno.substring(5); 
@@ -296,8 +294,8 @@ public class FalconRHUtils {
 	/**
 	 * Method getCNPJFormatado.
 	 * @param cnpj Long
-	
-	 * @return String */
+	 * @return String
+	 */
 	public static String getCNPJFormatado(Long cnpj){
 		String cnpjRetorno = StringUtils.leftPad(String.valueOf(cnpj), 14, '0');
 		return cnpjRetorno.substring(0,2) + "." + cnpjRetorno.substring(2,5) + "." + cnpjRetorno.substring(5,8) + "/" + cnpjRetorno.substring(8,12) + "-" + cnpjRetorno.substring(12);
@@ -306,8 +304,8 @@ public class FalconRHUtils {
 	/**
 	 * Method getDataFormatada.
 	 * @param data Date
-	
-	 * @return String */
+	 * @return String
+	 */
 	public static String getDataFormatada(Date data){
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		return sdf.format(data);
