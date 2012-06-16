@@ -51,7 +51,7 @@ public class PessoaConverter implements Converter {
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Pessoa pessoa = null;
-		if(StringUtils.isBlank(value)){
+		if(StringUtils.isBlank(value) || value.equals("--Selecione--")){
 			return null;
 		}
 		try {

@@ -26,9 +26,8 @@ public class MunicipioConverter implements Converter {
 	 * @param ctx FacesContext
 	 * @param component UIComponent
 	 * @param value String
-	
-	
-	 * @return Object * @see javax.faces.convert.Converter#getAsObject(FacesContext, UIComponent, String) */
+	 * @return Object * @see javax.faces.convert.Converter#getAsObject(FacesContext, UIComponent, String)
+	 */
 	@Override
 	public Object getAsObject(FacesContext ctx, UIComponent component, String value) {
 		if(value==null || "".equals(value) || value.equals("--Selecione--")){
@@ -48,9 +47,9 @@ public class MunicipioConverter implements Converter {
 	 * @param ctx FacesContext
 	 * @param component UIComponent
 	 * @param object Object
-	
-	
-	 * @return String * @see javax.faces.convert.Converter#getAsString(FacesContext, UIComponent, Object) */
+	 * @return String
+	 * @see javax.faces.convert.Converter#getAsString(FacesContext, UIComponent, Object)
+	 */
 	@Override
 	public String getAsString(FacesContext ctx, UIComponent component, Object object) {
 		if(object instanceof Municipio){
@@ -61,8 +60,8 @@ public class MunicipioConverter implements Converter {
 	
 	/**
 	 * Method getMunicipioServices.
-	
-	 * @return MunicipioServices */
+	 * @return MunicipioServices
+	 */
 	public MunicipioServices getMunicipioServices(){
 		try {
 			Context context = new InitialContext();
@@ -74,5 +73,4 @@ public class MunicipioConverter implements Converter {
 		}
 		return null;
 	}
-
 }
