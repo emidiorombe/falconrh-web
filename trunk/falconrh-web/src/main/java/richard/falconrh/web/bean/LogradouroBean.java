@@ -21,7 +21,6 @@ import richard.falconrh.service.MunicipioServices;
 /**
  * ManagedBean JSF utilizado em arquivos xhtml
  * @author Richard Mendes Madureira
- *
  * @version $Revision: 1.0 $
  */
 @ManagedBean(name="logradouroBean")
@@ -55,8 +54,8 @@ public class LogradouroBean extends BaseBean<Logradouro, LogradouroServices>{
 	
 	/**
 	 * Method getServices.
-	
-	 * @return LogradouroServices */
+	 * @return LogradouroServices
+	 */
 	@Override
 	public LogradouroServices getServices() {
 		return logradouroServices;
@@ -77,8 +76,8 @@ public class LogradouroBean extends BaseBean<Logradouro, LogradouroServices>{
 
 	/**
 	 * Method getListaBairros.
-	
-	 * @return List<Bairro> */
+	 * @return List<Bairro>
+	 */
 	public List<Bairro> getListaBairros() {
 		return listaBairros;
 	}
@@ -93,8 +92,8 @@ public class LogradouroBean extends BaseBean<Logradouro, LogradouroServices>{
 
 	/**
 	 * Method getListaMunicipios.
-	
-	 * @return List<Municipio> */
+	 * @return List<Municipio>
+	 */
 	public List<Municipio> getListaMunicipios() {
 		return listaMunicipios;
 	}
@@ -110,8 +109,8 @@ public class LogradouroBean extends BaseBean<Logradouro, LogradouroServices>{
 	/**
 	 * Method obterListaMunicipios.
 	 * @param event ValueChangeEvent
-	
-	 * @throws ServicesException */
+	 * @throws ServicesException
+	 */
 	public void obterListaMunicipios(ValueChangeEvent event) throws ServicesException{
 		UF uf = (UF)event.getNewValue();
 		Set<Municipio> municipiosObtidos = municipioServices.obterListaMunicipiosPelaUF(uf);
@@ -122,8 +121,8 @@ public class LogradouroBean extends BaseBean<Logradouro, LogradouroServices>{
 	/**
 	 * Method obterListaBairros.
 	 * @param event ValueChangeEvent
-	
-	 * @throws ServicesException */
+	 * @throws ServicesException
+	 */
 	public void obterListaBairros(ValueChangeEvent event) throws ServicesException{
 		Municipio municipio = (Municipio)event.getNewValue();
 		Set<Bairro> listaBairros = bairroServices.obterListaPeloIdMunicipio(municipio.getId());
