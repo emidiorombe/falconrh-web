@@ -1,9 +1,15 @@
 package richard.falconrh.entity.pessoa;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.ForeignKey;
 
@@ -22,11 +28,13 @@ public class Empregado extends Pessoa{
 	
 	private Long matricula;
 	private SituacaoFuncional situacaoFuncional;
+	private Double salario;
+	private Date dataContratacao;
 
 	/**
 	 * Method getMatricula.
-	
-	 * @return Long */
+	 * @return Long
+	 */
 	@Column(nullable=false)
 	public Long getMatricula() {
 		return matricula;
@@ -34,10 +42,21 @@ public class Empregado extends Pessoa{
 	
 	/**
 	 * Method getsituacaoFuncional.
-	
-	 * @return SituacaoFuncional */
-	public SituacaoFuncional getsituacaoFuncional(){
+	 * @return SituacaoFuncional
+	 */
+	@Enumerated(value=EnumType.STRING)
+	public SituacaoFuncional getSituacaoFuncional(){
 		return situacaoFuncional;
+	}
+	
+	@Column(nullable=false)
+	public Double getSalario(){
+		return salario;
+	}
+	
+	@Temporal(value=TemporalType.DATE)
+	public Date getDataContratacao(){
+		return dataContratacao;
 	}
 	
 	/**
@@ -54,6 +73,14 @@ public class Empregado extends Pessoa{
 	 */
 	public void setSituacaoFuncional(SituacaoFuncional situacaoFuncional){
 		this.situacaoFuncional = situacaoFuncional;
+	}
+	
+	public void setSalario(Double salario){
+		this.salario = salario;
+	}
+	
+	public void setDataContratacao(Date dataContratacao){
+		this.dataContratacao = dataContratacao;
 	}
 	
 }
