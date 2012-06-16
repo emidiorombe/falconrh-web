@@ -22,7 +22,6 @@ import richard.falconrh.service.MunicipioServices;
 /**
  * ManagedBean JSF utilizado em arquivos xhtml
  * @author Richard Mendes Madureira
- *
  * @version $Revision: 1.0 $
  */
 @ManagedBean(name="enderecoBean")
@@ -62,20 +61,21 @@ public class EnderecoBean implements Serializable{
 	/**
 	 * Method obterListaMunicipios.
 	 * @param event ValueChangeEvent
-	
-	 * @throws ServicesException */
+	 * @throws ServicesException
+	 */
 	public void obterListaMunicipios(ValueChangeEvent event) throws ServicesException{
 		setUf((UF)event.getNewValue());
 		Set<Municipio> municipiosObtidos = municipioServices.obterListaMunicipiosPelaUF(getUf());
 		setListaMunicipios(municipiosObtidos);
 		setListaBairros(new HashSet<Bairro>());
+		setMunicipio(null);
 	}
 	
 	/**
 	 * Method obterListaBairros.
 	 * @param event ValueChangeEvent
-	
-	 * @throws ServicesException */
+	 * @throws ServicesException
+	 */
 	public void obterListaBairros(ValueChangeEvent event) throws ServicesException{
 		municipio = (Municipio)event.getNewValue();
 		Set<Bairro> listaBairros = bairroServices.obterListaPeloIdMunicipio(municipio.getId());
@@ -85,8 +85,8 @@ public class EnderecoBean implements Serializable{
 	/**
 	 * Method obterListaLogradouros.
 	 * @param event ValueChangeEvent
-	
-	 * @throws ServicesException */
+	 * @throws ServicesException
+	 */
 	public void obterListaLogradouros(ValueChangeEvent event) throws ServicesException{
 		Bairro bairro = (Bairro) event.getNewValue();
 		Set<Logradouro> listaLogradouros = logradouroServices.obterLogradourosPeloIdBairro(bairro.getId());
@@ -111,8 +111,8 @@ public class EnderecoBean implements Serializable{
 
 	/**
 	 * Method getMunicipio.
-	
-	 * @return Municipio */
+	 * @return Municipio
+	 */
 	public Municipio getMunicipio() {
 		return municipio;
 	}
@@ -127,8 +127,8 @@ public class EnderecoBean implements Serializable{
 
 	/**
 	 * Method getListaMunicipios.
-	
-	 * @return Set<Municipio> */
+	 * @return Set<Municipio>
+	 */
 	public Set<Municipio> getListaMunicipios() {
 		return listaMunicipios;
 	}
@@ -143,8 +143,8 @@ public class EnderecoBean implements Serializable{
 
 	/**
 	 * Method getListaBairros.
-	
-	 * @return Set<Bairro> */
+	 * @return Set<Bairro>
+	 */
 	public Set<Bairro> getListaBairros() {
 		return listaBairros;
 	}
@@ -159,8 +159,8 @@ public class EnderecoBean implements Serializable{
 
 	/**
 	 * Method getUf.
-	
-	 * @return UF */
+	 * @return UF
+	 */
 	public UF getUf() {
 		return uf;
 	}
@@ -175,16 +175,16 @@ public class EnderecoBean implements Serializable{
 
 	/**
 	 * Method getBairro.
-	
-	 * @return Bairro */
+	 * @return Bairro
+	 */
 	public Bairro getBairro() {
 		return bairro;
 	}
 
 	/**
 	 * Method getEndereco.
-	
-	 * @return Endereco */
+	 * @return Endereco
+	 */
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -199,8 +199,8 @@ public class EnderecoBean implements Serializable{
 
 	/**
 	 * Method getListaLogradouros.
-	
-	 * @return Set<Logradouro> */
+	 * @return Set<Logradouro>
+	 */
 	public Set<Logradouro> getListaLogradouros() {
 		return listaLogradouros;
 	}
