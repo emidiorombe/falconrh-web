@@ -7,7 +7,6 @@ import javax.persistence.metamodel.StaticMetamodel;
 
 import richard.falconrh.entity.Parent_;
 
-
 @StaticMetamodel(Competencia.class)
 public class Competencia_ extends Parent_{
 	public static volatile SingularAttribute<Competencia, String> descricao;
