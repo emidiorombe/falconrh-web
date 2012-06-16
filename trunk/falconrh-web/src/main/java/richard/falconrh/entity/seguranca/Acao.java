@@ -24,9 +24,7 @@ public class Acao extends Parent implements Principal{
 	
 	private String nome;
 
-	public Acao(){
-		
-	}
+	public Acao(){}
 	
 	public Acao(String nome){
 		this.nome = nome;
