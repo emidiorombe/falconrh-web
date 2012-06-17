@@ -24,6 +24,7 @@
 		<class>richard.falconrh.entity.seguranca.Acao</class>
 		<class>richard.falconrh.entity.seguranca.Funcionalidade</class>
 		<class>richard.falconrh.entity.seguranca.PerfilAcesso</class>
+		<class>richard.falconrh.entity.seguranca.Acesso</class>
 		<!-- configurações para o postregresql -->
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
