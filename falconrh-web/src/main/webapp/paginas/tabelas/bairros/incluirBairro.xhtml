@@ -10,13 +10,13 @@
 			<h:panelGrid columns="2" id="painel2ColunasInclusao">
 				<h:outputLabel value="#{msg['label.bairro.uf']}" for="uf" id="labelUf" />
 				<p:selectOneMenu value="#{bairroBean.entity.municipio.uf}" id="uf" required="true" requiredMessage="#{msg['bairro.uf.obrigatorio']}" title="#{msg['title.bairro.uf']}" valueChangeListener="#{bairroBean.obterListaMunicipios}" effect="fade" >
-					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true"/>
+					<f:selectItem itemLabel="--Selecione--"/>
 					<f:selectItems value="#{utilBean.listaUFs}" />
 					<p:ajax event="change" update="municipio" immediate="true"/>
 				</p:selectOneMenu>
 				<h:outputLabel value="#{msg['label.bairro.municipio']}" for="municipio" id="labelMunicipio" />
 				<p:selectOneMenu value="#{bairroBean.entity.municipio}" id="municipio" required="true" requiredMessage="#{msg['bairro.municipio.obrigatorio']}" title="#{msg['title.bairro.municipio']}" converter="municipioConverter" converterMessage="Erro ao converter Municipio" effect="fade">
-					<f:selectItem itemLabel="--Selecione--" itemValue="" noSelectionOption="true"/>
+					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
 					<f:selectItems value="#{bairroBean.listaMunicipios}" var="municipio" itemLabel="#{municipio.nome}" itemValue="#{municipio}" />
 				</p:selectOneMenu>
 				<h:outputLabel value="#{msg['label.bairro.nome']}" for="nome" id="labelNome" />
