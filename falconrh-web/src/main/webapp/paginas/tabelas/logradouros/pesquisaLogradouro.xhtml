@@ -10,19 +10,19 @@
 			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
 				<h:outputLabel value="#{msg['label.logradouro.uf']}" for="ufPesquisa" id="labelUfPesquisa" />
 				<p:selectOneMenu value="#{logradouroBean.entity.bairro.municipio.uf}" id="ufPesquisa" title="#{msg['title.logradouro.uf']}" valueChangeListener="#{logradouroBean.obterListaMunicipios}" effect="fade" immediate="true">
-					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true"/>
+					<f:selectItem itemLabel="--Selecione--" />
 					<f:selectItems value="#{utilBean.listaUFs}" />
 					<p:ajax event="change" update="municipioPesquisa,bairroPesquisa" immediate="true"/>
 				</p:selectOneMenu>
 				<h:outputLabel value="#{msg['label.logradouro.municipio']}" for="municipioPesquisa" id="labelMunicipioPesquisa" />
 				<p:selectOneMenu value="#{logradouroBean.entity.bairro.municipio}" id="municipioPesquisa" title="#{msg['title.logradouro.municipio']}" converter="municipioConverter" converterMessage="Erro ao converter Municipio" valueChangeListener="#{logradouroBean.obterListaBairros}" effect="fade" immediate="true">
-					<f:selectItem itemLabel="--Selecione--" itemValue="" noSelectionOption="true"/>
+					<f:selectItem itemLabel="--Selecione--" itemValue="" />
 					<f:selectItems value="#{logradouroBean.listaMunicipios}" var="municipio" itemLabel="#{municipio.nome}" itemValue="#{municipio}" />
 					<p:ajax event="change" update="bairroPesquisa" immediate="true"/>
 				</p:selectOneMenu>
 				<h:outputLabel value="#{msg['label.logradouro.bairro']}" for="bairroPesquisa" id="labelBairroPesquisa" />
 				<p:selectOneMenu value="#{logradouroBean.entity.bairro}" id="bairroPesquisa" title="#{msg['title.logradouro.bairro']}" converter="bairroConverter" converterMessage="Erro ao converter bairro">
-					<f:selectItem itemLabel="--Selecione--" itemValue="" noSelectionOption="true"/>
+					<f:selectItem itemLabel="--Selecione--" itemValue="" />
 					<f:selectItems value="#{logradouroBean.listaBairros}" var="bairro" itemLabel="#{bairro.nome}" itemValue="#{bairro}" />
 				</p:selectOneMenu>
 				<h:outputLabel value="#{msg['label.logradouro.nome']}" for="nomePesquisa" id="labelNomePesquisa" />
