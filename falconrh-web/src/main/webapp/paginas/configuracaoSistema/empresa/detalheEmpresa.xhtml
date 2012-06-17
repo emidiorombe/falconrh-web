@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://java.sun.com/jsf/composite/rich">	
+	<p:outputPanel id="painelDetalhe" rendered="#{empresaBean.modoDetalhe or empresaBean.modoExclusao}">
+		<p:panel header="#{msg['titulo.empresa.detalhe']}" id="painelDetalheAcao">
+			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
+				<h:outputLabel value="#{msg['label.empresa.nomeEmpresarial']}" for="nomeEmpresarialDetalhe" id="labelNomeEmpresarialDetalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{empresaBean.entity.nomeEmpresarial}" id="nomeEmpresarialDetalhe"/>
+				<h:outputLabel value="#{msg['label.empresa.titulo']}" for="tituloDetalhe" id="labelTituloDetalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{empresaBean.entity.titulo}" id="tituloDetalhe"/>
+				<h:outputLabel value="#{msg['label.empresa.cnpj']}" for="cnpjDetalhe" id="labelCnpjDetalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{empresaBean.entity.cnpj}" id="cnpjDetalhe"/>
+			</h:panelGrid>
+		</p:panel>
+		<rich:painelEndereco modoOperacao="#{empresaBean.modoOperacao}" value="#{empresaBean.entity.endereco}"/>
+	</p:outputPanel>
+</ui:composition>

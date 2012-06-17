@@ -1,0 +1,36 @@
+<ui:composition template="/paginas/layout/layout.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:rich="http://java.sun.com/jsf/composite/rich">
+      
+<ui:define name="tituloPagina"><h:outputText value="#{msg['titulo.empresa']}" id="tituloPaginaConteudo"/></ui:define>
+	<ui:define name="conteudo">
+		<ui:debug hotkey="q"/>
+		<h:form id="form" prependId="true" acceptcharset="utf-8">
+			<p:messages id="mensagens" showDetail="true" showSummary="true"/>
+			<p:outputPanel id="painelGlobal">
+				<ui:include src="incluirEmpresa.xhtml"/>
+				<ui:include src="detalheEmpresa.xhtml"/>
+				<ui:include src="pesquisaEmpresa.xhtml"/>
+				<p:panel style="text-align: center" rendered="#{not empty empresaBean.modoOperacao}">
+					<p:commandButton value="#{msg['label.botao.cadastro.empresa']}" actionListener="#{empresaBean.cadastrar}" update="form:painelGlobal, form:mensagens" rendered="#{empresaBean.modoInclusao}" title="#{msg['title.botao.cadastro.empresa']}" id="botaoCadastroEmpresa"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.empresa']}" actionListener="#{empresaBean.atualizar}" update="form:painelGlobal, form:mensagens" rendered="#{empresaBean.modoEdicao}" title="#{msg['title.botao.atualizacao.empresa']}" id="botaoAtualizacaoEmpresa"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.empresa']}" actionListener="#{empresaBean.pesquisar}" update="form:painelGlobal, form:mensagens" rendered="#{empresaBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.empresa']}" id="botaoPesquisaEmpresa"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.empresa']}" update="form:painelGlobal, form:mensagens" rendered="#{empresaBean.modoExclusao}" title="#{msg['title.botao.exclusao.empresa']}" id="botaoExclusaoEmpresa" onclick="confirmation.show()" type="button"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{empresaBean.voltarParaResultadoDaPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{empresaBean.modoExclusao or empresaBean.modoEdicao or empresaBean.modoDetalhe}" title="#{msg['title.botao.exclusao.empresa']}" immediate="true" id="botaoVoltarEmpresa">
+						<f:setPropertyActionListener target="#{empresaBean.entity}" value="#{empresaBean.entity}"/>
+					</p:commandButton>
+					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{empresaBean.iniciarPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{empresaBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente']}" immediate="true" id="botaoPesquisarNovamenteEmpresa"/>
+					<p:commandButton value="#{msg['label.botao.sair']}" action="#{empresaBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairEmpresa"/>
+				</p:panel>
+			</p:outputPanel>
+			<p:confirmDialog id="confirmDialog" message="Você tem certeza de que deseja excluir o registro?" header="Confirmação de Exclusão" severity="alert" widgetVar="confirmation">
+				<p:commandButton id="confirmId" value="Sim" update="form:painelGlobal, form:mensagens" oncomplete="confirmation.hide()" actionListener="#{empresaBean.excluir}"/>
+				<p:commandButton id="declineId" value="Não" onclick="confirmation.hide()" type="button" /> 
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

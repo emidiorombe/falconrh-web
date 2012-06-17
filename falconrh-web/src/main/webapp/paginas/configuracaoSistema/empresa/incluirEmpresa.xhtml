@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://java.sun.com/jsf/composite/rich">
+	<p:outputPanel id="painelInclusao" rendered="#{empresaBean.modoInclusao or empresaBean.modoEdicao}">
+		<p:panel header="#{msg['label.titulo.inclusao.empresa']}">
+			<p:focus for="nomeEmpresarial" id="focusPaginaInclusao"/>
+			<h:panelGrid columns="2" id="painel2ColunasInclusao">
+				<p:outputLabel value="#{msg['label.empresa.nomeEmpresarial']}" for="nomeEmpresarial" id="labelNomeEmpresarial" styleClass="labelNegrito"/>
+				<p:inputText value="#{empresaBean.entity.nomeEmpresarial}" size="40" maxlength="100" id="nomeEmpresarial" required="true" requiredMessage="#{msg['empresa.nomeEmpresarial.obrigatorio']}" title="#{msg['title.empresa.nomeEmpresarial']}"/>
+				<p:outputLabel value="#{msg['label.empresa.titulo']}" for="titulo" id="labelTitulo" styleClass="labelNegrito"/>
+				<p:inputText value="#{empresaBean.entity.titulo}" id="titulo"  size="40" maxlength="100" required="true" requiredMessage="#{msg['empresa.titulo.obrigatorio']}" title="#{msg['title.empresa.titulo']}"/>
+				<p:outputLabel value="#{msg['label.empresa.cnpj']}" for="cnpj" id="labelCnpj" styleClass="labelNegrito"/>
+				<p:inputText value="#{empresaBean.entity.cnpj}" id="cnpj" size="20" maxlength="20" required="true" requiredMessage="#{msg['empresa.cnpj.obrigatorio']}" title="#{msg['title.empresa.cnpj']}"/>
+			</h:panelGrid>
+		</p:panel>
+ 
+	</p:outputPanel>
+</ui:composition>

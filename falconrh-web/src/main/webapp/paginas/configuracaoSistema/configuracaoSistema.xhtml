@@ -1,0 +1,35 @@
+<ui:composition template="/paginas/layout/layout.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="tituloPagina"><h:outputText value="#{msg['titulo.configuracaoSistema']}" id="tituloPaginaConteudo"/></ui:define>
+	<ui:define name="conteudo">
+		<ui:debug hotkey="q"/>
+		<h:form id="form" prependId="true" acceptcharset="utf-8">
+			<p:messages id="mensagens" showDetail="true" showSummary="true"/>
+			<p:outputPanel id="painelGlobal">
+				<ui:include src="incluirConfiguracaoSistema.xhtml"/>
+				<ui:include src="detalheConfiguracaoSistema.xhtml"/>
+				<ui:include src="pesquisaConfiguracaoSistema.xhtml"/>
+				<p:panel style="text-align: center" rendered="#{not empty configuracaoSistemaBean.modoOperacao}">
+					<p:commandButton value="#{msg['label.botao.cadastro.configuracaoSistema']}" actionListener="#{configuracaoSistemaBean.cadastrar}" update="form:painelGlobal, form:mensagens" rendered="#{configuracaoSistemaBean.modoInclusao}" title="#{msg['title.botao.cadastro.configuracaoSistema']}" id="botaoCadastroConfiguracaoSistema"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.configuracaoSistema']}" actionListener="#{configuracaoSistemaBean.atualizar}" update="form:painelGlobal, form:mensagens" rendered="#{configuracaoSistemaBean.modoEdicao}" title="#{msg['title.botao.atualizacao.configuracaoSistema']}" id="botaoAtualizacaoConfiguracaoSistema"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.configuracaoSistema']}" actionListener="#{configuracaoSistemaBean.pesquisar}" update="form:painelGlobal, form:mensagens" rendered="#{configuracaoSistemaBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.configuracaoSistema']}" id="botaoPesquisaConfiguracaoSistema"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.configuracaoSistema']}" update="form:painelGlobal, form:mensagens" rendered="#{configuracaoSistemaBean.modoExclusao}" title="#{msg['title.botao.exclusao.configuracaoSistema']}" id="botaoExclusaoConfiguracaoSistema" onclick="confirmation.show()" type="button"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{configuracaoSistemaBean.voltarParaResultadoDaPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{configuracaoSistemaBean.modoExclusao or configuracaoSistemaBean.modoEdicao or configuracaoSistemaBean.modoDetalhe}" title="#{msg['title.botao.exclusao.configuracaoSistema']}" immediate="true" id="botaoVoltarConfiguracaoSistema">
+						<f:setPropertyActionListener target="#{configuracaoSistemaBean.entity}" value="#{configuracaoSistemaBean.entity}"/>
+					</p:commandButton>
+					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{configuracaoSistemaBean.iniciarPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{configuracaoSistemaBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente']}" immediate="true" id="botaoPesquisarNovamenteConfiguracaoSistema"/>
+					<p:commandButton value="#{msg['label.botao.sair']}" action="#{configuracaoSistemaBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairConfiguracaoSistema"/>
+				</p:panel>
+			</p:outputPanel>
+			<p:confirmDialog id="confirmDialog" message="Você tem certeza de que deseja excluir o registro?" header="Confirmação de Exclusão" severity="alert" widgetVar="confirmation">
+				<p:commandButton id="confirmId" value="Sim" update="form:painelGlobal, form:mensagens" oncomplete="confirmation.hide()" actionListener="#{configuracaoSistemaBean.excluir}"/>
+				<p:commandButton id="declineId" value="Não" onclick="confirmation.hide()" type="button" /> 
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

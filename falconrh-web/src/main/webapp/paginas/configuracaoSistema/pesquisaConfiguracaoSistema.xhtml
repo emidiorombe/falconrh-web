@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelPesquisa" rendered="#{acaoBean.modoPesquisa}">
+		<p:panel header="#{msg['titulo.acao.pesquisa']}" id="painelPesquisaAcao">
+			<p:focus for="nomePesquisa" id="focusPaginaPesquisa"/>
+			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
+				<h:outputLabel for="nomePesquisa" id="labelNomePesquisa" value="#{msg['label.acao.nome']}" styleClass="labelNegrito"/>
+				<p:inputText value="#{acaoBean.entity.nome}" id="nomePesquisa" size="60" maxlength="255" required="true" requiredMessage="#{msg['acao.nome.obrigatorio']}" title="#{msg['title.acao.nome']}"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+	<p:outputPanel id="painelDetalhePesquisa" rendered="#{acaoBean.modoDetalhePesquisa}" >
+		<p:dataTable value="#{acaoBean.listaEntities}" var="acao" id="dataTableDetalhePesquisa">
+			<p:column id="colunaNomeAcao" sortBy="#{acao.nome}">
+				<f:facet name="header"><h:outputText value="#{msg['label.acao.nome']}" id="labelColunaNome"/></f:facet>
+				<h:outputText value="#{acao.nome}" id="nomeDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaBotaoEditar">
+				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
+				<p:commandLink update="@form" actionListener="#{acaoBean.editar}" id="botaoEditarAcao">
+					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarAcao"/>
+                	<f:setPropertyActionListener value="#{acao}" target="#{acaoBean.entity}"/>  
+            	</p:commandLink>
+			</p:column>            	  
+			<p:column style="text-align:center" id="colunaVisualizar">
+				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
+				<p:commandLink update="@form" actionListener="#{acaoBean.visualizar}" id="botaoVisualizarAcao">
+					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarAcao"/>
+                	<f:setPropertyActionListener value="#{acao}" target="#{acaoBean.entity}" />
+				</p:commandLink>
+			</p:column>
+			<p:column style="text-align:center" id="colunaExcluir">
+				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
+				<p:commandLink update="@form" actionListener="#{acaoBean.iniciarExclusao}" id="botaoExcluirAcao">
+					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirAcao"/>
+                	<f:setPropertyActionListener value="#{acao}" target="#{acaoBean.entity}" />
+            	</p:commandLink>                        
+			</p:column>
+		</p:dataTable>
+	</p:outputPanel>
+</ui:composition>
