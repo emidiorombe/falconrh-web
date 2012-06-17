@@ -1,0 +1,35 @@
+<ui:composition template="/paginas/layout/layout.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="tituloPagina"><h:outputText value="#{msg['titulo.acesso']}" id="tituloPaginaConteudo"/></ui:define>
+	<ui:define name="conteudo">
+		<ui:debug hotkey="q"/>
+		<h:form id="form" prependId="true" acceptcharset="utf-8">
+			<p:messages id="mensagens" showDetail="true" showSummary="true"/>
+			<p:outputPanel id="painelGlobal">
+				<ui:include src="incluirAcesso.xhtml"/>
+				<ui:include src="detalheAcesso.xhtml"/>
+				<ui:include src="pesquisaAcesso.xhtml"/>
+				<p:panel style="text-align: center" rendered="#{not empty acessoBean.modoOperacao}">
+					<p:commandButton value="#{msg['label.botao.cadastro.acesso']}" actionListener="#{acessoBean.cadastrar}" update="form:painelGlobal, form:mensagens" rendered="#{acessoBean.modoInclusao}" title="#{msg['title.botao.cadastro.acesso']}" id="botaoCadastroAcesso"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.acesso']}" actionListener="#{acessoBean.atualizar}" update="form:painelGlobal, form:mensagens" rendered="#{acessoBean.modoEdicao}" title="#{msg['title.botao.atualizacao.acesso']}" id="botaoAtualizacaoAcesso"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.acesso']}" actionListener="#{acessoBean.pesquisar}" update="form:painelGlobal, form:mensagens" rendered="#{acessoBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.acesso']}" id="botaoPesquisaAcesso"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.acesso']}" update="form:painelGlobal, form:mensagens" rendered="#{acessoBean.modoExclusao}" title="#{msg['title.botao.exclusao.acesso']}" id="botaoExclusaoAcesso" onclick="confirmation.show()" type="button"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{acessoBean.voltarParaResultadoDaPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{acessoBean.modoExclusao or acessoBean.modoEdicao or acessoBean.modoDetalhe}" title="#{msg['title.botao.exclusao.acesso']}" immediate="true" id="botaoVoltarAcesso">
+						<f:setPropertyActionListener target="#{acessoBean.entity}" value="#{acessoBean.entity}"/>
+					</p:commandButton>
+					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{acessoBean.iniciarPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{acessoBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente']}" immediate="true" id="botaoPesquisarNovamenteAcesso"/>
+					<p:commandButton value="#{msg['label.botao.sair']}" action="#{acessoBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairAcesso"/>
+				</p:panel>
+			</p:outputPanel>
+			<p:confirmDialog id="confirmDialog" message="Você tem certeza de que deseja excluir o registro?" header="Confirmação de Exclusão" severity="alert" widgetVar="confirmation">
+				<p:commandButton id="confirmId" value="Sim" update="form:painelGlobal, form:mensagens" oncomplete="confirmation.hide()" actionListener="#{acessoBean.excluir}"/>
+				<p:commandButton id="declineId" value="Não" onclick="confirmation.hide()" type="button" /> 
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
