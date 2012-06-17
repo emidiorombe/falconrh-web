@@ -14,6 +14,6 @@ public class Acesso_ extends Parent_ {
 	public static volatile SingularAttribute<Acesso, String> ipUsuario;
 	public static volatile SingularAttribute<Acesso, String> ipServidorAplicacao;
 	public static volatile SingularAttribute<Acesso, Date> dataLogon;
-	public static volatile SingularAttribute<Acesso, Date> dataLogff;
+	public static volatile SingularAttribute<Acesso, Date> dataLogoff;
 	public static volatile SingularAttribute<Acesso, String> idSessao;
 }
