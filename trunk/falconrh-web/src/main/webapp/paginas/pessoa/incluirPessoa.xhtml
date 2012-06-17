@@ -16,17 +16,17 @@
 				<p:calendar value="#{pessoaBean.entity.dataNascimento}" id="dataNascimento" size="12" maxlength="10" required="true" requiredMessage="#{msg['pessoa.dataNascimento.obrigatorio']}" title="#{msg['title.pessoa.dataNascimento']}" showOn="button" navigator="true" locale="pt_BR" lang="pt" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy"/>
 				<h:outputLabel value="#{msg['label.pessoa.sexo']}" id="labelSexo" for="sexo"/>
 				<p:selectOneMenu value="#{pessoaBean.entity.sexo}" id="sexo" required="true" requiredMessage="#{msg['pessoa.sexo.obrigatorio']}" effect="fade">
-					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true"/>
+					<f:selectItem itemLabel="--Selecione--" />
 					<f:selectItems value="#{utilBean.listaSexos}" />
 				</p:selectOneMenu>
 				<h:outputLabel value="#{msg['label.pessoa.estadoCivil']}" id="labelEstadoCivil" for="estadoCivil" />
 				<p:selectOneMenu value="#{pessoaBean.entity.estadoCivil}" id="estadoCivil" required="true" requiredMessage="#{msg['pessoa.estadoCivil.obrigatorio']}" effect="fade">
-					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true"/>
+					<f:selectItem itemLabel="--Selecione--" />
 					<f:selectItems value="#{utilBean.listaEstadosCivis}" />
 				</p:selectOneMenu>
 				<h:outputLabel value="#{msg['label.pessoa.etnia']}" id="labelEtnia" for="etnia" />
 				<p:selectOneMenu value="#{pessoaBean.entity.etnia}" id="etnia" required="true" requiredMessage="#{msg['pessoa.etnia.obrigatorio']}" effect="fade">
-					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true"/>
+					<f:selectItem itemLabel="--Selecione--" />
 					<f:selectItems value="#{utilBean.listaEtnias}" />
 				</p:selectOneMenu>
 				<h:outputLabel value="#{msg['label.pessoa.deficienteFisico']}" id="labelDeficienteFisico" for="deficienteFisico" />
@@ -35,7 +35,7 @@
 				</p:selectOneRadio>
 				<h:outputLabel value="#{msg['label.pessoa.nacionalidade']}" id="labelNacionalidade" for="nacionalidade" />
 				<p:selectOneMenu value="#{pessoaBean.entity.nacionalidade}" id="nacionalidade" required="true" requiredMessage="#{msg['pessoa.nacionalidade.obrigatorio']}" effect="fade">
-					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true"/>
+					<f:selectItem itemLabel="--Selecione--" />
 					<f:selectItems value="#{utilBean.listaNacionalidades}" />
 				</p:selectOneMenu>
 				<h:outputLabel value="#{msg['label.pessoa.email']}" id="labelEmail" for="email"/>
