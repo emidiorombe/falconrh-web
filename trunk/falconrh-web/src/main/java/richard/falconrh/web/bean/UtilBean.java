@@ -38,6 +38,7 @@ import richard.falconrh.modelo.enums.TipoTelefone;
 import richard.falconrh.modelo.enums.UF;
 import richard.falconrh.service.AbstractServices;
 import richard.falconrh.service.AcaoServices;
+import richard.falconrh.service.AgenciaServices;
 import richard.falconrh.service.BancoServices;
 import richard.falconrh.service.PessoaServices;
 
@@ -65,6 +66,8 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 	@EJB(name="ejb/BancoServices")
 	private BancoServices bancoServices;
 	
+	@EJB(name="ejb/AgenciaServices")
+	private AgenciaServices agenciaServices;
 	@EJB(name="ejb/PessoaServices")
 	private PessoaServices pessoaServices;
 	
@@ -286,6 +289,25 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 		SelectItem item = null;
 		for(Acao acao : listaAcoes){
 			item = new SelectItem(acao, acao.getNome());
+			lista[cont++] = item;
+		}
+		return lista;
+	}
+	
+	public SelectItem[] getListaTodasAgencias(){
+		Set<Agencia> listaAgencias = new TreeSet<Agencia>();
+		try{
+			listaAgencias = agenciaServices.obterListaTodasAgencias();
+		}catch(ServicesException e){
+			LOGGER.error("erro.obter.lista.acoes", e);
+			adicionarMensagemErro("erro.obter.lista.acoes");
+			return null;
+		}
+		SelectItem[] lista = new SelectItem[listaAgencias.size()];
+		int cont = 0;
+		SelectItem item = null;
+		for(Agencia agencia : listaAgencias){
+			item = new SelectItem(agencia, agencia.getNome());
 			lista[cont++] = item;
 		}
 		return lista;
