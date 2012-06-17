@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:rich="http://java.sun.com/composite">
+	<p:outputPanel id="painelInclusao" rendered="#{configuracaoSistemaBean.modoInclusao or configuracaoSistemaBean.modoEdicao}">
+		<p:focus for="nomeEmpresarial" id="focusPaginaInclusao"/>
+		<p:panel header="#{msg['label.titulo.inclusao.configuracaoSistema']}" id="panelInclusao">
+			<p:fieldset>
+				<legend>Dados da Empresa</legend>
+				<div>
+					<h:panelGrid columns="2" id="painel2ColunasInclusao">
+						<p:outputLabel value="#{msg['label.configuracaoSistema.nomeEmpresarial']}" for="nomeEmpresarial" id="labelNomeEmpresarial" styleClass="labelNegrito"/>
+						<p:inputText value="#{configuracaoSistemaBean.entity.nomeEmpresarial}" id="nomeEmpresarial" required="true" requiredMessage="#{msg['configuracaoSistema.nomeEmpresarial.obrigatorio']}" title="#{msg['title.configuracaoSistema.nomeEmpresarial']}"/>
+						<p:outputLabel value="#{msg['label.configuracaoSistema.titulo']}" for="titulo" id="labelTitulo" styleClass="labelNegrito"/>
+						<p:inputText value="#{configuracaoSistemaBean.entity.titulo}" id="titulo" required="true" requiredMessage="#{msg['configuracaoSistema.titulo.obrigatorio']}" title="#{msg['title.configuracaoSistema.titulo']}"/>
+						<p:outputLabel value="#{msg['label.configuracaoSistema.cnpj']}" for="cnpj" id="labelCnpj" styleClass="labelNegrito"/>
+						<p:outputLabel value="#{configuracaoSistemaBean.entity.cnpj}" id="cnpj" required="true" requiredMessage="#{msg['configuracaoSistema.cnpj.obrigatorio']}" title="#{msg['title.configuracaoSistema.cnpj']}"/>
+					</h:panelGrid>
+					<rich:painelEndereco value="#{configuracaoSistemaBean.entity.endereco}"/>
+				</div>
+			</p:fieldset>
+			<p:fieldset>
+				<legend>Dados do Responsável perante CNPJ</legend>
+				<p:outputLabel value="#{msg['label.configuracaoSistema.responsavelPeranteCNPJ']}" for="responsavelPeranteCnpj" id="labelResponsavelPeranteCnpj" styleClass="labelNegrito"/>
+				<p:inputText value=""/>
+			</p:fieldset>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>
