@@ -3,6 +3,12 @@
 	<persistence-unit name="falconrh-ejb" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:jboss/datasources/FalconRHDS</jta-data-source>
+		<class>richard.falconrh.entity.seguranca.PerfilaAcessoFuncionalidadeAcao</class>
+		<class>richard.falconrh.entity.seguranca.PerfilAcesso</class>
+		<class>richard.falconrh.entity.seguranca.FuncionalidadeAcao</class>
+		<class>richard.falconrh.entity.seguranca.Funcionalidade</class>
+		<class>richard.falconrh.entity.seguranca.Acesso</class>
+		<class>richard.falconrh.entity.seguranca.Acao</class>
 		<class>richard.falconrh.entity.pessoa.Usuario</class>
 		<class>richard.falconrh.entity.pessoa.Pessoa</class>
 		<class>richard.falconrh.entity.pessoa.Empregado</class>
@@ -15,15 +21,15 @@
 		<class>richard.falconrh.entity.ir.AliquotaImpostoRenda</class>
 		<class>richard.falconrh.entity.inss.TabelaINSS</class>
 		<class>richard.falconrh.entity.inss.AliquotaINSS</class>
+		<class>richard.falconrh.entity.folha.ConfiguracaoFolhaPagamento</class>
 		<class>richard.falconrh.entity.feriado.TabelaFeriado</class>
 		<class>richard.falconrh.entity.feriado.Feriado</class>
+		<class>richard.falconrh.entity.empresa.Empresa</class>
 		<class>richard.falconrh.entity.documento.Documento</class>
+		<class>richard.falconrh.entity.competencia.Competencia</class>
 		<class>richard.falconrh.entity.banco.ContaCorrente</class>
 		<class>richard.falconrh.entity.banco.Banco</class>
 		<class>richard.falconrh.entity.banco.Agencia</class>
-		<class>richard.falconrh.entity.seguranca.Acao</class>
-		<class>richard.falconrh.entity.seguranca.Funcionalidade</class>
-		<class>richard.falconrh.entity.seguranca.PerfilAcesso</class>
 		<class>richard.falconrh.entity.Parent</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
