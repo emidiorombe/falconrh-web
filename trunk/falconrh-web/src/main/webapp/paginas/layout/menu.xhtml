@@ -11,6 +11,16 @@
 	        		<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/pessoa/pessoa.xhtml?modoOperacao=modoPesquisa" id="menuitemCadastrosPessoaPesquisarAlterarExcluir"/>
 				</p:submenu>
 			</p:submenu>
+			<p:submenu label="Configuração do Sistema" id="menuConfiguracaoSistema">
+				<p:submenu label="Empresa" id="submenuConfiguracaoSistemaEmpresa">
+					<p:menuitem value="Nova" url="/faces/paginas/configuracaoSistema/empresa/empresa.xhtml?modoOperacao=modoInclusao" id="menuitemConfiguracaoSistemaEmpresaNovo"/>
+	        		<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/configuracaoSistema/empresa/empresa.xhtml?modoOperacao=modoPesquisa" id="menuitemCOnfiguracaoSistemaEmpresaPesquisarAlterarExcluir"/>
+				</p:submenu>
+				<p:submenu label="Folha de Pagamento" id="submenuConfiguracaoSistemaFolhaPagamento">
+					<p:menuitem value="Nova" url="/faces/paginas/configuracaoSistema/folhaPagamento/configuracaoFolhaPagamento.xhtml?modoOperacao=modoInclusao" id="menuitemConfiguracaoSistemaFolhaPagamentoNovo"/>
+	        		<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/configuracaoSistema/folhaPagamento/configuracaoFolhaPagamento.xhtml?modoOperacao=modoPesquisa" id="menuitemCOnfiguracaoSistemaFolhaPagamentoPesquisarAlterarExcluir"/>
+				</p:submenu>
+			</p:submenu>
 	        <p:submenu label="Gestão" id="menuGestao">
 	        	<p:submenu label="Tabelas do Sistema" id="submenuGestaoTabelasSistema">
 	        		<p:submenu label="Bancos" id="submenuTabelasSistemaBancos">
@@ -51,6 +61,10 @@
 	        		</p:submenu>
 	        	</p:submenu>
 	        	<p:submenu label="Segurança do Sistema" id="submenuGestaoSegurancaSistema">
+    				<p:submenu label="Usuario" id="submenuSegurancaUsuario">
+						<p:menuitem value="Novo" url="/faces/paginas/seguranca/usuario/usuario.xhtml?modoOperacao=modoInclusao" id="menuitemSegurancaUsuarioNovo"/>
+	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/usuario/usuario.xhtml?modoOperacao=modoPesquisa" id="menuitemSegurancaUsuarioPesquisarAlterarExcluir"/>
+					</p:submenu>
 	        		<p:submenu label="Ações" id="submenuGestaoSegurancaAcoes">
 	        			<p:menuitem value="Nova" url="/faces/paginas/seguranca/acao/acao.xhtml?modoOperacao=modoInclusao" id="menuitemGestaoSegurancaAcoesNovo"/>
 	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/acao/acao.xhtml?modoOperacao=modoPesquisa" id="menuitemGestaoSegurancaAcoesPesquisarAlterarExcluir"/>
