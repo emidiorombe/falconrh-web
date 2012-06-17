@@ -10,7 +10,7 @@
 			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
 				<h:outputLabel value="#{msg['label.municipio.uf']}" for="ufPesquisa" />
 				<p:selectOneMenu value="#{municipioBean.entity.uf}" id="ufPesquisa" title="#{msg['title.municipio.uf']}" effect="fade" >
-					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true"/>
+					<f:selectItem itemLabel="--Selecione--" />
 					<f:selectItems value="#{utilBean.listaUFs}" />
 				</p:selectOneMenu>
 				<h:outputLabel for="nomePesquisa" id="labelNomePesquisa" value="#{msg['label.municipio.nome']}"/>
