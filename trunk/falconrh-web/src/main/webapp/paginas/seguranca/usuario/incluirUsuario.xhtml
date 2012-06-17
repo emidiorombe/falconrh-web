@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<p:outputPanel id="painelInclusao" rendered="#{usuarioBean.modoInclusao or usuarioBean.modoEdicao}">
+		<p:panel header="#{msg['label.titulo.inclusao.usuario']}">
+			<p:focus for="nome" id="focusPaginaInclusao"/>
+			<h:panelGrid columns="2" id="painel2ColunasInclusao">
+				<p:outputLabel value="#{msg['label.usuario.nome']}" for="nome" id="labelNome" styleClass="labelNegrito"/>
+				<p:selectOneMenu value="#{usuarioBean.pessoa}" converter="pessoaConverter" id="nome" required="true" requiredMessage="#{msg['usuario.nome.obrigatorio']}" title="#{msg['title.usuario.nome']}">
+					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
+					<f:selectItems value="#{utilBean.listaPessoas}" var="pessoa" itemLabel="#{pessoa.nome}" itemValue="#{pessoa}"/>
+				</p:selectOneMenu>
+				<p:outputLabel value="#{msg['label.usuario.login']}" id="labelLogin" for="login" styleClass="labelNegrito"/>
+				<p:inputText value="#{usuarioBean.entity.login}" id="login" required="true" requiredMessage="#{msg['usuario.login.obrigatorio']}" title="#{msg['title.usuario.login']}"/>
+				<p:outputLabel value="#{msg['label.usuario.senha']}" id="labelSenha" for="senha" styleClass="labelNegrito"/>
+				<p:password value="#{usuarioBean.entity.senha}" promptLabel="Informe uma senha forte para sua segurança" id="senha" required="true" requiredMessage="#{msg['usuario.senha.obrigatorio']}" title="#{msg['title.usuario.senha']}" feedback="true" goodLabel="Senha boa" strongLabel="Senha Forte" weakLabel="Senha Fraca" redisplay="false"/>
+				<p:outputLabel value="#{msg['label.usuario.ativo']}" id="labelAtivo" for="ativo" styleClass="labelNegrito"/>
+				<p:selectOneRadio converter="simNaoConverter" value="#{usuarioBean.entity.ativo}" id="ativo" required="true" requiredMessage="#{msg['usuario.ativo.obrigatorio']}" title="#{msg['title.usuario.ativo']}">
+					<f:selectItems value="#{utilBean.listaSimOuNao}" id="selectItemsSimOUNao"/>
+				</p:selectOneRadio> 
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>
