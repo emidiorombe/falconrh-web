@@ -86,4 +86,13 @@ public class AgenciaServicesImpl extends AbstractServicesImpl<Agencia> implement
 		TypedQuery<Agencia> typedQuery = getEntityManager().createQuery(criteriaQuery);
 		return new HashSet<Agencia>(typedQuery.getResultList());
 	}
+
+	@Override
+	public Set<Agencia> obterListaTodasAgencias() throws ServicesException {
+		CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<Agencia> criteriaQuery = criteriaBuilder.createQuery(Agencia.class);
+		criteriaQuery.from(Agencia.class);
+		TypedQuery<Agencia> typedQuery = getEntityManager().createQuery(criteriaQuery);
+		return new HashSet<Agencia>(typedQuery.getResultList());
+	}
 }
