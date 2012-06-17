@@ -52,7 +52,7 @@ public class Funcionalidade extends Parent implements Principal{
 	}
 
 	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="FUNCIONALIDADE_ACOES", joinColumns = @JoinColumn(name="ID_FUNCIONALIDADE", referencedColumnName="ID"), inverseJoinColumns= @JoinColumn(name="ID_ACAO", referencedColumnName="ID"))
+	@JoinTable(name="FUNCIONALIDADES_ACOES", joinColumns = @JoinColumn(name="ID_FUNCIONALIDADE", referencedColumnName="ID"), inverseJoinColumns= @JoinColumn(name="ID_ACAO", referencedColumnName="ID"))
 	public List<Acao> getListaAcoes() {
 		return listaAcoes;
 	}
