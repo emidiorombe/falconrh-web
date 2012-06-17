@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelPesquisa" rendered="#{acessoBean.modoPesquisa}">
+		<p:panel header="#{msg['titulo.acesso.pesquisa']}" id="painelPesquisaAcesso">
+			<p:focus for="usuarioPesquisa" id="focusPaginaPesquisa"/>
+			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
+				<h:outputLabel for="usuarioPesquisa" id="labelNomePesquisa" value="#{msg['label.acesso.nome']}" styleClass="labelNegrito"/>
+				<p:inputText value="#{acessoBean.entity.usuario}" id="usuarioPesquisa" size="60" maxlength="255" required="true" requiredMessage="#{msg['acesso.usuario.obrigatorio']}" title="#{msg['title.acesso.usuario']}" converter="usuarioConverter"/>
+				<h:outputLabel for="dataLogonPesquisa" id="labelDataLogonPesquisa" value="#{msg['label.acesso.dataLogon']}" styleClass="labelNegrito"/>
+				<p:calendar value="#{acessoBean.entity.dataLogon}" id="dataLogonPesquisa" required="false" requiredMessage="#{msg['acesso.dataLogon.obrigatorio']}" title="#{msg['title.acesso.dataLogon']}" pattern="dd/MM/yyyy hh:mm:ss" timeZone="America/Sao_Paulo" locale="pt_BR"/>
+				<h:outputLabel for="dataLogoffPesquisa" id="labelDataLogoffPesquisa" value="#{msg['label.acesso.dataLogoff']}" styleClass="labelNegrito"/>
+				<p:calendar value="#{acessoBean.entity.dataLogoff}" id="dataLogoffPesquisa" required="true" requiredMessage="#{msg['acesso.dataLogoff.obrigatorio']}" title="#{msg['title.acesso.dataLogoff']}" pattern="dd/MM/yyyy hh:mm:ss" timeZone="America/Sao_Paulo" locale="pt_BR"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+	<p:outputPanel id="painelDetalhePesquisa" rendered="#{acessoBean.modoDetalhePesquisa}" >
+		<p:dataTable value="#{acessoBean.listaEntities}" var="acesso" id="dataTableDetalhePesquisa">
+			<p:column id="colunaUsuarioAcesso" sortBy="#{acesso.usuario.nome}">
+				<f:facet name="header"><h:outputText value="#{msg['label.acesso.usuario']}" id="labelColunaUsuario"/></f:facet>
+				<h:outputText value="#{acesso.usuario.nome}" id="usuarioDetalhe"/>
+			</p:column>
+			<p:column id="colunaDataLogonAcesso" sortBy="#{acesso.dataLogon}">
+				<f:facet name="header"><h:outputText value="#{msg['label.acesso.dataLogon']}" id="labelColunaDataLogon"/></f:facet>
+				<h:outputText value="#{acesso.dataLogon}" id="dataLogonDetalhe"/>
+			</p:column>
+			<p:column id="colunaDataLogoffAcesso" sortBy="#{acesso.dataLogoff}">
+				<f:facet name="header"><h:outputText value="#{msg['label.acesso.dataLogoff']}" id="labelColunaDataLogoff"/></f:facet>
+				<h:outputText value="#{acesso.dataLogoff}" id="dataLogoffDetalhe"/>
+			</p:column>
+			
+			<p:column style="text-align:center" id="colunaBotaoEditar">
+				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
+				<p:commandLink update="@form" actionListener="#{acessoBean.editar}" id="botaoEditarAcesso">
+					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarAcesso"/>
+                	<f:setPropertyActionListener value="#{acesso}" target="#{acessoBean.entity}"/>  
+            	</p:commandLink>
+			</p:column>            	  
+			<p:column style="text-align:center" id="colunaVisualizar">
+				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
+				<p:commandLink update="@form" actionListener="#{acessoBean.visualizar}" id="botaoVisualizarAcesso">
+					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarAcesso"/>
+                	<f:setPropertyActionListener value="#{acesso}" target="#{acessoBean.entity}" />
+				</p:commandLink>
+			</p:column>
+			<p:column style="text-align:center" id="colunaExcluir">
+				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
+				<p:commandLink update="@form" actionListener="#{acessoBean.iniciarExclusao}" id="botaoExcluirAcesso">
+					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirAcesso"/>
+                	<f:setPropertyActionListener value="#{acesso}" target="#{acessoBean.entity}" />
+            	</p:commandLink>                        
+			</p:column>
+		</p:dataTable>
+	</p:outputPanel>
+</ui:composition>

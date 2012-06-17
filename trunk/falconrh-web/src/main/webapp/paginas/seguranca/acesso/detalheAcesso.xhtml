@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelDetalhe" rendered="#{acessoBean.modoDetalhe or acessoBean.modoExclusao}">
+		<p:panel header="#{msg['titulo.acesso.detalhe']}" id="painelDetalheAcao">
+			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
+				<h:outputLabel value="#{msg['label.acesso.usuario']}" for="usuarioDetalhe" id="labelUsuarioDetalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{acessoBean.entity.usuario.nome}" id="usuarioDetalheDetalhe"/>
+				<h:outputLabel value="#{msg['label.acesso.dataLogon']}" id="labelDataLogonDetalhe" for="dataLogonDetalhe"/>
+				<h:outputText value="#{acessoBean.entity.dataLogon}" id="dataLogonDetalhe">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" locale="pt_BR"/>
+				</h:outputText>
+				<h:outputLabel value="#{msg['label.acesso.dataLogoff']}" id="labelDataLogoffDetalhe" for="dataLogoffDetalhe"/>
+				<h:outputText value="#{acessoBean.entity.dataLogoff}" id="dataLogoffDetalhe">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" locale="pt_BR"/>
+				</h:outputText>
+				<h:outputLabel for="ipUsuarioDetalhe" id="labelIUsuarioDetalhe" value="#{msg['label.acesso.ipUsuario']}"/>
+				<h:outputText value="#{acessoBean.entity.ipUsuario}" id="ipUsuarioDetalhe"/>
+				<h:outputLabel for="ipServidorAplicacaoDetalhe" id="labelIpServidorAplicacaoDetalhe" value="#{msg['label.acesso.ipServidorAplicacao']}"/>
+				<h:outputText value="#{acessoBean.entity.ipServidorAplicacao}" id="ipServidorAplicacaoDetalhe"/>
+				<h:outputLabel for="idSessaoDetalhe" id="labelIdSessaoDetalhe" value="#{msg['label.acesso.idSessao']}"/>
+				<h:outputText value="#{acessoBean.entity.idSessao}" id="idSessaoDetalhe"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>

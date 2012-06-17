@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelInclusao" rendered="#{usuarioBean.modoInclusao or usuarioBean.modoEdicao}">
+		<p:panel header="#{msg['label.titulo.inclusao.acao']}">
+			<p:focus for="usuario" id="focusPaginaInclusao"/>
+			<h:panelGrid columns="2" id="painel2ColunasInclusao">
+				<p:outputLabel value="#{msg['label.acesso.usuario']}" for="usuario" id="labelUsuario" styleClass="labelNegrito"/>
+				<p:inputText value="#{acessoBean.entity.usuario.nome}" id="usuario" converter="usuarioConverter" required="true" requiredMessage="#{msg['acesso.usuario.obrigatorio']}" title="#{msg['title.acesso.usuario']}"/>
+				<p:outputLabel value="#{msg['label.acesso.dataLogon']}" id="labelDataLogon" for="dataLogon"/>
+				<p:calendar value="#{acessoBean.entity.dataLogon}" id="dataLogon" required="true" requiredMessage="#{msg['acesso.dataLogon.obrigatorio']}" title="#{msg['title.acesso.dataLogon']}" pattern="dd/MM/yyyy hh:mm:ss" timeZone="America/Sao_Paulo"  locale="pt_BR"/>
+				<p:outputLabel value="#{msg['label.acesso.dataLogoff']}" id="labelDataLogoff" for="dataLogoff"/>
+				<p:outputLabel for="ipUsuario" id="labelIpUsuario" value="#{msg['label.acesso.ipUsuario']}"/>
+				<p:inputText value="#{acessoBean.entity.ipUsuario}" id="ipUsuario" required="true" requiredMessage="#{msg['acesso.ipUsuario.obrigatorio']}" title="#{msg['title.acesso.ipUsuario']}"/>
+				<p:outputLabel for="ipServidorAplicacao" id="labelIpServidorAplicacao" value="#{msg['label.acesso.ipServidorAplicacao']}"/>
+				<p:inputText value="#{acessoBean.entity.ipServidorAplicacao}" id="ipServidorAplicacao" required="true" requiredMessage="#{msg['acesso.ipServidorAplicacao.obrigatorio']}" title="#{msg['title.acesso.ipServidorAplicacao']}"/>
+				<p:outputLabel for="idSessao" id="labelIdSessao" value="#{msg['label.acesso.idSessao']}"/>
+				<p:inputText value="#{acessoBean.entity.idSessao}" id="idSessao" required="true" requiredMessage="#{msg['acesso.idSessao.obrigatorio']}" title="#{msg['title.acesso.idSessao']}"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>
