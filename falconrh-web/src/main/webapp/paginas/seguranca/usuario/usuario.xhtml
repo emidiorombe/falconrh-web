@@ -1,0 +1,35 @@
+<ui:composition template="/paginas/layout/layout.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="tituloPagina"><h:outputText value="#{msg['titulo.usuario']}" id="tituloPaginaConteudo"/></ui:define>
+	<ui:define name="conteudo">
+		<ui:debug hotkey="q"/>
+		<h:form id="form" prependId="true" acceptcharset="utf-8">
+			<p:messages id="mensagens" showDetail="true" showSummary="true"/>
+			<p:outputPanel id="painelGlobal">
+				<ui:include src="incluirUsuario.xhtml"/>
+				<ui:include src="detalheUsuario.xhtml"/>
+				<ui:include src="pesquisaUsuario.xhtml"/>
+				<p:panel style="text-align: center" rendered="#{not empty usuarioBean.modoOperacao}">
+					<p:commandButton value="#{msg['label.botao.cadastro.usuario']}" actionListener="#{usuarioBean.cadastrar}" update="form:painelGlobal, form:mensagens" rendered="#{usuarioBean.modoInclusao}" title="#{msg['title.botao.cadastro.usuario']}" id="botaoCadastroUsuario"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.usuario']}" actionListener="#{usuarioBean.atualizar}" update="form:painelGlobal, form:mensagens" rendered="#{usuarioBean.modoEdicao}" title="#{msg['title.botao.atualizacao.usuario']}" id="botaoAtualizacaoUsuario"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.usuario']}" actionListener="#{usuarioBean.pesquisar}" update="form:painelGlobal, form:mensagens" rendered="#{usuarioBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.usuario']}" id="botaoPesquisaUsuario"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.usuario']}" update="form:painelGlobal, form:mensagens" rendered="#{usuarioBean.modoExclusao}" title="#{msg['title.botao.exclusao.usuario']}" id="botaoExclusaoUsuario" onclick="confirmation.show()" type="button"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{usuarioBean.voltarParaResultadoDaPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{usuarioBean.modoExclusao or usuarioBean.modoEdicao or usuarioBean.modoDetalhe}" title="#{msg['title.botao.exclusao.usuario']}" immediate="true" id="botaoVoltarUsuario">
+						<f:setPropertyActionListener target="#{usuarioBean.entity}" value="#{usuarioBean.entity}"/>
+					</p:commandButton>
+					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{usuarioBean.iniciarPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{usuarioBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente']}" immediate="true" id="botaoPesquisarNovamenteUsuario"/>
+					<p:commandButton value="#{msg['label.botao.sair']}" action="#{usuarioBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairUsuario"/>
+				</p:panel>
+			</p:outputPanel>
+			<p:confirmDialog id="confirmDialog" message="Você tem certeza de que deseja excluir o registro?" header="Confirmação de Exclusão" severity="alert" widgetVar="confirmation">
+				<p:commandButton id="confirmId" value="Sim" update="form:painelGlobal, form:mensagens" oncomplete="confirmation.hide()" actionListener="#{usuarioBean.excluir}"/>
+				<p:commandButton id="declineId" value="Não" onclick="confirmation.hide()" type="button" /> 
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
