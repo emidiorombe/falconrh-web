@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelDetalhe" rendered="#{configuracaoFolhaPagamentoBean.modoDetalhe or configuracaoFolhaPagamentoBean.modoExclusao}">
+		<p:panel header="#{msg['titulo.configuracaoFolhaPagamento.detalhe']}" id="painelDetalheConfiguracaoFolhaPagamento">
+			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
+				<h:outputLabel value="#{msg['label.configuracaoFolhaPagamento.descricao']}" for="descricaoDetalhe" id="labelDescricaoDetalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{configuracaoFolhaPagamentoBean.entity.descricao}" id="descricaoDetalhe"/>
+			</h:panelGrid>
+			<h:panelGrid columns="4" id="painel2colunasDetalhe2">
+				<h:outputLabel value="#{msg['label.configuracaoFolhaPagamento.diaPagamentoFolhaAdiantamento13']}" id="labelDiaPagamentoFolhaAdiantamento13Detalhe" for="diaPagamentoFolhaAdiantamento13Detalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{configuracaoFolhaPagamentoBean.entity.diaPagamentoFolhaAdiantamento13}" id="diaPagamentoFolhaAdiantamento13Detalhe" size="2"/>			
+				<h:outputLabel value="#{msg['label.configuracaoFolhaPagamento.diaPagamentoFolhaAdiantamentoFerias']}" id="labelDiaPagamentoFolhaAdiantamentoFeriasDetalhe" for="diaPagamentoFolhaAdiantamentoFeriasDetalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{configuracaoFolhaPagamentoBean.entity.diaPagamentoFolhaAdiantamentoFerias}" id="diaPagamentoFolhaAdiantamentoFeriasDetalhe" size="2"/>
+				<h:outputLabel value="#{msg['label.configuracaoFolhaPagamento.diaPagamentoFolha13']}" id="labelDiaPagamentoFolha13Detalhe" for="diaPagamentoFolha13Detalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{configuracaoFolhaPagamentoBean.entity.diaPagamentoFolha13}" id="diaPagamentoFolha13Detalhe" size="2"/>
+				<h:outputLabel value="#{msg['label.configuracaoFolhaPagamento.diaPagamentoFolhaAdiantamentoFeriasManual']}" id="labelDiaPagamentoFolhaAdiantamentoFeriasManualDetalhe" for="diaPagamentoFolhaAdiantamentoFeriasManualDetalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{configuracaoFolhaPagamentoBean.entity.diaPagamentoFolhaAdiantamentoFeriasManual}" id="diaPagamentoFolhaAdiantamentoFeriasManualDetalhe" size="2"/>
+				<h:outputLabel value="#{msg['label.configuracaoFolhaPagamento.diaPagamentoFolhaNormal']}" id="labelDiaPagamentoFolhaNormalDetalhe" for="diaPagamentoFolhaNormalDetalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{configuracaoFolhaPagamentoBean.entity.diaPagamentoFolhaNormal}" id="diaPagamentoFolhaNormalDetalhe" size="2"/>
+				<h:outputLabel value="#{msg['label.configuracaoFolhaPagamento.diaPagamentoFolhaNormalManual']}" id="labelDiaPagamentoFolhaNormalManualDetalhe" for="diaPagamentoFolhaNormalManualDetalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{configuracaoFolhaPagamentoBean.entity.diaPagamentoFolhaNormalManual}" id="diaPagamentoFolhaNormalManualDetalhe" size="2"/>
+				<h:outputLabel value="#{msg['label.configuracaoFolhaPagamento.mesCobrancaContribuicaoSindical']}" id="labelMesCobrancaContribuicaoSindicalDetalhe" for="mesCobrancaContribuicaoSindicalDetalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{configuracaoFolhaPagamentoBean.entity.mesCobrancaContribuicaoSindical}" id="mesCobrancaContribuicaoSindicalDetalhe" size="2"/>
+				<h:outputLabel value="#{msg['label.configuracaoFolhaPagamento.mesLimitePagamentoFolhaAdiantamento13']}" id="labelMesLimitePagamentoFolhaAdiantamento13Detalhe" for="mesLimitePagamentoFolhaAdiantamento13Detalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{configuracaoFolhaPagamentoBean.entity.mesLimitePagamentoFolhaAdiantamento13}" id="mesLimitePagamentoFolhaAdiantamento13Detalhe" size="2"/>
+				<h:outputLabel value="#{msg['label.configuracaoFolhaPagamento.mesPagamentoFolhaAdiantamento13']}" id="labelMesPagamentoFolhaAdiantamento13Detalhe" for="mesPagamentoFolhaAdiantamento13Detalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{configuracaoFolhaPagamentoBean.entity.mesPagamentoFolhaAdiantamento13}" id="mesPagamentoFolhaAdiantamento13Detalhe" size="2"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>
