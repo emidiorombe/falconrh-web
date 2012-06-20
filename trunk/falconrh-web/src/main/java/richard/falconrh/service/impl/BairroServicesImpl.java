@@ -59,7 +59,7 @@ public class BairroServicesImpl extends AbstractServicesImpl<Bairro> implements 
 		
 		Predicate listaRestricoes = criteriaBuilder.conjunction();
 		if(StringUtils.isNotBlank(bairro.getNome())){
-			Predicate restricaoNome = criteriaBuilder.like(criteriaBuilder.lower(from.get(Bairro_.nome)), "%" + bairro.getMunicipio().getNome().toLowerCase() + "%");
+			Predicate restricaoNome = criteriaBuilder.like(criteriaBuilder.lower(from.get(Bairro_.nome)), "%" + bairro.getNome().toLowerCase() + "%");
 			listaRestricoes = criteriaBuilder.and(restricaoNome);
 		}
 		if(bairro.getMunicipio()!=null){
