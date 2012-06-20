@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -23,7 +24,7 @@ import richard.falconrh.modelo.enums.TipoLogradouro;
 @Entity
 @Table(name="LOGRADOUROS")
 @GenericGenerator(name = "SEQ_GEN", strategy = "sequence", parameters = { @Parameter(name = "sequence", value = "SEQ_LOGRADOUROS") })
-public class Logradouro extends Parent{
+public class Logradouro extends Parent implements Comparable<Logradouro>{
 	private static final long serialVersionUID = -768435063368126425L;
 
 	private TipoLogradouro tipoLogradouro;
@@ -44,8 +45,8 @@ public class Logradouro extends Parent{
 
 	/**
 	 * Method getTipoLogradouro.
-	
-	 * @return TipoLogradouro */
+	 * @return TipoLogradouro
+	 */
 	@Enumerated(value=EnumType.STRING)
 	@Column(nullable=false, length=30)
 	public TipoLogradouro getTipoLogradouro() {
@@ -54,8 +55,8 @@ public class Logradouro extends Parent{
 
 	/**
 	 * Method getNome.
-	
-	 * @return String */
+	 * @return String 
+	 */
 	@Column(length=255, nullable=false)
 	public String getNome() {
 		return nome;
@@ -63,8 +64,8 @@ public class Logradouro extends Parent{
 
 	/**
 	 * Method getBairro.
-	
-	 * @return Bairro */
+	 * @return Bairro
+	 */
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_BAIRRO", nullable=false)
 	@ForeignKey(name="fk_bairro")
@@ -111,5 +112,16 @@ public class Logradouro extends Parent{
 	 */
 	public void setCep(Long cep){
 		this.cep = cep;
+	}
+
+	@Override
+	public int compareTo(Logradouro o) {
+		if(this.getId()!=null & bairro.getId()!=null){
+			return this.getId().compareTo(bairro.getId());
+		}
+		if(StringUtils.isNotBlank(this.getNome()) && StringUtils.isNotBlank(bairro.getNome())){
+			return this.getNome().compareTo(bairro.getNome());
+		}
+		return 0;
 	}
 }
