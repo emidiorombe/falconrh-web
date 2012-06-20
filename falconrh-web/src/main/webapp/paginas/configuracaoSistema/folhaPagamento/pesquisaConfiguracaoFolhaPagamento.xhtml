@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelPesquisa" rendered="#{configuracaoFolhaPagamentoBean.modoPesquisa}">
+		<p:panel header="#{msg['titulo.configuracaoFolhaPagamento.pesquisa']}" id="painelPesquisaConfiguracaoFolhaPagamento">
+			<p:focus for="descricaoPesquisa" id="focusPaginaPesquisa"/>
+			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
+				<h:outputLabel for="descricaoPesquisa" id="labelDescricaoPesquisa" value="#{msg['label.configuracaoFolhaPagamento.descricao']}" styleClass="labelNegrito"/>
+				<p:inputText value="#{configuracaoFolhaPagamentoBean.entity.descricao}" id="descricaoPesquisa" required="true" requiredMessage="#{msg['configuracaoFolhaPagamento.descricao.obrigatorio']}" title="#{msg['title.configuracaoFolhaPagamento.descricao']}" showButtonPanel="true"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+	<p:outputPanel id="painelDetalhePesquisa" rendered="#{configuracaoFolhaPagamentoBean.modoDetalhePesquisa}" >
+		<p:dataTable value="#{configuracaoFolhaPagamentoBean.listaEntities}" var="configuracaoFolhaPagamento" id="dataTableDetalhePesquisa">
+			<p:column id="colunaDescricaoConfiguracaoFolhaPagamento" sortBy="#{configuracaoFolhaPagamento.descricao}">
+				<f:facet name="header"><h:outputText value="#{msg['label.configuracaoFolhaPagamento.descricao']}" id="labelColunaDescricao"/></f:facet>
+				<h:outputText value="#{configuracaoFolhaPagamento.descricao}" id="descricaoDetalhe"/>
+			</p:column>
+			<p:column id="colunaDataInicioVigenciaFolhaPagamento" sortBy="#{configuracaoFolhaPagamento.dataInicioVigencia}" style="text-align:center">
+				<f:facet name="header"><h:outputText value="#{msg['label.configuracaoFolhaPagamento.dataInicioVigencia']}" id="labelColunaDataInicioVigencia"/></f:facet>
+				<h:outputText value="#{configuracaoFolhaPagamento.dataInicioVigencia}" id="dataInicioVigenciaDetalhe">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeStyle="America/Sao_Paulo" locale="pt_BR"/>
+				</h:outputText>
+			</p:column>
+			<p:column id="colunaDataTerminoVigenciaConfiguracaoFolhaPagamento" sortBy="#{configuracaoFolhaPagamento.dataTerminoVigencia}" style="text-align:center">
+				<f:facet name="header"><h:outputText value="#{msg['label.configuracaoFolhaPagamento.dataTerminoVigencia']}" id="labelColunaDataTerminoVigencia"/></f:facet>
+				<h:outputText value="#{configuracaoFolhaPagamento.dataTerminoVigencia}" id="dataTerminoVigenciaDetalhe">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeStyle="America/Sao_Paulo" locale="pt_BR"/>
+				</h:outputText>
+			</p:column>
+			<p:column style="text-align:center" id="colunaBotaoEditar">
+				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
+				<p:commandLink update="@form" actionListener="#{configuracaoFolhaPagamentoBean.editar}" id="botaoEditarConfiguracaoFolhaPagamento">
+					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarConfiguracaoFolhaPagamento"/>
+                	<f:setPropertyActionListener value="#{configuracaoFolhaPagamento}" target="#{configuracaoFolhaPagamentoBean.entity}"/>  
+            	</p:commandLink>
+			</p:column>            	  
+			<p:column style="text-align:center" id="colunaVisualizar">
+				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
+				<p:commandLink update="@form" actionListener="#{configuracaoFolhaPagamentoBean.visualizar}" id="botaoVisualizarConfiguracaoFolhaPagamento">
+					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarConfiguracaoFolhaPagamento"/>
+                	<f:setPropertyActionListener value="#{configuracaoFolhaPagamento}" target="#{configuracaoFolhaPagamentoBean.entity}" />
+				</p:commandLink>
+			</p:column>
+			<p:column style="text-align:center" id="colunaExcluir">
+				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
+				<p:commandLink update="@form" actionListener="#{configuracaoFolhaPagamentoBean.iniciarExclusao}" id="botaoExcluirConfiguracaoFolhaPagamento">
+					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirConfiguracaoFolhaPagamento"/>
+                	<f:setPropertyActionListener value="#{configuracaoFolhaPagamento}" target="#{configuracaoFolhaPagamentoBean.entity}" />
+            	</p:commandLink>                        
+			</p:column>
+		</p:dataTable>
+	</p:outputPanel>
+</ui:composition>

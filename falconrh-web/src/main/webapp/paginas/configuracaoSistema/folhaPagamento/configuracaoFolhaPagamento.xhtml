@@ -1,0 +1,35 @@
+<ui:composition template="/paginas/layout/layout.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="tituloPagina"><h:outputText value="#{msg['titulo.configuracaoFolhaPagamento']}" id="tituloPaginaConteudo"/></ui:define>
+	<ui:define name="conteudo">
+		<ui:debug hotkey="q"/>
+		<h:form id="form" prependId="true" acceptcharset="utf-8">
+			<p:messages id="mensagens" showDetail="true" showSummary="true"/>
+			<p:outputPanel id="painelGlobal">
+				<ui:include src="incluirConfiguracaoFolhaPagamento.xhtml"/>
+				<ui:include src="detalheConfiguracaoFolhaPagamento.xhtml"/>
+				<ui:include src="pesquisaConfiguracaoFolhaPagamento.xhtml"/>
+				<p:panel style="text-align: center" rendered="#{not empty configuracaoFolhaPagamentoBean.modoOperacao}">
+					<p:commandButton value="#{msg['label.botao.cadastro.configuracaoFolhaPagamento']}" actionListener="#{configuracaoFolhaPagamentoBean.cadastrar}" update="form:painelGlobal, form:mensagens" rendered="#{configuracaoFolhaPagamentoBean.modoInclusao}" title="#{msg['title.botao.cadastro.configuracaoFolhaPagamento']}" id="botaoCadastroConfiguracaoFolhaPagamento"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.configuracaoFolhaPagamento']}" actionListener="#{configuracaoFolhaPagamentoBean.atualizar}" update="form:painelGlobal, form:mensagens" rendered="#{configuracaoFolhaPagamentoBean.modoEdicao}" title="#{msg['title.botao.atualizacao.configuracaoFolhaPagamento']}" id="botaoAtualizacaoConfiguracaoFolhaPagamento"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.configuracaoFolhaPagamento']}" actionListener="#{configuracaoFolhaPagamentoBean.pesquisar}" update="form:painelGlobal, form:mensagens" rendered="#{configuracaoFolhaPagamentoBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.configuracaoFolhaPagamento']}" id="botaoPesquisaConfiguracaoFolhaPagamento"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.configuracaoFolhaPagamento']}" update="form:painelGlobal, form:mensagens" rendered="#{configuracaoFolhaPagamentoBean.modoExclusao}" title="#{msg['title.botao.exclusao.configuracaoFolhaPagamento']}" id="botaoExclusaoConfiguracaoFolhaPagamento" onclick="confirmation.show()" type="button"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{configuracaoFolhaPagamentoBean.voltarParaResultadoDaPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{configuracaoFolhaPagamentoBean.modoExclusao or configuracaoFolhaPagamentoBean.modoEdicao or configuracaoFolhaPagamentoBean.modoDetalhe}" title="#{msg['title.botao.exclusao.configuracaoFolhaPagamento']}" immediate="true" id="botaoVoltarConfiguracaoFolhaPagamento">
+						<f:setPropertyActionListener target="#{configuracaoFolhaPagamentoBean.entity}" value="#{configuracaoFolhaPagamentoBean.entity}"/>
+					</p:commandButton>
+					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{configuracaoFolhaPagamentoBean.iniciarPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{configuracaoFolhaPagamentoBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente']}" immediate="true" id="botaoPesquisarNovamenteConfiguracaoFolhaPagamento"/>
+					<p:commandButton value="#{msg['label.botao.sair']}" action="#{configuracaoFolhaPagamentoBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairConfiguracaoFolhaPagamento"/>
+				</p:panel>
+			</p:outputPanel>
+			<p:confirmDialog id="confirmDialog" message="Você tem certeza de que deseja excluir o registro?" header="Confirmação de Exclusão" severity="alert" widgetVar="confirmation">
+				<p:commandButton id="confirmId" value="Sim" update="form:painelGlobal, form:mensagens" oncomplete="confirmation.hide()" actionListener="#{configuracaoFolhaPagamentoBean.excluir}"/>
+				<p:commandButton id="declineId" value="Não" onclick="confirmation.hide()" type="button" /> 
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

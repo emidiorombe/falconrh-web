@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelInclusao" rendered="#{configuracaoFolhaPagamentoBean.modoInclusao or configuracaoFolhaPagamentoBean.modoEdicao}">
+		<p:panel header="#{msg['label.titulo.inclusao.configuracaoFolhaPagamento']}">
+			<p:focus for="descricao" id="focusPaginaInclusao"/>
+			<h:panelGrid columns="2" id="painel2ColunasInclusao">
+				<p:outputLabel value="#{msg['label.configuracaoFolhaPagamento.descricao']}" for="descricao" id="labelDescricao" styleClass="labelNegrito"/>
+				<p:inputText value="#{configuracaoFolhaPagamentoBean.entity.descricao}" id="descricao" size="40" maxlength="100" required="true" requiredMessage="#{msg['configuracaoFolhaPagamento.descricao.obrigatorio']}" title="#{msg['title.configuracaoFolhaPagamento.descricao']}"/>
+				<p:outputLabel value="#{msg['label.configuracaoFolhaPagamento.agenciaFGTS']}" for="agenciaFGTS" id="labelAgenciaFGTS" styleClass="labelNegrito"/>
+				<p:selectOneMenu value="#{configuracaoFolhaPagamentoBean.entity.agenciaFGTS}" id="agenciaFGTS" required="true" requiredMessage="#{msg['configuracaoFolhaPagamento.agenciaFGTS.obrigatorio']}" title="#{msg['title.configuracaoFolhaPagamento.agenciaFGTS']}" converter="agenciaConverter" converterMessage="Erro ao converter agencia">
+					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
+					<f:selectItems value="#{utilBean.listaTodasAgencias}" var="agencia" itemLabel="#{agencia.descricao}" itemValue="#{agencia}"/>
+				</p:selectOneMenu>
+				<p:outputLabel value="#{msg['label.configuracaoFolhaPagamento.dataInicioVigencia']}" for="dataInicioVigencia" id="labelDataInicioVigencia" styleClass="labelNegrito"/>
+				<p:calendar value="#{configuracaoFolhaPagamentoBean.entity.dataInicioVigencia}" size="12" id="dataInicioVigencia"  timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" lang="pt" locale="pt_BR" navigator="true" required="true" requiredMessage="#{msg['configuracaoFolhaPagamento.dataInicioVigencia.obrigatorio']}" title="#{msg['title.configuracaoFolhaPagamento.dataInicioVigencia']}" showButtonPanel="true"/>
+				<p:outputLabel value="#{msg['label.configuracaoFolhaPagamento.dataTerminoVigencia']}" for="dataTerminoVigencia" id="labelDataTerminoVigencia" styleClass="labelNegrito"/>
+				<p:calendar value="#{configuracaoFolhaPagamentoBean.entity.dataTerminoVigencia}" size="12" id="dataTerminoVigencia"  timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" lang="pt" locale="pt_BR" navigator="true" required="false" requiredMessage="#{msg['configuracaoFolhaPagamento.dataTerminoVigencia.obrigatorio']}" title="#{msg['title.configuracaoFolhaPagamento.dataTerminoVigencia']}" showButtonPanel="true"/>
+				<p:outputLabel id="labelForcarNormal" for="forcarNormal" value="#{msg['label.configuracaoFolhaPagamento.forcarDiaPagamentoFolhaNormalManual']}" styleClass="labelNegrito"/>
+				<p:selectBooleanCheckbox value="#{configuracaoFolhaPagamentoBean.entity.forcarDiaPagamentoFolhaNormalManual}" id="forcarNormal" required="true" requiredMessage="#{msg['label.configuracaoFolhaPagamento.forcarDiaPagamentoFolhaNormalManual']}"/>
+				<p:outputLabel id="labelForcarAdiantamentoFerias" for="forcarAdiantamentoFerias" value="#{msg['label.configuracaoFolhaPagamento.forcarDiaPagamentoFolhaAdiantamentoFeriasManual']}" styleClass="labelNegrito"/>
+				<p:selectBooleanCheckbox value="#{configuracaoFolhaPagamentoBean.entity.forcarDiaPagamentoFolhaAdiantamentoFeriasManual}" id="forcarAdiantamentoFerias" required="true" requiredMessage="#{msg['label.configuracaoFolhaPagamento.forcarDiaPagamentoFolhaAdiantamentoFeriasManual']}" onchange="changeForcarDataAdiantamentoFerias()"/>
+			</h:panelGrid>
+			<h:panelGrid columns="4" id="painel2colunasInclusao2">
+				<p:outputLabel value="#{msg['label.configuracaoFolhaPagamento.diaPagamentoFolhaAdiantamento13']}" id="labelDiaPagamentoFolhaAdiantamento13" for="diaPagamentoFolhaAdiantamento13" styleClass="labelNegrito"/>
+				<p:spinner value="#{configuracaoFolhaPagamentoBean.entity.diaPagamentoFolhaAdiantamento13}" min="1" max="31" id="diaPagamentoFolhaAdiantamento13" size="2" required="true" requiredMessage="#{msg['configuracaoFolhaPagamento.diaPagamentoFolhaAdiantamento13.obrigatorio']}']" title="#{msg['title.configuracaoFolhaPagamento.diaPagamentoFolhaAdiantamento13']}"/>
+				<p:outputLabel value="#{msg['label.configuracaoFolhaPagamento.diaPagamentoFolhaAdiantamentoFerias']}" id="labelDiaPagamentoFolhaAdiantamentoFerias" for="diaPagamentoFolhaAdiantamentoFerias" styleClass="labelNegrito"/>
+				<p:spinner value="#{configuracaoFolhaPagamentoBean.entity.diaPagamentoFolhaAdiantamentoFerias}" min="1" max="31" id="diaPagamentoFolhaAdiantamentoFerias" size="2" required="true" requiredMessage="#{msg['configuracaoFolhaPagamento.diaPagamentoFolhaAdiantamentoFerias.obrigatorio']}" title="#{msg['title.configuracaoFolhaPagamento.diaPagamentoFolhaAdiantamentoFerias']}]"/>
+				<p:outputLabel value="#{msg['label.configuracaoFolhaPagamento.diaPagamentoFolha13']}" id="labelDiaPagamentoFolha13" for="diaPagamentoFolha13" styleClass="labelNegrito"/>
+				<p:spinner value="#{configuracaoFolhaPagamentoBean.entity.diaPagamentoFolha13}" min="1" max="31" id="diaPagamentoFolha13" size="2" required="true" requiredMessage="#{msg['configuracaoFolhaPagamento.diaPagamentoFolha13.obrigatorio']}" title="#{msg['title.configuracaoFolhaPagamento.diaPagamentoFolha13']}"/>
+				<p:outputLabel value="#{msg['label.configuracaoFolhaPagamento.diaPagamentoFolhaAdiantamentoFeriasManual']}" id="labelDiaPagamentoFolhaAdiantamentoFeriasManual" for="diaPagamentoFolhaAdiantamentoFeriasManual" styleClass="labelNegrito"/>
+				<p:spinner value="#{configuracaoFolhaPagamentoBean.entity.diaPagamentoFolhaAdiantamentoFeriasManual}" min="1" max="31" id="diaPagamentoFolhaAdiantamentoFeriasManual" size="2" required="true" requiredMessage="#{msg['configuracaoFolhaPagamento.diaPagamentoFolhaAdiantamentoFeriasManual.obrigatorio']}" title="#{msg['configuracaoFolhaPagamento.diaPagamentoFolhaAdiantamentoFeriasManual']}"/>
+				<p:outputLabel value="#{msg['label.configuracaoFolhaPagamento.diaPagamentoFolhaNormal']}" id="labelDiaPagamentoFolhaNormal" for="diaPagamentoFolhaNormal" styleClass="labelNegrito"/>
+				<p:spinner value="#{configuracaoFolhaPagamentoBean.entity.diaPagamentoFolhaNormal}" min="1" max="31" id="diaPagamentoFolhaNormal" size="2" required="true" requiredMessage="#{msg['configuracaoFolhaPagamento.diaPagamentoFolhaNormal.obrigatorio']}" title="#{msg['title.configuracaoFolhaPagamento.diaPagamentoFolhaNormal']}"/>
+				<p:outputLabel value="#{msg['label.configuracaoFolhaPagamento.diaPagamentoFolhaNormalManual']}" id="labelDiaPagamentoFolhaNormalManual" for="diaPagamentoFolhaNormalManual" styleClass="labelNegrito"/>
+				<p:spinner value="#{configuracaoFolhaPagamentoBean.entity.diaPagamentoFolhaNormalManual}" min="1" max="31" id="diaPagamentoFolhaNormalManual" size="2" required="true" requiredMessage="#{msg['configuracaoFolhaPagamento.diaPagamentoFolhaNormalManual.obrigatorio']}" title="#{msg['title.configuracaoFolhaPagamento.diaPagamentoFolhaNormalManual']}"/>
+				<p:outputLabel value="#{msg['label.configuracaoFolhaPagamento.mesCobrancaContribuicaoSindical']}" id="labelMesCobrancaContribuicaoSindical" for="mesCobrancaContribuicaoSindical" styleClass="labelNegrito"/>
+				<p:spinner value="#{configuracaoFolhaPagamentoBean.entity.mesCobrancaContribuicaoSindical}" min="1" max="12" id="mesCobrancaContribuicaoSindical" size="2" required="true" requiredMessage="#{msg['configuracaoFolhaPagamento.mesCobrancaContribuicaoSindical.obrigatorio']}" title="#{msg['title.configuracaoFolhaPagamento.mesCobrancaContribuicaoSindical']}"/>
+				<p:outputLabel value="#{msg['label.configuracaoFolhaPagamento.mesLimitePagamentoFolhaAdiantamento13']}" id="labelMesLimitePagamentoFolhaAdiantamento13" for="mesLimitePagamentoFolhaAdiantamento13" styleClass="labelNegrito"/>
+				<p:spinner value="#{configuracaoFolhaPagamentoBean.entity.mesLimitePagamentoFolhaAdiantamento13}" min="1" max="12" id="mesLimitePagamentoFolhaAdiantamento13" size="2" required="true" requiredMessage="#{msg['configuracaoFolhaPagamento.mesLimitePagamentoFolhaAdiantamento13.obrigatorio']}" title="#{msg['title.configuracaoFolhaPagamento.mesLimitePagamentoFolhaAdiantamento13']}"/>
+				<p:outputLabel value="#{msg['label.configuracaoFolhaPagamento.mesPagamentoFolhaAdiantamento13']}" id="labelMesPagamentoFolhaAdiantamento13" for="mesPagamentoFolhaAdiantamento13" styleClass="labelNegrito"/>
+				<p:spinner value="#{configuracaoFolhaPagamentoBean.entity.mesPagamentoFolhaAdiantamento13}" min="1" max="12" id="mesPagamentoFolhaAdiantamento13" size="2" required="true" requiredMessage="#{msg['configuracaoFolhaPagamento.mesPagamentoFolhaAdiantamento13.obrigatorio']}" title="#{msg['title.configuracaoFolhaPagamento.mesPagamentoFolhaAdiantamento13']}"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>
