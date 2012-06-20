@@ -27,7 +27,6 @@ import richard.falconrh.entity.seguranca.PerfilAcesso;
 import richard.falconrh.modelo.enums.EstadoCivil;
 import richard.falconrh.modelo.enums.Etnia;
 import richard.falconrh.modelo.enums.Nacionalidade;
-import richard.falconrh.modelo.enums.NivelAcesso;
 import richard.falconrh.modelo.enums.Sexo;
 
 /**
@@ -238,7 +237,7 @@ public class TesteMain {
 	 * Method gravarPessoa.
 	 * @param entityManager EntityManager
 	 */
-	private void gravarPessoa(EntityManager entityManager){
+	protected void gravarPessoa(EntityManager entityManager){
 		Pessoa pessoa = criarPessoa();
 		
 		entityManager.getTransaction().begin();
@@ -250,7 +249,7 @@ public class TesteMain {
 	 * Method gravarUsuario.
 	 * @param entityManager EntityManager
 	 */
-	private void gravarUsuario(EntityManager entityManager){
+	protected void gravarUsuario(EntityManager entityManager){
 		Usuario usuario = criarUsuario();
 		
 		entityManager.getTransaction().begin();
