@@ -1,7 +1,7 @@
 package richard.falconrh.modelo.enums;
 
 /**
- * @author richard
+ * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
 public enum TipoDocumento {
@@ -11,7 +11,8 @@ public enum TipoDocumento {
 	CARTEIRA_DE_TRABALHO("Carteira de Trabalho"),
 	CARTEIRA_DE_MOTORISTA("Carteira de Motorista"),
 	RIC("Registro de Identidade Civil"),
-	CERTIFICADO_RESERVISTA("Certificado de Reservista");
+	CERTIFICADO_RESERVISTA("Certificado de Reservista"), 
+	PIS_PASEP("PIS/PASEP");
 	
 	private String descricao;
 
@@ -25,8 +26,8 @@ public enum TipoDocumento {
 
 	/**
 	 * Method getDescricao.
-	
-	 * @return String */
+	 * @return String
+	 */
 	public String getDescricao() {
 		return descricao;
 	}
