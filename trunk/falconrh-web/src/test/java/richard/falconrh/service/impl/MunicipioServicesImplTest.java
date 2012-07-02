@@ -25,8 +25,8 @@ public class MunicipioServicesImplTest extends BaseJPATest{
 	
 	/**
 	 * Method setUp.
-	
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception{
 		super.setUp();
@@ -36,8 +36,8 @@ public class MunicipioServicesImplTest extends BaseJPATest{
 	
 	/**
 	 * Method cadastrarDeveCadastrarMunicipio.
-	
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	@Test
 	public void cadastrarDeveCadastrarMunicipio() throws Exception {
 		Municipio municipio = new Municipio();
@@ -48,5 +48,36 @@ public class MunicipioServicesImplTest extends BaseJPATest{
 		municipioServices.getEntityManager().getTransaction().commit();
 		verificarEstruturaBancoAposInclusao("MUNICIPIOS");
 	}
+	
+	@Test
+	public void alterarDeveAlterarMunicipio() throws Exception {
+		Municipio municipio = getEntityManager().find(Municipio.class, 2L);
+		municipio.setNome("Nome do Município alterado");
+		municipioServices.getEntityManager().getTransaction().begin();
+		municipioServices.alterar(municipio);
+		municipioServices.getEntityManager().getTransaction().commit();
+		verificarEstruturaBancoAposAlteracao("MUNICIPIOS");
+	}
+	
+	@Test
+	public void excluirDeveExcluirMunicipio() throws Exception {
+		Municipio municipio = getEntityManager().find(Municipio.class, 2L);
+		municipioServices.getEntityManager().getTransaction().begin();
+		municipioServices.excluirPeloId(Municipio.class, municipio.getId());
+		municipioServices.getEntityManager().getTransaction().commit();
+		verificarEstruturaBancoAposExclusao("MUNICIPIOS");
+	}
+	
+//	@Test(expected=ServicesException.class)
+//	public void cadastrarDeveLancarExceptionQuandoOcorrerQualquerErro() throws ServicesException{
+//		Municipio municipio = new Municipio();
+//		municipio.setNome("Nome do Município");
+//		municipio.setUf(UF.ACRE);
+//		municipioServices.setEntityManager(null);
+//		municipioServices.cadastrar(municipio);
+//		fail("Deveria ter lançado exception ao cadastrar município");
+//	}
+	
+	
 
 }
