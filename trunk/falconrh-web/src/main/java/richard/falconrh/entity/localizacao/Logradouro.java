@@ -30,7 +30,7 @@ public class Logradouro extends Parent implements Comparable<Logradouro>{
 	private TipoLogradouro tipoLogradouro;
 	private String nome;
 	private Bairro bairro;
-	private Long cep;
+	private Integer cep;
 
 	public Logradouro() {
 	}
@@ -78,7 +78,7 @@ public class Logradouro extends Parent implements Comparable<Logradouro>{
 	
 	 * @return Long */
 	@Column(length=8, nullable=false)
-	public Long getCep(){
+	public Integer getCep(){
 		return cep;
 	}
 
@@ -110,7 +110,7 @@ public class Logradouro extends Parent implements Comparable<Logradouro>{
 	 * Method setCep.
 	 * @param cep Long
 	 */
-	public void setCep(Long cep){
+	public void setCep(Integer cep){
 		this.cep = cep;
 	}
 
