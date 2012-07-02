@@ -192,7 +192,7 @@ public class FalconRHUtils {
 		int resto=0;
 		String strResto="";
 		
-		if(StringUtils.isBlank(numPIS)){
+		if(StringUtils.isBlank(numPIS) || numPIS.length()!=11){
 			return false;
 		}
 		for(int i=0;i<=9;i++){
@@ -218,6 +218,11 @@ public class FalconRHUtils {
 	 * @return boolean
 	 */
 	public static boolean isCEPValido(String value){
+		if(StringUtils.isNotBlank(value)){
+			if(StringUtils.isNumeric(value)){
+				return isCEPValido(Integer.valueOf(value));
+			}
+		}
 		return false;
 	}
 	
@@ -241,12 +246,17 @@ public class FalconRHUtils {
 	
 	/**
 	 * Method isCEPValido.
-	 * @param value Long
+	 * @param value Integer
 	 * @return boolean
 	 */
-	public static boolean isCEPValido(Long value){
-		return false;
+	public static boolean isCEPValido(Integer value){
+		return (value<=99999999 && value >9999999);
 	}
+	
+	public static boolean isCEPValido(Long value){
+		return (value<=99999999L && value >9999999L);
+	}
+	
 	
 	/**
 	 * Method isCPFValido.
@@ -254,7 +264,7 @@ public class FalconRHUtils {
 	 * @return boolean
 	 */
 	public static boolean isCPFValido(Long value){
-		return false;
+		return isCPFValido(String.valueOf(value));
 	}
 
 	/**
