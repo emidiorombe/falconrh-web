@@ -29,9 +29,10 @@ public class CEPValidator implements Validator{
 		boolean isValido = false;
 		if(obj instanceof Long){
 			isValido = FalconRHUtils.isCEPValido((Long)obj);
-		}
-		else if(obj instanceof String){
+		} else if(obj instanceof String){
 			isValido = FalconRHUtils.isCEPValido(FalconRHUtils.getSomenteNumeros(String.valueOf(obj)));
+		} else if(obj instanceof Integer){
+			isValido = FalconRHUtils.isCEPValido((Integer)obj);
 		}
 		if(!isValido){
 			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação", "O valor informado para o CPF não é um valor válido");
