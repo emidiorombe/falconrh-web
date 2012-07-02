@@ -29,7 +29,7 @@ public class LogradouroTest {
 	public void testGetsESets(){
 		Long idBairro = 3212L;
 		Bairro bairro = new Bairro(idBairro);
-		Long cep = 88036001L;
+		Integer cep = 88036001;
 		Long id = 5648L;
 		String descricao = "Nome do bairro";
 		TipoLogradouro tipoLogradouro = TipoLogradouro.RUA;
