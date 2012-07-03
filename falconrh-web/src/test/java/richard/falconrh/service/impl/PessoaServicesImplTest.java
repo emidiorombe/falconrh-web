@@ -3,6 +3,7 @@ package richard.falconrh.service.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -22,7 +23,7 @@ import richard.falconrh.modelo.enums.Nacionalidade;
 import richard.falconrh.modelo.enums.Sexo;
 
 /**
- * @author richard
+ * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
 public class PessoaServicesImplTest extends BaseJPATest{
@@ -38,8 +39,8 @@ public class PessoaServicesImplTest extends BaseJPATest{
 	
 	/**
 	 * Method setUp.
-	
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception{
 		super.setUp();
@@ -49,8 +50,8 @@ public class PessoaServicesImplTest extends BaseJPATest{
 	
 	/**
 	 * Method testObterPessoaPeloId.
-	
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	@Test
 	public void testObterPessoaPeloId() throws Exception{
 		Long id = 2L;
@@ -61,19 +62,20 @@ public class PessoaServicesImplTest extends BaseJPATest{
 	
 	/**
 	 * Method obterPessoaPeloIdDeveLancarExceptionQuandoOcorrerQualquerErro.
-	
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	@Test(expected=ServicesException.class)
 	public void obterPessoaPeloIdDeveLancarExceptionQuandoOcorrerQualquerErro() throws Exception{
 		Long id = 2L;
 		pessoaServices.setEntityManager(null);
 		pessoaServices.obterPeloId(Pessoa.class, id);
+		fail("Deveria ter lançado ServicesException");
 	}
 	
 	/**
 	 * Method cadastrarPessoaDeveCadastrarPessoa.
-	
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	@Test
 	public void cadastrarPessoaDeveCadastrarPessoa() throws Exception{
 		String nome = "Juciara Mendes Madureira";
@@ -109,8 +111,8 @@ public class PessoaServicesImplTest extends BaseJPATest{
 	
 	/**
 	 * Method cadastrarPessoaDeveLancarExceptionQuandoOcorrerQualquerErro.
-	
-	 * @throws ServicesException */
+	 * @throws ServicesException
+	 */
 	@Test(expected=ServicesException.class)
 	public void cadastrarPessoaDeveLancarExceptionQuandoOcorrerQualquerErro() throws ServicesException{
 		String nome = "Juciara Mendes Madureira";
@@ -141,13 +143,12 @@ public class PessoaServicesImplTest extends BaseJPATest{
 		pessoaServices.setEntityManager(null);
 		pessoaServices.cadastrar(pessoa);
 		pessoaServices.getEntityManager().getTransaction().commit();
-		
 	}
 	
 	/**
 	 * Method alterarPessoaDeveAlterarPessoa.
-	
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	@Test
 	public void alterarPessoaDeveAlterarPessoa() throws Exception{
 		Pessoa pessoa = pessoaServices.getEntityManager().find(Pessoa.class, 2L);
@@ -162,8 +163,8 @@ public class PessoaServicesImplTest extends BaseJPATest{
 	
 	/**
 	 * Method alterarPessoaDeveLancarExceptionQuandoOcorrerQualquerErro.
-	
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	@Test(expected=ServicesException.class)
 	public void alterarPessoaDeveLancarExceptionQuandoOcorrerQualquerErro() throws Exception{
 		Pessoa pessoa = pessoaServices.getEntityManager().find(Pessoa.class, 2L);
@@ -177,8 +178,8 @@ public class PessoaServicesImplTest extends BaseJPATest{
 	
 	/**
 	 * Method excluirPessoaDeveExcluir.
-	
-	 * @throws Exception */
+	 * @throws Exception
+	 */
 	@Test
 	public void excluirPessoaDeveExcluir() throws Exception{
 		Long id = 2L;
@@ -191,8 +192,8 @@ public class PessoaServicesImplTest extends BaseJPATest{
 	
 	/**
 	 * Method excluirPessoaDeveLancarExceptionQuandoOcorrerQualquerErro.
-	
-	 * @throws ServicesException */
+	 * @throws ServicesException
+	 */
 	@Test(expected=ServicesException.class)
 	public void excluirPessoaDeveLancarExceptionQuandoOcorrerQualquerErro() throws ServicesException{
 		Long id = 2L;
@@ -204,8 +205,8 @@ public class PessoaServicesImplTest extends BaseJPATest{
 
 	/**
 	 * Method obterListaPeloExemploDeveRetornarListaDeObjetosEncontrados.
-	
-	 * @throws ServicesException */
+	 * @throws ServicesException
+	 */
 	@Test
 	public void obterListaPeloExemploDeveRetornarListaDeObjetosEncontrados() throws ServicesException{
 		Pessoa pessoa = new Pessoa();
@@ -218,8 +219,8 @@ public class PessoaServicesImplTest extends BaseJPATest{
 	
 	/**
 	 * Method obterListaPeloExemploDeveRetornarListaDeObjetosEncontrados1.
-	
-	 * @throws ServicesException */
+	 * @throws ServicesException
+	 */
 	@Test
 	public void obterListaPeloExemploDeveRetornarListaDeObjetosEncontrados1() throws ServicesException{
 		Pessoa pessoa = new Pessoa();
@@ -246,8 +247,8 @@ public class PessoaServicesImplTest extends BaseJPATest{
 	
 	/**
 	 * Method obterListaPeloExemploDeveRetornarListaVaziaQuandoNaoEncontrarNada.
-	
-	 * @throws ServicesException */
+	 * @throws ServicesException
+	 */
 	@Test
 	public void obterListaPeloExemploDeveRetornarListaVaziaQuandoNaoEncontrarNada() throws ServicesException{
 		Pessoa pessoa = new Pessoa();
@@ -259,8 +260,8 @@ public class PessoaServicesImplTest extends BaseJPATest{
 	
 	/**
 	 * Method obterListaPeloExemploDeveLancarExceptionQuandoOcorrerQualquerErro.
-	
-	 * @throws ServicesException */
+	 * @throws ServicesException
+	 */
 	@Test(expected=ServicesException.class)
 	public void obterListaPeloExemploDeveLancarExceptionQuandoOcorrerQualquerErro() throws ServicesException{
 		Pessoa pessoa = new Pessoa();
@@ -268,5 +269,6 @@ public class PessoaServicesImplTest extends BaseJPATest{
 		pessoa.setEstadoCivil(EstadoCivil.CASADO);
 		pessoaServices.setEntityManager(null);
 		pessoaServices.obterListaPeloExemplo(pessoa);
+		fail("Deveria ter lançado exceção ao obter lista pelo exemplo");
 	}
 }
