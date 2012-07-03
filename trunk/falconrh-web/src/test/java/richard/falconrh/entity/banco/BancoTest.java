@@ -56,6 +56,15 @@ public class BancoTest {
 	}
 	
 	@Test
+	public void testarConstrutoraComParametroStringEString(){
+		String codigoFebraban = "001";
+		String nome = "Banco do Brasil";
+		banco = new Banco(codigoFebraban, nome);
+		assertEquals(codigoFebraban, banco.getCodigoFebraban());
+		assertEquals(nome, banco.getNome());
+	}
+	
+	@Test
 	public void getDescricaoDeveRetornarCodigoFebrabanENomeDoBanco(){
 		final String descricaoEsperada = "001 - Banco do Brasil S/A";
 		banco = new Banco();
