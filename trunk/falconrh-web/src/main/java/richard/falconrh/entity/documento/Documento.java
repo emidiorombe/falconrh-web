@@ -121,8 +121,7 @@ public class Documento extends Parent {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
-		result = prime * result
-				+ ((tipoDocumento == null) ? 0 : tipoDocumento.hashCode());
+		result = prime * result + ((tipoDocumento == null) ? 0 : tipoDocumento.hashCode());
 		return result;
 	}
 
