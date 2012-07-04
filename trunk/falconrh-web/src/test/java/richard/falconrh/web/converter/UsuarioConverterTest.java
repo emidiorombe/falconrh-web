@@ -19,47 +19,47 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import richard.falconrh.entity.seguranca.Acao;
-import richard.falconrh.service.AcaoServices;
-import richard.falconrh.service.impl.AcaoServicesImpl;
+import richard.falconrh.entity.pessoa.Usuario;
+import richard.falconrh.service.UsuarioServices;
+import richard.falconrh.service.impl.UsuarioServicesImpl;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(AcaoConverter.class)
-public class AcaoConverterTest {
-	private AcaoConverter acaoConverter;
-	private final String nomeMetodoMockado = "getAcaoServices";
-	private AcaoServices retornoEsperadoAoChamarMetodoMockado;
+@PrepareForTest(UsuarioConverter.class)
+public class UsuarioConverterTest {
+	private UsuarioConverter usuarioConverter;
+	private final String nomeMetodoMockado = "getUsuarioServices";
+	private UsuarioServices retornoEsperadoAoChamarMetodoMockado;
 	
 	@Before
 	public void setUp() throws Exception{
-		acaoConverter = spy(new AcaoConverter());
-		final Acao acaoEsperada = criarAcao();
-		retornoEsperadoAoChamarMetodoMockado = Mockito.mock(AcaoServicesImpl.class);
-		Mockito.when(retornoEsperadoAoChamarMetodoMockado.obterPeloId(Acao.class, acaoEsperada.getId())).thenReturn(acaoEsperada);
-		PowerMockito.when(acaoConverter, nomeMetodoMockado).thenReturn(retornoEsperadoAoChamarMetodoMockado);
+		usuarioConverter = spy(new UsuarioConverter());
+		final Usuario usuarioEsperada = criarUsuario();
+		retornoEsperadoAoChamarMetodoMockado = Mockito.mock(UsuarioServicesImpl.class);
+		Mockito.when(retornoEsperadoAoChamarMetodoMockado.obterPeloId(Usuario.class, usuarioEsperada.getId())).thenReturn(usuarioEsperada);
+		PowerMockito.when(usuarioConverter, nomeMetodoMockado). thenReturn(retornoEsperadoAoChamarMetodoMockado);
 	}
 	
 	@After
 	public void tearDown() throws Exception{
-		acaoConverter = null;
+		usuarioConverter = null;
 	}
 	
 	@Test
-	public void getAsObjectDeveRetornarAcao() throws Exception{
+	public void getAsObjectDeveRetornarUsuario() throws Exception{
 		
 		final String value = "1";
-		final Acao acaoEsperada = criarAcao();
+		final Usuario usuarioEsperada = criarUsuario();
 
 		FacesContext context = Mockito.mock(FacesContext.class);
 		UIComponent component = Mockito.mock(UIComponent.class);
-		Object object = acaoConverter.getAsObject(context, component, value);
+		Object object = usuarioConverter.getAsObject(context, component, value);
 		assertNotNull(object);
-		assertTrue(object instanceof Acao);
-		Acao acaoRetorno = (Acao)object;
-		assertEquals(acaoEsperada, acaoRetorno);
+		assertTrue(object instanceof Usuario);
+		Usuario usuarioRetorno = (Usuario)object;
+		assertEquals(usuarioEsperada, usuarioRetorno);
 
 		// Optionally verify that the private method was actually called
-		verifyPrivate(acaoConverter).invoke(nomeMetodoMockado);
+		verifyPrivate(usuarioConverter).invoke(nomeMetodoMockado);
 	}
 	
 	@Test
@@ -68,39 +68,38 @@ public class AcaoConverterTest {
 
 		FacesContext context = Mockito.mock(FacesContext.class);
 		UIComponent component = Mockito.mock(UIComponent.class);
-		Object object = acaoConverter.getAsObject(context, component, value);
+		Object object = usuarioConverter.getAsObject(context, component, value);
 		assertNull(object);
 		// Optionally verify that the private method was actually called
-		verifyPrivate(acaoConverter).invoke(nomeMetodoMockado);
+		verifyPrivate(usuarioConverter).invoke(nomeMetodoMockado);
 	}
 	
 	@Test
 	public void getAsStringDeveRetornarString() throws Exception{
-		final Acao acaoEsperada = criarAcao();
-		final String idAcao = "1";
+		final Usuario usuarioEsperada = criarUsuario();
+		final String idUsuario = "1";
 		
 		FacesContext context = Mockito.mock(FacesContext.class);
 		UIComponent component = Mockito.mock(UIComponent.class);
-		String retorno = acaoConverter.getAsString(context, component, acaoEsperada);
+		String retorno = usuarioConverter.getAsString(context, component, usuarioEsperada);
 		assertNotNull(retorno);
 		assertTrue(retorno instanceof String);
-		assertEquals(idAcao, retorno);
+		assertEquals(idUsuario, retorno);
 	}
 	
 	@Test
-	public void getAsStringDeveRetornarNullQuandoNaoForinstanciaAcao() throws Exception{
+	public void getAsStringDeveRetornarNullQuandoNaoForinstanciaUsuario() throws Exception{
 		FacesContext context = Mockito.mock(FacesContext.class);
 		UIComponent component = Mockito.mock(UIComponent.class);
-		String retorno = acaoConverter.getAsString(context, component, new Object());
+		String retorno = usuarioConverter.getAsString(context, component, new Object());
 		assertNull(retorno);
 	}
 
-	protected Acao criarAcao() {
-		final Long idAcao = 1L;
-		final String nomeAcao = "Cadastrar";
-		Acao acaoRetorno = new Acao();
-		acaoRetorno.setId(idAcao);
-		acaoRetorno.setNome(nomeAcao);
-		return acaoRetorno;
+	protected Usuario criarUsuario() {
+		final Long id = 1L;
+		Usuario usuario = new Usuario();
+		usuario.setId(id);
+		//TODO incluir mais sets
+		return usuario;
 	}
 }
