@@ -16,7 +16,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import richard.falconrh.util.FalconRHUtils;
 
 /**
- * @author richard
+ * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
 @RunWith(PowerMockRunner.class)
