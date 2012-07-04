@@ -17,7 +17,7 @@ import richard.falconrh.entity.Parent;
 import richard.falconrh.util.FalconRHUtils;
 
 /**
- * @author richard
+ * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
 @Entity
@@ -43,8 +43,8 @@ public class ContaCorrente extends Parent {
 	
 	/**
 	 * Method getAgencia.
-	
-	 * @return Agencia */
+	 * @return Agencia
+	 */
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_AGENCIA", nullable=false)
 	@ForeignKey(name="fk_agencia")
@@ -54,8 +54,8 @@ public class ContaCorrente extends Parent {
 	
 	/**
 	 * Method getNumero.
-	
-	 * @return String */
+	 * @return String
+	 */
 	@Column(length=8, nullable=false)
 	public String getNumero(){
 		return numero;
@@ -63,8 +63,8 @@ public class ContaCorrente extends Parent {
 
 	/**
 	 * Method getDigitoVerificador.
-	
-	 * @return String */
+	 * @return String
+	 */
 	@Column(length=2, nullable=false)
 	public String getDigitoVerificador() {
 		return digitoVerificador;
@@ -96,8 +96,8 @@ public class ContaCorrente extends Parent {
 	
 	/**
 	 * Method getDescricao.
-	
-	 * @return String */
+	 * @return String
+	 */
 	@Transient
 	public String getDescricao(){
 		if(StringUtils.isNotBlank(getDigitoVerificador())){
@@ -108,8 +108,8 @@ public class ContaCorrente extends Parent {
 
 	/**
 	 * Method isValida.
-	
-	 * @return boolean */
+	 * @return boolean
+	 */
 	@Transient
 	public boolean isValida() {
 		String dv = FalconRHUtils.getDigitoVerificador(getNumero());
