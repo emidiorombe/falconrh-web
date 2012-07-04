@@ -17,46 +17,34 @@ import richard.falconrh.exception.ServicesException;
 import richard.falconrh.service.AgenciaServices;
 
 /**
- * Classe para conversão de instancias de objetos Agencia em Strings para utilização em arquivos xhtml
+ * Classe para conversão de instâncias de objetos Agência em Strings para utilização em arquivos xhtml
  * @author Richard Mendes Madureira
- *
  * @version $Revision: 1.0 $
  */
 @FacesConverter(forClass=Agencia.class, value="agenciaConverter")
 public class AgenciaConverter implements Converter {
 	private static final Logger logger = Logger.getLogger(AgenciaConverter.class);
-	private AgenciaServices agenciaServices;
-	
-	public AgenciaConverter(){
-		agenciaServices = getAgenciaServices();
-	}
-	
-	/**
-	 * Method setAgenciaServices.
-	 * @param agenciaServices AgenciaServices
-	 */
-	public void setAgenciaServices(AgenciaServices agenciaServices){
-		this.agenciaServices = agenciaServices;
-	}
 	
 	/**
 	 * Method getAsObject.
 	 * @param context FacesContext
 	 * @param component UIComponent
 	 * @param value String
-	
-	
-	 * @return Object * @see javax.faces.convert.Converter#getAsObject(FacesContext, UIComponent, String) */
+	 * @return Object * @see javax.faces.convert.Converter#getAsObject(FacesContext, UIComponent, String)
+	 */
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Agencia agencia = null;
-		if(StringUtils.isNotBlank(value) && !"--Selecione--".equals(value)){
+		if(StringUtils.isNotBlank(value) && !"--Selecione--".equals(value) && StringUtils.isNumeric(value)){
 			try {
 				Long idAgencia = Long.valueOf(value);
-				agencia = agenciaServices.obterPeloId(Agencia.class, idAgencia);
+				agencia = getAgenciaServices().obterPeloId(Agencia.class, idAgencia);
+				if(logger.isDebugEnabled()){
+					logger.debug("Agência encontrada: " + agencia.getId() + " - " + agencia.getNome());
+				}
 			} catch (ServicesException e) {
-				logger.error("Erro ao converter a string para um objeto do tipo agencia", e);
-				FacesMessage facesMessage = new FacesMessage("Erro ao converter a String para um objeto do tipo Agencia");
+				logger.error("Erro ao converter a string para um objeto do tipo Agencia", e);
+				FacesMessage facesMessage = new FacesMessage("Erro de Conversão: ", "Erro ao converter a String para um objeto do tipo Agencia");
 				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 			}
 			return agencia;
@@ -69,32 +57,34 @@ public class AgenciaConverter implements Converter {
 	 * @param context FacesContext
 	 * @param component UIComponent
 	 * @param value Object
-	
-	
-	 * @return String * @see javax.faces.convert.Converter#getAsString(FacesContext, UIComponent, Object) */
+	 * @return String * @see javax.faces.convert.Converter#getAsString(FacesContext, UIComponent, Object)
+	 */
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		String idAgencia = null;
 		if (value != null && (value instanceof Agencia)) {
 			idAgencia = String.valueOf(((Agencia) value).getId());
 		}
+		if(logger.isDebugEnabled()){
+			logger.debug("String convertida: " + idAgencia);
+		}
 		return idAgencia;
 	}
 
 	/**
 	 * Method getAgenciaServices.
-	
-	 * @return AgenciaServices */
-	private AgenciaServices getAgenciaServices() {
+	 * @return AgenciaServices
+	 */
+	private AgenciaServices getAgenciaServices(){
 		try {
 			Context context = new InitialContext();
 			String name = "java:global/falconrh-web/ejb/AgenciaServices";
 			AgenciaServices services = (AgenciaServices) context.lookup(name);
 			return services;
 		} catch (NamingException e) {
+			logger.error("Erro ao tentar obter o EJB AgenciaServices");
 			e.printStackTrace();
 		}
 		return null;
 	}
-
 }

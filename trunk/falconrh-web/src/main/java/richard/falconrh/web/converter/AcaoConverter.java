@@ -9,6 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import richard.falconrh.entity.seguranca.Acao;
@@ -29,19 +30,23 @@ public class AcaoConverter implements Converter {
 	 * @param context FacesContext
 	 * @param component UIComponent
 	 * @param value String
-	 * @return Object * @see javax.faces.convert.Converter#getAsObject(FacesContext, UIComponent, String) */
+	 * @return Object * @see javax.faces.convert.Converter#getAsObject(FacesContext, UIComponent, String)
+	 */
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Long idAcao = Long.valueOf(value);
 		Acao acao = null;
-		try {
-			acao = getAcaoServices().obterPeloId(Acao.class, idAcao);
-		} catch (ServicesException e) {
-			logger.error("Erro ao converter a String para um objeto do tipo Acao", e);
-			FacesMessage facesMessage = new FacesMessage("Erro ao converter a String para um objeto do tipo Acao");
-			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		if(StringUtils.isNotBlank(value) && !"--Selecione--".equals(value)){
+			try {
+				Long idAcao = Long.valueOf(value);
+				acao = getAcaoServices().obterPeloId(Acao.class, idAcao);
+			} catch (ServicesException e) {
+				logger.error("Erro ao converter a string para um objeto do tipo Acao", e);
+				FacesMessage facesMessage = new FacesMessage("Erro ao converter a String para um objeto do tipo Acao");
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			}
+			return acao;
 		}
-		return acao;
+		return null;
 	}
 
 	/**
@@ -49,7 +54,8 @@ public class AcaoConverter implements Converter {
 	 * @param context FacesContext
 	 * @param component UIComponent
 	 * @param value Object
-	 * @return String * @see javax.faces.convert.Converter#getAsString(FacesContext, UIComponent, Object) */
+	 * @return String * @see javax.faces.convert.Converter#getAsString(FacesContext, UIComponent, Object)
+	 */
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		String idAcao = null;
