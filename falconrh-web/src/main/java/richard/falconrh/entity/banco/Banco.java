@@ -121,18 +121,10 @@ public class Banco extends Parent implements Comparable<Banco>{
 	 */
 	@Override
 	public int compareTo(Banco b2) {
-		if(StringUtils.isNotBlank(this.getCodigoFebraban())){
-			if(StringUtils.isNotBlank(b2.getCodigoFebraban())){
-				return this.getCodigoFebraban().compareTo(b2.getCodigoFebraban());
-			}else{
-				return 0;
-			}
-		}else if(StringUtils.isNotBlank(this.getNome())){
-			if(StringUtils.isNotBlank(b2.getNome())){
-				return this.getNome().compareTo(b2.getNome());
-			}else{
-				return 0;
-			}
+		if(StringUtils.isNotBlank(this.getCodigoFebraban()) && StringUtils.isNotBlank(b2.getCodigoFebraban())){
+			return this.getCodigoFebraban().compareTo(b2.getCodigoFebraban());
+		} else if(StringUtils.isNotBlank(this.getNome()) && StringUtils.isNotBlank(b2.getNome())){
+			return this.getNome().compareTo(b2.getNome());
 		}
 		return 0;
 	}
