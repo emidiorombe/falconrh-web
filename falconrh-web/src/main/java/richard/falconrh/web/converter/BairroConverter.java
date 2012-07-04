@@ -1,5 +1,6 @@
 package richard.falconrh.web.converter;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -8,6 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import richard.falconrh.entity.localizacao.Bairro;
@@ -15,59 +17,65 @@ import richard.falconrh.exception.ServicesException;
 import richard.falconrh.service.BairroServices;
 
 /**
- * Classe para conversão de instancias de objetos Bairro em Strings para utilização em arquivos xhtml
+ * Classe para conversão de instâncias de objetos Bairros em Strings para utilização em arquivos xhtml
  * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
 @FacesConverter(forClass=Bairro.class, value="bairroConverter")
 public class BairroConverter implements Converter {
-	private static final Logger LOGGER = Logger.getLogger(BairroConverter.class);
+	private static final Logger logger = Logger.getLogger(BairroConverter.class);
 	
 	/**
 	 * Method getAsObject.
-	 * @param ctx FacesContext
+	 * @param context FacesContext
 	 * @param component UIComponent
 	 * @param value String
-	 * @return Object
-	 * @see javax.faces.convert.Converter#getAsObject(FacesContext, UIComponent, String)
+	 * @return Object * @see javax.faces.convert.Converter#getAsObject(FacesContext, UIComponent, String)
 	 */
 	@Override
-	public Object getAsObject(FacesContext ctx, UIComponent component, String value) {
-		LOGGER.debug("Convertendo A String bairro em um objeto...");
-		if(value==null || "".equals(value) || value.equals("--Selecione--")){
-			return null;
+	public Object getAsObject(FacesContext context, UIComponent component, String value) {
+		Bairro bairro = null;
+		if(StringUtils.isNotBlank(value) && !"--Selecione--".equals(value) && StringUtils.isNumeric(value)){
+			try {
+				Long idBairro = Long.valueOf(value);
+				bairro = getBairroServices().obterPeloId(Bairro.class, idBairro);
+				if(logger.isDebugEnabled()){
+					logger.debug("Bairro encontrado: " + bairro.getId() + " - " + bairro.getNome());
+				}
+			} catch (ServicesException e) {
+				logger.error("Erro ao converter a string para um objeto do tipo Bairro", e);
+				FacesMessage facesMessage = new FacesMessage("Erro de Conversão: ", "Erro ao converter a String para um objeto do tipo Bairro");
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			}
+			return bairro;
 		}
-		Long id =  Long.parseLong(value);
-		try{
-			return getBairroServices().obterPeloId(Bairro.class, id);
-		}catch(ServicesException e){
-			LOGGER.error("Erro ao converter o bairro", e);
-			throw new RuntimeException(e);
-		}
+		return null;
 	}
 
 	/**
 	 * Method getAsString.
-	 * @param ctx FacesContext
+	 * @param context FacesContext
 	 * @param component UIComponent
-	 * @param object Object
-	 * @return String
-	 * @see javax.faces.convert.Converter#getAsString(FacesContext, UIComponent, Object)
+	 * @param value Object
+	 * @return String * @see javax.faces.convert.Converter#getAsString(FacesContext, UIComponent, Object)
 	 */
 	@Override
-	public String getAsString(FacesContext ctx, UIComponent component, Object object) {
-		LOGGER.debug("Convertendo o objeto bairro em String...");
-		if(object instanceof Bairro){
-			return String.valueOf(((Bairro) object).getId());
+	public String getAsString(FacesContext context, UIComponent component, Object value) {
+		String idBairro = null;
+		if (value != null && (value instanceof Bairro)) {
+			idBairro = String.valueOf(((Bairro) value).getId());
 		}
-		return null;
+		if(logger.isDebugEnabled()){
+			logger.debug("String convertida: " + idBairro);
+		}
+		return idBairro;
 	}
-	
+
 	/**
 	 * Method getBairroServices.
 	 * @return BairroServices
 	 */
-	public BairroServices getBairroServices(){
+	private BairroServices getBairroServices() {
 		try {
 			Context context = new InitialContext();
 			String name = "java:global/falconrh-web/ejb/BairroServices";

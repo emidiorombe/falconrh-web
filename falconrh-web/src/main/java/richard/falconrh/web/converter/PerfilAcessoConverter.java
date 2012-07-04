@@ -9,6 +9,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import richard.falconrh.entity.seguranca.PerfilAcesso;
@@ -16,14 +17,14 @@ import richard.falconrh.exception.ServicesException;
 import richard.falconrh.service.PerfilAcessoServices;
 
 /**
- * Classe para conversão de instancias de objetos Acao em Strings para utilização em arquivos xhtml
+ * Classe para conversão de instâncias de objetos PerfilAcesso em Strings para utilização em arquivos xhtml
  * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
 @FacesConverter(forClass=PerfilAcesso.class, value="perfilAcessoConverter")
 public class PerfilAcessoConverter implements Converter {
 	private static final Logger logger = Logger.getLogger(PerfilAcessoConverter.class);
-
+	
 	/**
 	 * Method getAsObject.
 	 * @param context FacesContext
@@ -33,16 +34,22 @@ public class PerfilAcessoConverter implements Converter {
 	 */
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Long idPerfilAcesso = Long.valueOf(value);
 		PerfilAcesso perfilAcesso = null;
-		try {
-			perfilAcesso = getPerfilAcessoServices().obterPeloId(PerfilAcesso.class, idPerfilAcesso);
-		} catch (ServicesException e) {
-			logger.error("Erro ao converter a String para um objeto do tipo PerfilAcesso", e);
-			FacesMessage facesMessage = new FacesMessage("Erro ao converter a String para um objeto do tipo PerfilAcesso");
-			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		if(StringUtils.isNotBlank(value) && !"--Selecione--".equals(value) && StringUtils.isNumeric(value)){
+			try {
+				Long idPerfilAcesso = Long.valueOf(value);
+				perfilAcesso = getPerfilAcessoServices().obterPeloId(PerfilAcesso.class, idPerfilAcesso);
+				if(logger.isDebugEnabled()){
+					logger.debug("Perfil de acesso encontrado: " + perfilAcesso.getId() + " - " + perfilAcesso.getNome());
+				}
+			} catch (ServicesException e) {
+				logger.error("Erro ao converter a string para um objeto do tipo PerfilAcesso", e);
+				FacesMessage facesMessage = new FacesMessage("Erro de Conversão: ", "Erro ao converter a String para um objeto do tipo PerfilAcesso");
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			}
+			return perfilAcesso;
 		}
-		return perfilAcesso;
+		return null;
 	}
 
 	/**
@@ -57,6 +64,9 @@ public class PerfilAcessoConverter implements Converter {
 		String idPerfilAcesso = null;
 		if (value != null && (value instanceof PerfilAcesso)) {
 			idPerfilAcesso = String.valueOf(((PerfilAcesso) value).getId());
+		}
+		if(logger.isDebugEnabled()){
+			logger.debug("String convertida: " + idPerfilAcesso);
 		}
 		return idPerfilAcesso;
 	}
@@ -76,5 +86,4 @@ public class PerfilAcessoConverter implements Converter {
 		}
 		return null;
 	}
-
 }
