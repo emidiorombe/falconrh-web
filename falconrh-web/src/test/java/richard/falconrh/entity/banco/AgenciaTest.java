@@ -128,4 +128,24 @@ public class AgenciaTest {
 		assertFalse(agencia.isValida());
 		PowerMockito.verifyStatic();
 	}
+	
+	@Test
+	public void testCompareTo(){
+		Agencia agencia = new Agencia();
+		agencia.setId(1L);
+		agencia.setNome("Bbbb");
+		agencia.setNumero("1111");
+		
+		Agencia agencia2 = new Agencia();
+		agencia2.setId(2L);
+		agencia2.setNumero("2222");
+		agencia2.setNome("Aaaa");
+		int a = agencia.compareTo(agencia2);
+		assertTrue(a<0);
+		int a2 = agencia2.compareTo(agencia);
+		assertTrue(a2>0);
+		agencia2 = agencia;
+		int a3 = agencia.compareTo(agencia2);
+		assertEquals(0, a3);
+	}
 }
