@@ -67,7 +67,11 @@ public class UsuarioBean extends BaseBean<Usuario, UsuarioServices>{
 	public void cadastrar(ActionEvent event) {
 		try {
 			BeanUtils.copyProperties(getEntity(), getPessoa());
-		} catch (IllegalAccessException | InvocationTargetException e) {
+		} catch (IllegalAccessException e) {
+			FacesMessage mensagem = new FacesMessage("Erro ao  tentar copiar propriedades de pessoa para usuario");
+			FacesContext.getCurrentInstance().addMessage(null, mensagem);
+			e.printStackTrace();
+		} catch (InvocationTargetException e){
 			FacesMessage mensagem = new FacesMessage("Erro ao  tentar copiar propriedades de pessoa para usuario");
 			FacesContext.getCurrentInstance().addMessage(null, mensagem);
 			e.printStackTrace();
