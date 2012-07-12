@@ -27,12 +27,7 @@ import richard.falconrh.service.AcessoServices;
  */
 @Stateless(name="ejb/AcessoServices", mappedName="AcessoServices")
 public class AcessoServicesImpl extends AbstractServicesImpl<Acesso> implements AcessoServices {
-	/**
-	 * Method obterListaPeloExemplo.
-	 * @param entity Acesso
-	 * @return Set<Acesso> * @throws ServicesException
-	 */
-	
+
 	public static volatile SingularAttribute<Acesso, Usuario> usuario;
 	public static volatile SingularAttribute<Acesso, String> ipUsuario;
 	public static volatile SingularAttribute<Acesso, String> ipServidorAplicacao;
