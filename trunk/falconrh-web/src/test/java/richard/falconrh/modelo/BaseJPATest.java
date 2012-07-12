@@ -88,8 +88,6 @@ public class BaseJPATest {
 	/**
 	 * Method substituirDatasEValoresNulos.
 	 * @param dataSet IDataSet
-	
-	
 	 * @throws DatabaseUnitException * @throws Exception */
 	protected void substituirDatasEValoresNulos(IDataSet dataSet) throws DatabaseUnitException, Exception{
 		ReplacementDataSet replacementDataSet = new ReplacementDataSet(dataSet); 
@@ -104,7 +102,6 @@ public class BaseJPATest {
 	 * Method verificarEstruturaBanco.
 	 * @param arquivoDadosEsperado String
 	 * @param tabelas String[]
-	
 	 * @throws Exception */
 	private void verificarEstruturaBanco(String arquivoDadosEsperado, String... tabelas) throws Exception{
 		IDatabaseConnection databaseConnection = new DatabaseConnection(getConnection());
@@ -124,7 +121,6 @@ public class BaseJPATest {
 	/**
 	 * Method verificarEstruturaBancoAposInclusao.
 	 * @param tabelas String[]
-	
 	 * @throws Exception */
 	public void verificarEstruturaBancoAposInclusao(String... tabelas) throws Exception{
 		assertNotNull("Para realizar a comparacao de dados apos a operacao é necessário informar o arquivo de comparacao", nomeArquivoAposInclusao);
@@ -134,7 +130,6 @@ public class BaseJPATest {
 	/**
 	 * Method verificarEstruturaBancoAposAlteracao.
 	 * @param tabelas String[]
-	
 	 * @throws Exception */
 	public void verificarEstruturaBancoAposAlteracao(String... tabelas) throws Exception{
 		assertNotNull("Para realizar a comparacao de dados apos a operacao é necessario informar o arquivo de comparacao", nomeArquivoAposAlteracao);
@@ -144,7 +139,6 @@ public class BaseJPATest {
 	/**
 	 * Method verificarEstruturaBancoAposExclusao.
 	 * @param tabelas String[]
-	
 	 * @throws Exception */
 	public void verificarEstruturaBancoAposExclusao(String... tabelas) throws Exception{
 		assertNotNull("Para realizar a comparacao de dados apos a operacao é necessario informar o arquivo de comparacao", nomeArquivoAposExclusao);
@@ -154,8 +148,6 @@ public class BaseJPATest {
 	/**
 	 * Method getTabelaBase.
 	 * @param nomeTabela String
-	
-	
 	 * @return ITable * @throws Exception */
 	public ITable getTabelaBase(String nomeTabela) throws Exception{
 		assertNotNull("Para realizar a comparacao de dados apos a operacao é necessario informar o arquivo de comparacao", nomeArquivoBase);
