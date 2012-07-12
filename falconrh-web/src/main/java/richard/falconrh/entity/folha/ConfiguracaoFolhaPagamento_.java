@@ -1,5 +1,7 @@
 package richard.falconrh.entity.folha;
 
+import java.util.Date;
+
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
@@ -20,4 +22,8 @@ public class ConfiguracaoFolhaPagamento_ extends Parent_{
 	public static volatile SingularAttribute<ConfiguracaoFolhaPagamento, Integer> diaPagamentoFolhaAdiantamentoFeriasManual;
 	public static volatile SingularAttribute<ConfiguracaoFolhaPagamento, Boolean> forcarDiaPagamentoFolhaNormalManual;
 	public static volatile SingularAttribute<ConfiguracaoFolhaPagamento, Boolean> forcarDiaPagamentoFolhaAdiantamentoFeriasManual;
+	public static volatile SingularAttribute<ConfiguracaoFolhaPagamento, Date> dataInicioVigencia;
+	public static volatile SingularAttribute<ConfiguracaoFolhaPagamento, Date> dataTerminoVigencia;
+	public static volatile SingularAttribute<ConfiguracaoFolhaPagamento, String> descricao;
+	
 }
