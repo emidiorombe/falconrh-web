@@ -2,7 +2,6 @@ package richard.falconrh.entity.seguranca;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -33,7 +32,7 @@ public class Acesso extends Parent {
 	public Acesso() {
 	}
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="ID_USUARIO", nullable=false)
 	public Usuario getUsuario() {
 		return usuario;
@@ -44,7 +43,7 @@ public class Acesso extends Parent {
 		return ipUsuario;
 	}
 
-	@Column(name = "IP_SEVR_APLI", length = 39, nullable = false)
+	@Column(name = "IP_SERV_APLI", length = 39, nullable = false)
 	public String getIpServidorAplicacao() {
 		return ipServidorAplicacao;
 	}
