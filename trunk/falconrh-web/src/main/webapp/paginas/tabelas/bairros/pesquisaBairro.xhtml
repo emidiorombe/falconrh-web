@@ -30,27 +30,31 @@
 				<f:facet name="header"><h:outputText value="#{msg['label.bairro.nome']}" id="labelColunaNome"/></f:facet>
 				<h:outputText value="#{bairro.nome}" id="nomeDetalhe"/>
 			</p:column>
-			<p:column style="text-align:center" id="colunaUF" sortBy="#{bairro.uf}">
+			<p:column id="colunaMunicipioBairro" sortBy="#{bairro.municipio.nome}">
+				<f:facet name="header"><h:outputText value="#{msg['label.bairro.municipio']}" id="labelColunaMunicipio"/></f:facet>
+				<h:outputText value="#{bairro.municipio.nome}" id="municipioDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaUF" sortBy="#{bairro.municipio.uf.nome}">
 				<f:facet name="header"><h:outputText value="#{msg['label.bairro.uf']}" id="labelColunaUF" /></f:facet>
-				<h:outputText value="#{bairro.uf}" id="ufDetalhe"/>
+				<h:outputText value="#{bairro.municipio.uf.nome}" id="ufDetalhe"/>
 			</p:column>
 			<p:column style="text-align:center" id="colunaBotaoEditar">
 				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{bairroBean.editar}" id="botaoEditarBairro" ajax="true" immediate="true">
+				<p:commandLink update="@form" actionListener="#{bairroBean.editar}" id="botaoEditarBairro">
 					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarBairro"/>
                 	<f:setPropertyActionListener value="#{bairro}" target="#{bairroBean.entity}"/>  
             	</p:commandLink>
 			</p:column>            	  
 			<p:column style="text-align:center" id="colunaVisualizar">
 				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{bairroBean.visualizar}" id="botaoVisualizarBairro" ajax="true" immediate="true">
+				<p:commandLink update="@form" actionListener="#{bairroBean.visualizar}" id="botaoVisualizarBairro">
 					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarBairro"/>
                 	<f:setPropertyActionListener value="#{bairro}" target="#{bairroBean.entity}" />
 				</p:commandLink>
 			</p:column>
 			<p:column style="text-align:center" id="colunaExcluir">
 				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
-				<p:commandLink update="form:painelGlobal, form:mensagens" actionListener="#{bairroBean.iniciarExclusao}" id="botaoExcluirBairro" ajax="true" immediate="true">
+				<p:commandLink update="@form" actionListener="#{bairroBean.iniciarExclusao}" id="botaoExcluirBairro">
 					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirBairro"/>
                 	<f:setPropertyActionListener value="#{bairro}" target="#{bairroBean.entity}" />
             	</p:commandLink>                        
