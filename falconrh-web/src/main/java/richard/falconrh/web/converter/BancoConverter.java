@@ -47,9 +47,8 @@ public class BancoConverter implements Converter {
 				FacesMessage facesMessage = new FacesMessage("Erro de Conversão: ", "Erro ao converter a String para um objeto do tipo Banco");
 				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 			}
-			return banco;
 		}
-		return null;
+		return banco;
 	}
 
 	/**
