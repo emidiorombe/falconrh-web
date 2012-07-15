@@ -15,7 +15,7 @@
 					<p:ajax event="change" update="municipio,bairro" immediate="true" process="@this"/>
 				</p:selectOneMenu>
 				<p:outputLabel value="#{msg['label.logradouro.municipio']}" for="municipio" id="labelMunicipio" />
-				<p:selectOneMenu value="#{logradouroBean.entity.bairro.municipio}" id="municipio" required="true" requiredMessage="#{msg['logradouro.municipio.obrigatorio']}" title="#{msg['title.logradouro.municipio']}" valueChangeListener="#{logradouroBean.obterListaBairros}" effect="fade">
+				<p:selectOneMenu converter="municipioConverter" value="#{logradouroBean.entity.bairro.municipio}" id="municipio" required="true" requiredMessage="#{msg['logradouro.municipio.obrigatorio']}" title="#{msg['title.logradouro.municipio']}" valueChangeListener="#{logradouroBean.obterListaBairros}" effect="fade">
 					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
 					<f:selectItems value="#{logradouroBean.listaMunicipios}" var="municipio" itemLabel="#{municipio.nome}" itemValue="#{municipio}"/>
 					<p:ajax event="change" update="bairro" immediate="true" process="@this"/>
