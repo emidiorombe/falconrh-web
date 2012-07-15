@@ -48,14 +48,14 @@ public class BairroServicesImpl extends AbstractServicesImpl<Bairro> implements 
 	/**
 	 * Method obterListaPeloExemplo.
 	 * @param bairro Bairro
-	
-	
-	 * @return Set<Bairro> * @throws ServicesException */
+	 * @return Set<Bairro> * @throws ServicesException
+	 */
 	@Override
 	public Set<Bairro> obterListaPeloExemplo(Bairro bairro) throws ServicesException {
 		CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<Bairro> criteriaQuery = criteriaBuilder.createQuery(Bairro.class);
 		Root<Bairro> from = criteriaQuery.from(Bairro.class);
+		from.fetch(Bairro_.municipio);//para evitar o lazy ao ler a uf, por exemplo
 		
 		Predicate listaRestricoes = criteriaBuilder.conjunction();
 		if(StringUtils.isNotBlank(bairro.getNome())){
