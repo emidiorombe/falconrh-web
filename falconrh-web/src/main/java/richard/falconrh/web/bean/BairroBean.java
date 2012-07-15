@@ -19,7 +19,6 @@ import richard.falconrh.service.MunicipioServices;
 /**
  * ManagedBean JSF utilizado em arquivos xhtml
  * @author Richard Mendes Madureira
- *
  * @version $Revision: 1.0 $
  */
 @ManagedBean(name="bairroBean")
@@ -48,8 +47,8 @@ public class BairroBean extends BaseBean<Bairro, BairroServices>{
 	
 	/**
 	 * Method getServices.
-	
-	 * @return BairroServices */
+	 * @return BairroServices
+	 */
 	@Override
 	public BairroServices getServices() {
 		return bairroServices;
@@ -71,8 +70,8 @@ public class BairroBean extends BaseBean<Bairro, BairroServices>{
 	/**
 	 * Method obterListaMunicipios.
 	 * @param event ValueChangeEvent
-	
-	 * @throws ServicesException */
+	 * @throws ServicesException
+	 */
 	public void obterListaMunicipios(ValueChangeEvent event) throws ServicesException{
 		UF uf = (UF)event.getNewValue();
 		getEntity().getMunicipio().setUf(uf);
@@ -82,8 +81,8 @@ public class BairroBean extends BaseBean<Bairro, BairroServices>{
 
 	/**
 	 * Method getListaMunicipios.
-	
-	 * @return List<Municipio> */
+	 * @return List<Municipio>
+	 */
 	public List<Municipio> getListaMunicipios() {
 		return listaMunicipios;
 	}
