@@ -88,6 +88,16 @@
 	       		<p:separator id="separadorAjuda"/>
 	       		<p:menuitem value="Sobre o Falcon RH..." url="#" id="menuitemAjudaSobreFalconRH"/>
 	       	</p:submenu>
+	       	<p:submenu label="Scheduler" id="menuScheduler">
+				<p:submenu label="Tarefa" id="submenuSchedulerTarefa">
+					<p:menuitem value="Nova" url="/faces/paginas/scheduler/tarefa/tarefa.xhtml?modoOperacao=modoInclusao" id="menuitemSchedulerTarefaNova"/>
+	        		<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/scheduler/tarefa/tarefa.xhtml?modoOperacao=modoPesquisa" id="menuitemSchedulerTarefapesquisarAlterarExcluir"/>
+				</p:submenu>
+				<p:submenu label="Agendamento de Tarefa" id="submenuSchedulerAgendamentoTarefa">
+					<p:menuitem value="Novo" url="/faces/paginas/scheduler/tarefaAgendada/tarefaAgendada.xhtml?modoOperacao=modoInclusao" id="menuitemSchedulerTarefaAgendadaNova"/>
+	        		<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/scheduler/tarefaAgendada/tarefaAgendada.xhtml?modoOperacao=modoPesquisa" id="menuitemSchedulerTarefaAgendadaPesquisarAlterarExcluir"/>
+				</p:submenu>
+			</p:submenu>
 		</p:menubar>
 		<p:toolbar>
 			<p:toolbarGroup align="left">
