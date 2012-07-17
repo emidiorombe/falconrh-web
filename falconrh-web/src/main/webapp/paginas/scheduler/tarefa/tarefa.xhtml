@@ -1,0 +1,35 @@
+<ui:composition template="/paginas/layout/layout.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="tituloPagina"><h:outputText value="#{msg['titulo.tarefa']}" id="tituloPaginaConteudo"/></ui:define>
+	<ui:define name="conteudo">
+		<ui:debug hotkey="q"/>
+		<h:form id="form" prependId="true" acceptcharset="utf-8">
+			<p:messages id="mensagens" showDetail="true" showSummary="true"/>
+			<p:outputPanel id="painelGlobal">
+				<ui:include src="incluirTarefa.xhtml"/>
+				<ui:include src="detalheTarefa.xhtml"/>
+				<ui:include src="pesquisaTarefa.xhtml"/>
+				<p:panel style="text-align: center" rendered="#{not empty tarefaBean.modoOperacao}">
+					<p:commandButton value="#{msg['label.botao.cadastro.tarefa']}" actionListener="#{tarefaBean.cadastrar}" update="form:painelGlobal, form:mensagens" rendered="#{tarefaBean.modoInclusao}" title="#{msg['title.botao.cadastro.tarefa']}" id="botaoCadastroTarefa"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.tarefa']}" actionListener="#{tarefaBean.atualizar}" update="form:painelGlobal, form:mensagens" rendered="#{tarefaBean.modoEdicao}" title="#{msg['title.botao.atualizacao.tarefa']}" id="botaoAtualizacaoTarefa"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.tarefa']}" actionListener="#{tarefaBean.pesquisar}" update="form:painelGlobal, form:mensagens" rendered="#{tarefaBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.tarefa']}" id="botaoPesquisaTarefa"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.tarefa']}" update="form:painelGlobal, form:mensagens" rendered="#{tarefaBean.modoExclusao}" title="#{msg['title.botao.exclusao.tarefa']}" id="botaoExclusaoAcao" onclick="confirmation.show()" type="button"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{tarefaBean.voltarParaResultadoDaPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{tarefaBean.modoExclusao or tarefaBean.modoEdicao or tarefaBean.modoDetalhe}" title="#{msg['title.botao.exclusao.tarefa']}" immediate="true" id="botaoVoltarAcao">
+						<f:setPropertyActionListener target="#{tarefaBean.entity}" value="#{tarefaBean.entity}"/>
+					</p:commandButton>
+					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{tarefaBean.iniciarPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{tarefaBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente']}" immediate="true" id="botaoPesquisarNovamenteAcao"/>
+					<p:commandButton value="#{msg['label.botao.sair']}" action="#{tarefaBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairAcao"/>
+				</p:panel>
+			</p:outputPanel>
+			<p:confirmDialog id="confirmDialog" message="Você tem certeza de que deseja excluir o registro?" header="Confirmação de Exclusão" severity="alert" widgetVar="confirmation">
+				<p:commandButton id="confirmId" value="Sim" update="form:painelGlobal, form:mensagens" oncomplete="confirmation.hide()" actionListener="#{tarefaBean.excluir}"/>
+				<p:commandButton id="declineId" value="Não" onclick="confirmation.hide()" type="button" /> 
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

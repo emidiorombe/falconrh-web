@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelPesquisa" rendered="#{tarefaBean.modoPesquisa}">
+		<p:panel header="#{msg['titulo.tarefa.pesquisa']}" id="painelPesquisaTarefa">
+			<p:focus for="nomePesquisa" id="focusPaginaPesquisa"/>
+			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
+				<h:outputLabel for="nomePesquisa" id="labelNomePesquisa" value="#{msg['label.tarefa.nome']}" styleClass="labelNegrito"/>
+				<p:inputText value="#{tarefaBean.entity.nome}" id="nomePesquisa" size="60" maxlength="60" required="true" requiredMessage="#{msg['tarefa.nome.obrigatorio']}" title="#{msg['title.tarefa.nome']}"/>
+				<h:outputLabel for="descricaoPesquisa" id="labelDescricaoPesquisa" value="#{msg['label.tarefa.descricao']}" styleClass="labelNegrito"/>
+				<p:inputText value="#{tarefaBean.entity.descricao}" id="descricaoPesquisa" size="60" maxlength="255" required="false" requiredMessage="#{msg['tarefa.descricao.obrigatorio']}" title="#{msg['title.tarefa.descricao']}"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+	<p:outputPanel id="painelDetalhePesquisa" rendered="#{tarefaBean.modoDetalhePesquisa}" >
+		<p:dataTable value="#{tarefaBean.listaEntities}" var="tarefa" id="dataTableDetalhePesquisa">
+			<p:column id="colunaNomeTarefa" sortBy="#{tarefa.nome}">
+				<f:facet name="header"><h:outputText value="#{msg['label.tarefa.nome']}" id="labelColunaNome"/></f:facet>
+				<h:outputText value="#{tarefa.nome}" id="nomeDetalhe"/>
+			</p:column>
+			<p:column id="colunaDescricaoTarefa" sortBy="#{tarefa.descricao}">
+				<f:facet name="header"><h:outputText value="#{msg['label.tarefa.descricao']}" id="labelColunaDescricao"/></f:facet>
+				<h:outputText value="#{tarefa.descricao}" id="descricaoDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaBotaoEditar">
+				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
+				<p:commandLink update="@form" actionListener="#{tarefaBean.editar}" id="botaoEditarTarefa">
+					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditarTarefa"/>
+                	<f:setPropertyActionListener value="#{tarefa}" target="#{tarefaBean.entity}"/>  
+            	</p:commandLink>
+			</p:column>            	  
+			<p:column style="text-align:center" id="colunaVisualizar">
+				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
+				<p:commandLink update="@form" actionListener="#{tarefaBean.visualizar}" id="botaoVisualizarTarefa">
+					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizarTarefa"/>
+                	<f:setPropertyActionListener value="#{tarefa}" target="#{tarefaBean.entity}" />
+				</p:commandLink>
+			</p:column>
+			<p:column style="text-align:center" id="colunaExcluir">
+				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
+				<p:commandLink update="@form" actionListener="#{tarefaBean.iniciarExclusao}" id="botaoExcluirTarefa">
+					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluirTarefa"/>
+                	<f:setPropertyActionListener value="#{tarefa}" target="#{tarefaBean.entity}" />
+            	</p:commandLink>                        
+			</p:column>
+		</p:dataTable>
+	</p:outputPanel>
+</ui:composition>

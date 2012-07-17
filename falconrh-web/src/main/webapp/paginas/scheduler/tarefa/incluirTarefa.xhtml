@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelInclusao" rendered="#{tarefaBean.modoInclusao or tarefaBean.modoEdicao}">
+		<p:panel header="#{msg['label.titulo.inclusao.tarefa']}">
+			<p:focus for="nome" id="focusPaginaInclusao"/>
+			<h:panelGrid columns="2" id="painel2ColunasInclusao">
+				<h:outputLabel value="#{msg['label.tarefa.nome']}" for="nome" id="labelNome" styleClass="labelNegrito"/>
+				<p:inputText value="#{tarefaBean.entity.nome}" id="nome" size="40" maxlength="100" required="true" requiredMessage="#{msg['tarefa.nome.obrigatorio']}" title="#{msg['title.tarefa.nome']}"/>
+				<h:outputLabel value="#{msg['label.tarefa.descricao']}" for="descricao" id="labelDescricao" styleClass="labelNegrito"/>
+				<p:inputText value="#{tarefaBean.entity.descricao}" id="descricao" size="40" maxlength="100" required="true" requiredMessage="#{msg['tarefa.descricao.obrigatorio']}" title="#{msg['title.tarefa.descricao']}"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>
