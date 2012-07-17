@@ -54,7 +54,7 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	
 	private T entity;
 	private List<T> listaEntities;
-	private T ultimoSamplePesquisa;
+	protected T ultimoSamplePesquisa;
 	
 	public BaseBean(){
 		inicializaEntity();
