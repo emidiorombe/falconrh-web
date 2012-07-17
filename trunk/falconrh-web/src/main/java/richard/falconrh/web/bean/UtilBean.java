@@ -36,11 +36,14 @@ import richard.falconrh.modelo.enums.TipoFeriado;
 import richard.falconrh.modelo.enums.TipoLogradouro;
 import richard.falconrh.modelo.enums.TipoTelefone;
 import richard.falconrh.modelo.enums.UF;
+import richard.falconrh.scheduler.PeriodicidadeTarefa;
+import richard.falconrh.scheduler.Tarefa;
 import richard.falconrh.service.AbstractServices;
 import richard.falconrh.service.AcaoServices;
 import richard.falconrh.service.AgenciaServices;
 import richard.falconrh.service.BancoServices;
 import richard.falconrh.service.PessoaServices;
+import richard.falconrh.service.TarefaServices;
 
 /**
  * ManagedBean JSF utilizado em arquivos xhtml
@@ -74,6 +77,9 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 	@EJB(name="ejb/AcaoServices")
 	private AcaoServices acaoServices;
 	
+	@EJB(name="ejb/TarefasServices")
+	private TarefaServices tarefaServices;
+	
 	/**
 	 * Method getListaNacionalidades.
 	 * @return SelectItem[]
@@ -84,6 +90,17 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 		SelectItem item = null;
 		for(Nacionalidade nacionalidade : Nacionalidade.values()){
 			item = new SelectItem(nacionalidade, nacionalidade.getDescricao());
+			lista[cont++] = item;
+		}
+		return lista;
+	}
+	
+	public SelectItem[] getListaTodasPeriodicidadesTarefas(){
+		SelectItem[] lista = new SelectItem[PeriodicidadeTarefa.values().length];
+		int cont = 0;
+		SelectItem item = null;
+		for(PeriodicidadeTarefa p  : PeriodicidadeTarefa.values()){
+			item = new SelectItem(p, p.getDescricao());
 			lista[cont++] = item;
 		}
 		return lista;
@@ -204,6 +221,25 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 		SelectItem item = null;
 		for(UF uf : UF.values()){
 			item = new SelectItem(uf, uf.getNome());
+			lista[cont++] = item;
+		}
+		return lista;
+	}
+	
+	public SelectItem[] getListaTodasTarefasAtivas(){
+		SortedSet<Tarefa> listaTarefas = new TreeSet<Tarefa>();
+		try{
+			listaTarefas = tarefaServices.obterListaTodasTarefas();
+		}catch(ServicesException e){
+			LOGGER.error("erro.obter.lista.tarefas", e);
+			adicionarMensagemErro("erro.obter.lista.tarefas");
+			return null;
+		}
+		SelectItem[] lista = new SelectItem[listaTarefas.size()];
+		int cont = 0;
+		SelectItem item = null;
+		for(Tarefa tarefa : listaTarefas){
+			item = new SelectItem(tarefa, tarefa.getNome());
 			lista[cont++] = item;
 		}
 		return lista;
