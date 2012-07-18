@@ -1,0 +1,34 @@
+<ui:composition template="/paginas/layout/layout.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<ui:define name="tituloPagina"><h:outputText value="#{msg['titulo.agendamentoTarefa']}" id="tituloPaginaConteudo"/></ui:define>
+	<ui:define name="conteudo">
+		<h:form id="form" prependId="true" acceptcharset="utf-8">
+			<p:messages id="mensagens" showDetail="true" showSummary="true"/>
+			<p:outputPanel id="painelGlobal">
+				<ui:include src="incluirAgendamentoTarefa.xhtml"/>
+				<ui:include src="detalheAgendamentoTarefa.xhtml"/>
+				<ui:include src="pesquisaAgendamentoTarefa.xhtml"/>
+				<p:panel style="text-align: center" rendered="#{not empty agendamentoTarefaBean.modoOperacao}">
+					<p:commandButton value="#{msg['label.botao.agendamento.agendamentoTarefa']}" actionListener="#{agendamentoTarefaBean.agendarTarefa}" update="form:painelGlobal, form:mensagens" rendered="#{agendamentoTarefaBean.modoInclusao}" title="#{msg['title.botao.agendamento.agendamentoTarefa']}" id="botaoAgendamentoAgendamentoTarefa"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.agendamentoTarefa']}" actionListener="#{agendamentoTarefaBean.atualizar}" update="form:painelGlobal, form:mensagens" rendered="#{agendamentoTarefaBean.modoEdicao}" title="#{msg['title.botao.atualizacao.agendamentoTarefa']}" id="botaoAtualizacaoAgendamentoTarefa"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.agendamentoTarefa']}" actionListener="#{agendamentoTarefaBean.pesquisarAgendamento}" update="form:painelGlobal, form:mensagens" rendered="#{agendamentoTarefaBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.agendamentoTarefa']}" id="botaoPesquisaAgendamentoTarefa"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.agendamentoTarefa']}" update="form:painelGlobal, form:mensagens" rendered="#{agendamentoTarefaBean.modoExclusao}" title="#{msg['title.botao.exclusao.agendamentoTarefa']}" id="botaoExclusaoAgendamentoTarefa" onclick="confirmation.show()" type="button"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{agendamentoTarefaBean.voltarParaResultadoDaPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{agendamentoTarefaBean.modoExclusao or agendamentoTarefaBean.modoEdicao or agendamentoTarefaBean.modoDetalhe}" title="#{msg['title.botao.exclusao.agendamentoTarefa']}" immediate="true" id="botaoVoltarAgendamentoTarefa">
+						<f:setPropertyActionListener target="#{agendamentoTarefaBean.entity}" value="#{agendamentoTarefaBean.entity}"/>
+					</p:commandButton>
+					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{agendamentoTarefaBean.iniciarPesquisa}" update="form:painelGlobal, form:mensagens" rendered="#{agendamentoTarefaBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente']}" immediate="true" id="botaoPesquisarNovamenteAgendamentoTarefa"/>
+					<p:commandButton value="#{msg['label.botao.sair']}" action="#{agendamentoTarefaBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairAgendamentoTarefa"/>
+				</p:panel>
+			</p:outputPanel>
+			<p:confirmDialog id="confirmDialog" message="#{msg['label.confirmar.exclusao']}" header="#{msg['label.header.confirmar.exclusao']}" severity="alert" widgetVar="confirmation">
+				<p:commandButton id="confirmId" value="#{msg['sim']}" update="form:painelGlobal, form:mensagens" oncomplete="confirmation.hide()" actionListener="#{agendamentoTarefaBean.excluir}"/>
+				<p:commandButton id="declineId" value="#{msg['nao']}" onclick="confirmation.hide()" type="button" /> 
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

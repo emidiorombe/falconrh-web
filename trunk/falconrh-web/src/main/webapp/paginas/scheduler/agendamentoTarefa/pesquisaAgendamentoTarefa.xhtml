@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:outputPanel id="painelPesquisa" rendered="#{agendamentoTarefaBean.modoPesquisa}">
+		<p:panel header="#{msg['titulo.agendamentoTarefa.pesquisa']}" id="painelPesquisaagendamentoTarefa">
+			<p:focus for="tarefaPesquisa" id="focusPaginaPesquisa"/>
+			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
+				<h:outputLabel for="tarefaPesquisa" id="labelTarefaPesquisa" value="#{msg['label.agendamentoTarefa.tarefa']}" styleClass="labelNegrito"/>
+				<p:selectOneMenu value="#{agendamentoTarefaBean.entity.tarefa}" converter="tarefaConverter" id="tarefaPesquisa" required="false" requiredMessage="#{msg['agendamentoTarefa.tarefa.obrigatorio']}" title="#{msg['title.agendamentoTarefa.tarefa']}">
+					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
+					<f:selectItems value="#{utilBean.listaTodasTarefasAtivas}" var="tarefa" itemLabel="#{tarefa.nome}" itemValue="#{tarefa}"/>
+				</p:selectOneMenu>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+	<p:outputPanel id="painelDetalhePesquisa" rendered="#{agendamentoTarefaBean.modoDetalhePesquisa}" >
+		<p:dataTable value="#{agendamentoTarefaBean.listaEntities}" var="agendamentoTarefa" id="dataTableDetalhePesquisa">
+			<p:column id="colunaTarefa" sortBy="#{agendamentoTarefa.tarefa.nome}">
+				<f:facet name="header"><h:outputText value="#{msg['label.agendamentoTarefa.tarefa']}" id="labelColunaTarefa"/></f:facet>
+				<h:outputText value="#{agendamentoTarefa.tarefa.nome}" id="tarefaDetalhe"/>
+			</p:column>
+			<p:column id="colunaPeriodicidade" sortBy="#{agendamentoTarefa.periodicidadeTarefa.descricao}">
+				<f:facet name="header"><h:outputText value="#{msg['label.agendamentoTarefa.periodicidadeTarefa']}" id="labelColunaPeriodicidadeTarefa"/></f:facet>
+				<h:outputText value="#{agendamentoTarefa.periodicidadeTarefa.descricao}" id="periodicidadeTarefaDetalhe"/>
+			</p:column>
+			<p:column id="colunaDataHoraExecucao" sortBy="#{agendamentoTarefa.dataHoraExecucao}">
+				<f:facet name="header"><h:outputText value="#{msg['label.agendamentoTarefa.tarefa']}" id="labelColunaDataHoraExecucao"/></f:facet>
+				<h:outputText value="#{agendamentoTarefa.dataHoraExecucao}" id="dataHoraExecucaoDetalhe"/>
+			</p:column>
+			<p:column id="colunaStatusAgendamento" sortBy="#{agendamentoTarefa.statusAgendamento.descricao}">
+				<f:facet name="header"><h:outputText value="#{msg['label.agendamentoTarefa.tarefa']}" id="labelColunaStatusAgendamento"/></f:facet>
+				<h:outputText value="#{agendamentoTarefa.statusAgendamento.descricao}" id="statusAgendamentoDetalhe"/>
+			</p:column>
+			<p:column style="text-align:center" id="colunaBotaoEditar">
+				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>
+				<p:commandLink update="@form" actionListener="#{agendamentoTarefaBean.editar}" id="botaoEditaragendamentoTarefa">
+					<h:graphicImage library="imagens" name="small_edit.png" id="imagemEditaragendamentoTarefa"/>
+                	<f:setPropertyActionListener value="#{agendamentoTarefa}" target="#{agendamentoTarefaBean.entity}"/>  
+            	</p:commandLink>
+			</p:column>            	  
+			<p:column style="text-align:center" id="colunaVisualizar">
+				<f:facet name="header"><h:outputText value="Visualizar" id="labelColunaVisualizar"/></f:facet>
+				<p:commandLink update="@form" actionListener="#{agendamentoTarefaBean.visualizar}" id="botaoVisualizaragendamentoTarefa">
+					<h:graphicImage library="imagens" name="small_find.png" id="imagemVisualizaragendamentoTarefa"/>
+                	<f:setPropertyActionListener value="#{agendamentoTarefa}" target="#{agendamentoTarefaBean.entity}" />
+				</p:commandLink>
+			</p:column>
+			<p:column style="text-align:center" id="colunaExcluir">
+				<f:facet name="header"><h:outputText value="Excluir" id="labelExcluir"/></f:facet>
+				<p:commandLink update="@form" actionListener="#{agendamentoTarefaBean.iniciarExclusao}" id="botaoExcluiragendamentoTarefa">
+					<h:graphicImage library="imagens" name="small_delete.png" id="imagemExcluiragendamentoTarefa"/>
+                	<f:setPropertyActionListener value="#{agendamentoTarefa}" target="#{agendamentoTarefaBean.entity}" />
+            	</p:commandLink>                        
+			</p:column>
+		</p:dataTable>
+	</p:outputPanel>
+</ui:composition>

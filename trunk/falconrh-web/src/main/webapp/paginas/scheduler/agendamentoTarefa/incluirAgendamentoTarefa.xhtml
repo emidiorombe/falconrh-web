@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<p:outputPanel id="painelInclusao" rendered="#{agendamentoTarefaBean.modoInclusao or agendamentoTarefaBean.modoEdicao}">
+		<p:panel header="#{msg['label.titulo.inclusao.agendamentoTarefa']}">
+			<p:focus for="tarefa" id="focusPaginaInclusao"/>
+			<h:panelGrid columns="2" id="painel2ColunasInclusao">
+				<h:outputLabel value="#{msg['label.agendamentoTarefa.tarefa']}" for="tarefa" id="labelTarefa" styleClass="labelNegrito"/>
+				<p:selectOneMenu value="#{agendamentoTarefaBean.entity.tarefa}" converter="tarefaConverter" id="tarefa" required="true" requiredMessage="#{msg['agendamentoTarefa.tarefa.obrigatorio']}" title="#{msg['title.agendamentoTarefa.tarefa']}">
+					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
+					<f:selectItems value="#{utilBean.listaTodasTarefasAtivas}" var="tarefa" itemLabel="#{tarefa.nome}" itemValue="#{tarefa}"/>
+				</p:selectOneMenu>
+				<h:outputLabel value="#{msg['label.agendamentoTarefa.periodicidadeTarefa']}" for="periodicidadeTarefa" id="labelPeriodicidadeTarefa" styleClass="labelNegrito"/>
+				<p:selectOneMenu value="#{agendamentoTarefaBean.entity.periodicidadeTarefa}" id="periodicidadeTarefa" required="true" requiredMessage="#{msg['agendamentoTarefa.periodicidadeTarefa.obrigatorio']}" title="#{msg['title.agendamentoTarefa.periodicidadeTarefa']}">
+					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
+					<f:selectItems value="#{utilBean.listaTodasPeriodicidadesTarefas}" var="periodicidadeTarefa" itemLabel="#{periodicidadeTarefa.descricao}" itemValue="#{periodicidadeTarefa}"/>
+				</p:selectOneMenu>
+				<h:outputLabel value="#{msg['label.agendamentoTarefa.dataHoraExecucao']}" for="dataHoraExecucao" id="labelDataHoraExecucao" styleClass="labelNegrito"/>
+				<p:calendar value="#{agendamentoTarefaBean.entity.dataHoraExecucao}" id="dataHoraExecucao" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy HH:mm:ss" lang="pt" locale="pt_BR" navigator="true" required="true" requiredMessage="#{msg['agendamentoTarefa.dataHoraExecucao.obrigatorio']}" showButtonPanel="true"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</ui:composition>
