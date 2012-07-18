@@ -15,45 +15,48 @@ import org.apache.log4j.Logger;
 
 import richard.falconrh.entity.pessoa.Usuario;
 import richard.falconrh.exception.ServicesException;
+import richard.falconrh.scheduler.AgendamentoTarefa;
 import richard.falconrh.scheduler.StatusAgendamento;
-import richard.falconrh.scheduler.TarefaAgendada;
 import richard.falconrh.service.AbstractServices;
-import richard.falconrh.service.AgendadorTarefaServices;
+import richard.falconrh.service.AgendamentoTarefaServices;
 
 /**
  * ManagedBean JSF utilizado em arquivos xhtml
  * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
-@ManagedBean(name="tarefaAgendadaBean")
+@ManagedBean(name="agendamentoTarefaBean")
 @ViewScoped
-public class TarefaAgendadaBean extends BaseBean<TarefaAgendada, AbstractServices<TarefaAgendada>> implements Serializable{
+public class AgendamentoTarefaBean extends BaseBean<AgendamentoTarefa, AbstractServices<AgendamentoTarefa>> implements Serializable{
 	private static final long serialVersionUID = 0L;
-	private static final Logger logger = Logger.getLogger(TarefaAgendadaBean.class);
+	private static final Logger logger = Logger.getLogger(AgendamentoTarefaBean.class);
 	
 	private static final String ERRO_AGENDAMENTO = "erro.agendamento.tarefa";
 	private static final String SUCESSO_AGENDAMENTO = "sucesso.agendamento.tarefa";
 	
-	@EJB(name="ejb/AgendadorTarefaServices")
-	private AgendadorTarefaServices agendadorTarefaServices;
+	@EJB(name="ejb/AgendamentoTarefaServices")
+	private AgendamentoTarefaServices agendamentoTarefaServices;
 	
-	public TarefaAgendadaBean(){
+//	@EJB(name="ejb/QuartzServices")
+//	private QuartzServices quartzServices;
+	
+	public AgendamentoTarefaBean(){
 		super();
 	}
 	
 	@Override
 	public void inicializaEntity() {
 		super.inicializaEntity();
-		setEntity(new TarefaAgendada());
+		setEntity(new AgendamentoTarefa());
 		getEntity().setResponsavelAgendamento(new Usuario());
 	}
 	
 	public void agendarTarefa(ActionEvent event){
 		try{
 			getEntity().setDataAgendamento(new Date());
-			getEntity().setAtiva(Boolean.TRUE);
 			getEntity().setStatusAgendamento(StatusAgendamento.AGENDADO);
-			agendadorTarefaServices.agendarTarefa(getEntity());
+			agendamentoTarefaServices.agendarTarefa(getEntity());
+			//quartzServices.agendarTarefa(getEntity());
 			adicionarMensagemInformacao(SUCESSO_AGENDAMENTO);
 		} catch(ServicesException e){
 			adicionarMensagemErro(ERRO_AGENDAMENTO);
@@ -62,10 +65,11 @@ public class TarefaAgendadaBean extends BaseBean<TarefaAgendada, AbstractService
 	
 	public void pesquisarAgendamento(ActionEvent event){
 		logger.debug("Iniciando a pesquisa de de entidade...");
-		Set<TarefaAgendada> lista = new HashSet<TarefaAgendada>();
+		Set<AgendamentoTarefa> lista = new HashSet<AgendamentoTarefa>();
 		try{
 			ultimoSamplePesquisa = getEntity();
-			lista = agendadorTarefaServices.obterListaTarefasAgendadas();
+			lista = agendamentoTarefaServices.obterListaTarefasAgendadas();
+			//lista = quartzServices.obterListaTarefasAgendadas();
 			logger.debug("Sucesso a pesquisar entidade");
 		}catch(Exception e){
 			adicionarMensagemErro(ERRO_PESQUISA);
@@ -77,7 +81,7 @@ public class TarefaAgendadaBean extends BaseBean<TarefaAgendada, AbstractService
 			logger.info("Nao foi encontrada nenhum entidade na pesquisa");
 			return;
 		}
-		setListaEntities(new ArrayList<TarefaAgendada>(lista));
+		setListaEntities(new ArrayList<AgendamentoTarefa>(lista));
 		setModoOperacao(MODO_DETALHE_PESQUISA);
 		logger.debug("Fim da pesquisa de entidade");
 	}
@@ -86,7 +90,8 @@ public class TarefaAgendadaBean extends BaseBean<TarefaAgendada, AbstractService
 	public void excluir(ActionEvent event) {
 		logger.debug("Inicializando a exclusao de tarefa agendada");
 		try{
-			agendadorTarefaServices.excluirTarefaAgendada(getEntity());
+			agendamentoTarefaServices.excluirTarefaAgendada(getEntity());
+			//quartzServices.desagendarTarefa(getEntity());
 			adicionarMensagemInformacao(SUCESSO_EXCLUSAO);
 			setModoOperacao(MODO_PESQUISA);
 			inicializaEntity();

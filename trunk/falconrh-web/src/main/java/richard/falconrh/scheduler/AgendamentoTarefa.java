@@ -5,18 +5,18 @@ import java.util.Date;
 import richard.falconrh.entity.Parent;
 import richard.falconrh.entity.pessoa.Usuario;
 
-public class TarefaAgendada extends Parent implements Comparable<TarefaAgendada>{
+public class AgendamentoTarefa extends Parent implements Comparable<AgendamentoTarefa>{
 	private static final long serialVersionUID = 1L;
 	
 	private Tarefa tarefa;
 	private Date dataAgendamento;
 	private Date dataHoraExecucao;
-	private Boolean ativa;
 	private Usuario responsavelAgendamento;
 	private PeriodicidadeTarefa periodicidadeTarefa;
 	private StatusAgendamento statusAgendamento;
+	private String ipResponsavelAgendamento;
 	
-	public TarefaAgendada(){}
+	public AgendamentoTarefa(){}
 
 	public Tarefa getTarefa() {
 		return tarefa;
@@ -30,10 +30,6 @@ public class TarefaAgendada extends Parent implements Comparable<TarefaAgendada>
 		return dataHoraExecucao;
 	}
 
-	public Boolean getAtiva() {
-		return ativa;
-	}
-
 	public Usuario getResponsavelAgendamento() {
 		return responsavelAgendamento;
 	}
@@ -44,6 +40,10 @@ public class TarefaAgendada extends Parent implements Comparable<TarefaAgendada>
 	
 	public StatusAgendamento getStatusAgendamento(){
 		return statusAgendamento;
+	}
+	
+	public String getIpResponsavelAgendamento(){
+		return ipResponsavelAgendamento;
 	}
 
 	public void setTarefa(Tarefa tarefa) {
@@ -58,10 +58,6 @@ public class TarefaAgendada extends Parent implements Comparable<TarefaAgendada>
 		this.dataHoraExecucao = dataHoraExecucao;
 	}
 
-	public void setAtiva(Boolean ativa) {
-		this.ativa = ativa;
-	}
-
 	public void setResponsavelAgendamento(Usuario responsavelAgendamento) {
 		this.responsavelAgendamento = responsavelAgendamento;
 	}
@@ -72,6 +68,10 @@ public class TarefaAgendada extends Parent implements Comparable<TarefaAgendada>
 	
 	public void setStatusAgendamento(StatusAgendamento statusAgendamento){
 		this.statusAgendamento = statusAgendamento;
+	}
+	
+	public void setIpResponsavelAgendamento(String ipResponsavelAgendamento){
+		this.ipResponsavelAgendamento = ipResponsavelAgendamento;
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class TarefaAgendada extends Parent implements Comparable<TarefaAgendada>
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TarefaAgendada other = (TarefaAgendada) obj;
+		AgendamentoTarefa other = (AgendamentoTarefa) obj;
 		if (dataHoraExecucao == null) {
 			if (other.dataHoraExecucao != null)
 				return false;
@@ -111,7 +111,7 @@ public class TarefaAgendada extends Parent implements Comparable<TarefaAgendada>
 	}
 	
 	@Override
-	public int compareTo(TarefaAgendada a) {
+	public int compareTo(AgendamentoTarefa a) {
 		if(a!=null && a.getTarefa()!=null){
 			if(this.getTarefa()!=null){
 				return this.getTarefa().getNome().toUpperCase().compareTo(a.getTarefa().getNome().toUpperCase());

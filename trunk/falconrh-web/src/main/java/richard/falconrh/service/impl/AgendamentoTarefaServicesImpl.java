@@ -20,19 +20,19 @@ import org.apache.log4j.Logger;
 
 import richard.falconrh.exception.ServicesException;
 import richard.falconrh.scheduler.StatusAgendamento;
-import richard.falconrh.scheduler.TarefaAgendada;
-import richard.falconrh.service.AgendadorTarefaServices;
+import richard.falconrh.scheduler.AgendamentoTarefa;
+import richard.falconrh.service.AgendamentoTarefaServices;
 
-@Singleton(name = "ejb/AgendadorTarefasServices", mappedName = "AgendadorTarefasServices")
+@Singleton(name = "ejb/AgendamentoTarefaServices", mappedName = "AgendamentoTarefaServices")
 @Startup
-public class AgendadorTarefasServicesImpl extends AbstractServicesImpl<TarefaAgendada> implements AgendadorTarefaServices{
-	private static final Logger LOGGER = Logger.getLogger(AgendadorTarefasServicesImpl.class);
+public class AgendamentoTarefaServicesImpl extends AbstractServicesImpl<AgendamentoTarefa> implements AgendamentoTarefaServices{
+	private static final Logger LOGGER = Logger.getLogger(AgendamentoTarefaServicesImpl.class);
 
 	@Resource
 	private TimerService timerService;
 	
 	@Override
-	public void agendarTarefa(TarefaAgendada agenda) throws ServicesException{
+	public void agendarTarefa(AgendamentoTarefa agenda) throws ServicesException{
 		if(LOGGER.isDebugEnabled()){
 			LOGGER.debug("Iniciando agendamento de tarefa");
 		}
@@ -88,26 +88,26 @@ public class AgendadorTarefasServicesImpl extends AbstractServicesImpl<TarefaAge
 	}
 	
 	@Override
-	public void cancelarTarefaAgendada(TarefaAgendada tarefaAgendada) throws ServicesException{
+	public void cancelarTarefaAgendada(AgendamentoTarefa tarefaAgendada) throws ServicesException{
 		for(Timer timer :  timerService.getTimers()){
 			timer.cancel();
 		}
 	}
 	
 	@Override
-	public void cancelarTarefaEmExecucao(TarefaAgendada tarefaAgendada) throws ServicesException{
+	public void cancelarTarefaEmExecucao(AgendamentoTarefa tarefaAgendada) throws ServicesException{
 		for(Timer timer :  timerService.getTimers()){
 			timer.cancel();
 		}
 	}
 	
 	@Override
-	public void excluirTarefaAgendada(TarefaAgendada tarefaAgendada) throws ServicesException {
+	public void excluirTarefaAgendada(AgendamentoTarefa tarefaAgendada) throws ServicesException {
 		try{
 			Collection<Timer> timers = timerService.getTimers();
-			TarefaAgendada ta = null;
+			AgendamentoTarefa ta = null;
 			for(Timer timer :  timers){
-				ta = (TarefaAgendada) timer.getInfo();
+				ta = (AgendamentoTarefa) timer.getInfo();
 				if(ta.getTarefa().getNome().equals(ta.getTarefa().getNome())){
 					timer.cancel();
 					break;
@@ -119,12 +119,12 @@ public class AgendadorTarefasServicesImpl extends AbstractServicesImpl<TarefaAge
 	}
 	
 	@Override
-	public Set<TarefaAgendada> obterListaTarefasAgendadas() throws ServicesException{
-		Set<TarefaAgendada> lista = new TreeSet<TarefaAgendada>();
+	public Set<AgendamentoTarefa> obterListaTarefasAgendadas() throws ServicesException{
+		Set<AgendamentoTarefa> lista = new TreeSet<AgendamentoTarefa>();
 		Collection<Timer> timers = timerService.getTimers();
-		TarefaAgendada agendamentoTarefa = null;
+		AgendamentoTarefa agendamentoTarefa = null;
 		for(Timer timer :  timers){
-			agendamentoTarefa = (TarefaAgendada) timer.getInfo();
+			agendamentoTarefa = (AgendamentoTarefa) timer.getInfo();
 			lista.add(agendamentoTarefa);
 		}
 		return lista;		
@@ -135,13 +135,12 @@ public class AgendadorTarefasServicesImpl extends AbstractServicesImpl<TarefaAge
 		try{
 			Thread.sleep(60000L);
 		}catch(Exception e){}
-		TarefaAgendada tarefaAgendada = (TarefaAgendada) timer.getInfo();
+		AgendamentoTarefa tarefaAgendada = (AgendamentoTarefa) timer.getInfo();
 		System.out.println(tarefaAgendada.getTarefa().getNome());
 		System.out.println(tarefaAgendada.getTarefa().getDescricao());
 		System.out.println(tarefaAgendada.getDataAgendamento());
 		System.out.println(tarefaAgendada.getDataHoraExecucao());
 		System.out.println(tarefaAgendada.getPeriodicidadeTarefa().getDescricao());
-		System.out.println(tarefaAgendada.getAtiva());
 		tarefaAgendada.setStatusAgendamento(StatusAgendamento.EM_EXECUCAO);
 		if(timer.isCalendarTimer()){
 			System.out.println(timer.getSchedule().getStart());
