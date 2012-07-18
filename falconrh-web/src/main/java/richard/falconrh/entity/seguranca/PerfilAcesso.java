@@ -10,8 +10,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -50,7 +48,9 @@ public class PerfilAcesso extends Parent implements Group, Principal {
 		return ativo;
 	}
 	
-	@OneToMany(targetEntity=PerfilaAcessoFuncionalidadeAcao.class, fetch=FetchType.LAZY, mappedBy="perfilAcesso")
+	//FIXME CORRIGIR O MAPEAMENTO
+	//@OneToMany(targetEntity=PerfilaAcessoFuncionalidadeAcao.class, fetch=FetchType.LAZY, mappedBy="perfilAcesso")
+	@Transient
 	public Set<PerfilaAcessoFuncionalidadeAcao> getListaPerfisAcessosFuncionalidadesAcoes() {
 		return listaPerfisAcessosFuncionalidadesAcoes;
 	}
