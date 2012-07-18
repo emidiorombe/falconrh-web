@@ -2,15 +2,23 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 	<p:outputPanel id="painelInclusao" rendered="#{tarefaBean.modoInclusao or tarefaBean.modoEdicao}">
 		<p:panel header="#{msg['label.titulo.inclusao.tarefa']}">
 			<p:focus for="nome" id="focusPaginaInclusao"/>
 			<h:panelGrid columns="2" id="painel2ColunasInclusao">
-				<h:outputLabel value="#{msg['label.tarefa.nome']}" for="nome" id="labelNome" styleClass="labelNegrito"/>
+				<p:outputLabel value="#{msg['label.tarefa.nome']}" for="nome" id="labelNome" styleClass="labelNegrito"/>
 				<p:inputText value="#{tarefaBean.entity.nome}" id="nome" size="40" maxlength="100" required="true" requiredMessage="#{msg['tarefa.nome.obrigatorio']}" title="#{msg['title.tarefa.nome']}"/>
-				<h:outputLabel value="#{msg['label.tarefa.descricao']}" for="descricao" id="labelDescricao" styleClass="labelNegrito"/>
-				<p:inputText value="#{tarefaBean.entity.descricao}" id="descricao" size="40" maxlength="100" required="true" requiredMessage="#{msg['tarefa.descricao.obrigatorio']}" title="#{msg['title.tarefa.descricao']}"/>
+				<p:outputLabel value="#{msg['label.tarefa.descricao']}" for="descricao" id="labelDescricao" styleClass="labelNegrito"/>
+				<p:inputText value="#{tarefaBean.entity.descricao}" id="descricao" size="80" maxlength="100" required="true" requiredMessage="#{msg['tarefa.descricao.obrigatorio']}" title="#{msg['title.tarefa.descricao']}"/>
+				<p:outputLabel value="#{msg['label.tarefa.nomeClasseImplementacao']}" id="labelNomeClasseImplementacao" for="nomeClasseImplementacao" styleClass="labelNegrito"/>
+				<p:inputText value="#{tarefaBean.entity.nomeClasseImplementacao}" size="80" id="nomeClasseImplementacao" required="true" requiredMessage="#{msg['tarefa.nomeClasseImplementacao.obrigatorio']}"/>
+				<p:outputLabel value="#{msg['label.tarefa.grupoTarefa']}" id="labelGrupoTarefa" for="grupoTarefa" styleClass="labelNegrito"/>
+				<p:selectOneMenu value="#{tarefaBean.entity.grupoTarefa}" id="grupoTarefa" required="true" requiredMessage="#{msg['tarefa.grupoTarefa.obrigatorio']}">
+					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
+					<f:selectItems value="#{utilBean.listaGruposTarefas}" var="grupoTarefa" itemLabel="#{grupoTarefa.descricao}" itemValue="#{grupoTarefa}"/>
+				</p:selectOneMenu>
 			</h:panelGrid>
 		</p:panel>
 	</p:outputPanel>

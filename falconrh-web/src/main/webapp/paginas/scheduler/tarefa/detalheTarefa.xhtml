@@ -10,6 +10,10 @@
 				<h:outputText value="#{tarefaBean.entity.nome}" id="nomeDetalhe"/>
 				<h:outputLabel value="#{msg['label.tarefa.descricao']}" for="descricaoDetalhe" id="labelDescricaoDetalhe" styleClass="labelNegrito"/>
 				<h:outputText value="#{tarefaBean.entity.descricao}" id="descricaoDetalhe"/>
+				<h:outputLabel value="#{msg['label.tarefa.grupoTarefa']}" id="labelGrupoTarefaDetalhe" for="grupoTarefaDetalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{tarefaBean.entity.grupoTarefa.descricao}" id="grupoTarefaDetalhe"/>
+				<h:outputLabel value="#{msg['label.tarefa.nomeClasseImplementacao']}" id="labelNomeClasseImplementacaoDetalhe" for="grupoTarefaDetalhe" styleClass="labelNegrito"/>
+				<h:outputText value="#{tarefaBean.entity.nomeClasseImplementacao}" id="nomeClasseImplementacaoDetalhe"/>
 			</h:panelGrid>
 		</p:panel>
 	</p:outputPanel>
