@@ -8,7 +8,7 @@
 		<p:panel header="#{msg['titulo.tarefaAgendada.pesquisa']}" id="painelPesquisatarefaAgendada">
 			<p:focus for="tarefaPesquisa" id="focusPaginaPesquisa"/>
 			<h:panelGrid columns="2" id="painel2ColunasPesquisa">
-				<h:outputLabel for="tarefaPesquisa" id="labelTarefaPesquisa" value="#{msg['label.tarefaAgendada.tarefaPesquisa']}" styleClass="labelNegrito"/>
+				<h:outputLabel for="tarefaPesquisa" id="labelTarefaPesquisa" value="#{msg['label.tarefaAgendada.tarefa']}" styleClass="labelNegrito"/>
 				<p:selectOneMenu value="#{tarefaAgendadaBean.entity.tarefa}" converter="tarefaConverter" id="tarefaPesquisa" required="false" requiredMessage="#{msg['tarefaAgendada.tarefa.obrigatorio']}" title="#{msg['title.tarefaAgendada.tarefa']}">
 					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
 					<f:selectItems value="#{utilBean.listaTodasTarefasAtivas}" var="tarefa" itemLabel="#{tarefa.nome}" itemValue="#{tarefa}"/>
