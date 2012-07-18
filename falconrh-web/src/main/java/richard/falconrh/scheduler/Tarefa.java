@@ -2,6 +2,8 @@ package richard.falconrh.scheduler;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.StringUtils;
@@ -18,6 +20,8 @@ public class Tarefa extends Parent implements Comparable<Tarefa>{
 	
 	private String nome;
 	private String descricao;
+	private String nomeClasseImplementacao;
+	private GrupoTarefa grupoTarefa;
 	
 	public Tarefa(){
 	}
@@ -32,12 +36,31 @@ public class Tarefa extends Parent implements Comparable<Tarefa>{
 		return descricao;
 	}
 	
+	@Column(name="NOME_CLASS_JOB", length=255, nullable=false)
+	public String getNomeClasseImplementacao() {
+		return nomeClasseImplementacao;
+	}
+	
+	@Enumerated(value=EnumType.STRING)
+	@Column(nullable=false)
+	public GrupoTarefa getGrupoTarefa(){
+		return grupoTarefa;
+	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public void setNomeClasseImplementacao(String nomeClasseJob){
+		this.nomeClasseImplementacao = nomeClasseJob;
+	}
+	
+	public void setGrupoTarefa(GrupoTarefa grupoTarefa){
+		this.grupoTarefa = grupoTarefa;
 	}
 
 	@Override

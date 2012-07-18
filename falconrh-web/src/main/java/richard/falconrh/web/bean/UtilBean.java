@@ -36,6 +36,7 @@ import richard.falconrh.modelo.enums.TipoFeriado;
 import richard.falconrh.modelo.enums.TipoLogradouro;
 import richard.falconrh.modelo.enums.TipoTelefone;
 import richard.falconrh.modelo.enums.UF;
+import richard.falconrh.scheduler.GrupoTarefa;
 import richard.falconrh.scheduler.PeriodicidadeTarefa;
 import richard.falconrh.scheduler.Tarefa;
 import richard.falconrh.service.AbstractServices;
@@ -90,6 +91,17 @@ public class UtilBean extends BaseBean<Parent, AbstractServices<Parent>> impleme
 		SelectItem item = null;
 		for(Nacionalidade nacionalidade : Nacionalidade.values()){
 			item = new SelectItem(nacionalidade, nacionalidade.getDescricao());
+			lista[cont++] = item;
+		}
+		return lista;
+	}
+	
+	public SelectItem[] getListaGruposTarefas(){
+		SelectItem[] lista = new SelectItem[GrupoTarefa.values().length];
+		int cont = 0;
+		SelectItem item = null;
+		for(GrupoTarefa grupoTarefa : GrupoTarefa.values()){
+			item = new SelectItem(grupoTarefa, grupoTarefa.getDescricao());
 			lista[cont++] = item;
 		}
 		return lista;
