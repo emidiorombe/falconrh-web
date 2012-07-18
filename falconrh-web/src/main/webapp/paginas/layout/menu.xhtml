@@ -60,60 +60,44 @@
 	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/tabelas/logradouros/logradouro.xhtml?modoOperacao=modoPesquisa" id="menuitemLogradourosPesquisarAlterarExcluir"/>
 	        		</p:submenu>
 	        	</p:submenu>
-	        	<p:submenu label="Segurança do Sistema" id="submenuGestaoSegurancaSistema">
-    				<p:submenu label="Usuario" id="submenuSegurancaUsuario">
-						<p:menuitem value="Novo" url="/faces/paginas/seguranca/usuario/usuario.xhtml?modoOperacao=modoInclusao" id="menuitemSegurancaUsuarioNovo"/>
-	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/usuario/usuario.xhtml?modoOperacao=modoPesquisa" id="menuitemSegurancaUsuarioPesquisarAlterarExcluir"/>
-					</p:submenu>
-					<p:submenu label="Acessos" id="submenuSegurancaAcessos">
-						<p:menuitem value="Novo" url="/faces/paginas/seguranca/acesso/acesso.xhtml?modoOperacao=modoInclusao" id="menuitemSegurancaAcessoNovo"/>
-	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/acesso/acesso.xhtml?modoOperacao=modoPesquisa" id="menuitemSegurancaAcessoPesquisarAlterarExcluir"/>
-					</p:submenu>
-	        		<p:submenu label="Ações" id="submenuGestaoSegurancaAcoes">
-	        			<p:menuitem value="Nova" url="/faces/paginas/seguranca/acao/acao.xhtml?modoOperacao=modoInclusao" id="menuitemGestaoSegurancaAcoesNovo"/>
-	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/acao/acao.xhtml?modoOperacao=modoPesquisa" id="menuitemGestaoSegurancaAcoesPesquisarAlterarExcluir"/>
-	        		</p:submenu>
-	        		<p:submenu label="Funcionalidades" id="submenuGestaoSegurancaFuncionalidades">
-	        			<p:menuitem value="Nova" url="/faces/paginas/seguranca/funcionalidade/funcionalidade.xhtml?modoOperacao=modoInclusao" id="menuitemGestaoSegurancaFuncionalidadesNovo"/>
-	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/funcionalidade/funcionalidade.xhtml?modoOperacao=modoPesquisa" id="menuitemGestaoSegurancaFuncionalidadesPesquisarAlterarExcluir"/>
-	        		</p:submenu>
-	        		<p:submenu label="Perfil de Acesso" id="submenuGestaoSegurancaPerfilAcesso">
-						<p:menuitem value="Novo" url="/faces/paginas/seguranca/perfilAcesso/perfilAcesso.xhtml?modoOperacao=modoInclusao"/>
-	        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/perfilAcesso/perfilAcesso.xhtml?modoOperacao=modoPesquisa"/>
-					</p:submenu>
-	        	</p:submenu>
 	        </p:submenu>
+        	<p:submenu label="Segurança do Sistema" id="submenuGestaoSegurancaSistema">
+   				<p:submenu label="Usuario" id="submenuSegurancaUsuario">
+					<p:menuitem value="Novo" url="/faces/paginas/seguranca/usuario/usuario.xhtml?modoOperacao=modoInclusao" id="menuitemSegurancaUsuarioNovo"/>
+        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/usuario/usuario.xhtml?modoOperacao=modoPesquisa" id="menuitemSegurancaUsuarioPesquisarAlterarExcluir"/>
+				</p:submenu>
+				<p:submenu label="Acessos" id="submenuSegurancaAcessos">
+					<p:menuitem value="Novo" url="/faces/paginas/seguranca/acesso/acesso.xhtml?modoOperacao=modoInclusao" id="menuitemSegurancaAcessoNovo"/>
+        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/acesso/acesso.xhtml?modoOperacao=modoPesquisa" id="menuitemSegurancaAcessoPesquisarAlterarExcluir"/>
+				</p:submenu>
+        		<p:submenu label="Ações" id="submenuGestaoSegurancaAcoes">
+        			<p:menuitem value="Nova" url="/faces/paginas/seguranca/acao/acao.xhtml?modoOperacao=modoInclusao" id="menuitemGestaoSegurancaAcoesNovo"/>
+        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/acao/acao.xhtml?modoOperacao=modoPesquisa" id="menuitemGestaoSegurancaAcoesPesquisarAlterarExcluir"/>
+        		</p:submenu>
+        		<p:submenu label="Funcionalidades" id="submenuGestaoSegurancaFuncionalidades">
+        			<p:menuitem value="Nova" url="/faces/paginas/seguranca/funcionalidade/funcionalidade.xhtml?modoOperacao=modoInclusao" id="menuitemGestaoSegurancaFuncionalidadesNovo"/>
+        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/funcionalidade/funcionalidade.xhtml?modoOperacao=modoPesquisa" id="menuitemGestaoSegurancaFuncionalidadesPesquisarAlterarExcluir"/>
+        		</p:submenu>
+        		<p:submenu label="Perfil de Acesso" id="submenuGestaoSegurancaPerfilAcesso">
+					<p:menuitem value="Novo" url="/faces/paginas/seguranca/perfilAcesso/perfilAcesso.xhtml?modoOperacao=modoInclusao"/>
+        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/perfilAcesso/perfilAcesso.xhtml?modoOperacao=modoPesquisa"/>
+				</p:submenu>
+        	</p:submenu>
+       		<p:submenu label="Scheduler" id="menuScheduler">
+				<p:submenu label="Tarefa" id="submenuSchedulerTarefa">
+					<p:menuitem value="Nova" url="/faces/paginas/scheduler/tarefa/tarefa.xhtml?modoOperacao=modoInclusao" id="menuitemSchedulerTarefaNova"/>
+        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/scheduler/tarefa/tarefa.xhtml?modoOperacao=modoPesquisa" id="menuitemSchedulerTarefapesquisarAlterarExcluir"/>
+				</p:submenu>
+				<p:submenu label="Agendamento de Tarefa" id="submenuSchedulerAgendamentoTarefa">
+					<p:menuitem value="Novo" url="/faces/paginas/scheduler/agendamentoTarefa/agendamentoTarefa.xhtml?modoOperacao=modoInclusao" id="menuitemSchedulerAgendamentoTarefaNovo"/>
+        			<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/scheduler/agendamentoTarefa/agendamentoTarefa.xhtml?modoOperacao=modoPesquisa" id="menuitemSchedulerAgendamentoTarefaPesquisarAlterarExcluir"/>
+				</p:submenu>
+			</p:submenu>
 			<p:submenu label="Ajuda" id="submenuAjuda">
-	       		<p:menuitem value="Ajuda do Falcon RH" url="#" id="menuitemAjudaDoFalconRH"/>
+       			<p:menuitem value="Ajuda do Falcon RH" url="#" id="menuitemAjudaDoFalconRH"/>
 	       		<p:separator id="separadorAjuda"/>
 	       		<p:menuitem value="Sobre o Falcon RH..." url="#" id="menuitemAjudaSobreFalconRH"/>
 	       	</p:submenu>
-	       	<p:submenu label="Scheduler" id="menuScheduler">
-				<p:submenu label="Tarefa" id="submenuSchedulerTarefa">
-					<p:menuitem value="Nova" url="/faces/paginas/scheduler/tarefa/tarefa.xhtml?modoOperacao=modoInclusao" id="menuitemSchedulerTarefaNova"/>
-	        		<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/scheduler/tarefa/tarefa.xhtml?modoOperacao=modoPesquisa" id="menuitemSchedulerTarefapesquisarAlterarExcluir"/>
-				</p:submenu>
-				<p:submenu label="Agendamento de Tarefa" id="submenuSchedulerAgendamentoTarefa">
-					<p:menuitem value="Novo" url="/faces/paginas/scheduler/tarefaAgendada/tarefaAgendada.xhtml?modoOperacao=modoInclusao" id="menuitemSchedulerTarefaAgendadaNova"/>
-	        		<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/scheduler/tarefaAgendada/tarefaAgendada.xhtml?modoOperacao=modoPesquisa" id="menuitemSchedulerTarefaAgendadaPesquisarAlterarExcluir"/>
-				</p:submenu>
-			</p:submenu>
-		</p:menubar>
-		<p:toolbar>
-			<p:toolbarGroup align="left">
-				<p:menuButton value="Ações">
-					<p:menuitem value="Nova" url="/faces/paginas/seguranca/acao/acao.xhtml?modoOperacao=modoInclusao"/>
-	        		<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/acao/acao.xhtml?modoOperacao=modoPesquisa"/>	
-				</p:menuButton>
-				<p:menuButton value="Funcionalidade">
-					<p:menuitem value="Nova" url="/faces/paginas/seguranca/funcionalidade/funcionalidade.xhtml?modoOperacao=modoInclusao"/>
-	        		<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/funcionalidade/funcionalidade.xhtml?modoOperacao=modoPesquisa"/>
-				</p:menuButton>
-				<p:menuButton value="Perfil de Acesso">
-					<p:menuitem value="Novo" url="/faces/paginas/seguranca/perfilAcesso/perfilAcesso.xhtml?modoOperacao=modoInclusao"/>
-	        		<p:menuitem value="Pesquisar/Alterar/Excluir" url="/faces/paginas/seguranca/perfilAcesso/perfilAcesso.xhtml?modoOperacao=modoPesquisa"/>
-				</p:menuButton>
-			</p:toolbarGroup>
-		</p:toolbar>  
+		</p:menubar> 
 	</h:form>
 </ui:composition>
