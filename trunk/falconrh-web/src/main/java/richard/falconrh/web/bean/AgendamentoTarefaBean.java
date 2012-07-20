@@ -31,14 +31,11 @@ public class AgendamentoTarefaBean extends BaseBean<AgendamentoTarefa, AbstractS
 	private static final long serialVersionUID = 0L;
 	private static final Logger logger = Logger.getLogger(AgendamentoTarefaBean.class);
 	
-	private static final String ERRO_AGENDAMENTO = "erro.agendamento.tarefa";
-	private static final String SUCESSO_AGENDAMENTO = "sucesso.agendamento.tarefa";
+	private static final String ERRO_AGENDAMENTO = "erro.agendamento.agendamentoTarefa";
+	private static final String SUCESSO_AGENDAMENTO = "sucesso.agendamento.agendamentoTarefa";
 	
 	@EJB(name="ejb/AgendamentoTarefaServices")
 	private AgendamentoTarefaServices agendamentoTarefaServices;
-	
-//	@EJB(name="ejb/QuartzServices")
-//	private QuartzServices quartzServices;
 	
 	public AgendamentoTarefaBean(){
 		super();
@@ -56,7 +53,6 @@ public class AgendamentoTarefaBean extends BaseBean<AgendamentoTarefa, AbstractS
 			getEntity().setDataAgendamento(new Date());
 			getEntity().setStatusAgendamento(StatusAgendamento.AGENDADO);
 			agendamentoTarefaServices.agendarTarefa(getEntity());
-			//quartzServices.agendarTarefa(getEntity());
 			adicionarMensagemInformacao(SUCESSO_AGENDAMENTO);
 		} catch(ServicesException e){
 			adicionarMensagemErro(ERRO_AGENDAMENTO);
@@ -69,7 +65,6 @@ public class AgendamentoTarefaBean extends BaseBean<AgendamentoTarefa, AbstractS
 		try{
 			ultimoSamplePesquisa = getEntity();
 			lista = agendamentoTarefaServices.obterListaTarefasAgendadas();
-			//lista = quartzServices.obterListaTarefasAgendadas();
 			logger.debug("Sucesso a pesquisar entidade");
 		}catch(Exception e){
 			adicionarMensagemErro(ERRO_PESQUISA);
@@ -87,11 +82,16 @@ public class AgendamentoTarefaBean extends BaseBean<AgendamentoTarefa, AbstractS
 	}
 	
 	@Override
+	public void voltarParaResultadoDaPesquisa(ActionEvent event){
+		setEntity(ultimoSamplePesquisa);
+		pesquisarAgendamento(event);
+	}
+	
+	@Override
 	public void excluir(ActionEvent event) {
 		logger.debug("Inicializando a exclusao de tarefa agendada");
 		try{
 			agendamentoTarefaServices.excluirTarefaAgendada(getEntity());
-			//quartzServices.desagendarTarefa(getEntity());
 			adicionarMensagemInformacao(SUCESSO_EXCLUSAO);
 			setModoOperacao(MODO_PESQUISA);
 			inicializaEntity();
@@ -106,12 +106,12 @@ public class AgendamentoTarefaBean extends BaseBean<AgendamentoTarefa, AbstractS
 	
 	@Override
 	public void setMensagensInformativas() {
-		ERRO_PESQUISA = "erro.pesquisa.tarefaAgendada";
-		PESQUISA_NAO_ENCONTRADA = "pesquisa.tarefaAgendada.nao.encontrada";
-		SUCESSO_EXCLUSAO ="sucesso.exclusao.tarefaAgendada";
-		ERRO_EXCLUSAO = "erro.exclusao.tarefaAgendada";
-		SUCESSO_ATUALIZACAO = "sucesso.atualizacao.tarefaAgendada";
-		ERRO_ATUALIZACAO= "erro.atualizacao.tarefaAgendada";
+		ERRO_PESQUISA = "erro.pesquisa.agendamentoTarefa";
+		PESQUISA_NAO_ENCONTRADA = "pesquisa.agendamentoTarefa.nao.encontrado";
+		SUCESSO_EXCLUSAO ="sucesso.exclusao.agendamentoTarefa";
+		ERRO_EXCLUSAO = "erro.exclusao.agendamentoTarefa";
+		SUCESSO_ATUALIZACAO = "sucesso.atualizacao.agendamentoTarefa";
+		ERRO_ATUALIZACAO= "erro.atualizacao.agendamentoTarefa";
 	}
 	
 }
