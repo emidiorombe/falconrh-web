@@ -13,8 +13,6 @@
 				<h:outputText value="#{agendamentoTarefaBean.entity.dataHoraExecucao}" id="dataHoraExecucaoDetalhe">
 					<f:convertDateTime timeZone="America/Sao_Paulo" locale="pt_BR" pattern="dd/MM/yyyy HH:mm:ss"/>
 				</h:outputText>
-				<h:outputLabel value="#{msg['label.agendamentoTarefa.ativa']}" for="ativaDetalhe" id="labelAtivaDetalhe" styleClass="labelNegrito"/>
-				<h:outputText value="#{agendamentoTarefaBean.entity.ativa}" id="ativaDetalhe" converter="simNaoConverter"/>
 				<h:outputLabel value="#{msg['label.agendamentoTarefa.dataAgendamento']}" for="dataAgendamentoDetalhe" id="labelDataAgendamentoDetalhe" styleClass="labelNegrito"/>
 				<h:outputText value="#{agendamentoTarefaBean.entity.dataAgendamento}" id="dataAgendamentoDetalhe">
 					<f:convertDateTime timeZone="America/Sao_Paulo" locale="pt_BR" pattern="dd/MM/yyyy HH:mm:ss" />

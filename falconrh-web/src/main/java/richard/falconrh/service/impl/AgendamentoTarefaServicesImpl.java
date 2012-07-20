@@ -2,6 +2,7 @@ package richard.falconrh.service.impl;
 
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
@@ -19,7 +20,6 @@ import javax.ejb.TimerService;
 import org.apache.log4j.Logger;
 
 import richard.falconrh.exception.ServicesException;
-import richard.falconrh.scheduler.StatusAgendamento;
 import richard.falconrh.scheduler.AgendamentoTarefa;
 import richard.falconrh.service.AgendamentoTarefaServices;
 
@@ -28,6 +28,10 @@ import richard.falconrh.service.AgendamentoTarefaServices;
 public class AgendamentoTarefaServicesImpl extends AbstractServicesImpl<AgendamentoTarefa> implements AgendamentoTarefaServices{
 	private static final Logger LOGGER = Logger.getLogger(AgendamentoTarefaServicesImpl.class);
 
+	public static final long UM_SEGUNDO = 1000L;
+	public static final long UM_MINUTO = UM_SEGUNDO*60;
+	public static final long UMA_HORA = UM_MINUTO*60;
+	
 	@Resource
 	private TimerService timerService;
 	
@@ -53,7 +57,7 @@ public class AgendamentoTarefaServicesImpl extends AbstractServicesImpl<Agendame
 				timerService.createSingleActionTimer(agenda.getDataHoraExecucao(), timerConfig);
 				break;
 			case HORARIA:
-				timerService.createIntervalTimer(agenda.getDataHoraExecucao(), 1000*15, timerConfig);
+				timerService.createIntervalTimer(agenda.getDataHoraExecucao(), UMA_HORA, timerConfig);
 				break;
 			case DIARIA:
 				schedule.hour(calendar.get(Calendar.HOUR));
@@ -132,21 +136,30 @@ public class AgendamentoTarefaServicesImpl extends AbstractServicesImpl<Agendame
 	
 	@Timeout
 	public void execute(Timer timer){
-		try{
-			Thread.sleep(60000L);
-		}catch(Exception e){}
-		AgendamentoTarefa tarefaAgendada = (AgendamentoTarefa) timer.getInfo();
-		System.out.println(tarefaAgendada.getTarefa().getNome());
-		System.out.println(tarefaAgendada.getTarefa().getDescricao());
-		System.out.println(tarefaAgendada.getDataAgendamento());
-		System.out.println(tarefaAgendada.getDataHoraExecucao());
-		System.out.println(tarefaAgendada.getPeriodicidadeTarefa().getDescricao());
-		tarefaAgendada.setStatusAgendamento(StatusAgendamento.EM_EXECUCAO);
-		if(timer.isCalendarTimer()){
-			System.out.println(timer.getSchedule().getStart());
-			System.out.println(timer.getSchedule().getEnd());
+		if(timer!=null && timer.getInfo() instanceof AgendamentoTarefa){
+			AgendamentoTarefa tarefaAgendada = (AgendamentoTarefa) timer.getInfo();
+			numeroExecucoes++;
+			System.out.println("NUMERO DE EXECUÇÃO: " + numeroExecucoes + " INICIADO EM " + new Date() + " PARA A TAREFA " + tarefaAgendada.getTarefa().getNome());
 		}
+//		for(int i=0; i<50; i++){
+//			try{
+//				Thread.sleep(1000L);
+//			}catch(Exception e){}
+//			AgendamentoTarefa tarefaAgendada = (AgendamentoTarefa) timer.getInfo();
+//			System.out.println(tarefaAgendada.getTarefa().getNome());
+//			System.out.println(tarefaAgendada.getTarefa().getDescricao());
+//			System.out.println(tarefaAgendada.getDataAgendamento());
+//			System.out.println(tarefaAgendada.getDataHoraExecucao());
+//			System.out.println(tarefaAgendada.getPeriodicidadeTarefa().getDescricao());
+//			tarefaAgendada.setStatusAgendamento(StatusAgendamento.EM_EXECUCAO);
+//			if(timer.isCalendarTimer()){
+//				System.out.println(timer.getSchedule().getStart());
+//				System.out.println(timer.getSchedule().getEnd());
+//			}
+//		}
+		
 		
 	}
+	private int numeroExecucoes;
 	
 }

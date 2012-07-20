@@ -28,7 +28,9 @@
 			</p:column>
 			<p:column id="colunaDataHoraExecucao" sortBy="#{agendamentoTarefa.dataHoraExecucao}">
 				<f:facet name="header"><h:outputText value="#{msg['label.agendamentoTarefa.tarefa']}" id="labelColunaDataHoraExecucao"/></f:facet>
-				<h:outputText value="#{agendamentoTarefa.dataHoraExecucao}" id="dataHoraExecucaoDetalhe"/>
+				<h:outputText value="#{agendamentoTarefa.dataHoraExecucao}" id="dataHoraExecucaoDetalhe">
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="America/Sao_Paulo" locale="pt_BR"/>
+				</h:outputText>
 			</p:column>
 			<p:column id="colunaStatusAgendamento" sortBy="#{agendamentoTarefa.statusAgendamento.descricao}">
 				<f:facet name="header"><h:outputText value="#{msg['label.agendamentoTarefa.tarefa']}" id="labelColunaStatusAgendamento"/></f:facet>
