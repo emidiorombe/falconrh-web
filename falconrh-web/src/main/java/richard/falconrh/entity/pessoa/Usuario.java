@@ -4,15 +4,12 @@ import java.security.Principal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.ForeignKey;
 
-import richard.falconrh.entity.seguranca.PerfilAcesso;
 import richard.falconrh.util.FalconRHUtils;
 
 /**
@@ -29,7 +26,6 @@ public class Usuario extends Pessoa implements Principal{
 	private String login;
 	private String senha;
 	private Boolean ativo;
-	private PerfilAcesso perfilAcesso;
 
 	/**
 	 * Method getLogin.
@@ -54,13 +50,6 @@ public class Usuario extends Pessoa implements Principal{
 		return ativo;
 	}
 	
-	@ManyToOne
-	@JoinColumn(name="ID_PERFIL_ACESSO", nullable=true)
-	@ForeignKey(name="fk_perfilAcesso")
-	public PerfilAcesso getPerfilAcesso(){
-		return perfilAcesso;
-	}
-
 	/**
 	 * Method setLogin.
 	 * @param login String
@@ -81,10 +70,6 @@ public class Usuario extends Pessoa implements Principal{
 		this.ativo = ativo;
 	}
 	
-	public void setPerfilAcesso(PerfilAcesso perfilAcesso){
-		this.perfilAcesso = perfilAcesso;
-	}
-
 	/**
 	 * Method getName.
 	 * @return String * @see java.security.Principal#getName()

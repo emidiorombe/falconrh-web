@@ -2,9 +2,7 @@ package richard.falconrh.util;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Locale;
-import java.util.Set;
 import java.util.TimeZone;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -12,12 +10,9 @@ import org.apache.commons.beanutils.BeanUtils;
 import richard.falconrh.entity.pessoa.Pessoa;
 import richard.falconrh.entity.pessoa.Usuario;
 import richard.falconrh.entity.seguranca.Acesso;
-import richard.falconrh.entity.seguranca.PerfilAcesso;
-import richard.falconrh.entity.seguranca.PerfilaAcessoFuncionalidadeAcao;
 import richard.falconrh.modelo.enums.EstadoCivil;
 import richard.falconrh.modelo.enums.Etnia;
 import richard.falconrh.modelo.enums.Nacionalidade;
-import richard.falconrh.modelo.enums.NivelAcesso;
 import richard.falconrh.modelo.enums.Sexo;
 
 public class TesteUtils {
@@ -47,7 +42,6 @@ public class TesteUtils {
 		}
 		usuario.setAtivo(Boolean.TRUE);
 		usuario.setLogin("nome.sobrenome");
-		usuario.setPerfilAcesso(getPerfilAcesso());
 		usuario.setSenha("1234567890");
 		return usuario;
 	}
@@ -78,18 +72,5 @@ public class TesteUtils {
 		pessoa.setDeficienteFisico(deficienteFisico);
 		pessoa.setEmail(email);
 		return pessoa;
-	}
-	
-	public static PerfilAcesso getPerfilAcesso(){
-		PerfilAcesso perfilAcesso = new PerfilAcesso();
-		perfilAcesso.setAtivo(Boolean.TRUE);
-		perfilAcesso.setListaPerfisAcessosFuncionalidadesAcoes(getListaPerfilAcessosFuncionalidadesAcoes());
-		perfilAcesso.setNivelAcesso(NivelAcesso.NACIONAL);
-		perfilAcesso.setNome("ADMINISTRADOR");
-		return perfilAcesso;
-	}
-
-	private static Set<PerfilaAcessoFuncionalidadeAcao> getListaPerfilAcessosFuncionalidadesAcoes() {
-		return new HashSet<PerfilaAcessoFuncionalidadeAcao>();
 	}
 }

@@ -46,7 +46,7 @@
 			<h:panelGrid columns="8" id="panelGridInclusaoTelefones">
 				<h:outputLabel value="#{msg['label.telefone.tipoTelefone']}" for="tipoTelefone" id="labelTipoTelefone"/>
 				<p:selectOneMenu value="#{pessoaBean.telefone.tipoTelefone}" id="tipoTelefone">
-					<f:selectItem itemLabel="--Selectione" itemValue="" id="selecioneTipoTelefoneId"/>
+					<f:selectItem itemLabel="--Selecione" itemValue="" id="selecioneTipoTelefoneId"/>
 					<f:selectItems value="#{utilBean.listaTiposTelefones}"/>
 				</p:selectOneMenu>
 				<h:outputLabel value="#{msg['label.telefone.ddd']}" for="dddTelefone" id="labelDdd"/>
@@ -88,7 +88,7 @@
 				<h:outputLabel value="#{msg['label.documento.dataEmissao']}" for="dataEmissaoDocumento" id="labelDataEmissaoDocumento"/>
 				<p:calendar value="#{pessoaBean.documento.dataEmissao}" id="dataEmissaoDocumento" size="12" maxlength="10" title="#{msg['title.documento.dataEmissao']}" showOn="button" navigator="true" locale="pt_BR" lang="pt" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy"/>
 				<h:outputLabel value="#{msg['label.documento.numero']}" for="numeroDocumento" id="labelNumeroDocumento" />
-				<p:inputText value="#{pessoaBean.documento.numero}" size="10" maxlength="8" id="numeroDocumento"/>
+				<p:inputText value="#{pessoaBean.documento.numero}" size="20" maxlength="15" id="numeroDocumento"/>
 				<p:commandButton value="Limpar" type="button" onclick="javascript:limparCamposDocumento()" id="botaoLimparDocumentos"/>
 				<p:commandButton value="Adicionar" update="documentos @parent" action="#{pessoaBean.reinitDocumentos}" process="painelInclusaoDocumentos" id="botaoAdicionarDocumento">
 					<p:collector value="#{pessoaBean.documento}" addTo="#{pessoaBean.entity.listaDocumentos}"/>

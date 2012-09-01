@@ -25,7 +25,7 @@
 			</p:column>
 			<p:column id="colunaAtivoUsuario" sortBy="#{usuario.ativo}">
 				<f:facet name="header"><h:outputText value="#{msg['label.usuario.ativo']}" id="labelColunaAtivo"/></f:facet>
-				<h:outputText value="#{usuario.ativo}" id="ativoDetalhe"/>
+				<h:outputText value="#{usuario.ativo}" id="ativoDetalhe" converter="simNaoConverter"/>
 			</p:column>
 			<p:column style="text-align:center" id="colunaBotaoEditar">
 				<f:facet name="header"><h:outputText value="Editar" id="labelColunaEditar"/></f:facet>

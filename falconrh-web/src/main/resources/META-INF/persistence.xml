@@ -3,10 +3,6 @@
 	<persistence-unit name="falconrh-ejb" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:jboss/datasources/FalconRHDS</jta-data-source>
-		<class>richard.falconrh.entity.seguranca.PerfilaAcessoFuncionalidadeAcao</class>
-		<class>richard.falconrh.entity.seguranca.PerfilAcesso</class>
-		<class>richard.falconrh.entity.seguranca.FuncionalidadeAcao</class>
-		<class>richard.falconrh.entity.seguranca.Funcionalidade</class>
 		<class>richard.falconrh.entity.seguranca.Acesso</class>
 		<class>richard.falconrh.entity.seguranca.Acao</class>
 		<class>richard.falconrh.entity.pessoa.Usuario</class>
@@ -31,6 +27,7 @@
 		<class>richard.falconrh.entity.banco.Banco</class>
 		<class>richard.falconrh.entity.banco.Agencia</class>
 		<class>richard.falconrh.entity.Parent</class>
+		<class>richard.falconrh.scheduler.Tarefa</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />

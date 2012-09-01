@@ -22,6 +22,10 @@ body{
 	padding-right: 20px;
 }
 
+#rodape{
+	padding-top: 10px;
+}
+
 .ui-widget-header{
 	padding-left : 10px;
 	padding-right: 10px;
