@@ -112,28 +112,4 @@ public class DocumentoTest {
 		StringBuilder sb = new StringBuilder();
 		Assert.assertFalse(documento.equals(sb));
 	}
-	
-	@Test
-	public void equalsDeveRetornarFalseQuandoObjetoNaoForInstanciaDeDocumento(){
-		Long id = 1L;
-		TipoDocumento tipoDocumento = TipoDocumento.CARTEIRA_DE_MOTORISTA;
-		String numero = "123";
-		Date dataEmissao = new Date();
-		
-		documento.setTipoDocumento(tipoDocumento);
-		documento.setNumero(numero);
-		documento.setId(id);
-		documento.setDataEmissao(dataEmissao);
-		Documento2 documento2 = new Documento2();
-		documento2.setTipoDocumento(tipoDocumento);
-		documento2.setNumero(numero);
-		documento2.setId(id);
-		documento2.setDataEmissao(dataEmissao);
-		
-		Assert.assertFalse(documento2.equals(documento));
-	}
-	
-	private class Documento2 extends Documento{
-		private static final long serialVersionUID = 1L;
-	}
 }

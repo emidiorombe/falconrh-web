@@ -51,6 +51,7 @@ public abstract class AbstractServicesImpl<T extends Parent> implements Abstract
 	 */
 	@Override
 	public void cadastrar(T entity) throws ServicesException {
+		beforeCadastrar(entity);
 		LOGGER.debug("Inicio do cadastro da entitdade " + entity.getClass().getSimpleName());
 		try{
 			getEntityManager().persist(entity);
@@ -60,6 +61,9 @@ public abstract class AbstractServicesImpl<T extends Parent> implements Abstract
 		}finally{
 			LOGGER.debug("Fim do cadastro da entitidade " + entity.getClass().getSimpleName());
 		}
+	}
+
+	protected void beforeCadastrar(T entity) {
 	}
 
 	/**

@@ -12,6 +12,7 @@ import javax.persistence.criteria.Root;
 
 import org.apache.commons.lang.StringUtils;
 
+import richard.falconrh.entity.documento.Documento;
 import richard.falconrh.entity.pessoa.Pessoa;
 import richard.falconrh.entity.pessoa.Pessoa_;
 import richard.falconrh.exception.ServicesException;
@@ -97,6 +98,13 @@ public class PessoaServicesImpl extends AbstractServicesImpl<Pessoa> implements 
 			return q.getSingleResult();
 		} catch(Exception e){
 			throw new ServicesException(e);
+		}
+	}
+	
+	@Override
+	protected void beforeCadastrar(Pessoa pessoa) {
+		for(Documento documento : pessoa.getListaDocumentos()){
+			documento.setPessoa(pessoa);
 		}
 	}
 }

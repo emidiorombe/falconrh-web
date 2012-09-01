@@ -77,7 +77,7 @@ public class Documento extends Parent {
 	/**
 	 * Method getPessoa.
 	 * @return Pessoa */
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.REFRESH)
 	@JoinColumn(name="ID_PESSOA", nullable=false)
 	@ForeignKey(name="fk_pessoa")
 	public Pessoa getPessoa() {
