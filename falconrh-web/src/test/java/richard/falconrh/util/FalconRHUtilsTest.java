@@ -8,8 +8,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-/**
- * @author richard
+/**Classe de testes da classe utilitária <link>richard.falconrh.util.FalconRHUtils</link>
+ * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
 public class FalconRHUtilsTest {
