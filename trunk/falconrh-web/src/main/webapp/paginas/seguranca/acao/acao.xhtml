@@ -26,9 +26,9 @@
 					<p:commandButton value="#{msg['label.botao.sair']}" action="#{acaoBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairAcao"/>
 				</p:panel>
 			</p:outputPanel>
-			<p:confirmDialog id="confirmDialog" message="Você tem certeza de que deseja excluir o registro?" header="Confirmação de Exclusão" severity="alert" widgetVar="confirmation">
-				<p:commandButton id="confirmId" value="Sim" update="form:painelGlobal, form:mensagens" oncomplete="confirmation.hide()" actionListener="#{acaoBean.excluir}"/>
-				<p:commandButton id="declineId" value="Não" onclick="confirmation.hide()" type="button" /> 
+			<p:confirmDialog id="confirmDialog" message="#{msg['label.confirmar.exclusao']}" header="#{nsg['label.header.confirmar.exclusao']}" severity="alert" widgetVar="confirmation">
+				<p:commandButton id="confirmId" value="#{msg['sim']}" update="form:painelGlobal, form:mensagens" oncomplete="confirmation.hide()" actionListener="#{acaoBean.excluir}"/>
+				<p:commandButton id="declineId" value="#{msg['nao']}" onclick="confirmation.hide()" type="button" /> 
 			</p:confirmDialog>
 		</h:form>
 	</ui:define>
