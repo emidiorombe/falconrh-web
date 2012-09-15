@@ -103,8 +103,10 @@ public class PessoaServicesImpl extends AbstractServicesImpl<Pessoa> implements 
 	
 	@Override
 	protected void beforeCadastrar(Pessoa pessoa) {
-		for(Documento documento : pessoa.getListaDocumentos()){
-			documento.setPessoa(pessoa);
+		if(pessoa.getListaDocumentos()!=null && !pessoa.getListaDocumentos().isEmpty()){
+			for(Documento documento : pessoa.getListaDocumentos()){
+				documento.setPessoa(pessoa);
+			}
 		}
 	}
 }
