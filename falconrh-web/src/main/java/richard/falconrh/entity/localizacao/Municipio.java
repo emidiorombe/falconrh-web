@@ -141,7 +141,6 @@ public class Municipio extends Parent implements Comparable<Municipio> {
 	 * @return int */
 	@Override
 	public int compareTo(Municipio municipio) {
-		System.out.println("Comparando município com " + municipio.getId() + "- " + municipio.getNome());
 		if(this.getId()!=null && municipio.getId()!=null){
 			return this.getId().compareTo(municipio.getId());
 		}

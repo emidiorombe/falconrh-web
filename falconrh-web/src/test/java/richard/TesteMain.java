@@ -59,7 +59,6 @@ public class TesteMain {
 //		gravarUsuario(entityManager);
 		
 		logger.debug("Iniciando");
-		System.out.println("Fim");
 		logger.debug("fim");
 		System.exit(0);
 	}

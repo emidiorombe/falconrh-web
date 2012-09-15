@@ -39,7 +39,7 @@ public class PessoaConverter implements Converter {
 			try {
 				Long idPessoa = Long.valueOf(value);
 				pessoa = getPessoaServices().obterPeloId(Pessoa.class, idPessoa);
-				if(logger.isDebugEnabled()){
+				if(logger.isDebugEnabled() && pessoa!=null){
 					logger.debug("Pessoa encontrada: " + pessoa.getId() + " - " + pessoa.getNome());
 				}
 			} catch (ServicesException e) {

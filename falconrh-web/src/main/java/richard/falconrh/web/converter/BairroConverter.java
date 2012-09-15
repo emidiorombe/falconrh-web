@@ -39,7 +39,7 @@ public class BairroConverter implements Converter {
 			try {
 				Long idBairro = Long.valueOf(value);
 				bairro = getBairroServices().obterPeloId(Bairro.class, idBairro);
-				if(logger.isDebugEnabled()){
+				if(logger.isDebugEnabled() && bairro!=null){
 					logger.debug("Bairro encontrado: " + bairro.getId() + " - " + bairro.getNome());
 				}
 			} catch (ServicesException e) {

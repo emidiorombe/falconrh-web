@@ -39,7 +39,7 @@ public class UsuarioConverter implements Converter {
 			try {
 				Long idUsuario = Long.valueOf(value);
 				usuario = getUsuarioServices().obterPeloId(Usuario.class, idUsuario);
-				if(logger.isDebugEnabled()){
+				if(logger.isDebugEnabled() && usuario!=null){
 					logger.debug("Usuario encontrado: " + usuario.getId() + " - " + usuario.getNome());
 				}
 			} catch (ServicesException e) {

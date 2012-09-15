@@ -39,7 +39,7 @@ public class MunicipioConverter implements Converter {
 			try {
 				Long idMunicipio = Long.valueOf(value);
 				municipio = getMunicipioServices().obterPeloId(Municipio.class, idMunicipio);
-				if(logger.isDebugEnabled()){
+				if(logger.isDebugEnabled() && municipio!=null){
 					logger.debug("Municipio encontrado: " + municipio.getId() + " - " + municipio.getNome());
 				}
 			} catch (ServicesException e) {

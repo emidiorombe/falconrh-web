@@ -39,7 +39,7 @@ public class LogradouroConverter implements Converter {
 			try {
 				Long idLogradouro = Long.valueOf(value);
 				logradouro = getLogradouroServices().obterPeloId(Logradouro.class, idLogradouro);
-				if(logger.isDebugEnabled()){
+				if(logger.isDebugEnabled() && logradouro!=null){
 					logger.debug("Logradouro encontrada: " + logradouro.getId() + " - " + logradouro.getNome());
 				}
 			} catch (ServicesException e) {

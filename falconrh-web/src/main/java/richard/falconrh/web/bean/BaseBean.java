@@ -51,6 +51,7 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	public String PESQUISA_NAO_ENCONTRADA = "erro.pesquisa.nao.encontrado.entidade";
 	
 	private String modoOperacao;
+	private String modoOperacaoAnterior;
 	
 	private T entity;
 	private List<T> listaEntities;
@@ -68,13 +69,14 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 		logger.debug("obtendo o Modo de Operacao");
 		String modoOperacao = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(MODO_OPERACAO);
 		if(getModoOperacao()==null || "".equals(getModoOperacao())){
+			setModoOperacaoAnterior(getModoOperacao());
 			setModoOperacao(modoOperacao);
 		}
 	}
 	
 	/**
-	 * Method adicionarMensagemInformacao.
-	 * @param key String
+	 * Método que adiciona uma mensagem de informação.
+	 * @param key String que é a chave do arquivo de recursos que contém a mensagem a ser adicionada.
 	 */
 	public void adicionarMensagemInformacao(String key){
 		String mensagem = getMensagem(key);
@@ -83,8 +85,8 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	}
 	
 	/**
-	 * Method adicionarMensagemAlerta.
-	 * @param key String
+	 * Método que adiciona uma mensagem de alerta.
+	 * @param key String que é a chave do arquivo de recursos que contém a mensagem a ser adicionada.
 	 */
 	public void adicionarMensagemAlerta(String key){
 		String mensagem = getMensagem(key);
@@ -93,8 +95,8 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	}
 	
 	/**
-	 * Method adicionarMensagemErro.
-	 * @param key String
+	 * Método que adiciona uma mensagem de erro.
+	 * @param key String que é a chave do arquivo de recursos que contém a mensagem a ser adicionada.
 	 */
 	public void adicionarMensagemErro(String key){
 		String mensagem = getMensagem(key);
@@ -103,8 +105,8 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	}
 	
 	/**
-	 * Method adicionarMensagemErroFatal.
-	 * @param key String
+	 * Método que adiciona uma mensagem de erro fatal.
+	 * @param key String que é a chave do arquivo de recursos que contém a mensagem a ser adicionada.
 	 */
 	public void adicionarMensagemErroFatal(String key){
 		String mensagem = getMensagem(key);
@@ -113,98 +115,102 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	}
 	
 	/**
-	 * Method getMensagem.
-	 * @param key String
-	
-	 * @return String */
+	 * Método que retorna a mensagem que está no arquivo de resources a partir de sua chave.
+	 * @param key String que é a chave do arquivod e resources.
+	 * @return String que é a mensagem associada ao chave solicitada.
+	 */
 	public String getMensagem(String key){
 		ResourceBundle resource = getContext().getApplication().getResourceBundle(getContext(), MSG);
 		return resource.getString(key);
 	}
 	
 	/**
-	 * Method getContext.
-	
-	 * @return FacesContext */
+	 * Método que retorna uma instancia do FacesContext.
+	 * @return FacesContext
+	 */
 	public FacesContext getContext(){
 		return FacesContext.getCurrentInstance();
 	}
 	
 	/**
-	 * Method isModoInclusao.
-	
-	 * @return boolean */
+	 * Método que diz se o modo de operação atualmente sendo executado é o modo de inclusão.
+	 * @return boolean, sendo <code>true</code> se for "modoInclusao", ou <code>false</code> caso seja outro modo de operação.
+	 */
 	public boolean isModoInclusao(){
 		return MODO_INCLUSAO.equalsIgnoreCase(getModoOperacao());
 	}
 	
 	/**
-	 * Method isModoDetalhe.
-	
-	 * @return boolean */
+	 * Método que diz se o modo de operação atualmente sendo executado é o modo de de detalhe de informações.
+	 * @return boolean, sendo <code>true</code> se for "modoDetalhe", ou <code>false</code> caso seja outro modo de operação.
+	 */
 	public boolean isModoDetalhe(){
 		return MODO_DETALHE.equalsIgnoreCase(getModoOperacao());
 	}
 	
 	/**
-	 * Method isModoPesquisa.
-	
-	 * @return boolean */
+	 * Método que diz se o modo de operação atualmente sendo executado é o modo de Pesquisa.
+	 * @return boolean, sendo <code>true</code> se for "modoPesquisa", ou <code>false</code> caso seja outro modo de operação.
+	 */
 	public boolean isModoPesquisa(){
 		return MODO_PESQUISA.equalsIgnoreCase(getModoOperacao());
 	}
 	
 	/**
-	 * Method isModoExclusao.
-	
-	 * @return boolean */
+	 * Método que diz se o modo de operação atualmente sendo executado é o modo de exclusão.
+	 * @return boolean, sendo <code>true</code> se for "modoExclusao", ou <code>false</code> caso seja outro modo de operação.
+	 */
 	public boolean isModoExclusao(){
 		return MODO_EXCLUSAO.equalsIgnoreCase(getModoOperacao());
 	}
 	
 	/**
-	 * Method isModoEdicao.
-	
-	 * @return boolean */
+	 * Método que diz se o modo de operação atualmente sendo executado é o modo de edição.
+	 * @return boolean, sendo <code>true</code> se for "modoEdicao", ou <code>false</code> caso seja outro modo de operação.
+	 */
 	public boolean isModoEdicao(){
 		return MODO_EDICAO.equalsIgnoreCase(getModoOperacao());
 	}
 	
 	/**
-	 * Method isModoDetalhePesquisa.
-	
-	 * @return boolean */
+	 * Método que diz se o modo de operação atualmente sendo executado é o modo de detalhe da pesquisa.<br/>
+	 * Normalmente este método é utilizado para visualizar a lista de dados obtidas a partir de uma pesquisa (um dataTable, por exemplo).
+	 * @return boolean, sendo <code>true</code> se for "modoDetalhePequisa", ou <code>false</code> caso seja outro modo de operação.
+	 */	
 	public boolean isModoDetalhePesquisa(){
 		return MODO_DETALHE_PESQUISA.equalsIgnoreCase(getModoOperacao());
 	}
 	
 	/**
-	 * Method sair.
-	
-	 * @return String */
+	 * Método que retorna a execução inicial do sistema.
+	 * @return String
+	 */
 	public String sair(){
 		setModoOperacao("");
 		return "/home";
 	}
 	
 	/**
-	 * Method getServices.
-	
-	 * @return U */
+	 * Método que retorna a instância da classe que extente AbstractServices que está sendo utilizada.
+	 * @return U - a instância da classe Services utilizada.
+	 */
 	public U getServices(){return null;}
-	public void inicializaEntity(){}
 	
-
+	/**
+	 * Método que deve ser sobrescrito nas classes filhas para inicializar objetos básicos do ManagedBean.
+	 */
+	public void inicializaEntity(){}
 
 	/**
-	 * Method cadastrar.
-	 * @param event ActionEvent
+	 * Método base que realiza o cadastro no banco de dados da entidade que está sendo manipulada no momento.
+	 * @param event ActionEvent a instância do evento que foi disparado pelo usuário.
 	 */
 	public void cadastrar(ActionEvent event){
 		logger.debug("Inicializando o cadastro de entidade");
 		try{
 			getServices().cadastrar(getEntity());
 			adicionarMensagemInformacao(SUCESSO_CADASTRO);
+			setModoOperacaoAnterior(getModoOperacao());
 			setModoOperacao(MODO_DETALHE);
 			logger.debug("Entidade cadastrada com sucesso");
 		}catch(Exception e){
@@ -216,14 +222,15 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	}
 
 	/**
-	 * Method atualizar.
-	 * @param event ActionEvent
+	 * Método base que realiza a atualização da entidade no banco de dados que está sendo manipulada no momento.
+	 * @param event ActionEvent a instância do evento que foi disparado pelo usuário.
 	 */
 	public void atualizar(ActionEvent event){
 		logger.debug("Inicializando a atualizacao da entidade");
 		try{
 			getServices().alterar(getEntity());
 			adicionarMensagemInformacao(SUCESSO_ATUALIZACAO);
+			setModoOperacaoAnterior(getModoOperacao());
 			setModoOperacao(MODO_DETALHE);
 			logger.debug("Entidade atualizada com sucesso");
 		}catch(Exception e){
@@ -235,8 +242,9 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	}
 	
 	/**
-	 * Method pesquisar.
-	 * @param event ActionEvent
+	 * Método base que realiza a pesquisa de entidades no banco de dados.<br/>
+	 * Este método irá popular o objeto <code>lista</code> com os dados encontrados (pode ser obtido através de <code>getLista()</code>.
+	 * @param event ActionEvent a instância do evento que foi disparado pelo usuário.
 	 */
 	public void pesquisar(ActionEvent event){
 		logger.debug("Iniciando a pesquisa de de entidade...");
@@ -252,6 +260,7 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 		}
 		if(lista.isEmpty()){
 			adicionarMensagemErro(PESQUISA_NAO_ENCONTRADA);
+			setModoOperacaoAnterior(getModoOperacao());
 			setModoOperacao(MODO_PESQUISA);
 			logger.info("Nao foi encontrada nenhum entidade na pesquisa");
 			return;
@@ -262,8 +271,8 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	}
 	
 	/**
-	 * Method excluir.
-	 * @param event ActionEvent
+	 * Método base que realiza a exclusão de objetos do banco de dados.<br/>
+	 * @param event ActionEvent a instância do evento que foi disparado pelo usuário.
 	 */
 	@SuppressWarnings("unchecked")
 	public void excluir(ActionEvent event){
@@ -271,6 +280,7 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 		try{
 			getServices().excluirPeloId((Class<T>) getEntity().getClass(), getEntity().getId());
 			adicionarMensagemInformacao(SUCESSO_EXCLUSAO);
+			setModoOperacaoAnterior(getModoOperacao());
 			setModoOperacao(MODO_PESQUISA);
 			inicializaEntity();
 			logger.debug("Entidade excluida com sucesso");
@@ -282,47 +292,54 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 		}
 	}
 	
-	
 	/**
-	 * Method editar.
-	 * @param event ActionEvent
+	 * Método que muda o modo de operação em excução para o modo de edição de dados.<br/>
+	 * Após a execução deste método, o modo de operação passa a ser "modoEdicao".
+	 * @param event ActionEvent a instância do evento que foi disparado pelo usuário.
 	 */
 	public void editar(ActionEvent event){
 		logger.debug("Iniciando edicao");
+		setModoOperacaoAnterior(getModoOperacao());
 		setModoOperacao(MODO_EDICAO);
 	}
 	
 	/**
-	 * Method visualizar.
-	 * @param event ActionEvent
+	 * Método que muda o modo de operação em excução para o modo de visualização de dados.<br/>
+	 * Após a execução deste método, o modo de operação passa a ser "modoDetalhe".
+	 * @param event ActionEvent a instância do evento que foi disparado pelo usuário.
 	 */
 	public void visualizar(ActionEvent event){
 		logger.debug("Iniciando visualizacao");
+		setModoOperacaoAnterior(getModoOperacao());
 		setModoOperacao(MODO_DETALHE);
 	}
 	
 	/**
-	 * Method iniciarExclusao.
-	 * @param event ActionEvent
+	 * Método que muda o modo de operação em excução para o modo de exclusão de dados.<br/>
+	 * Após a execução deste método, o modo de operação passa a ser "modoExclusao".
+	 * @param event ActionEvent a instância do evento que foi disparado pelo usuário.
 	 */
 	public void iniciarExclusao(ActionEvent event){
 		logger.debug("Iniciando exclusao");
+		setModoOperacaoAnterior(getModoOperacao());
 		setModoOperacao(MODO_EXCLUSAO);
 	}
 	
 	/**
-	 * Method iniciarPesquisa.
-	 * @param event ActionEvent
+	 * Método que muda o modo de operação em excução para o modo de pesquisa de dados.<br/>
+	 * Após a execução deste método, o modo de operação passa a ser "modoPesquisa".
+	 * @param event ActionEvent a instância do evento que foi disparado pelo usuário.
 	 */
 	public void iniciarPesquisa(ActionEvent event){
 		logger.debug("Iniciando exclusao");
+		setModoOperacaoAnterior(getModoOperacao());
 		setModoOperacao(MODO_PESQUISA);
 		inicializaEntity();
 	}
 	
 	/**
-	 * Method voltarParaResultadoDaPesquisa.
-	 * @param event ActionEvent
+	 * Método que realiza novamente a pesquisa com os dados do último objeto pesquisado.
+	 * @param event ActionEvent a instância do evento que foi disparado pelo usuário.
 	 */
 	public void voltarParaResultadoDaPesquisa(ActionEvent event){
 		setEntity(ultimoSamplePesquisa);
@@ -330,23 +347,39 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	}
 	
 	/**
-	 * Method getModoOperacao.
-	 * @return String
+	 * Método que retorna o modo de operação atualmente sendo executado.
+	 * @return String que representa o modo de operacao sendo executado ("modoInclusao", "modoEdicao", "modoDetalhe", "modoDetalhePesquisa", "modoPesquisa" e "modoExclusao").
 	 */
 	public String getModoOperacao() {
 		return modoOperacao;
 	}
 	
 	/**
-	 * Method setModoOperacao.
-	 * @param modoOperacao String
+	 * Método que altera o objeto que representa o modo de operação atual do sistema
+	 * @param modoOperacao String que contém o modo de operação a ser executado ("modoInclusao", "modoEdicao", "modoDetalhe", "modoDetalhePesquisa", "modoPesquisa" e "modoExclusao").
 	 */
 	public void setModoOperacao(String modoOperacao) {
 		this.modoOperacao = modoOperacao;
 	}
+	
+	/**
+	 * Método que retorna o modo de operação que foi executado anteriormente ao modo que está sendo atualmente executado.
+	* @return String que representa o modo de operacao ("modoInclusao", "modoEdicao", "modoDetalhe", "modoDetalhePesquisa", "modoPesquisa" e "modoExclusao"). 
+	 */
+	public String getModoOperacaoAnterior(){
+		return modoOperacaoAnterior;
+	}
+	
+	/**
+	 * Método que muda o modo de operacao anterior
+	 * @param modoOperacaoAnterior
+	 */
+	public void setModoOperacaoAnterior(String modoOperacaoAnterior){
+		this.modoOperacaoAnterior = modoOperacaoAnterior;
+	}
 
 	/**
-	 * Method getEntity.
+	 * Método que retorna a entidade que está sendo manipulada no momento.
 	 * @return T
 	 */
 	public T getEntity() {
@@ -354,23 +387,24 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	}
 
 	/**
-	 * Method setEntity.
-	 * @param entity T
+	 * Método que informa qual será a entidade a ser manipulada.
+	 * @param entity T a instância da entidade que será manipulada.
 	 */
 	public void setEntity(T entity) {
 		this.entity = entity;
 	}
 
 	/**
-	 * Method getListaEntities.
-	 * @return List<T> */
+	 * Método que retorna a lista de entidades encontradas.
+	 * @return List<T> a instancia do objeto que representa a lista de entidades.
+	 */
 	public List<T> getListaEntities() {
 		return listaEntities;
 	}
 
 	/**
-	 * Method setListaEntities.
-	 * @param listaEntities List<T>
+	 * Método que informa qual será a lista de entidades a ser manipulada.
+	 * @param listaEntities List<T> a instância do objeto que representa a lista de entidades.
 	 */
 	public void setListaEntities(List<T> listaEntities) {
 		this.listaEntities = listaEntities;
