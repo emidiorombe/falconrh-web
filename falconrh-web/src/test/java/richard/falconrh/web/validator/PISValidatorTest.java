@@ -1,6 +1,6 @@
 package richard.falconrh.web.validator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
