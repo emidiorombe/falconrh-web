@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.junit.Ignore;
 
 import richard.falconrh.entity.pessoa.Pessoa;
 import richard.falconrh.entity.pessoa.Usuario;
@@ -15,7 +16,9 @@ import richard.falconrh.modelo.enums.Etnia;
 import richard.falconrh.modelo.enums.Nacionalidade;
 import richard.falconrh.modelo.enums.Sexo;
 
+@Ignore
 public class TesteUtils {
+	
 	public static Acesso getAcesso(){
 		Calendar calendar= Calendar.getInstance(new Locale("pt", "BR"));
 		calendar.clear();
