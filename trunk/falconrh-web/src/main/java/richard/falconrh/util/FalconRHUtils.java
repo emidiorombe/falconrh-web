@@ -231,7 +231,7 @@ public class FalconRHUtils {
 	 * @param value String
 	 * @return boolean
 	 */
-	public static boolean isDataValida(String value){
+	public static boolean isDataValida(String value, String pattern){
 		return false;
 	}
 	
