@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
@@ -19,12 +20,15 @@ import org.dbunit.dataset.ITable;
 import org.dbunit.dataset.ReplacementDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
-import org.hibernate.ejb.HibernateEntityManager;
+import org.hibernate.Session;
+import org.hibernate.engine.spi.SessionFactoryImplementor;
+import org.hibernate.service.jdbc.connections.spi.ConnectionProvider;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
 /**
- * @author richard
+ * Classe base para realização de testes utilizando o JUnit e DBUnit juntos
+ * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
 public class BaseJPATest {
@@ -38,11 +42,17 @@ public class BaseJPATest {
 	private static EntityManagerFactory emf;
 	private static EntityManager entityManager;
 	
+	/**
+	 * Método que é executado antes da execução dos métodos de teste da classe (executado apenas uma vez por classe).
+	 */
 	@BeforeClass
 	public static void beforeSetUp(){
 		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 	}
 	
+	/**
+	 * Método que é executado após da execução dos métodos de teste da classe (executado apenas uma vez por classe).
+	 */
 	@AfterClass
 	public static void afterTearDown(){
 		entityManager = null;
@@ -50,17 +60,17 @@ public class BaseJPATest {
 	}
 
 	/**
-	 * Method getEntityManager.
-	
-	 * @return EntityManager */
+	 * Método que retorna o entityManager.
+	 * @return EntityManager
+	 */
 	public EntityManager getEntityManager() {
 		return entityManager;
 	}
 	
 	/**
-	 * Method setUp.
-	
-	 * @throws Exception */
+	 * Método que realiza as configurações básicas antes de inicializar os testes.
+	 * @throws Exception
+	 */
 	public void setUp() throws Exception{
 		entityManager = emf.createEntityManager();
 		File fileDataSetInicial = new File(nomeArquivoBase);
@@ -77,18 +87,23 @@ public class BaseJPATest {
 	}
 
 	/**
-	 * Method getConnection.
-	
-	 * @return Connection */
-	@SuppressWarnings("deprecation")
-	protected Connection getConnection(){
-		return ((HibernateEntityManager)entityManager).getSession().connection();
+	 * Método que obterm a conexão utilizada a partir da sessão do hibernate.
+	 * @return Connection - a conexão atualmente utilizada 
+	 * @throws SQLException
+	 */
+	protected Connection getConnection() throws SQLException{
+		Session session = (Session) getEntityManager().getDelegate();
+		SessionFactoryImplementor sfi = (SessionFactoryImplementor) session.getSessionFactory();
+		ConnectionProvider cp = sfi.getConnectionProvider();
+		return cp.getConnection();
 	}
 
 	/**
-	 * Method substituirDatasEValoresNulos.
+	 * Método que substitui os valores nulos e algumas datas no formata string para objetos java.
 	 * @param dataSet IDataSet
-	 * @throws DatabaseUnitException * @throws Exception */
+	 * @throws DatabaseUnitException
+	 * @throws Exception
+	 */
 	protected void substituirDatasEValoresNulos(IDataSet dataSet) throws DatabaseUnitException, Exception{
 		ReplacementDataSet replacementDataSet = new ReplacementDataSet(dataSet); 
 		replacementDataSet.addReplacementObject("[NULL]", null);
@@ -97,12 +112,12 @@ public class BaseJPATest {
 		replacementDataSet.addReplacementObject("[01/01/09]", new Date());
 	}
 	
-	
 	/**
-	 * Method verificarEstruturaBanco.
-	 * @param arquivoDadosEsperado String
-	 * @param tabelas String[]
-	 * @throws Exception */
+	 * Método que faz a verificação da estrutura do banco de dados após a execução de algum teste.
+	 * @param arquivoDadosEsperado String que indica o caminho do arquivo xml com os dados que deverão estar no banco após a execução do teste.
+	 * @param tabelas String[]- array que contém os nomes das tabelas que serão verificadas pelo método.
+	 * @throws Exception
+	 */
 	private void verificarEstruturaBanco(String arquivoDadosEsperado, String... tabelas) throws Exception{
 		IDatabaseConnection databaseConnection = new DatabaseConnection(getConnection());
 		IDataSet dataSetBanco = databaseConnection.createDataSet();
@@ -119,36 +134,41 @@ public class BaseJPATest {
 	}
 	
 	/**
-	 * Method verificarEstruturaBancoAposInclusao.
-	 * @param tabelas String[]
-	 * @throws Exception */
+	 * Method Método que verifica a estrutura do banco de dados após a inclusão de dados.
+	 * @param tabelas String[] a lista de tabelas que serão verificadas.
+	 * @throws Exception
+	 */
 	public void verificarEstruturaBancoAposInclusao(String... tabelas) throws Exception{
 		assertNotNull("Para realizar a comparacao de dados apos a operacao é necessário informar o arquivo de comparacao", nomeArquivoAposInclusao);
 		verificarEstruturaBanco(nomeArquivoAposInclusao, tabelas);
 	}
 	
 	/**
-	 * Method verificarEstruturaBancoAposAlteracao.
-	 * @param tabelas String[]
-	 * @throws Exception */
+	 * Método que verifica a estrutura do banco de dados após a alteração de dados.
+	 * @param tabelas String[] a lista de tabelas que serão verificadas.
+	 * @throws Exception
+	 */
 	public void verificarEstruturaBancoAposAlteracao(String... tabelas) throws Exception{
 		assertNotNull("Para realizar a comparacao de dados apos a operacao é necessario informar o arquivo de comparacao", nomeArquivoAposAlteracao);
 		verificarEstruturaBanco(nomeArquivoAposAlteracao, tabelas);
 	}
 	
 	/**
-	 * Method verificarEstruturaBancoAposExclusao.
-	 * @param tabelas String[]
-	 * @throws Exception */
+	 * Método que verifica a estrutura do banco de dados após a exclusão de dados.
+	 * @param tabelas String[] a lista de tabelas que serão verificadas.
+	 * @throws Exception
+	 */
 	public void verificarEstruturaBancoAposExclusao(String... tabelas) throws Exception{
 		assertNotNull("Para realizar a comparacao de dados apos a operacao é necessario informar o arquivo de comparacao", nomeArquivoAposExclusao);
 		verificarEstruturaBanco(nomeArquivoAposExclusao, tabelas);
 	}
 	
 	/**
-	 * Method getTabelaBase.
-	 * @param nomeTabela String
-	 * @return ITable * @throws Exception */
+	 * Método que retorna um objeto que representa uma tabela no dbunit.
+	 * @param nomeTabela String - o nome da tabela do banco de dados.
+	 * @return ITable
+	 * @throws Exception
+	 */
 	public ITable getTabelaBase(String nomeTabela) throws Exception{
 		assertNotNull("Para realizar a comparacao de dados apos a operacao é necessario informar o arquivo de comparacao", nomeArquivoBase);
 		return new FlatXmlDataSetBuilder().build(new File(nomeArquivoBase)).getTable(nomeTabela);
