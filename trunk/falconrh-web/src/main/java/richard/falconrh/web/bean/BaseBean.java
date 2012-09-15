@@ -182,6 +182,54 @@ public abstract class BaseBean<T extends Parent, U extends AbstractServices<T>> 
 	}
 	
 	/**
+	 * Método que diz se o modo de operação anterior que foi executado estava no modo de inclusão.
+	 * @return boolean, sendo <code>true</code> se for "modoInclusao", ou <code>false</code> caso seja outro modo de operação.
+	 */
+	public boolean isModoInclusaoAnterior(){
+		return MODO_INCLUSAO.equalsIgnoreCase(getModoOperacao());
+	}
+	
+	/**
+	 * Método que diz se o modo de operação anterior que foi executado estava no modo de detalhe de informacoes.
+	 * @return boolean, sendo <code>true</code> se for "modoDetalhe", ou <code>false</code> caso seja outro modo de operação.
+	 */
+	public boolean isModoDetalheAnterior(){
+		return MODO_DETALHE.equalsIgnoreCase(getModoOperacao());
+	}
+	
+	/**
+	 * Método que diz se o modo de operação anterior que foi executado estava no modo de pesquisa de informações.
+	 * @return boolean, sendo <code>true</code> se for "modoPesquisa", ou <code>false</code> caso seja outro modo de operação.
+	 */
+	public boolean isModoPesquisaAnterior(){
+		return MODO_PESQUISA.equalsIgnoreCase(getModoOperacao());
+	}
+	
+	/**
+	 * Método que diz se o modo de operação anterior que foi executado estava no modo de exclusao.
+	 * @return boolean, sendo <code>true</code> se for "modoExclusao", ou <code>false</code> caso seja outro modo de operação.
+	 */
+	public boolean isModoExclusaoAnterior(){
+		return MODO_EXCLUSAO.equalsIgnoreCase(getModoOperacao());
+	}
+	
+	/**
+	 * Método que diz se o modo de operação anterior que foi executado estava no modo de edição.
+	 * @return boolean, sendo <code>true</code> se for "modoEdicao", ou <code>false</code> caso seja outro modo de operação.
+	 */
+	public boolean isModoEdicaoAnterior(){
+		return MODO_EDICAO.equalsIgnoreCase(getModoOperacao());
+	}
+	
+	/**
+	 * Método que diz se o modo de operação anterior que foi executado estava no modo de detalhe de pesquisa.
+	 * @return boolean, sendo <code>true</code> se for "modoDetalhePequisa", ou <code>false</code> caso seja outro modo de operação.
+	 */	
+	public boolean isModoDetalhePesquisaAnterior(){
+		return MODO_DETALHE_PESQUISA.equalsIgnoreCase(getModoOperacao());
+	}
+	
+	/**
 	 * Método que retorna a execução inicial do sistema.
 	 * @return String
 	 */
