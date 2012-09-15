@@ -39,7 +39,7 @@ public class AgenciaConverter implements Converter {
 			try {
 				Long idAgencia = Long.valueOf(value);
 				agencia = getAgenciaServices().obterPeloId(Agencia.class, idAgencia);
-				if(logger.isDebugEnabled()){
+				if(logger.isDebugEnabled() && agencia!=null){
 					logger.debug("Agência encontrada: " + agencia.getId() + " - " + agencia.getNome());
 				}
 			} catch (ServicesException e) {

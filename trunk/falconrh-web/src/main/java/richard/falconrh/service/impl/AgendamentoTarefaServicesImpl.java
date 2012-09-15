@@ -2,7 +2,6 @@ package richard.falconrh.service.impl;
 
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
@@ -136,30 +135,6 @@ public class AgendamentoTarefaServicesImpl extends AbstractServicesImpl<Agendame
 	
 	@Timeout
 	public void execute(Timer timer){
-		if(timer!=null && timer.getInfo() instanceof AgendamentoTarefa){
-			AgendamentoTarefa tarefaAgendada = (AgendamentoTarefa) timer.getInfo();
-			numeroExecucoes++;
-			System.out.println("NUMERO DE EXECUÇÃO: " + numeroExecucoes + " INICIADO EM " + new Date() + " PARA A TAREFA " + tarefaAgendada.getTarefa().getNome());
-		}
-//		for(int i=0; i<50; i++){
-//			try{
-//				Thread.sleep(1000L);
-//			}catch(Exception e){}
-//			AgendamentoTarefa tarefaAgendada = (AgendamentoTarefa) timer.getInfo();
-//			System.out.println(tarefaAgendada.getTarefa().getNome());
-//			System.out.println(tarefaAgendada.getTarefa().getDescricao());
-//			System.out.println(tarefaAgendada.getDataAgendamento());
-//			System.out.println(tarefaAgendada.getDataHoraExecucao());
-//			System.out.println(tarefaAgendada.getPeriodicidadeTarefa().getDescricao());
-//			tarefaAgendada.setStatusAgendamento(StatusAgendamento.EM_EXECUCAO);
-//			if(timer.isCalendarTimer()){
-//				System.out.println(timer.getSchedule().getStart());
-//				System.out.println(timer.getSchedule().getEnd());
-//			}
-//		}
-		
 		
 	}
-	private int numeroExecucoes;
-	
 }

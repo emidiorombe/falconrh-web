@@ -100,24 +100,16 @@ public class BancoTest {
 	
 	@Test
 	public void compareToDeveRetornar0quandoUmdosObjetosNaoPossuirCodigoFebraban(){
-		Banco banco = new Banco();
-		banco.setNome("Banco do Brasil");
-		
 		Banco banco2 = new Banco();
 		banco2.setCodigoFebraban("399");
-		banco2.setNome("Banco do Bradesco");
-		
+
 		assertEquals (0, banco.compareTo(banco2));
 		assertEquals (0, banco2.compareTo(banco));
 	}
 	
 	@Test
 	public void compareToDeveRetornar0quandoUmdosObjetosNaoPossuirNome(){
-		Banco banco = new Banco();
-		banco.setCodigoFebraban("001");
-		
 		Banco banco2 = new Banco();
-		banco2.setCodigoFebraban("399");
 		banco2.setNome("Banco do Bradesco");
 		
 		assertEquals (0, banco.compareTo(banco2));
@@ -126,7 +118,6 @@ public class BancoTest {
 	
 	@Test
 	public void compareToDeveRetornar0QuandoNaoHouverNemcodigoNemNome(){
-		banco = new Banco();
 		Banco banco2 = new Banco();
 		assertEquals(0, banco.compareTo(banco2));
 	}

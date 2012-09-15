@@ -51,7 +51,6 @@ public class PessoaConverterTest {
 	
 	@Test
 	public void getAsObjectDeveRetornarPessoa() throws Exception{
-		
 		final String value = "1";
 		final Pessoa pessoaEsperada = criarPessoa();
 
@@ -61,7 +60,8 @@ public class PessoaConverterTest {
 		assertNotNull(object);
 		assertTrue(object instanceof Pessoa);
 		Pessoa pessoaRetorno = (Pessoa)object;
-		assertEquals(pessoaEsperada, pessoaRetorno);
+		assertEquals(pessoaEsperada.getId(), pessoaRetorno.getId());
+		assertEquals(pessoaEsperada.getNome(), pessoaRetorno.getNome());
 
 		// Optionally verify that the private method was actually called
 		verifyPrivate(pessoaConverter).invoke(nomeMetodoMockado);

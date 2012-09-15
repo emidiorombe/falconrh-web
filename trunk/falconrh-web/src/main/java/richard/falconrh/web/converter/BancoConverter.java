@@ -39,7 +39,7 @@ public class BancoConverter implements Converter {
 			try {
 				Long idBanco = Long.valueOf(value);
 				banco = getBancoServices().obterPeloId(Banco.class, idBanco);
-				if(logger.isDebugEnabled()){
+				if (logger.isDebugEnabled() && banco != null) {
 					logger.debug("Banco encontrado: " + banco.getId() + " - " + banco.getNome());
 				}
 			} catch (ServicesException e) {

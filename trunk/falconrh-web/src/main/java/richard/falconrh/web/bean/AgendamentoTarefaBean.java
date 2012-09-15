@@ -72,6 +72,7 @@ public class AgendamentoTarefaBean extends BaseBean<AgendamentoTarefa, AbstractS
 		}
 		if(lista.isEmpty()){
 			adicionarMensagemErro(PESQUISA_NAO_ENCONTRADA);
+			setModoOperacaoAnterior(getModoOperacao());
 			setModoOperacao(MODO_PESQUISA);
 			logger.info("Nao foi encontrada nenhum entidade na pesquisa");
 			return;
@@ -93,6 +94,7 @@ public class AgendamentoTarefaBean extends BaseBean<AgendamentoTarefa, AbstractS
 		try{
 			agendamentoTarefaServices.excluirTarefaAgendada(getEntity());
 			adicionarMensagemInformacao(SUCESSO_EXCLUSAO);
+			setModoOperacaoAnterior(getModoOperacao());
 			setModoOperacao(MODO_PESQUISA);
 			inicializaEntity();
 			logger.debug("Tarefa agendada excluida com sucesso");
