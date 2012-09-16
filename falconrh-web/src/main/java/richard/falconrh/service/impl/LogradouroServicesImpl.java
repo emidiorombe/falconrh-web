@@ -84,6 +84,12 @@ public class LogradouroServicesImpl extends AbstractServicesImpl<Logradouro> imp
 		
 		criteriaQuery.where(listaRestricoes);
 		TypedQuery<Logradouro> typedQuery = getEntityManager().createQuery(criteriaQuery);
-		return new TreeSet<Logradouro>(typedQuery.getResultList());
+		Set<Logradouro> lista = new TreeSet<Logradouro>(typedQuery.getResultList());
+		for(Logradouro log : lista){
+			log.getBairro().getNome();
+			log.getBairro().getMunicipio().getNome();
+			log.getBairro().getMunicipio().getUf();
+		}
+		return lista;
 	}
 }

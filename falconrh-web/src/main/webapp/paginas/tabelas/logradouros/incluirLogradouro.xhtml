@@ -4,8 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-	<p:outputPanel id="painelInclusao" rendered="#{municipioBean.modoInclusao or municipioBean.modoEdicao}">
-		<p:panel header="#{msg['titulo.municipio.inclusao']}">
+	<p:outputPanel id="painelInclusao" rendered="#{logradouroBean.modoInclusao or logradouroBean.modoEdicao}">
+		<p:panel header="#{msg['titulo.logradouro.inclusao']}">
 			<p:focus for="uf" id="focusPaginaInclusao"/>
 			<h:panelGrid columns="2" id="painel2ColunasInclusao">
 				<p:outputLabel value="#{msg['label.logradouro.uf']}" for="uf" id="labelUf" />
@@ -15,25 +15,25 @@
 					<p:ajax event="change" update="municipio,bairro" immediate="true" process="@this"/>
 				</p:selectOneMenu>
 				<p:outputLabel value="#{msg['label.logradouro.municipio']}" for="municipio" id="labelMunicipio" />
-				<p:selectOneMenu converter="municipioConverter" value="#{logradouroBean.entity.bairro.municipio}" id="municipio" required="true" requiredMessage="#{msg['logradouro.municipio.obrigatorio']}" title="#{msg['title.logradouro.municipio']}" valueChangeListener="#{logradouroBean.obterListaBairros}" effect="fade">
+				<p:selectOneMenu converter="municipioConverter" value="#{logradouroBean.entity.bairro.municipio}" id="municipio" required="true" requiredMessage="#{msg['logradouro.municipio.obrigatorio']}" title="#{msg['title.logradouro.municipio']}" valueChangeListener="#{logradouroBean.obterListaBairros}" effect="fade" converterMessage="#{msg['erro.conversao.municipio']}">
 					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
 					<f:selectItems value="#{logradouroBean.listaMunicipios}" var="municipio" itemLabel="#{municipio.nome}" itemValue="#{municipio}"/>
 					<p:ajax event="change" update="bairro" immediate="true" process="@this"/>
 				</p:selectOneMenu>
 				<p:outputLabel value="#{msg['label.logradouro.bairro']}" for="bairro" id="labelBairro" />
-				<p:selectOneMenu converter="bairroConverter" id="bairro" value="#{logradouroBean.entity.bairro}" required="true" requiredMessage="#{msg['logradouro.bairro.obrigatorio']}" converterMessage="Erro de conversão de objeto bairro">
+				<p:selectOneMenu converter="bairroConverter" id="bairro" value="#{logradouroBean.entity.bairro}" required="true" requiredMessage="#{msg['logradouro.bairro.obrigatorio']}" converterMessage="#{msg['erro.conversao.bairro']}">
 					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
 					<f:selectItems value="#{logradouroBean.listaBairros}" var="bairro" itemLabel="#{bairro.nome}" itemValue="#{bairro}"/>
 				</p:selectOneMenu>
 				<p:outputLabel value="#{msg['label.logradouro.tipoLogradouro']}" for="tipoLogradouro" id="labelTipoLogradouro"/>
-				<p:selectOneMenu value="#{logradouroBean.entity.tipoLogradouro}" id="tipoLogradouro" required="true" requiredMessage="#{msg['logradouro.tipoLogradouro.obrigatorio']}" title="#{msg['title.logradouro.tipoLogradouro']}">
+				<p:selectOneMenu value="#{logradouroBean.entity.tipoLogradouro}" id="tipoLogradouro" required="true" requiredMessage="#{msg['logradouro.tipoLogradouro.obrigatorio']}" title="#{msg['title.logradouro.tipoLogradouro']}" effect="fade">
 					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
 					<f:selectItems value="#{utilBean.listaTiposLogradouros}"/>
 				</p:selectOneMenu>
 				<p:outputLabel value="#{msg['label.logradouro.nome']}" for="nome" id="labelNome" />
 				<p:inputText value="#{logradouroBean.entity.nome}" id="nome" required="true" requiredMessage="#{msg['endereco.logradouro.obrigatorio']}" title="#{msg['title.logradouro.nome']}" size="50" maxlength="255"/>
 				<p:outputLabel value="#{msg['label.logradouro.cep']}" id="labelCep" for="cep"/>
-				<p:inputText value="#{logradouroBean.entity.cep}" id="cep" required="true" requiredMessage="#{msg['cep.logradouro.obrigatorio']}" title="#{msg['title.logradouro.cep']}" size="11" maxlength="10"/>
+				<p:inputText value="#{logradouroBean.entity.cep}" id="cep" converter="cepConverter" converterMessage="#{msg['erro.conversao.cep']}" required="true" requiredMessage="#{msg['cep.logradouro.obrigatorio']}" title="#{msg['title.logradouro.cep']}" size="11" maxlength="10" validator="cepValidator"/>
 			</h:panelGrid>
 		</p:panel>
 	</p:outputPanel>
