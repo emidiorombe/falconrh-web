@@ -32,7 +32,7 @@ import richard.falconrh.modelo.enums.Nacionalidade;
 import richard.falconrh.modelo.enums.Sexo;
 
 /**
- * @author richard
+ * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
 @Entity
