@@ -34,7 +34,7 @@
             <property name="hibernate.show_sql" value ="true"/>
 			<property name="hibernate.generate_statistics" value="true"/>
 			<property name="org.hibernate.SQL.level" value="FINEST"/>
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<!-- <property name="hibernate.hbm2ddl.auto" value="create" />-->
 		</properties>
 	</persistence-unit>
 </persistence>
