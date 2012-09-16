@@ -9,21 +9,21 @@
 	<ui:define name="conteudo">
 		<ui:debug hotkey="q"/>
 		<h:form id="form" prependId="true" acceptcharset="utf-8">
-			<p:messages id="mensagens" showDetail="true" showSummary="true"/>
+			<p:messages id="mensagens" showDetail="false" showSummary="true"/>
 			<p:outputPanel id="painelGlobal">
 				<ui:include src="incluirLogradouro.xhtml"/>
 				<ui:include src="detalheLogradouro.xhtml"/>
 				<ui:include src="pesquisaLogradouro.xhtml"/>
 				<p:panel style="text-align: center" rendered="#{not empty logradouroBean.modoOperacao}">
-					<p:commandButton value="#{msg['label.botao.cadastro.logradouro']}" actionListener="#{logradouroBean.cadastrar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{logradouroBean.modoInclusao}" title="#{msg['title.botao.cadastro.logradouro']}" id="botaoCadastroMunicipio"/>
-					<p:commandButton value="#{msg['label.botao.atualizacao.logradouro']}" actionListener="#{logradouroBean.atualizar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{logradouroBean.modoEdicao}" title="#{msg['title.botao.atualizacao.logradouro']}" id="botaoAtualizacaoMunicipio"/>
-					<p:commandButton value="#{msg['label.botao.pesquisa.logradouro']}" actionListener="#{logradouroBean.pesquisar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{logradouroBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.logradouro']}" id="botaoPesquisaMunicipio"/>
-					<p:commandButton value="#{msg['label.botao.exclusao.logradouro']}" actionListener="#{logradouroBean.excluir}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{logradouroBean.modoExclusao}" title="#{msg['title.botao.exclusao.logradouro']}" id="botaoExclusaoMunicipio"/>
-					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{logradouroBean.voltarParaResultadoDaPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{logradouroBean.modoExclusao or logradouroBean.modoEdicao or logradouroBean.modoDetalhe}" title="#{msg['title.botao.exclusao.logradouro']}" immediate="true" id="botaoVoltarMunicipio">
+					<p:commandButton value="#{msg['label.botao.cadastro.logradouro']}" actionListener="#{logradouroBean.cadastrar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{logradouroBean.modoInclusao}" title="#{msg['title.botao.cadastro.logradouro']}" id="botaoCadastroLogradouro"/>
+					<p:commandButton value="#{msg['label.botao.atualizacao.logradouro']}" actionListener="#{logradouroBean.atualizar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{logradouroBean.modoEdicao}" title="#{msg['title.botao.atualizacao.logradouro']}" id="botaoAtualizacaoLogradouro"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.logradouro']}" actionListener="#{logradouroBean.pesquisar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{logradouroBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.logradouro']}" id="botaoPesquisaLogradouro"/>
+					<p:commandButton value="#{msg['label.botao.exclusao.logradouro']}" actionListener="#{logradouroBean.excluir}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{logradouroBean.modoExclusao}" title="#{msg['title.botao.exclusao.logradouro']}" id="botaoExclusaoLogradouro"/>
+					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{logradouroBean.voltarParaResultadoDaPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{logradouroBean.modoExclusao or logradouroBean.modoEdicao or logradouroBean.modoDetalhe}" title="#{msg['title.botao.exclusao.logradouro']}" immediate="true" id="botaoVoltarLogradouro">
 						<f:setPropertyActionListener target="#{logradouroBean.entity}" value="#{logradouroBean.entity}"/>
 					</p:commandButton>
-					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{logradouroBean.iniciarPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{logradouroBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente']}" immediate="true" id="botaoPesquisarNovamenteMunicipio"/>
-					<p:commandButton value="#{msg['label.botao.sair']}" action="#{logradouroBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairMunicipio"/>
+					<p:commandButton value="#{msg['label.botao.pesquisa.novamente']}" actionListener="#{logradouroBean.iniciarPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{logradouroBean.modoDetalhePesquisa}" title="#{msg['title.botao.pesquisa.novamente']}" immediate="true" id="botaoPesquisarNovamenteLogradouro"/>
+					<p:commandButton value="#{msg['label.botao.sair']}" action="#{logradouroBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairLogradouro"/>
 				</p:panel>
 			</p:outputPanel>
 		</h:form>
