@@ -25,8 +25,15 @@
 					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
 					<f:selectItems value="#{logradouroBean.listaBairros}" var="bairro" itemLabel="#{bairro.nome}" itemValue="#{bairro}"/>
 				</p:selectOneMenu>
+				<p:outputLabel value="#{msg['label.logradouro.tipoLogradouro']}" for="tipoLogradouro" id="labelTipoLogradouro"/>
+				<p:selectOneMenu value="#{logradouroBean.entity.tipoLogradouro}" id="tipoLogradouro" required="true" requiredMessage="#{msg['logradouro.tipoLogradouro.obrigatorio']}" title="#{msg['title.logradouro.tipoLogradouro']}">
+					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
+					<f:selectItems value="#{utilBean.listaTiposLogradouros}"/>
+				</p:selectOneMenu>
 				<p:outputLabel value="#{msg['label.logradouro.nome']}" for="nome" id="labelNome" />
-				<p:inputText value="#{logradouroBean.entity.nome}" id="nome" required="true" requiredMessage="#{msg['endereco.logradouro.obrigatorio']}" title="#{msg['title.logradouro.nome']}"/>
+				<p:inputText value="#{logradouroBean.entity.nome}" id="nome" required="true" requiredMessage="#{msg['endereco.logradouro.obrigatorio']}" title="#{msg['title.logradouro.nome']}" size="50" maxlength="255"/>
+				<p:outputLabel value="#{msg['label.logradouro.cep']}" id="labelCep" for="cep"/>
+				<p:inputText value="#{logradouroBean.entity.cep}" id="cep" required="true" requiredMessage="#{msg['cep.logradouro.obrigatorio']}" title="#{msg['title.logradouro.cep']}" size="11" maxlength="10"/>
 			</h:panelGrid>
 		</p:panel>
 	</p:outputPanel>
