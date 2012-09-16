@@ -20,19 +20,20 @@ import richard.falconrh.exception.ServicesException;
 import richard.falconrh.service.LogradouroServices;
 
 /**
- * @author richard
+ * Classe EJB para manipulação da entidade Logradouro
+ * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
 @Stateless(name="ejb/LogradouroServices", mappedName="LogradouroServices")
 public class LogradouroServicesImpl extends AbstractServicesImpl<Logradouro> implements LogradouroServices {
 
 	/**
-	 * Method obterLogradourosPeloIdBairro.
-	 * @param id Long
-	
-	
-	
-	 * @return Set<Logradouro> * @throws ServicesException * @see richard.falconrh.service.LogradouroServices#obterLogradourosPeloIdBairro(Long) */
+	 * Método que obterm uma lista de logradouros com base na chave primária (ID) do bairro.
+	 * @param id Long o identificador do Bairro (chave primária).
+	 * @return Set<Logradouro>, sendo a lista de logradouros do bairro
+	 * @throws ServicesException caso dê algum erro ao obter a lista de logradouros
+	 * @see richard.falconrh.service.LogradouroServices#obterLogradourosPeloIdBairro(Long)
+	 */
 	@Override
 	public Set<Logradouro> obterLogradourosPeloIdBairro(Long id) throws ServicesException {
 		// TODO Auto-generated method stub
@@ -40,11 +41,11 @@ public class LogradouroServicesImpl extends AbstractServicesImpl<Logradouro> imp
 	}
 	
 	/**
-	 * Method obterListaPeloExemplo.
-	 * @param logradouro Logradouro
-	
-	
-	 * @return Set<Logradouro> * @throws ServicesException */
+	 * Método que obterm uma lista de logradouros com base no exemplo informado
+	 * @param logradouro Logradouro o exemplo a ser pesquisado
+	 * @return Set<Logradouro> a lista de logradouros encontrados
+	 * @throws ServicesException exceção que é disparada quando ocorre qualquer erro no método
+	 */
 	@Override
 	public Set<Logradouro> obterListaPeloExemplo(Logradouro logradouro) throws ServicesException {
 		CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
@@ -85,6 +86,8 @@ public class LogradouroServicesImpl extends AbstractServicesImpl<Logradouro> imp
 		criteriaQuery.where(listaRestricoes);
 		TypedQuery<Logradouro> typedQuery = getEntityManager().createQuery(criteriaQuery);
 		Set<Logradouro> lista = new TreeSet<Logradouro>(typedQuery.getResultList());
+		
+		//FIXME Solução temporária para evitar o problema de Lazy. Verificar solução melhor posteriormente
 		for(Logradouro log : lista){
 			log.getBairro().getNome();
 			log.getBairro().getMunicipio().getNome();
