@@ -252,7 +252,7 @@
 				</configuration>
 				<executions>
 					<execution>
-						<id>uit-tests</id>
+						<id>unit-tests</id>
 						<phase>test</phase>
 						<goals>
 							<goal>test</goal>
