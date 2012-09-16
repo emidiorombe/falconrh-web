@@ -8,12 +8,12 @@
 		<p:panel header="#{msg['titulo.municipio.inclusao']}">
 			<p:focus for="uf" id="focusPaginaInclusao"/>
 			<h:panelGrid columns="2" id="painel2ColunasInclusao">
-				<h:outputLabel value="#{msg['label.municipio.uf']}" id="labelUF" for="uf" />
+				<p:outputLabel value="#{msg['label.municipio.uf']}" id="labelUF" for="uf" />
 				<p:selectOneMenu value="#{municipioBean.entity.uf}" id="uf" required="true" requiredMessage="#{msg['municipio.uf.obrigatorio']}" title="#{msg['title.municipio.uf']}" effect="fade" >
 					<f:selectItem itemLabel="--Selecione--" />
 					<f:selectItems value="#{utilBean.listaUFs}" />
 				</p:selectOneMenu>				
-				<h:outputLabel value="#{msg['label.municipio.nome']}" for="nome" id="labelNome" />
+				<p:outputLabel value="#{msg['label.municipio.nome']}" for="nome" id="labelNome" />
 				<p:inputText value="#{municipioBean.entity.nome}" id="nome" size="60" maxlength="255" required="true" requiredMessage="#{msg['municipio.nome.obrigatorio']}" title="#{msg['title.municipio.nome']}"/>
 			</h:panelGrid>
 		</p:panel>
