@@ -7,7 +7,7 @@
 		<p:panel header="#{msg['label.titulo.inclusao.acao']}">
 			<p:focus for="nome" id="focusPaginaInclusao"/>
 			<h:panelGrid columns="2" id="painel2ColunasInclusao">
-				<h:outputLabel value="#{msg['label.acao.nome']}" for="nome" id="labelNome" styleClass="labelNegrito"/>
+				<p:outputLabel value="#{msg['label.acao.nome']}" for="nome" id="labelNome" styleClass="labelNegrito"/>
 				<p:inputText value="#{acaoBean.entity.nome}" id="nome" size="40" maxlength="100" required="true" requiredMessage="#{msg['acao.nome.obrigatorio']}" title="#{msg['title.acao.nome']}"/>
 			</h:panelGrid>
 		</p:panel>
