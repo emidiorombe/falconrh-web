@@ -13,7 +13,7 @@ import richard.falconrh.util.FalconRHUtils;
  * @author richard
  * @version $Revision: 1.0 $
  */
-@FacesValidator(value="cpfValidator")
+@FacesValidator(value="cepValidator")
 public class CEPValidator implements Validator{
 
 	/**
@@ -35,7 +35,7 @@ public class CEPValidator implements Validator{
 			isValido = FalconRHUtils.isCEPValido((Integer)obj);
 		}
 		if(!isValido){
-			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação", "O valor informado para o CPF não é um valor válido");
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de validação", "O valor informado para o CEP não é um valor válido");
 			throw new ValidatorException(facesMessage);
 		}
 	}

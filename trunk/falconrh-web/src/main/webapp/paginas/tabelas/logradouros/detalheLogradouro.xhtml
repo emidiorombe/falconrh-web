@@ -6,8 +6,18 @@
 	<p:outputPanel id="painelDetalhe" rendered="#{logradouroBean.modoDetalhe or logradouroBean.modoExclusao}">
 		<p:panel header="#{msg['titulo.logradouro.detalhe']}" id="painelDetalheBanco">
 			<h:panelGrid columns="2" id="painel2ColunasDetalhe">
+				<h:outputLabel value="#{msg['label.logradouro.tipoLogradouro']}" for="tipoLogradouroDetalheLogradouro" id="labelTipoLogradouroDetalheLogradouro" styleClass="labelNegrito"/>
+				<h:outputText value="#{logradouroBean.entity.tipoLogradouro.nome}" id="tipoLogradouroDetalheLogradouro"/>
 				<h:outputLabel value="#{msg['label.logradouro.nome']}" for="nomeDetalheLogradouro" id="labelNomeDetalheLogradouro" styleClass="labelNegrito"/>
 				<h:outputText value="#{logradouroBean.entity.nome}" id="nomeDetalheLogradouro"/>
+				<h:outputLabel value="#{msg['label.logradouro.cep']}" for="cepDetalheLogradouro" id="labelCepDetalheLogradouro" styleClass="labelNegrito"/>
+				<h:outputText value="#{logradouroBean.entity.cep}" id="cepDetalheLogradouro" converter="cepConverter" converterMessage="#{msg['erro.conversao.cep']}" />
+				<h:outputLabel value="#{msg['label.logradouro.bairro']}" for="bairroDetalheLogradouro" id="labelBairroDetalheLogradouro" styleClass="labelNegrito"/>
+				<h:outputText value="#{logradouroBean.entity.bairro.nome}" id="bairroDetalheLogradouro"/>
+				<h:outputLabel value="#{msg['label.logradouro.municipio']}" for="MunicipioDetalheLogradouro" id="labelMunicipioDetalheLogradouro" styleClass="labelNegrito"/>
+				<h:outputText value="#{logradouroBean.entity.bairro.municipio.nome}" id="MunicipioDetalheLogradouro"/>
+				<h:outputLabel value="#{msg['label.logradouro.uf']}" for="UfDetalheLogradouro" id="labelUfDetalheLogradouro" styleClass="labelNegrito"/>
+				<h:outputText value="#{logradouroBean.entity.bairro.municipio.uf.nome}" id="UfDetalheLogradouro"/>
 			</h:panelGrid>
 		</p:panel>
 	</p:outputPanel>

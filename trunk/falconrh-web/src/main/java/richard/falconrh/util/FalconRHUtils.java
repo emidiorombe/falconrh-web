@@ -11,9 +11,8 @@ import richard.falconrh.exception.ImpossivelObterHashSenhaException;
 import sun.misc.BASE64Encoder;
 
 /**
- * Classe Utilitária para metodos utilitários diversos
+ * Classe Utilitária para métodos utilitários diversos
  * @author Richard Mendes Madureira
- *
  * @version $Revision: 1.0 $
  */
 public class FalconRHUtils {
@@ -58,9 +57,9 @@ public class FalconRHUtils {
 	}
 	
 	/**
-	 * Method getDigitoVerificador.
-	 * @param numero String
-	 * @return String
+	 * Método que calcula o digito verificador de um número utilizando o método de resto de divisão por 11
+	 * @param numero String o número que será utilizado para calcular o dígito verificador
+	 * @return String o dígito verificador calculado.
 	 */
 	public static String getDigitoVerificador(String numero){
 		int totalDigitos = numero.length();
@@ -81,9 +80,9 @@ public class FalconRHUtils {
 	}
 	
 	/**
-	 * Method isCPFValido.
-	 * @param strCpf String
-	 * @return boolean
+	 * Método que diz se um CPF é valido ou não.
+	 * @param strCpf o número do CPF a ser verificado.
+	 * @return boolean, sendo <code>true</code> para CPF válido e <code>false</code> para CPF inválido.
 	 */
 	public static boolean isCPFValido(String strCpf){
 		String[] blackList = new String[]{
@@ -129,9 +128,9 @@ public class FalconRHUtils {
 	}
 	
 	/**
-	 * Method isCNPJValido.
-	 * @param strCNPJ String
-	 * @return boolean
+	 * Método que verifica se um CNPJ é valido
+	 * @param strCNPJ String que contém o número a ser verificado
+	 * @return boolean, sendo <code>true</code> para CNPJ válido e <code>false</code> para CNPJ inválido.
 	 */
 	public static boolean isCNPJValido(String strCNPJ) {
 	    int iSoma = 0, iDigito;
@@ -182,9 +181,9 @@ public class FalconRHUtils {
 	}
 	
 	/**
-	 * Method isPISValido.
-	 * @param numPIS String
-	 * @return boolean
+	 * Método que verifica se um PIS/PASEP/NIT é valido ou não.
+	 * @param numPIS String que contém o numero a ser verificado
+	 * @return boolean, sendo <code>true</code> para PIS válido e <code>false</code> para PIS inválido.
 	 */
 	public static boolean isPISValido(String numPIS) {
 		final String ftap = "3298765432";
@@ -213,9 +212,9 @@ public class FalconRHUtils {
 	}
 	
 	/**
-	 * Method isCEPValido.
-	 * @param value String
-	 * @return boolean
+	 * Método que verifica se um CPF é valido ou não
+	 * @param value String que representa o número a ser verificado
+	 * @return boolean, sendo <code>true</code> para valido e <code>false</code> para inválido
 	 */
 	public static boolean isCEPValido(String value){
 		if(StringUtils.isNotBlank(value)){
@@ -227,50 +226,56 @@ public class FalconRHUtils {
 	}
 	
 	/**
-	 * Method isDataValida.
-	 * @param value String
-	 * @return boolean
+	 * Método que verifica se uma data é valida ou não, com base em seu padrão.
+	 * @param value String que representa a data a ser verificada
+	 * @param pattern String que representa o formato de data.
+	 * @return boolean, sendo <code>true</code> para valida e <code>false</code> para inválida
 	 */
 	public static boolean isDataValida(String value, String pattern){
 		return false;
 	}
 	
 	/**
-	 * Method isMoedaValida.
-	 * @param value String
-	 * @return boolean
+	 * Método que verifica se o valor informado é ou não uma moeda válida
+	 * @param value String que representa o número a ser verificado
+	 * @return boolean, sendo <code>true</code> para valida e <code>false</code> para inválida
 	 */
 	public static boolean isMoedaValida(String value){
 		return false;
 	}
 	
 	/**
-	 * Method isCEPValido.
-	 * @param value Integer
-	 * @return boolean
+	 * Método que dir se um CEP é valido ou não.
+	 * @param value Integer o número a ser verificado.
+	 * @return boolean, sendo <code>true</code> para valido e <code>false</code> para inválido
 	 */
 	public static boolean isCEPValido(Integer value){
 		return (value<=99999999 && value >9999999);
 	}
 	
+	/**
+	 * Método que dir se um CEP é valido ou não.
+	 * @param value Long o número a ser verificado.
+	 * @return boolean, sendo <code>true</code> para valido e <code>false</code> para inválido
+	 */
 	public static boolean isCEPValido(Long value){
 		return (value<=99999999L && value >9999999L);
 	}
 	
 	
 	/**
-	 * Method isCPFValido.
-	 * @param value Long
-	 * @return boolean
+	 * Método qu edir se um CPF é valido ou não
+	 * @param value Long o número do CPF a ser verificado
+	 * @return boolean, sendo <code>true</code> para valido e <code>false</code> para inválido
 	 */
 	public static boolean isCPFValido(Long value){
 		return isCPFValido(String.valueOf(value));
 	}
 
 	/**
-	 * Method getSomenteNumeros.
-	 * @param value String
-	 * @return String
+	 * Método que retira qualquer caracter não numérico e retorna apenas números.
+	 * @param value String que contém a sequencia de caracteres a ser verificada
+	 * @return String sem os caracteres não númericos. Retorna apenas números.
 	 */
 	public static String getSomenteNumeros(String value) {
 		LOGGER.debug("Retirando caracteres não numéricos");
@@ -282,9 +287,9 @@ public class FalconRHUtils {
 	}
 
 	/**
-	 * Method getCPFCormatado.
-	 * @param cpf Long
-	 * @return String
+	 * Método que formata um CPF.
+	 * @param cpf Long o número do CPF a ser formatado.
+	 * @return a String que representa o CPF formatado.
 	 */
 	public static String getCPFCormatado(Long cpf) {
 		String cpfRetorno = StringUtils.leftPad(String.valueOf(cpf), 11, '0');
@@ -292,19 +297,28 @@ public class FalconRHUtils {
 	}
 	
 	/**
-	 * Method getCEPFormatado.
-	 * @param cep Long
-	 * @return String
+	 * Método que formata um CEP.
+	 * @param cep Long o número do CEP a ser formatado.
+	 * @return a String que representa o EP formatado.
 	 */
 	public static String getCEPFormatado(Long cep){
+		return getCEPFormatado(cep.intValue());
+	}
+	
+	/**
+	 * Método que formata um CEP.
+	 * @param cep Integer o número do CEP a ser formatado.
+	 * @return a String que representa o EP formatado.
+	 */
+	public static String getCEPFormatado(Integer cep){
 		String cepRetorno = StringUtils.rightPad(String.valueOf(cep), 8, '0');
 		return cepRetorno.substring(0,2) + "." + cepRetorno.substring(2,5) + "-" + cepRetorno.substring(5); 
 	}
 	
 	/**
-	 * Method getCNPJFormatado.
-	 * @param cnpj Long
-	 * @return String
+	 * Método que formata um CNPJ..
+	 * @param cnpj Long o número do cnpj a ser formatado.
+	 * @return String que representa o CNPJ formatado.
 	 */
 	public static String getCNPJFormatado(Long cnpj){
 		String cnpjRetorno = StringUtils.leftPad(String.valueOf(cnpj), 14, '0');
@@ -312,12 +326,18 @@ public class FalconRHUtils {
 	}
 	
 	/**
-	 * Method getDataFormatada.
-	 * @param data Date
-	 * @return String
+	 * Método que retorna uma data formata com base em seu pattern.
+	 * Caso o pattern não seja informado, será utilizado o padrão brasileiro dd/MM/yyyy
+	 * @param data Date a data a ser formatada
+	 * @return String que representa a data formatada
 	 */
-	public static String getDataFormatada(Date data){
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	public static String getDataFormatada(Date data, String... pattern){
+		SimpleDateFormat sdf = null;
+		if(pattern==null){
+			sdf = new SimpleDateFormat("dd/MM/yyyy");
+		}else{
+			sdf = new SimpleDateFormat(pattern[0]);
+		}
 		return sdf.format(data);
 	}
 }
