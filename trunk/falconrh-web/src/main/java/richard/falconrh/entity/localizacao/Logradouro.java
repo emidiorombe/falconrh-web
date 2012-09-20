@@ -116,11 +116,11 @@ public class Logradouro extends Parent implements Comparable<Logradouro>{
 
 	@Override
 	public int compareTo(Logradouro o) {
-		if(this.getId()!=null & bairro.getId()!=null){
-			return this.getId().compareTo(bairro.getId());
+		if(this.getId()!=null & o.getId()!=null){
+			return this.getId().compareTo(o.getId());
 		}
-		if(StringUtils.isNotBlank(this.getNome()) && StringUtils.isNotBlank(bairro.getNome())){
-			return this.getNome().compareTo(bairro.getNome());
+		if(StringUtils.isNotBlank(this.getNome()) && StringUtils.isNotBlank(o.getNome())){
+			return this.getNome().compareTo(o.getNome());
 		}
 		return 0;
 	}
