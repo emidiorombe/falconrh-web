@@ -9,11 +9,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,6 +27,7 @@ import org.hibernate.annotations.Parameter;
 
 import richard.falconrh.entity.Parent;
 import richard.falconrh.entity.documento.Documento;
+import richard.falconrh.entity.localizacao.Endereco;
 import richard.falconrh.entity.localizacao.Telefone;
 import richard.falconrh.modelo.enums.EstadoCivil;
 import richard.falconrh.modelo.enums.Etnia;
@@ -49,7 +52,7 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	private EstadoCivil estadoCivil;
 	private Nacionalidade nacionalidade;
 	private String email;
-//	private Endereco endereco;
+	private Endereco endereco;
 	private List<Telefone> listaTelefones;
 	private List<Documento> listaDocumentos;
 	private Boolean deficienteFisico;
@@ -58,26 +61,26 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	}
 	
 	/**
-	 * Constructor for Pessoa.
-	 * @param id Long
+	 * Método construtor para Pessoa.
+	 * @param id - o identificador único da Pessoa (chave primária).
 	 */
 	public Pessoa(Long id) {
 		this.id = id;
 	}
 
 	/**
-	 * Method getNome.
-	
-	 * @return String */
+	 * Método que obtem o nome da pessoa.
+	 * @return String que representa o nome da pessoa.
+	 */
 	@Column(length=255,  nullable=false)
 	public String getNome() {
 		return nome;
 	}
 
 	/**
-	 * Method getDataNascimento.
-	
-	 * @return Date */
+	 * Método que retorna a data de nascimento da pessoa.
+	 * @return Date a data de nascimento da pessoa.
+	 */
 	@Temporal(value=TemporalType.DATE)
 	@Column(nullable=false)
 	public Date getDataNascimento() {
@@ -85,9 +88,9 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	}
 
 	/**
-	 * Method getSexo.
-	
-	 * @return Sexo */
+	 * Método que retorna o sexo da pessoa.
+	 * @return Sexo - o sexo da pessoa .
+	 */
 	@Enumerated(value=EnumType.STRING)
 	@Column(nullable=false, length=10)
 	public Sexo getSexo() {
@@ -95,9 +98,9 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	}
 
 	/**
-	 * Method getEtnia.
-	
-	 * @return Etnia */
+	 * Método que retorna a Etnia da pessoa.
+	 * @return a Etnia da pessoa.
+	 */
 	@Enumerated(value=EnumType.STRING)
 	@Column(nullable=false, length=10)
 	public Etnia getEtnia() {
@@ -105,9 +108,9 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	}
 
 	/**
-	 * Method getEstadoCivil.
-	
-	 * @return EstadoCivil */
+	 * Método que retorna o estado civil da pessoa.
+	 * @return EstadoCivil o Estado civil da pessoa.
+	 */
 	@Enumerated(value=EnumType.STRING)
 	@Column(nullable=false, length=10)
 	public EstadoCivil getEstadoCivil() {
@@ -115,9 +118,9 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	}
 
 	/**
-	 * Method getNacionalidade.
-	
-	 * @return Nacionalidade */
+	 * Método que retorna a nacionalidade da pessoa
+	 * @return Nacionalidade - enum que contém a nacionalidade da pessoa.
+	 */
 	@Enumerated(value=EnumType.STRING)
 	@Column(nullable=false, length=20)
 	public Nacionalidade getNacionalidade() {
@@ -125,52 +128,62 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	}
 	
 	/**
-	 * Method getEmail.
-	
-	 * @return String */
+	 * Método que retorna o email da pessoa..
+	 * @return String que representa o email da pessoa.
+	 */
 	@Column(nullable=true, length=255)
 	public String getEmail() {
 		return email;
 	}
 
-//	@ManyToOne(fetch=FetchType.LAZY)
-//	@JoinColumn(name="ID_ENDERECO", nullable=true)//FIXME MUDAR PARA nullable=true ap�s incluir o endere�o na tela
-//	public Endereco getEndereco() {
-//		return endereco;
-//	}
+	/**
+	 * Método que retorna o endereço da pessoa.
+	 * @return um objeto Endereco que contém o endereço da pessoa.
+	 */
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="ID_ENDERECO", nullable=true)//FIXME MUDAR PARA nullable=true após incluir o endereço na tela
+	public Endereco getEndereco() {
+		return endereco;
+	}
 	
 	/**
-	 * Method getListaTelefones.
-	 * @return Set<Telefone> */
+	 * Método que retorna a lista de telefones da Pessoa.
+	 * @return instância de Set<Telefone> que contém os telefones da pessoa.
+	 */
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="PESSOAS_TELEFONES", joinColumns = @JoinColumn(name="ID_PESSOA", referencedColumnName="ID"), inverseJoinColumns= @JoinColumn(name="ID_TELEFONE", referencedColumnName="ID"))
 	public List<Telefone> getListaTelefones(){
 		return listaTelefones;
 	}
 	
+	/**
+	 * Método que retorna a lista de documentos da pessoa.
+	 * @return instância de List<Documento> que contém a os documentos da pessoa.
+	 */
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="pessoa", targetEntity=Documento.class)
 	public List<Documento> getListaDocumentos(){
 		return listaDocumentos;
 	}
 	
 	/**
-	 * Method getDeficienteFisico.
-	 * @return Boolean */
+	 * Método que retorna um booleano que informa se a pessoa é portadora de alguma necessidade especial.
+	 * @return Boolean , sendo <code>true</code>em caso positovo e <code>false</code> em caso contrário.
+	 */
 	@Column(nullable=false)
 	public Boolean getDeficienteFisico(){
 		return deficienteFisico;
 	}
 	
 	/**
-	 * Method setNome.
-	 * @param nome String
+	 * Método que altera o nome da pessoa.
+	 * @param nome String que será o novo nome da pessoa.
 	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
 	/**
-	 * Method setDataNascimento.
+	 * Método que altera a data de nascimento da pessoa
 	 * @param dataNascimento Date
 	 */
 	public void setDataNascimento(Date dataNascimento) {
@@ -178,16 +191,15 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	}
 
 	/**
-	 * Method setSexo.
+	 * Método que altera o sexo da pessoa.
 	 * @param sexo Sexo
 	 */
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
 
-
 	/**
-	 * Method setEtnia.
+	 * Método que altera a Etnia da pessoa.
 	 * @param etnia Etnia
 	 */
 	public void setEtnia(Etnia etnia) {
@@ -195,7 +207,7 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	}
 	
 	/**
-	 * Method setEstadoCivil.
+	 * Método que altera o estado civil da pessoa.
 	 * @param estadoCivil EstadoCivil
 	 */
 	public void setEstadoCivil(EstadoCivil estadoCivil) {
@@ -203,7 +215,7 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	}
 
 	/**
-	 * Method setNacionalidade.
+	 * Método que altera a nacionalidade da pessoa.
 	 * @param nacionalidade Nacionalidade
 	 */
 	public void setNacionalidade(Nacionalidade nacionalidade) {
@@ -211,31 +223,39 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	}
 	
 	/**
-	 * Method setEmail.
+	 * Método que altera o email da pessoa.
 	 * @param email String
 	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-//	public void setEndereco(Endereco endereco) {
-//		this.endereco = endereco;
-//	}
+	/**
+	 * Método que altera o endereço da pessoa.
+	 * @param endereco
+	 */
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 	
 	/**
-	 * Method setListaTelefones.
+	 * Método que altera a lista de telefones da pessoa.
 	 * @param listaTelefones Set<Telefone>
 	 */
 	public void setListaTelefones(List<Telefone> listaTelefones){
 		this.listaTelefones = listaTelefones;
 	}
 	
+	/**
+	 * Método que altera a lista de documentos da pessoa.
+	 * @param listaDocumentos
+	 */
 	public void setListaDocumentos(List<Documento> listaDocumentos){
 		this.listaDocumentos = listaDocumentos;
 	}
 	
 	/**
-	 * Method setDeficienteFisico.
+	 * Método que altera o indicador de que a pessoa é deficiente ou não.
 	 * @param deficienteFisico Boolean
 	 */
 	public void setDeficienteFisico(Boolean deficienteFisico){
@@ -243,7 +263,7 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	}
 
 	/**
-	 * Method adicionarTelefone.
+	 * Método que adiciona um telefone à lista de telefones da pessoa.
 	 * @param telefone Telefone
 	 */
 	public void adicionarTelefone(Telefone telefone) {
@@ -259,6 +279,10 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 		getListaTelefones().add(telefone);
 	}
 	
+	/**
+	 * Método que adiciona um documento à lista de documentos da pessoa.
+	 * @param documento
+	 */
 	public void adicionarDocumento(Documento documento) {
 		if(getListaDocumentos()==null){
 			setListaDocumentos(new ArrayList<Documento>());
@@ -268,10 +292,10 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	}
 	
 	/**
-	 * Method removerTelefone.
-	 * @param telefone Telefone
-	
-	 * @return boolean */
+	 * Método que remove um telefone da lista de telefones da pessoa.
+	 * @param telefone Telefone a ser removido da lista
+	 * @return boolean, sendo <code>true</code>caso a remoção seja bem sucedida e <code>false</code>caso a exclusão seja mal sucedida (ou não tenha o telefone na lista de telefones).
+	 */
 	public boolean removerTelefone(Telefone telefone){
 		if(getListaTelefones()==null){
 			setListaTelefones(new ArrayList<Telefone>());
@@ -281,6 +305,11 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 		return false;
 	}
 	
+	/**
+	 * Método que remove um documento da lista de documentos da pessoa.
+	 * @param documento Documento a ser removido da lista
+	 * @return boolean, sendo <code>true</code>caso a remoção seja bem sucedida e <code>false</code>caso a exclusão seja mal sucedida (ou não tenha o documento na lista de documentos).
+	 */
 	public boolean removerDocumento(Documento documento){
 		if(getListaDocumentos()==null){
 			setListaDocumentos(new ArrayList<Documento>());
@@ -292,25 +321,25 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 	}
 
 	/**
-	 * Method hashCode.
-	
-	 * @return int */
+	 * Método que retorna o hash do objeto Pessoa
+	 * @return int
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
+		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
 		return result;
 	}
 
 	/**
-	 * Method equals.
-	 * @param obj Object
-	
-	 * @return boolean */
+	 * Método que compara dois objetos Pessoa.<br/>
+	 * Uma instância de Um Objeto Pessoa será igual a outra, quando o nome, data de nascimento e sexo das pessoas forem iguais.
+	 * @param obj Object a ser comparado com a Pessoa
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -343,6 +372,9 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 		return true;
 	}
 
+	/**
+	 * Método que realiza a comparação entre duas instâncias da Classe Pessoa.
+	 */
 	@Override
 	public int compareTo(Pessoa pessoa) {
 		if(this.getId()!=null & pessoa.getId()!=null){
@@ -353,7 +385,5 @@ public class Pessoa extends Parent implements Cloneable, Comparable<Pessoa>{
 		}
 		return 0;
 	}
-	
-	
 
 }
