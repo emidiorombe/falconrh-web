@@ -89,7 +89,7 @@ public class EnderecoBean implements Serializable{
 	 */
 	public void obterListaLogradouros(ValueChangeEvent event) throws ServicesException{
 		Bairro bairro = (Bairro) event.getNewValue();
-		Set<Logradouro> listaLogradouros = logradouroServices.obterLogradourosPeloIdBairro(bairro.getId());
+		Set<Logradouro> listaLogradouros = logradouroServices.obterListaPeloIdBairro(bairro.getId());
 		setListaLogradouros(listaLogradouros);
 	}
 	
