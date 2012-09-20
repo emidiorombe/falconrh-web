@@ -9,4 +9,6 @@ import richard.falconrh.entity.Parent_;
 public class Tarefa_ extends Parent_{
 	public static volatile SingularAttribute<Tarefa, String> nome;
 	public static volatile SingularAttribute<Tarefa, String> descricao;
+	public static volatile SingularAttribute<Tarefa, String> nomeClasseImplementacao;
+	public static volatile SingularAttribute<Tarefa, GrupoTarefa> grupoTarefa;
 }
