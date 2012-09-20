@@ -42,6 +42,7 @@ public class BairroBean extends BaseBean<Bairro, BairroServices>{
 	public void inicializaEntity() {
 		setEntity(new Bairro());
 		getEntity().setMunicipio(new Municipio());
+		getEntity().getMunicipio().setUf(UF.ACRE);
 		setListaEntities(new ArrayList<Bairro>());
 	}
 	
