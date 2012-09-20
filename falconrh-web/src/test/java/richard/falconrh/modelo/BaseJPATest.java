@@ -91,6 +91,7 @@ public class BaseJPATest {
 	 * @return Connection - a conexão atualmente utilizada 
 	 * @throws SQLException
 	 */
+	@SuppressWarnings("deprecation")
 	protected Connection getConnection() throws SQLException{
 		Session session = (Session) getEntityManager().getDelegate();
 		SessionFactoryImplementor sfi = (SessionFactoryImplementor) session.getSessionFactory();
