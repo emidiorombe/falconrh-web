@@ -14,28 +14,28 @@
 	<p:outputPanel id="painelInclusao" rendered="true">
 	<p:panel header="Endereço">
 			<h:panelGrid columns="2">
-				<h:outputLabel value="#{msg['label.endereco.uf']}" for="uf" id="labelUf" />
+				<p:outputLabel value="#{msg['label.endereco.uf']}" for="uf" id="labelUf" />
 				<p:selectOneMenu value="#{enderecoBean.bairro.municipio.uf}" id="uf" required="true" requiredMessage="#{msg['endereco.uf.obrigatorio']}" title="#{msg['title.endereco.uf']}" valueChangeListener="#{enderecoBean.obterListaMunicipios}" effect="fade" >
-					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true"/>
-					<f:selectItems value="#{utilBean.listaUFs}" />
-					<p:ajax event="change" update="municipio,bairro" immediate="true"/>
+					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true" id="itemSelecioneUf"/>
+					<f:selectItems value="#{utilBean.listaUFs}"  id="itemListaUfs"/>
+					<p:ajax event="change" update="municipio,bairro,logradouro" immediate="true"/>
 				</p:selectOneMenu>
-				<h:outputLabel value="#{msg['label.endereco.municipio']}" for="municipio" id="labelMunicipio" />
+				<p:outputLabel value="#{msg['label.endereco.municipio']}" for="municipio" id="labelMunicipio" />
 				<p:selectOneMenu value="#{enderecoBean.bairro.municipio}" id="municipio" required="true" requiredMessage="#{msg['endereco.municipio.obrigatorio']}" title="#{msg['title.endereco.municipio']}" converter="municipioConverter" converterMessage="Erro ao converter Municipio" valueChangeListener="#{enderecoBean.obterListaBairros}" effect="fade">
-					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
-					<f:selectItems value="#{enderecoBean.listaMunicipios}" var="municipio" itemLabel="#{municipio.nome}" itemValue="#{municipio}" />
-					<p:ajax event="change" update="bairro" immediate="true"/>
+					<f:selectItem itemLabel="--Selecione--" itemValue="" id="itemSelecioneMunicipio"/>
+					<f:selectItems value="#{enderecoBean.listaMunicipios}" var="municipio" itemLabel="#{municipio.nome}" itemValue="#{municipio}" id="itemListaMunicipios"/>
+					<p:ajax event="change" update="bairro,logradouro" immediate="true"/>
 				</p:selectOneMenu>
-				<h:outputLabel value="#{msg['label.endereco.bairro']}" for="bairro" id="labelBairro" />
+				<p:outputLabel value="#{msg['label.endereco.bairro']}" for="bairro" id="labelBairro" />
 				<p:selectOneMenu value="#{cc.attrs.value.logradouro.bairro}" id="bairro" required="true" requiredMessage="#{msg['endereco.bairro.obrigatorio']}" title="#{msg['title.endereco.bairro']}" converter="bairroConverter" converterMessage="Erro ao converter bairro" valueChangeListener="#{enderecoBean.obterListaLogradouros}">
-					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
-					<f:selectItems value="#{enderecoBean.listaBairros}" var="bairro" itemLabel="#{bairro.nome}" itemValue="#{bairro}" />
+					<f:selectItem itemLabel="--Selecione--" itemValue="" id="itemSelecioneBairro"/>
+					<f:selectItems value="#{enderecoBean.listaBairros}" var="bairro" itemLabel="#{bairro.nome}" itemValue="#{bairro}" id="itemListaBairros"/>
 					<p:ajax event="change" update="logradouro" immediate="true"/>
 				</p:selectOneMenu>
-				<h:outputLabel value="#{msg['label.endereco.logradouro']}" for="logradouro" id="labelLogradouro" />
-				<p:selectOneMenu value="#{cc.attrs.value.logradouro}" id="logradouro" required="true" requiredMessage="#{msg['endereco.logradouro.obrigatorio']}" title="#{msg['title.endereco.logradouro']}" converter="logradouroConverter" converterMessage="Erro ao converter logradouro" valueChangeListener="#{enderecoBean.atualizarEnderecoLogradouro}">
-					<f:selectItem itemLabel="--Selecione--" itemValue=""/>
-					<f:selectItems value="#{enderecoBean.listaLogradouros}" var="logradouro" itemLabel="#{logradouro.nome}" itemValue="#{logradouro}" />
+				<p:outputLabel value="#{msg['label.endereco.logradouro']}" for="logradouro" id="labelLogradouro" />
+				<p:selectOneMenu value="#{cc.attrs.value.logradouro}" id="logradouro" required="true" requiredMessage="#{msg['endereco.logradouro.obrigatorio']}" title="#{msg['title.endereco.logradouro']}" converter="logradouroConverter" converterMessage="Erro ao converter logradouro">
+					<f:selectItem itemLabel="--Selecione--" itemValue="" id="itemSelecioneLogradouro"/>
+					<f:selectItems value="#{enderecoBean.listaLogradouros}" var="logradouro" itemLabel="#{logradouro.nome}" itemValue="#{logradouro}" id="itemListaLogradouros" />
 					<p:ajax event="change" update="@this" immediate="true"/>
 				</p:selectOneMenu>
 			</h:panelGrid>

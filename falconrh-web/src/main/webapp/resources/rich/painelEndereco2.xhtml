@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+<composite:interface>
+	<composite:attribute name="value" required="true" type="richard.falconrh.entity.localizacao.Endereco"/>
+	<composite:attribute name="modoOperacao" required="true" type="java.lang.String"/>
+</composite:interface>
+<composite:implementation>
+	<p:outputPanel id="painelInclusaoEndereco" rendered="true">
+	<p:panel header="Endereço" id="painelEndereco">
+			<h:panelGrid columns="2" id="painelGridEndereco">
+				<p:outputLabel value="#{msg['label.endereco.uf']}" for="uf" id="labelUf" />
+				<p:selectOneMenu value="#{painelEnderecoBean.ufSelecionada}" id="uf" required="true" requiredMessage="#{msg['endereco.uf.obrigatorio']}" title="#{msg['title.endereco.uf']}" valueChangeListener="#{painelEnderecoBean.obterListaMunicipios}" effect="fade">
+					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true" id="itemSelecioneUf"/>
+					<f:selectItems value="#{utilBean.listaUFs}"  id="itemListaUfs"/>
+					<p:ajax event="change" update="municipio, bairro, logradouro" immediate="true" process="@this" partialSubmit="true"/>
+				</p:selectOneMenu>
+				<p:outputLabel value="#{msg['label.endereco.municipio']}" for="municipio" id="labelMunicipio" />
+				<p:selectOneMenu id="municipio" value="#{painelEnderecoBean.municipioSelecionado}" converter="municipioConverter" required="true" valueChangeListener="#{painelEnderecoBean.obterListaBairros}">
+					<f:selectItem itemLabel="--Selecione--" itemValue="" id="itemSelecioneMunicipio" />
+					<f:selectItems value="#{painelEnderecoBean.listaMunicipios}" var="municipio" itemLabel="#{municipio.nome}" itemValue="#{municipio}" id="itemsListaMunicipios"/>
+					<p:ajax event="change" update="bairro, logradouro, tipoLogradouro" immediate="true" process="@this" partialSubmit="true"/>
+				</p:selectOneMenu>
+				<p:outputLabel value="#{msg['label.endereco.bairro']}" for="bairro" id="labelBairro"/>
+				<p:selectOneMenu id="bairro" value="#{painelEnderecoBean.bairroSelecionado}" converter="bairroConverter" valueChangeListener="#{painelEnderecoBean.obterListaLogradouros}">
+					<f:selectItem itemLabel="--Selecione--" itemValue="" id="itemSelecioneBairro" />
+					<f:selectItems value="#{painelEnderecoBean.listaBairros}" var="bairro" itemLabel="#{bairro.nome}" itemValue="#{bairro}" id="itemsListaBairros"/>
+					<p:ajax event="change" update="logradouro, tipoLogradouro" process="@this" immediate="true" partialSubmit="true"/>
+				</p:selectOneMenu>
+				<p:outputLabel value="#{msg['label.endereco.tipoLogradouro']}" for="tipoLogradouro" id="labelTipoLogradouro"/>
+				<p:selectOneMenu id="tipoLogradouro" value="#{cc.attrs.value.logradouro.tipoLogradouro}">
+					<f:selectItem itemLabel="--Selecione--" itemValue="" id="itemSelecioneTipoLogradouro"/>
+					<f:selectItems value="#{utilBean.listaTiposLogradouros}" var="tipoLogradouro" itemLabel="#{tipoLogradouro.descricao}" itemValue="#{tipoLogradouro}"/>
+				</p:selectOneMenu>
+				<p:outputLabel value="#{msg['label.endereco.logradouro']}" for="logradouro" id="labelLogradouro"/>
+				<p:selectOneMenu id="logradouro" value="#{cc.attrs.value.logradouro}" converter="logradouroConverter">
+					<f:selectItem itemLabel="--Selecione--" itemValue="" id="itemSelecioneLogradouro"/>
+					<f:selectItems value="#{painelEnderecoBean.listaLogradouros}" var="logradouro" itemLabel="#{logradouro.nome}" itemValue="#{logradouro}" id="itemListaLogradouros"/>
+					<p:ajax event="change" update="tipoLogradouro" process="@this" immediate="true" partialSubmit="true"/>
+				</p:selectOneMenu>
+				<p:outputLabel value="#{msg['label.endereco.numero']}" for="numero" id="labelNumero"/>
+				<p:inputText value="#{cc.attrs.value.numero}" id="numero" size="6" maxlength="8"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+</composite:implementation>
+</ui:composition>
