@@ -42,6 +42,7 @@
 				<p:inputText value="#{pessoaBean.entity.email}" id="email" title="#{msg['title.pessoa.email']}" size="60" maxlength="100"/>
 			</h:panelGrid>
 		</p:panel>
+		<rich:painelEndereco2 modoOperacao="#{pessoaBean.modoOperacao}" value="#{pessoaBean.entity.endereco}"/>
 		<p:panel header="Incluir telefones da pessoa" id="painelInclusaoTelefones">
 			<h:panelGrid columns="8" id="panelGridInclusaoTelefones">
 				<h:outputLabel value="#{msg['label.telefone.tipoTelefone']}" for="tipoTelefone" id="labelTipoTelefone"/>
