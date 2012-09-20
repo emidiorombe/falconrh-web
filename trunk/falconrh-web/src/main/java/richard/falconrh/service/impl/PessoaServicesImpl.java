@@ -13,6 +13,7 @@ import javax.persistence.criteria.Root;
 import org.apache.commons.lang.StringUtils;
 
 import richard.falconrh.entity.documento.Documento;
+import richard.falconrh.entity.localizacao.Telefone;
 import richard.falconrh.entity.pessoa.Pessoa;
 import richard.falconrh.entity.pessoa.Pessoa_;
 import richard.falconrh.exception.ServicesException;
@@ -83,7 +84,20 @@ public class PessoaServicesImpl extends AbstractServicesImpl<Pessoa> implements 
 			}
 			cq.where(listaRestricoes);
 			TypedQuery<Pessoa> query = getEntityManager().createQuery(cq);
-			return new TreeSet<Pessoa>(query.getResultList());
+			TreeSet<Pessoa> listaRetorno = new TreeSet<Pessoa>(query.getResultList());
+			for(Pessoa p :  listaRetorno){//gambiarra para evitar o problema de lazy
+				for(Telefone telefone : p.getListaTelefones()){
+					telefone.getTipoTelefone();
+					telefone.getDdd();
+					telefone.getNumero();
+				}
+				for(Documento documento : p.getListaDocumentos()){
+					documento.getTipoDocumento();
+					documento.getDataEmissao();
+					documento.getNumero();
+				}
+			}
+			return listaRetorno;
 		} catch(Exception e){
 			throw new ServicesException(e);
 		}
