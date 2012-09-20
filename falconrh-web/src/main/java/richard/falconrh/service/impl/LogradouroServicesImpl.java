@@ -29,15 +29,21 @@ public class LogradouroServicesImpl extends AbstractServicesImpl<Logradouro> imp
 
 	/**
 	 * Método que obterm uma lista de logradouros com base na chave primária (ID) do bairro.
-	 * @param id Long o identificador do Bairro (chave primária).
+	 * @param idBairro Long o identificador do Bairro (chave primária).
 	 * @return Set<Logradouro>, sendo a lista de logradouros do bairro
 	 * @throws ServicesException caso dê algum erro ao obter a lista de logradouros
-	 * @see richard.falconrh.service.LogradouroServices#obterLogradourosPeloIdBairro(Long)
+	 * @see richard.falconrh.service.LogradouroServices#obterListaPeloIdBairro(Long)
 	 */
 	@Override
-	public Set<Logradouro> obterLogradourosPeloIdBairro(Long id) throws ServicesException {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<Logradouro> obterListaPeloIdBairro(Long idBairro) throws ServicesException {
+		CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<Logradouro> criteriaQuery = criteriaBuilder.createQuery(Logradouro.class);
+		Root<Logradouro> from = criteriaQuery.from(Logradouro.class);
+		
+		Predicate restricaoIdBairro = criteriaBuilder.equal(from.get(Logradouro_.bairro).get(Bairro_.id), idBairro);
+		criteriaQuery.where(restricaoIdBairro);
+		TypedQuery<Logradouro> typedQuery = getEntityManager().createQuery(criteriaQuery);
+		return new TreeSet<Logradouro>(typedQuery.getResultList());
 	}
 	
 	/**
