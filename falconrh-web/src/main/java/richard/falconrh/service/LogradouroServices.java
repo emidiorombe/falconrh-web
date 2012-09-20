@@ -15,10 +15,9 @@ import richard.falconrh.exception.ServicesException;
 public interface LogradouroServices extends AbstractServices<Logradouro>{
 
 	/**
-	 * Method obterLogradourosPeloIdBairro.
-	 * @param id Long
-	
-	
-	 * @return Set<Logradouro> * @throws ServicesException */
-	public Set<Logradouro> obterLogradourosPeloIdBairro(Long id) throws ServicesException;
+	 * Método que obtem a lista de logradouros a partir do identificador do Bairro
+	 * @param id o identificador do bairro
+	 * @return uma lista de logradouros pertencentes ao id do bairro informado.
+	 */
+	public Set<Logradouro> obterListaPeloIdBairro(Long id) throws ServicesException;
 }
