@@ -64,8 +64,8 @@ public class Bairro extends Parent implements Comparable<Bairro>{
 	
 	/**
 	 * Method getListaLogradouros.
-	
-	 * @return Set<Logradouro> */
+	 * @return Set<Logradouro>
+	 */
 	@OneToMany(mappedBy="bairro", targetEntity=Logradouro.class, fetch=FetchType.LAZY)
 	public Set<Logradouro> getListaLogradouros(){
 		return listaLogradouros;
