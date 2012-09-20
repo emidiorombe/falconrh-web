@@ -7,6 +7,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import richard.falconrh.entity.documento.Documento;
+import richard.falconrh.entity.localizacao.Bairro;
+import richard.falconrh.entity.localizacao.Endereco;
+import richard.falconrh.entity.localizacao.Logradouro;
+import richard.falconrh.entity.localizacao.Municipio;
 import richard.falconrh.entity.localizacao.Telefone;
 import richard.falconrh.entity.pessoa.Pessoa;
 import richard.falconrh.service.PessoaServices;
@@ -40,6 +44,10 @@ public class PessoaBean extends BaseBean<Pessoa, PessoaServices>{
 		setListaEntities(new ArrayList<Pessoa>());
 		setTelefone(new Telefone());
 		setDocumento(new Documento());
+		getEntity().setEndereco(new Endereco());
+		getEntity().getEndereco().setLogradouro(new Logradouro());
+		getEntity().getEndereco().getLogradouro().setBairro(new Bairro());
+		getEntity().getEndereco().getLogradouro().getBairro().setMunicipio(new Municipio());
 	}
 
 	/**
