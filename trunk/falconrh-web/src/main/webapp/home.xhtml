@@ -9,7 +9,7 @@
 	<ui:define name="tituloPagina"><h:outputText value="#{msg['nome.aplicacao']}"/></ui:define>
 	<ui:define name="conteudo">
 		<h:form id="form1" prependId="false">
-			<rich:painelEndereco2 modoOperacao="modoInclusao" value="#{utilBean.endereco}"/>
+			<rich:painelEndereco2 modoOperacao="modoInclusao" value="#{utilBean.endereco}" id="componenteEndereco"/>
 		</h:form>
 	</ui:define>
 </ui:composition>
