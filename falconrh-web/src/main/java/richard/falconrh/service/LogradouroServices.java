@@ -20,4 +20,11 @@ public interface LogradouroServices extends AbstractServices<Logradouro>{
 	 * @return uma lista de logradouros pertencentes ao id do bairro informado.
 	 */
 	public Set<Logradouro> obterListaPeloIdBairro(Long id) throws ServicesException;
+
+	/**
+	 * Método que obtem o logradouro a partir do cep informado.
+	 * @param cepPesquisa o cep a ser pesquisado.
+	 * @return uma instância de Logradouro caso encontre alguma informação, ou null, caso contrário.
+	 */
+	public Logradouro obterLogradouroPeloCep(Long cepPesquisa);
 }
