@@ -42,7 +42,16 @@ public class BairroServicesImpl extends AbstractServicesImpl<Bairro> implements 
 		Predicate restricaoIdMunicipio = criteriaBuilder.equal(from.get(Bairro_.municipio).get(Municipio_.id), idMunicipio);
 		criteriaQuery.where(restricaoIdMunicipio);
 		TypedQuery<Bairro> typedQuery = getEntityManager().createQuery(criteriaQuery);
-		return new TreeSet<Bairro>(typedQuery.getResultList());
+		Set<Bairro> lista = new TreeSet<Bairro>(typedQuery.getResultList());
+		for(Bairro b: lista){
+			b.getId();
+			b.getNome();
+			b.getMunicipio().getId();
+			b.getMunicipio().getNome();
+			b.getMunicipio().getUf();
+			b.getMunicipio().getUf().getNome();
+		}
+		return lista;
 	}
 	
 	/**
