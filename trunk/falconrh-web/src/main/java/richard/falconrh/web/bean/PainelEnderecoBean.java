@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
 import org.apache.log4j.Logger;
@@ -31,6 +32,7 @@ public class PainelEnderecoBean implements Serializable{
 	private Municipio municipioSelecionado;
 	private Bairro bairroSelecionado;
 	private Logradouro logradouroSelecionado;
+	private Long cepPesquisa;
 	
 	private List<Municipio> listaMunicipios;
 	private List<Bairro> listaBairros;
@@ -70,11 +72,21 @@ public class PainelEnderecoBean implements Serializable{
 		setListaBairros(new ArrayList<Bairro>(listaBairrosEncontrados));
 	}
 	
+	public void hahaha(ActionEvent event){
+		Logradouro logradouro = logradouroServices.obterLogradouroPeloCep(getCepPesquisa());
+		setBairroSelecionado(logradouro.getBairro());
+		setMunicipioSelecionado(logradouro.getBairro().getMunicipio());
+		setUfSelecionada(logradouro.getBairro().getMunicipio().getUf());
+		setLogradouroSelecionado(logradouro);
+	}
+	
 	public void obterListaLogradouros(ValueChangeEvent event) throws ServicesException{
 		logger.info("Obtendo lista de logradouros");
-		Bairro bairro = (Bairro)event.getNewValue();
-		Set<Logradouro> listaLogradourosEncontrados = logradouroServices.obterListaPeloIdBairro(bairro.getId());
-		setListaLogradouros(new ArrayList<Logradouro>(listaLogradourosEncontrados));
+		if(event.getNewValue()!=null){
+			Bairro bairro = (Bairro)event.getNewValue();
+			Set<Logradouro> listaLogradourosEncontrados = logradouroServices.obterListaPeloIdBairro(bairro.getId());
+			setListaLogradouros(new ArrayList<Logradouro>(listaLogradourosEncontrados));
+		}
 	}
 
 	public UF getUfSelecionada() {
@@ -131,5 +143,13 @@ public class PainelEnderecoBean implements Serializable{
 
 	public void setLogradouroSelecionado(Logradouro logradouroSelecionado) {
 		this.logradouroSelecionado = logradouroSelecionado;
+	}
+
+	public Long getCepPesquisa() {
+		return cepPesquisa;
+	}
+
+	public void setCepPesquisa(Long cepPesquisa) {
+		this.cepPesquisa = cepPesquisa;
 	}
 }
