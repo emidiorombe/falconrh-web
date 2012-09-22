@@ -96,6 +96,12 @@ public class PessoaServicesImpl extends AbstractServicesImpl<Pessoa> implements 
 					documento.getDataEmissao();
 					documento.getNumero();
 				}
+				p.getEndereco().getNumero();
+				p.getEndereco().getLogradouro().getNome();
+				p.getEndereco().getLogradouro().getBairro().getNome();
+				p.getEndereco().getLogradouro().getBairro().getMunicipio().getNome();
+				p.getEndereco().getLogradouro().getBairro().getMunicipio().getUf().getNome();
+				
 			}
 			return listaRetorno;
 		} catch(Exception e){
