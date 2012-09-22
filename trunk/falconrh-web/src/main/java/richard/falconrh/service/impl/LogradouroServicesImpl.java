@@ -101,4 +101,21 @@ public class LogradouroServicesImpl extends AbstractServicesImpl<Logradouro> imp
 		}
 		return lista;
 	}
+
+	@Override
+	public Logradouro obterLogradouroPeloCep(Long cepPesquisa) {
+		CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<Logradouro> criteriaQuery = criteriaBuilder.createQuery(Logradouro.class);
+		Root<Logradouro> from = criteriaQuery.from(Logradouro.class);
+		
+		Predicate listaRestricoes = criteriaBuilder.conjunction();
+		
+		if(cepPesquisa!=null){
+			Predicate restricaoCep = criteriaBuilder.equal(from.get(Logradouro_.cep), cepPesquisa);
+			listaRestricoes = criteriaBuilder.and(restricaoCep);
+		}
+		criteriaQuery.where(listaRestricoes);
+		TypedQuery<Logradouro> typedQuery = getEntityManager().createQuery(criteriaQuery);
+		return typedQuery.getSingleResult();
+	}
 }
