@@ -11,7 +11,7 @@
 	<composite:attribute name="modoOperacao" required="true" type="java.lang.String"/>
 </composite:interface>
 <composite:implementation>
-	<p:outputPanel id="painelInclusaoEndereco" rendered="true">
+	<p:outputPanel id="painelInclusaoEndereco" rendered="#{(cc.attrs.modoOperacao eq 'modoInclusao') or(cc.attrs.modoOperacao eq 'modoEdicao')}">
 		<p:panel header="Endereço" id="painelEndereco">
 			<h:panelGrid columns="2" id="painelGridEndereco">
 				<p:outputLabel value="#{msg['label.endereco.uf']}" for="uf" id="labelUf" />
@@ -47,6 +47,26 @@
 				<p:inputText value="#{cc.attrs.value.numero}" id="numero" size="6" maxlength="8"/>
 				<p:outputLabel value="#{msg['label.endereco.complemento']}" for="complemento" id="labelComplemento"/>
 				<p:inputText value="#{cc.attrs.value.complemento}" size="6" maxlength="8" id="complemento"/>
+			</h:panelGrid>
+		</p:panel>
+	</p:outputPanel>
+	<p:outputPanel rendered="#{(cc.attrs.modoOperacao eq 'modoDetalhe') or (cc.attrs.modoOperacao eq 'modoExclusao')}">
+		<p:panel header="Endereço" id="painelDetalheEndereco">
+			<h:panelGrid columns="2">
+				<h:outputLabel for="logradouroEnderecoDetalhe" id="labelLogradouroEnderecoDetalhe" styleClass="labelNegrito" value="#{msg['label.endereco.logradouro']}" rendered="#{not empty cc.attrs.value.logradouro.nome}"/>
+				<h:outputText value="#{cc.attrs.value.logradouro.nome}" id="logradouroEnderecoDetalhe" rendered="#{not empty cc.attrs.value.logradouro.nome}"/>
+				<h:outputLabel for="numeroEnderecoDetalhe" id="labelNumeroEnderecoDetalhe" styleClass="labelNegrito" value="#{msg['label.endereco.numero']}" rendered="#{not empty cc.attrs.value.numero}"/>
+				<h:outputText value="#{cc.attrs.value.numero}" id="numeroEnderecoDetalhe" rendered="#{not empty cc.attrs.value.numero}"/>
+				<h:outputLabel for="complementoEnderecoDetalhe" id="labelComplementoEnderecoDetalhe" styleClass="labelNegrito" value="#{msg['label.endereco.complemento']}" rendered="#{not empty cc.attrs.value.complemento}"/>
+				<h:outputText value="#{cc.attrs.value.complemento}" id="complementoEnderecoDetalhe" rendered="#{not empty cc.attrs.value.complemento}"/>
+				<h:outputLabel for="cepEnderecoDetalhe" id="labelCepEnderecoDetalhe" styleClass="labelNegrito" value="#{msg['label.endereco.cep']}" rendered="#{not empty cc.attrs.value.logradouro.cep}"/>
+				<h:outputText value="#{cc.attrs.value.logradouro.cep}" id="cepEnderecoDetalhe" converter="cepConverter" rendered="#{not empty cc.attrs.value.logradouro.cep}"/>
+				<h:outputLabel for="bairroEnderecoDetalhe" id="labelBairroEnderecoDetalhe" styleClass="labelNegrito" value="#{msg['label.endereco.bairro']}" rendered="#{not empty cc.attrs.value.logradouro.bairro.nome}"/>
+				<h:outputText value="#{cc.attrs.value.logradouro.bairro.nome}" id="bairroEnderecoDetalhe" rendered="#{not empty cc.attrs.value.logradouro.bairro.nome}"/>
+				<h:outputLabel for="municipioEnderecoDetalhe" id="labelMunicipioEnderecoDetalhe" styleClass="labelNegrito" value="#{msg['label.endereco.municipio']}" rendered="#{not empty cc.attrs.value.logradouro.bairro.municipio.nome}"/>
+				<h:outputText value="#{cc.attrs.value.logradouro.bairro.municipio.nome}" id="municipioEnderecoDetalhe" rendered="#{not empty cc.attrs.value.logradouro.bairro.municipio.nome}"/>
+				<h:outputLabel for="ufEnderecoDetalhe" id="labelUfEnderecoDetalhe" styleClass="labelNegrito" value="#{msg['label.endereco.uf']}" rendered="#{not empty cc.attrs.value.logradouro.bairro.municipio.uf.nome}"/>
+				<h:outputText value="#{cc.attrs.value.logradouro.bairro.municipio.uf.nome}" id="ufEnderecoDetalhe" rendered="#{not empty cc.attrs.value.logradouro.bairro.municipio.uf.nome}"/>
 			</h:panelGrid>
 		</p:panel>
 	</p:outputPanel>
