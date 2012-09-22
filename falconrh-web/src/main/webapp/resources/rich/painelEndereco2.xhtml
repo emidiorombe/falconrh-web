@@ -45,7 +45,9 @@
 				</p:selectOneMenu>
 				<p:outputLabel value="#{msg['label.endereco.numero']}" for="numero" id="labelNumero"/>
 				<p:inputText value="#{cc.attrs.value.numero}" id="numero" size="6" maxlength="8"/>
-			</h:panelGrid>
+				<p:outputLabel value="#{msg['label.endereco.complemento']}" for="complemento" id="labelComplemento"/>
+				<p:inputText value="#{cc.attrs.value.complemento}" size="6" maxlength="8" id="complemento"/>
+			</p:panelGrid>
 		</p:panel>
 	</p:outputPanel>
 </composite:implementation>
