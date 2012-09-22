@@ -12,7 +12,7 @@
 </composite:interface>
 <composite:implementation>
 	<p:outputPanel id="painelInclusaoEndereco" rendered="true">
-	<p:panel header="Endereço" id="painelEndereco">
+		<p:panel header="Endereço" id="painelEndereco">
 			<h:panelGrid columns="2" id="painelGridEndereco">
 				<p:outputLabel value="#{msg['label.endereco.uf']}" for="uf" id="labelUf" />
 				<p:selectOneMenu value="#{painelEnderecoBean.ufSelecionada}" id="uf" required="true" requiredMessage="#{msg['endereco.uf.obrigatorio']}" title="#{msg['title.endereco.uf']}" valueChangeListener="#{painelEnderecoBean.obterListaMunicipios}" effect="fade">
@@ -47,7 +47,7 @@
 				<p:inputText value="#{cc.attrs.value.numero}" id="numero" size="6" maxlength="8"/>
 				<p:outputLabel value="#{msg['label.endereco.complemento']}" for="complemento" id="labelComplemento"/>
 				<p:inputText value="#{cc.attrs.value.complemento}" size="6" maxlength="8" id="complemento"/>
-			</p:panelGrid>
+			</h:panelGrid>
 		</p:panel>
 	</p:outputPanel>
 </composite:implementation>
