@@ -43,7 +43,20 @@ public class LogradouroServicesImpl extends AbstractServicesImpl<Logradouro> imp
 		Predicate restricaoIdBairro = criteriaBuilder.equal(from.get(Logradouro_.bairro).get(Bairro_.id), idBairro);
 		criteriaQuery.where(restricaoIdBairro);
 		TypedQuery<Logradouro> typedQuery = getEntityManager().createQuery(criteriaQuery);
-		return new TreeSet<Logradouro>(typedQuery.getResultList());
+		Set<Logradouro> lista = new TreeSet<Logradouro>(typedQuery.getResultList());
+		for(Logradouro l : lista){
+			l.getNome();
+			l.getBairro().getNome();
+			l.getBairro().getId();
+			l.getBairro().getMunicipio();
+			l.getBairro().getMunicipio().getId();
+			l.getBairro().getMunicipio().getNome();
+			l.getBairro().getMunicipio().getUf();
+			l.getBairro().getMunicipio().getUf().getNome();
+			l.getCep();
+			l.getTipoLogradouro();
+		}
+		return lista;
 	}
 	
 	/**
