@@ -13,7 +13,7 @@
 				<h:outputLabel value="#{msg['label.pessoa.nome']}" for="nome" id="labelNome"/>
 				<p:inputText value="#{pessoaBean.entity.nome}" id="nome" size="60" maxlength="255" required="true" requiredMessage="#{msg['pessoa.nome.obrigatorio']}" title="#{msg['title.pessoa.nome']}"/>
 				<h:outputLabel value="#{msg['label.pessoa.dataNascimento']}" for="dataNascimento" id="labelDataNascimento" />
-				<p:calendar value="#{pessoaBean.entity.dataNascimento}" id="dataNascimento" size="12" maxlength="10" required="true" requiredMessage="#{msg['pessoa.dataNascimento.obrigatorio']}" title="#{msg['title.pessoa.dataNascimento']}" showOn="button" navigator="true" locale="pt_BR" lang="pt" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy"/>
+				<p:calendar value="#{pessoaBean.entity.dataNascimento}" id="dataNascimento" size="12" maxlength="10" required="true" requiredMessage="#{msg['pessoa.dataNascimento.obrigatorio']}" title="#{msg['title.pessoa.dataNascimento']}" showOn="button" navigator="true" locale="pt_BR" lang="pt" timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" onkeypress="mascaraData(this)" onblur="validaData(this)"/>
 				<h:outputLabel value="#{msg['label.pessoa.sexo']}" id="labelSexo" for="sexo"/>
 				<p:selectOneMenu value="#{pessoaBean.entity.sexo}" id="sexo" required="true" requiredMessage="#{msg['pessoa.sexo.obrigatorio']}" effect="fade">
 					<f:selectItem itemLabel="--Selecione--" />
