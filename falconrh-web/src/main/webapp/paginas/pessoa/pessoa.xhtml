@@ -18,12 +18,15 @@
 					<p:commandButton value="#{msg['label.botao.cadastro.pessoa']}" actionListener="#{pessoaBean.cadastrar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{pessoaBean.modoInclusao}" title="#{msg['title.botao.cadastro.pessoa']}" id="botaoCadastroPessoa"/>
 					<p:commandButton value="#{msg['label.botao.atualizacao.pessoa']}" actionListener="#{pessoaBean.atualizar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{pessoaBean.modoEdicao}" title="#{msg['title.botao.atualizacao.pessoa']}" id="botaoAtualizacaoPessoa"/>
 					<p:commandButton value="#{msg['label.botao.pesquisa.pessoa']}" actionListener="#{pessoaBean.pesquisar}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{pessoaBean.modoPesquisa}" title="#{msg['title.botao.pesquisa.pessoa']}" id="botaoPesquisaPessoa"/>
-					<p:commandButton value="#{msg['label.botao.exclusao.pessoa']}" actionListener="#{pessoaBean.excluir}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{pessoaBean.modoExclusao}" title="#{msg['title.botao.exclusao.pessoa']}" id="botaoExclusaoPessoa"/>
-
+					<p:commandButton value="#{msg['label.botao.exclusao.pessoa']}" update="form:painelGlobal, form:mensagens" rendered="#{pessoaBean.modoExclusao}" title="#{msg['title.botao.exclusao.pessoa']}" id="botaoExclusaoPessoa" onclick="confirmation.show()" type="button"/>
 					<p:commandButton value="#{msg['label.botao.voltar']}" actionListener="#{pessoaBean.voltarParaResultadoDaPesquisa}" ajax="true" update="form:painelGlobal, form:mensagens" rendered="#{pessoaBean.modoExclusao or pessoaBean.modoEdicao or pessoaBean.modoDetalhe}" title="#{msg['title.botao.exclusao.pessoa']}" immediate="true" id="botaoVoltarPessoa"/>
 					<p:commandButton value="#{msg['label.botao.sair']}" action="#{pessoaBean.sair}" ajax="false" update="form:painelGlobal, form:mensagens" title="#{msg['title.botao.sair']}" immediate="true" id="botaoSairPessoa"/>
 				</p:panel>
 			</p:outputPanel>
+			<p:confirmDialog id="confirmDialog" message="#{msg['label.confirmar.exclusao']}" header="#{nsg['label.header.confirmar.exclusao']}" severity="alert" widgetVar="confirmation">
+				<p:commandButton id="confirmId" value="#{msg['sim']}" update="form:painelGlobal, form:mensagens" oncomplete="confirmation.hide()" actionListener="#{pessoaBean.excluir}"/>
+				<p:commandButton id="declineId" value="#{msg['nao']}" onclick="confirmation.hide()" type="button" /> 
+			</p:confirmDialog>
 		</h:form>
 	</ui:define>
 </ui:composition>
