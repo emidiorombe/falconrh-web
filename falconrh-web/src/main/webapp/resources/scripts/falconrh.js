@@ -1,11 +1,11 @@
 PrimeFaces.locales['pt_BR'] = {
     closeText: 'Fechar',
     prevText: 'Anterior',
-    nextText: 'Pr√≥ximo',
-    currentText: 'Come√ßo',
-    monthNames: ['Janeiro','Fevereiro','Mar√ßo','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+    nextText: 'PrÛximo',
+    currentText: 'ComeÁo',
+    monthNames: ['Janeiro','Fevereiro','MarÁo','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
     monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
-    dayNames: ['Domingo','Segunda','Ter√ßa','Quarta','Quinta','Sexta','S√°bado'],
+    dayNames: ['Domingo','Segunda','TerÁa','Quarta','Quinta','Sexta','S·bado'],
     dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
     dayNamesMin: ['D','S','T','Q','Q','S','S'],
     weekHeader: 'Semana',
@@ -13,24 +13,24 @@ PrimeFaces.locales['pt_BR'] = {
     isRTL: false,
     showMonthAfterYear: false,
     yearSuffix: '',
-    timeOnlyTitle: 'S√≥ Horas',
+    timeOnlyTitle: 'SÛ Horas',
     timeText: 'Tempo',
     hourText: 'Hora',
     minuteText: 'Minuto',
     secondText: 'Segundo',
     ampm: false,
-    month: 'M√™s',
+    month: 'MÍs',
     week: 'Semana',
     day: 'Dia',
     allDayText : 'Todo o Dia'
 };
 
-// Fun√ß√£o para retirar os espa√ßos em branco do in√≠cio e do fim da string.
+// FunÁ„o para retirar os espaÁos em branco do inÌcio e do fim da string.
 function trim(strTexto){
 	return strTexto.replace(/^\s+|\s+$/g, '');
 }
 
-// --------------------------------fun√ß√µes de valida√ß√µes-----------------------------------------------------
+// validaÁıes-----------------------------------------------------
 function isDataValida(campo, pattern){
 	var date=campo.valor;
 	var ardt=new Array;
@@ -55,7 +55,7 @@ function isDataValida(campo, pattern){
 }
 
 function isCEPValido(strCEP, blnVazio){
-	// Caso o CEP n√£o esteja nesse formato ele √© inv√°lido!
+	// Caso o CEP n„o esteja nesse formato ele È inv·lido!
 	var objER = /^[0-9]{2}\.[0-9]{3}-[0-9]{3}$/;
     strCEP = trim(strCEP);
     if(strCEP.length > 0){
@@ -118,7 +118,7 @@ function isCPFValido(obj) {
 }
 
 
-//--------------------- MASCARAS------------
+// --------------------- MASCARAS------------
 function mascaraMoeda(obj, e){
     var SEPARADOR_MILESIMO = ".";
     var SEPARADOR_DECIMAL = ",";
@@ -129,8 +129,8 @@ function mascaraMoeda(obj, e){
     var aux = aux2 = '';
     var whichCode = (window.Event) ? e.which : e.keyCode;
     if (whichCode == 13) return true;
-    key = String.fromCharCode(whichCode); // Valor para o c√≥digo da Chave
-    if (strCheck.indexOf(key) == -1) return false; // Chave inv√°lida
+    key = String.fromCharCode(whichCode); // Valor para o cÛdigo da Chave
+    if (strCheck.indexOf(key) == -1) return false; // Chave inv·lida
     len = obj.value.length;
     for(i = 0; i < len; i++)
         if ((obj.value.charAt(i) != '0') && (obj.value.charAt(i) != SEPARADOR_DECIMAL)) break;
@@ -164,7 +164,7 @@ function mascaraMoeda(obj, e){
 
 
 
-//adiciona mascara de cnpj
+// adiciona mascara de cnpj
 function mascaraCNPJ(cnpj){
 	if(mascaraInteiro(cnpj)==false){
 		event.returnValue = false;
@@ -172,7 +172,7 @@ function mascaraCNPJ(cnpj){
 	return formataCampo(cnpj, '00.000.000/0000-00', event);
 }
 
-//adiciona mascara de hora
+// adiciona mascara de hora
 function mascaraHora(hora){
 	if(mascaraInteiro(hora)==false){
 		event.returnValue = false;
@@ -180,7 +180,7 @@ function mascaraHora(hora){
 	return formataCampo(hora, '00:00', event);
 }
 
-//adiciona mascara de cep
+// adiciona mascara de cep
 function mascaraCep(cep){
 	if(mascaraInteiro(cep)==false){
 		event.returnValue = false;
@@ -188,7 +188,7 @@ function mascaraCep(cep){
 	return formataCampo(cep, '00.000-000', event);
 }
 
-//adiciona mascara de data
+// adiciona mascara de data
 function mascaraData(data){
 	if(mascaraInteiro(data)==false){
 		event.returnValue = false;
@@ -196,7 +196,7 @@ function mascaraData(data){
 	return formataCampo(data, '00/00/0000', event);
 }
 
-//adiciona mascara ao telefone
+// adiciona mascara ao telefone
 function mascaraTelefone(tel){  
 	if(mascaraInteiro(tel)==false){
 		event.returnValue = false;
@@ -204,7 +204,7 @@ function mascaraTelefone(tel){
 	return formataCampo(tel, '(00) 0000-0000', event);
 }
 
-//adiciona mascara ao CPF
+// adiciona mascara ao CPF
 function mascaraCPF(cpf){
 	if(mascaraInteiro(cpf)==false){
 		event.returnValue = false;
@@ -212,38 +212,38 @@ function mascaraCPF(cpf){
 	return formataCampo(cpf, '000.000.000-00', event);
 }
 
-//valida telefone
+// valida telefone
 function validaTelefone(tel){
 	exp = /\(\d{2}\)\ \d{4}\-\d{4}/;
 	if(!exp.test(tel.value)){
-		alert('Numero de Telefone Invalido!');
+		alert('Numero de Telefone Inv·lido!');
 	}
 }
 
-//valida CEP
+// valida CEP
 function validaCep(cep){
 	exp = /\d{2}\.\d{3}\-\d{3}/;
 	if(!exp.test(cep.value)){
-		alert('Numero de Cep Invalido!');               
+		alert('Numero de CEP Inv·lido!');               
 	}
 }
 
-//valida data
+// valida data
 function validaData(data){
 	exp = /\d{2}\/\d{2}\/\d{4}/;
 	if(!exp.test(data.value)){
-		alert('Data Invalida!');                        
+		alert('Data Inv·lida!');                        
 	}
 }
 
-//valida hora
+// valida hora
 function validaHora(hora){
 	exp = /\d\d:\d\d/;
 	if(!exp.test(hora.value))
-		alert('Hora Invalida!');
+		alert('Hora Inv·lida!');
 }
 
-//valida o CPF digitado
+// valida o CPF digitado
 function validarCPF(Objcpf){
 	var cpf = Objcpf.value;
 	exp = /\.|\-/g;
@@ -261,11 +261,11 @@ function validarCPF(Objcpf){
 
 	var digitoGerado=(soma1*10)+soma2;
 	if(digitoGerado!=digitoDigitado){
-		alert('CPF Invalido!');         
+		alert('CPF Inv·lido!');         
 	}
 }
 
-//valida numero inteiro com mascara
+// valida numero inteiro com mascara
 function mascaraInteiro(){
 	if (event.keyCode < 48 || event.keyCode > 57){
 		event.returnValue = false;
@@ -274,7 +274,7 @@ function mascaraInteiro(){
 	return true;
 }
 
-//valida o CNPJ digitado
+// valida o CNPJ digitado
 function validarCNPJ(objCnpj){
 	var cnpj = objCnpj.value;
 	var valida = new Array(6,5,4,3,2,9,8,7,6,5,4,3,2);
@@ -297,7 +297,7 @@ function validarCNPJ(objCnpj){
 	}
 }
 
-//formata de forma generica os campos
+// formata de forma generica os campos
 function formataCampo(campo, mascara, evento) { 
 	var boleanomascara; 
 
@@ -309,7 +309,7 @@ function formataCampo(campo, mascara, evento) {
 	var novoValorCampo="";
 	var tamanhoMascara = campoSoNumeros.length;; 
 		
-	if (Digitato != 8) { // backspace 
+	if (Digitato != 8) { // backspace
 		for(var i=0; i<= tamanhoMascara; i++) { 
 			boleanomascara  = ((mascara.charAt(i) == "-") || (mascara.charAt(i) == ".") || (mascara.charAt(i) == "/")  || (mascara.charAt(i) == ":")) ;
 			boleanomascara  = boleanomascara || ((mascara.charAt(i) == "(") || (mascara.charAt(i) == ")") || (mascara.charAt(i) == " "));
@@ -325,5 +325,12 @@ function formataCampo(campo, mascara, evento) {
 		return true; 
 	}else { 
 		return true; 
+	}
+}
+
+function proximoFoco(obj, nextObj){
+	var tamanhoMaximo = obj.getAttribute("maxLength");
+	if(obj.value.length==tamanhoMaximo){
+		nextObj.focus();
 	}
 }
