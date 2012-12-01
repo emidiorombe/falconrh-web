@@ -10,7 +10,8 @@ import javax.persistence.MappedSuperclass;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- * @author richard
+ * Classe que será utilizada como base para criação de entidades do sistema
+ * @author Richard Mendes Madureira
  * @version $Revision: 1.0 $
  */
 @MappedSuperclass
@@ -18,14 +19,12 @@ import org.hibernate.annotations.GenericGenerator;
 public abstract class Parent implements Serializable{
 	private static final long serialVersionUID = 2887056027368829436L;
 
-	public static final String nmcp_id = "id";
-
 	protected Long id;
 
 	/**
-	 * Method getId.
-	
-	 * @return Long */
+	 * Método que retorna o identificador único do objeto
+	 * @return Long a variável que representa o identificador único do objeto;
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN")
 	public Long getId() {
@@ -33,17 +32,17 @@ public abstract class Parent implements Serializable{
 	}
 
 	/**
-	 * Method setId.
-	 * @param id Long
+	 * Método que seta o identificador único do objeto
+	 * @param id parametro Long que representa o identificador único que será passado para o objeto.
 	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
 	/**
-	 * Method hashCode.
-	
-	 * @return int */
+	 * Método que calcula o hash do objeto Parent
+	 * @return int - número que representa o hash do objeto Parent
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -53,10 +52,10 @@ public abstract class Parent implements Serializable{
 	}
 
 	/**
-	 * Method equals.
-	 * @param obj Object
-	
-	 * @return boolean */
+	 * Método utilizado para comparar duas instâncias da classe Parent
+	 * @param obj - o Objeto que será comparado a classe
+	 * @return boolean, sendo true para objetos iguais e false para objetos diferentes
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
