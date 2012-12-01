@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -20,6 +21,7 @@ public abstract class Parent implements Serializable{
 	private static final long serialVersionUID = 2887056027368829436L;
 
 	protected Long id;
+	private Long versao;
 
 	/**
 	 * Método que retorna o identificador único do objeto
@@ -32,6 +34,15 @@ public abstract class Parent implements Serializable{
 	}
 
 	/**
+	 * Método que retorna a versão do registro da entidade em banco de dados (para fins de concorrência)
+	 * @return a versão do registro.
+	 */
+	@Version
+	public Long getVersao() {
+		return versao;
+	}
+	
+	/**
 	 * Método que seta o identificador único do objeto
 	 * @param id parametro Long que representa o identificador único que será passado para o objeto.
 	 */
@@ -39,6 +50,14 @@ public abstract class Parent implements Serializable{
 		this.id = id;
 	}
 
+	/**
+	 * Método que armazena a versão do registro em banco de dados para fins de concorrência
+	 * @param versao - a versão do registro
+	 */
+	public void setVersao(Long versao) {
+		this.versao = versao;
+	}
+	
 	/**
 	 * Método que calcula o hash do objeto Parent
 	 * @return int - número que representa o hash do objeto Parent
@@ -77,4 +96,8 @@ public abstract class Parent implements Serializable{
 		}
 		return true;
 	}
+
+	
+
+
 }
